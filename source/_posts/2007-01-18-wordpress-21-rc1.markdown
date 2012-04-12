@@ -1,0 +1,19 @@
+---
+date: '2007-01-18 02:35:43'
+layout: post
+slug: wordpress-21-rc1
+status: publish
+title: WordPress 2.1 RC1
+wordpress_id: '170'
+categories:
+- Software
+- Technology
+tags:
+- WordPress
+---
+
+[WordPress 2.1 RC1](http://boren.nu/archives/2007/01/17/wordpress-21-release-candidate-1/) has been released (about two whole hours after upgrading to Beta 4). So far RC1 is looking quite nice.
+
+I've got to say, this may be one of the most impressive WordPress releases I've seen yet. From my testing so far, everything seems to be working quite well. Now that 2.1 is at the RC level, I'll get that review I [promised](http://adamcaudill.com/2007/01/15/wordpress-207-upgrading-to-21-beta-2/) typed up.
+
+If you're a WordPress user, I'd grab a copy and make sure your theme and plugins work so you'll be ready when 2.1 goes gold.

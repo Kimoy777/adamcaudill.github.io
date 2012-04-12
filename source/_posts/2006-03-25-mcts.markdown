@@ -1,0 +1,19 @@
+---
+date: '2006-03-25 13:57:01'
+layout: post
+slug: mcts
+status: publish
+title: MCTS
+wordpress_id: '26'
+categories:
+- News &#038; Events
+---
+
+I think I've set myself up for an interesting adventure, I've decided to shoot for the [MCTS](http://www.microsoft.com/learning/mcp/mcts/winapps/), also known as "Microsoft Certified Technology Specialist" - and I'll be taking the tests without a single guide book. Yep, you heard that right, no test study guide. Now, if I were you, I'd be asking "Why?!" - well, _there are none_. The tests required for the MCTS are so new, no books have been published on them.
+
+I'll be working with one of my co-workers, Laura, on this, our plan is simple: _Learn everything there is to know about VB.NET 2005_. I think that should about cover anything on the test.  
+
+
+Seriously, we are going to start by studying "[Programming Microsoft Visual Basic 2005: The Language](ttp://www.amazon.com/gp/product/0735621837/)," one of the recommend Microsoft references for the test. We may look at another book or two, but right now I think this is the only one we'll need. I'd like to get my hands on a copy of "[MCTS Self-Paced Training Kit](http://www.amazon.com/gp/product/0735622779/)" - but that won't be available till July, and I'm hoping to have passed the tests by then ([this is why](http://www.microsoft.com/learning/mcp/offers/2ndchance/details/)).
+
+Wish me luck, somehow I think I'll need it.

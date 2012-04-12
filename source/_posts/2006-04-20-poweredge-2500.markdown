@@ -1,0 +1,68 @@
+---
+date: '2006-04-20 19:42:45'
+layout: post
+slug: poweredge-2500
+status: publish
+title: PowerEdge 2500
+wordpress_id: '58'
+categories:
+- News &#038; Events
+- Personal
+---
+
+As I've [written](http://adamcaudill.com/2006/04/09/rebuilding-my-network/) about, I'm in the process of rebuilding my network at home. the first major addition is a used [Dell PowerEdge 2500](http://docs.us.dell.com/support/edocs/systems/pe2500sc/en/ug/127kwc10.htm) server, while this is an older server, it's quite stable and reliable - and with I intend to use it for, being reliable is critical.
+
+[![Front and box](http://adamcaudill.com/files/2006/04/P4180001SM.thumbnail.JPG)](http://adamcaudill.com/files/2006/04/P4180001SM.JPG) [![Face behind the mask](http://adamcaudill.com/files/2006/04/P4180003SM.thumbnail.JPG)](http://adamcaudill.com/files/2006/04/P4180003SM.JPG) [![Guts of the beast](http://adamcaudill.com/files/2006/04/P4180002SM.thumbnail.JPG)
+](http://adamcaudill.com/files/2006/04/P4180002SM.JPG)
+
+This server will have a couple different roles at once, here's the basics:
+
+
+
+	
+  * Domain Controller
+
+	
+  * Development SQL Server
+
+	
+  * Development IIS Server
+
+	
+  * 'Shared Files' share
+
+
+This will allow me to keep a stable system running for shared access to development resources, as well as centralize management for my various systems. This box may also see a few more tasks aimed its way in the next couple months as this project goes on.
+
+**Building the Server**
+
+The process of rebuilding the server was surprisingly painless. After setting up the RAID array (set to RAID 10), there were no real speed bumps; the Windows install went smoothly and I was quickly on to setting up more important things, like my new domain.
+
+I choose [Windows Server 2003 R2](http://www.microsoft.com/windowsserver2003/default.mspx) as the OS due to its stability and flexibility. With the number of roles this system will have, along with the pounding development work will give it, those are very important traits. With the exception of a few issues while setting up the domain (like importing local accounts), the process was almost pleasant.
+
+**Server Details**
+
+The server itself seems rather beef (keeping its age in mind), and more than enough I believe for what I have planned for it. For those interested, here are the vital details:
+
+
+
+	
+  * 1 x [933MHz Intel Pentium III](http://processorfinder.intel.com/scripts/details.asp?sSpec=SL5U3&ProcFam=25&PkgType=ALL&SysBusSpd=ALL&CorSpd=ALL) CPU
+- A second, matching CPU has already been ordered.
+
+	
+  * 6 x 18.9 GB 10,000 RPM SCSI Hard-drives
+- These are in a RAID 10 configuration giving about 50GB of fully redundant storage.
+
+	
+  * 3 x 300W redundant power supplies
+
+	
+  * 1 x 128MB PC100 RAM dedicated to the RAID controller
+
+	
+  * 2 x 256MB PC133 Registered ECC RAM
+- This will be upgraded soon.
+
+
+While clearly this isn't a power-house by modern standards, it is a very well made server, that packs plenty of power. I hope to keep this one around for quite some time.

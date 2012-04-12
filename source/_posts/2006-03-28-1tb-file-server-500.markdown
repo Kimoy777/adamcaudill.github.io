@@ -1,0 +1,14 @@
+---
+date: '2006-03-28 23:07:35'
+layout: post
+slug: 1tb-file-server-500
+status: publish
+title: 1TB File Server, $500
+wordpress_id: '33'
+categories:
+- Technology
+---
+
+The price of storage has been steadily dropping over the last several years, and this is the latest example: [A Complete Terabyte File Server For About $500](http://www.informationweek.com/showArticle.jhtml?articleID=183702383)  - Yep, you read that right, a custom 1TB file server, in the $500 range. While I'm not sure what I could do with that much storage (I remember saying that when I picked a 1.25GB drive over a 1.5GB, saying I'd never need it), but it'd be nice to have. :)
+
+On the topic of cheap storage, I just purchased a [250GB SATA](http://www.newegg.com/Product/Product.asp?Item=N82E16822144701)  drive to replace my 80GB data drive that's almost full. With SATA drives under $100 for 250GB, I'm tempted to try my own version of his project.

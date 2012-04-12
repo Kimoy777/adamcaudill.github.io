@@ -1,0 +1,19 @@
+---
+date: '2007-01-12 02:11:47'
+layout: post
+slug: wordpress-207-208
+status: publish
+title: WordPress 2.0.7 & 2.0.8
+wordpress_id: '165'
+categories:
+- Software
+- Technology
+tags:
+- WordPress
+---
+
+Just a few days ago the [WordPress](http://wordpress.org/) team announced that [2.0.6](http://wordpress.org/development/2007/01/wordpress-206/) would be the last before the much anticipated [2.1 release](http://boren.nu/archives/2006/08/04/wordcamp-whats-new-in-21/). Although now it look like there will be at least one more release before 2.1, if not two. Based on discussions on the [wp-testers](http://comox.textdrive.com/pipermail/wp-testers/) mailing list, [it's looking like two](http://comox.textdrive.com/pipermail/wp-testers/2007-January/003654.html).
+
+Due to a security issue with some configurations, along with a few other issues ([details](http://comox.textdrive.com/pipermail/wp-testers/2007-January/003644.html)), the WordPress crew is moving along with a release in the very near future. From the look of the [WordPress Trac](http://trac.wordpress.org/query?status=new&status=assigned&status=reopened&status=closed&group=milestone&milestone=2.0.8&order=priority), it looks like there are also several issues open for 2.0.8.
+
+So after [updating a few days ago](http://adamcaudill.com/2007/01/06/wordpress-206/), looks like we'll be facing a couple more upgrades. Although, given the choice I'd much rather face additional upgrades rather than these security issues.

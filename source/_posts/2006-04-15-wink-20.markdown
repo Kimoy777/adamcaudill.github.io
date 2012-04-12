@@ -1,0 +1,14 @@
+---
+date: '2006-04-15 14:07:41'
+layout: post
+slug: wink-20
+status: publish
+title: Wink 2.0
+wordpress_id: '52'
+categories:
+- Software
+---
+
+I'm always interested in better ways to produce documentation or demonstrations for my software. One method I've found to be rather impressive is desktop capture, generating a movie either in a streaming format, or in Flash. The drawback: Price. The tools used for this are often rather expensive, and on a tight budget they can push you to the limit quickly. There is another option though, [Wink](http://www.debugmode.com/wink/)  - a free, cross-platform application that generates Flash demos and presentations.
+
+From my short review, this seems like an excellent option, and the fact that it's free just makes it even better.

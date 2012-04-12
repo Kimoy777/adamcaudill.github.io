@@ -1,0 +1,17 @@
+---
+date: '2007-01-06 02:40:20'
+layout: post
+slug: wordpress-206
+status: publish
+title: WordPress 2.0.6
+wordpress_id: '161'
+categories:
+- News &#038; Events
+- Software
+tags:
+- WordPress
+---
+
+Time once again, for a [WordPress update](http://wordpress.org/development/2007/01/wordpress-206/), the software that powers this site. This is primary a security update, fixing a few nasty issues as well as cleaning up some other things ([here's](http://trac.wordpress.org/query?status=closed&milestone=2.0.6) the breakdown). If you are running a WordPress blog, I'd recommend going for the update.
+
+It's a painless update, and so far seems quite stable.

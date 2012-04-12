@@ -1,0 +1,49 @@
+---
+date: '2012-02-29 23:47:17'
+layout: post
+slug: ccsrch-v1-0-7
+status: publish
+title: CCSRCH v1.0.7
+wordpress_id: '1113'
+categories:
+- Development
+- Technology
+tags:
+- CCSRCH
+- Development
+- Open Source
+- PCI
+- Security
+---
+
+I've released a new version of [CCSRCH](https://github.com/adamcaudill/ccsrch), the open-source PAN (a.k.a credit card number) search tool to help companies maintain PCI compliance. This is a fairly minor release, primarily focusing on reducing false positives. The scanner has been updated to exclude the following:
+
+
+
+	
+  * Results made up of the same two digits repeating (i.e. 5454545454545454).
+
+	
+  * Results that have seven or more of the same digits repeating (i.e. 5555555555554444).
+
+
+I also fixed a bug that I introduced in v1.0.6 that prevented it from compiling on certain *nix systems; while I was in there I also fixed several instances of this building warning on newer Linux distros:
+
+
+    
+    warning: call to __builtin___strncat_chk might overflow destination buffer
+     [enabled by default]
+
+
+
+I also took the time to write-up really simple build instructions for *nix users:
+
+    
+    $ wget -O ccsrch.tar.gz https://github.com/adamcaudill/ccsrch/tarball/master
+    $ tar -xvzf ccsrch.tar.gz
+    $ cd adamcaudill-ccsrch-<rev>/
+    $ make all
+
+
+
+This will probably be the last release for now unless a bug turns up; to improve results further I'm working on a new project ([ccsrch-score](https://github.com/adamcaudill/ccsrch-score)), hopefully it'll be released soon.

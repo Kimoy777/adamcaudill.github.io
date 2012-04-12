@@ -1,0 +1,44 @@
+---
+date: '2012-01-14 08:08:39'
+layout: post
+slug: ccsrch-v1-0-5
+status: publish
+title: CCSRCH v1.0.5
+wordpress_id: '1043'
+categories:
+- Security
+- Technology
+tags:
+- CCSRCH
+- PCI
+- Security
+---
+
+During my employers annual [PCI](https://www.pcisecuritystandards.org/) audit, our auditor requested that we perform a search of all of our servers for credit card data. He recommended a tool called "ccsrch" - which like many open source projects had a couple of issues, and hadn't been updated in years. So, I fixed it.
+
+CCSRCH is a cross-platform, command-line application that reads every file from the starting point passed in, and scans them for what looks like credit card numbers (and using the [Luhn algorithm](http://en.wikipedia.org/wiki/Luhn_algorithm) to check each possible result). It's fairly brute-force, but it gets the scans required for PCI - though I would be careful about using it during production hours, it can have a pretty significant impact on a server's I/O performance.
+
+I've forked the application and setup a new [ccsrch](https://github.com/adamcaudill/ccsrch) project over at github (the original is on [SourceForge](http://sourceforge.net/projects/ccsrch/)), and made a few modifications to better suit my needs (from the [change log](https://github.com/adamcaudill/ccsrch#readme)):
+
+
+
+	
+  * Added option to output the file name, and how many hits were found to the console when using -o (see -c in usage).
+
+	
+  * Added option to limit the number of results from a single file before going on to the next file (see -l in usage).
+
+	
+  * Added option to exclude certain file types from the scan (see -n in usage).
+
+	
+  * Fix for ignoring NULL, CR & LF.
+
+	
+  * Ignore dash when scanning.
+
+	
+  * Exclude results with the last 8 digits repeating (very unlikely to be a real PAN).
+
+
+I've [uploaded](https://github.com/adamcaudill/ccsrch/downloads) a Windows build of the new 1.0.5 release to github, and for *nix systems, you can just download the latest [tag](https://github.com/adamcaudill/ccsrch/tags).

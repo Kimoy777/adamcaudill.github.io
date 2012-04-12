@@ -1,0 +1,17 @@
+---
+date: '2006-07-30 15:41:45'
+layout: post
+slug: wordpress-204
+status: publish
+title: WordPress 2.0.4
+wordpress_id: '101'
+categories:
+- News &#038; Events
+- Software
+tags:
+- WordPress
+---
+
+It's upgrade time again, [WordPress 2.0.4](http://wordpress.org/development/2006/07/wordpress-204/) has been [released](http://wordpress.org/download/) ([changed files list & zip](http://markjaquith.wordpress.com/2006/07/30/wordpress-204-upgrade-changed-files-zip-changes-diff-changed-files-list/)), and after a fairly painless upgrade ([instructions](http://codex.wordpress.org/Upgrading_WordPress#Upgrade_2.0.3_to_2.0.4), though I didn't follow the method they suggest), seems quite stable. This release sports over [60 changes](http://trac.wordpress.org/query?status=closed&milestone=2.0.4), clearing up a fair number of small issues, as well as a few security fixes.
+
+If you have a WordPress powered blog, it's worth the upgrade.

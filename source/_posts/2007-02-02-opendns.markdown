@@ -1,0 +1,23 @@
+---
+date: '2007-02-02 19:45:16'
+layout: post
+slug: opendns
+status: publish
+title: OpenDNS
+wordpress_id: '177'
+categories:
+- Technology
+tags:
+- DNS
+- Networking
+- OpenDNS
+- Tips and Tricks
+---
+
+Looking for a bit of a speed boost? [OpenDNS](http://www.opendns.com/) might just help. Using the OpenDNS network, instead of your ISP's DNS servers seems to really boost the speed of the name resolution process (which is often the slowest part of connecting to another computer).
+
+From what I've seen so far, there's been a fairly significant speed boost on some sites, primarily those that include content from several domains. The boost isn't that great when you look at the overall loading process, but it does reduce the annoying lag when the browser starts loading. So far, I've been happy with the service (which is free), and I really like that the offer various customizations and statistics (if you want to open an account, also free).
+
+On top of the various options and statistics, they also offer [spelling correction](http://www.opendns.com/at_home/benefits.php#smarter) and [anti-phishing](http://www.opendns.com/at_home/benefits.php#safer) features. It may just be DNS, but this is DNS the way it should be done. And if that's not good enough, even [Matt likes them](http://photomatt.net/2006/07/18/opendns/). ;)
+
+You mileage will obviously vary, but I think this is pretty cool.

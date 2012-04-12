@@ -1,0 +1,31 @@
+---
+date: '2006-03-19 12:08:37'
+layout: post
+slug: iso-17799
+status: publish
+title: ISO 17799
+wordpress_id: '25'
+categories:
+- Software
+---
+
+
+Certifications are good things, or so I've always thought. Though the more work I do to help achieve [ISO 17799](http://en.wikipedia.org/wiki/ISO_17799)  compliance, I'm beginning to dislike them. This has been steadily adding work since I started this job in December, but now that we are only a couple weeks away from what should be our final audit, the work is coming a lot faster. We're working to ensure everything we have in production meets the requirements of the standard, which has proved to be rather difficult.
+
+
+
+
+
+
+The primary issue has been in data access, eliminating all direct SQL queries, and replacing them with stored procedures. While this isn't that difficult, when there are dozens of systems that need updates, it adds up surprisingly quick.
+
+
+
+
+
+
+Security is always a good thing, and when dealing with sensitive personal information of thousands of people, it's very important. So I'm not complaining about the security required, but when you are trying to cleanup from years of more relaxed practices, it takes a surprising amount of work. 
+
+
+
+

@@ -1,0 +1,86 @@
+---
+date: '2010-06-19 15:58:25'
+layout: post
+slug: on-hiring
+status: publish
+title: on Hiring
+wordpress_id: '582'
+categories:
+- Business of Software
+- Development
+tags:
+- Business
+- Development
+- Hiring
+- HR
+- ISV
+- Management
+- Tips and Tricks
+---
+
+The company I work for is hiring several developers which marks my first significant hiring effort since being promoted to management. This had led to a few interesting observations* I would like to share that may benefit both those looking for a new job and those looking for the next star to add to their team.
+
+**Immigration Law:** I had no idea how complex this area of law gets; it's a maddening maze of rules and policies that are more effective at confusing those involved than providing a reasonable solution to a problem. If you run into this (and you will), you need somebody that has dealt with this and knows what to do. Getting both parties into legal hot water is far too easy.
+
+**Resumes:** I've seen great resumes that made it clear that I needed to hire this person and resumes so cluttered and complex it took an hour just to get through it. Here's a few things that stuck out to me:
+
+
+
+	
+  * [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself) is good for code, and for a resume. Clean and concise is always better; if you find yourself hitting Ctrl+C even once while working on a resume, you're probably doing something wrong.
+
+	
+  * Length is important, but shorter isn't always better. Unlike many other fields where a single page resume is considered optimal, technical resumes need at least a second page. Going too short on a resume is a great way to blend into the crowd; a resume should stand out, and that takes space.
+
+	
+  * How long is too long? Unless you've been doing this for a _very_ long time, more than three pages is probably excessive. This isn't always true, but think it through before using more than two pages.
+
+	
+  * Use whitespace carefully. Don't leave a page half empty or pack everything in so that it looks cluttered. As with any type of design, whitespace is a powerful tool that should be used wisely and never be left to chance.
+
+	
+  * Use color sparingly. Many corporate printers are black and white only, so if you use color make sure it looks right when printed without it.
+
+	
+  * Use bold even more sparingly. It's sometimes useful to point out items of interest, but it quickly degrades the readability of a resume.
+
+
+Many people seem to have a hard time with this, but a resume is a _textual representation of yourself_. It represents you as a person and your accomplishments as a professional. Any errors or signs of haste or carelessness say much about you as a person; if you are careless with such a significant representation of yourself what does it say about your attention to detail or work ethic?
+
+**Experience:** For a person that has recently graduated, experience in the field is the single largest hindrance both when it comes to securing a position and to receiving a salary they are happy with. The best advice I can find for people in this position is to look to the open source community for help. There are many projects that are desperate for developers and it's a great way to get familiar with working in a team, coordinating with people over a distributed area, and releasing code for public consumption. In lieu of paid work experience, open source is a great way to fill in a resume (and it can be quite profitable for some, if you play your cards right).
+
+**Salary:** In some companies pay is a minor issue thanks to clearly structured systems such as that [proposed](http://www.joelonsoftware.com/articles/fog0000000038.html) by Joel Spolsky; for others is can be a source of pain, envy, and jealousy. This is a topic that I truly hate; it's uncomfortable at best and quite painful at worst. While I can't offer much advice, here are a few things to think about:
+
+
+
+	
+  * Money is not an effective motivator. In an ideal environment it should just stay out-of-the-way and allow developers to live a comfortable life; in reality the role it plays is a bit different. More often than not, it's a distraction that gets in the way and outweighs the factors that do motivate people.
+
+	
+  * Companies follow a few different pay systems, and once set moving to different system is nearly impossible. Here are a few I've seen:
+
+	
+    * Clearly Structured: This system places developers on a scale, and developers at a given level receive the same salary (see [Fog Creek](http://fogcreek.com/)).
+
+	
+    * Structured + Negotiated: This is the most common system I've seen; it mixes a structured level system with negotiated modifications that can apply a certain percentage increase from the normal base salary for that level or other benefits (extended vacation, etc).
+
+	
+    * Negotiated: Pay is based on negotiation skills and need; this can lead to odd situations such as where a junior developer can make more than a senior developer due to the need to fill a position quickly. This system requires strict secrecy when it comes to salary information to avoid nasty surprises, unlike the clearly structured system where salary information can be openly shared.
+
+
+
+
+	
+  * Are large salary increases possible? Some companies have no issue with large increases in salary for a promotion (20%+) while in others exceeding 5% for any reason is a major challenge. If a developer is coming in on the low-end of the scale (i.e. due to lack of experience, such as a recent graduate), is there a real possibility of moving up? In my experience, people stay near the end they start at - those that start at the bottom will stay there until they move to a different company.
+
+
+**Interview Questions:** If you are conducing an interview, make a list of questions and write them down. It's quite embarrassing to suddenly realize that you are out of questions just a few minutes in (Need inspiration? Try [this](http://en.wikipedia.org/wiki/Microsoft_interview) or [this](http://www.joelonsoftware.com/articles/GuerrillaInterviewing3.html)). Many people have said much about this, but the most important thing I can point out is just don't wing it. Plan carefully, make sure you know what you're going to do and when before the candidate shows up.
+
+**Interview Dress Code:** I've been amazed at what I've seen people wear, everything from high-end suits to jeans. What's appropriate? It really depends on the environment; a large corporation will expect an Armani suit where a startup is happier seeing jeans and an American Apparel t-shirt. When in doubt, I would go with a suit personally - but depending on the company that could cost you the job just as quickly as showing up in jeans.
+
+**Interviews Go Both Ways:** An interview shouldn't be a one-way affair; the candidate should be interviewing the company as much as you are interviewing them. They should be asking questions about the environment, expectations, tools and resources provided as much as you are asking them about prior experience and knowledge. If a candidate doesn't seem to care about the company or what the working conditions are like - think carefully before hiring them.
+
+**Other Thoughts:** I'll not go into what I look for when it comes to personality or other personal traits as that would require far more than a blog post to cover. I'm also going to avoid things such as hobbies and the like; while they can tell you much about a person they can also lead to other complications. Any question in an interview can quickly lead to a land-mine and in the legal quagmire that is HR law and policies, trouble is easy to find. When in doubt, just don't ask.
+
+* This is based on my experience over the years; not necessarily the experiences in this round of hiring or the opinions or policies of my employer. In general, nothing in this refers to policies, preferences, or procedures of my employer. <Standard Disclaimer />
