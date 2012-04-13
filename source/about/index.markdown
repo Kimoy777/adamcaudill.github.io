@@ -89,7 +89,7 @@ Other places you can find me include:
 ### This Site
 
 
-This site is being developed and maintained with [WordPress](http://wordpress.org/) & UltraEdit; the theme is [WordPress Bootstrap](http://320press.com/wpbs/) and the color scheme is based on United by [Bootswatch](http://bootswatch.com/). To ensure maximum usability, it's tested in the following browsers:
+This site is being developed and maintained with [Octopress](http://octopress.org/), currently using the excellent default theme. To ensure maximum usability, it's tested in the following browsers:
 
 
 
@@ -106,4 +106,7 @@ This site is being developed and maintained with [WordPress](http://wordpress.or
   * Google Chrome
 
 
-If you have any issues using this site, please [contact](http://adamcaudill.com/contact/) me, and I'll try to resolve it as soon as possible.
+### Contact Me
+
+You can reach me via email at [adam@adamcaudill.com](mailto:adam@adamcaudill.com) or on Twitter at [@adamcaudill](http://twitter.com/adamcaudill).
+
