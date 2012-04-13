@@ -10,7 +10,7 @@ wordpress_id: '2'
 ### Me
 
 
-I'm Adam Caudill, a 30 year-old software developer & architect with a strong focus on security issues, avid C# and .NET Framework fan, a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](http://adamcaudill.com/bayonet-collection/) and a [technology addict](http://flickr.com/photos/adamcaudill/165413413/in/set-72157594155854220/). In addition to programming I occupy myself with [reading](http://adamcaudill.com/my-books/) and [photography](http://adamcaudill.com/photo/).
+I'm Adam Caudill, a 30 year-old software developer & architect with a strong focus on security issues, avid C# and .NET Framework fan, a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](/bayonet-collection/) and a [technology addict](http://flickr.com/photos/adamcaudill/165413413/in/set-72157594155854220/). In addition to programming I occupy myself with [reading](/reading/) and [photography](/photo/).
 
 While I tend to spend most of my time in C#, I also spend a fair bit of time developing & maintaining websites using PHP and Ruby. I also have a background in Visual Basic & C++ development, as well as a few other languages that I avoid these days. I tend to limit the number of languages I work in so that I can better focus on those I use regularly.
 
