@@ -10,23 +10,23 @@ This is a listing of a portion of my personal library, these are mostly books I'
 
 ### Reading Now:
 
-[The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws](http://www.amazon.com/gp/product/B005LVQA9S/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B005LVQA9S): Up to date information, well written, highly recommended.
+[The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws](http://www.amazon.com/gp/product/B005LVQA9S/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B005LVQA9S): Well written, information is up to date and clear. If you are trying to learn more about pen-testing - either for real testing, or to better understand the attack vectors that your applications expose - this is a great resource. Highly recommended.
 
 ### Recent Additions:
 
-[The Shellcoder's Handbook: Discovering and Exploiting Security Holes](http://www.amazon.com/gp/product/047008023X/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=047008023X)
+[The Shellcoder's Handbook: Discovering and Exploiting Security Holes](http://www.amazon.com/gp/product/047008023X/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=047008023X): If you want to know more about how desktop/server software and operating systems are attacked, this is great resource - though this is certainly not light reading. If you don't have a background in ASM and C development, you'll find yourself in over your head in a hurry. 
 
 [The Portable Atheist: Essential Readings for the Nonbeliever](http://www.amazon.com/gp/product/B003KVKYAC/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B003KVKYAC)
 
 [God Is Not Great: How Religion Poisons Everything](http://www.amazon.com/gp/product/B000QUCO4Y/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B000QUCO4Y)
 
-[Cryptonomicon](http://www.amazon.com/gp/product/B000FC11A6/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B000FC11A6)
+[Cryptonomicon](http://www.amazon.com/gp/product/B000FC11A6/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B000FC11A6): I found this book hard to read because of the intertwined storylines, but it does all come together at the end. Overall, it's a great book - and even moreso if you are interested in history (much of the book takes place during WWII) and cryptography as I am.
 
-[And Another Thing... (The Hitchhiker's Guide to the Galaxy)](http://www.amazon.com/gp/product/B002WGC8PU/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B002WGC8PU)
+[And Another Thing... (The Hitchhiker's Guide to the Galaxy)](http://www.amazon.com/gp/product/B002WGC8PU/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B002WGC8PU): This book partially wrapped up the story for the Hitchhiker's Guide, but it's still open-ended on a number of fronts. I don't regret reading it, but I probably won't read it a second time.
 
-[The Ultimate Hitchhiker's Guide to the Galaxy](http://www.amazon.com/gp/product/B0043M4ZH0/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B0043M4ZH0)
+[The Ultimate Hitchhiker's Guide to the Galaxy](http://www.amazon.com/gp/product/B0043M4ZH0/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B0043M4ZH0): You've read this one, right? Right?! RIGHT?!?!?!?!
 
-[Zero Day: A Novel](http://www.amazon.com/gp/product/B00457X7XQ/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B00457X7XQ)
+[Zero Day: A Novel](http://www.amazon.com/gp/product/B00457X7XQ/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B00457X7XQ): Fantastic. This is an outstanding book, great technical detail, highly accurate, and realistic storyline. It was written by the legendary Mark Russinovitch, showing that not only can he write technical books, but that he's also very talented at fiction. Buy this book, that simple.
 
 ### Older Items:
 
