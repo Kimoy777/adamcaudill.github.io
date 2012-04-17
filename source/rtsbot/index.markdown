@@ -8,7 +8,7 @@ title: RTSbot
 
 ## What is RTSbot?
 
-RTSbot is a web crawler or spider that retrieves the [robots.txt](http://www.robotstxt.org/) files from web sites for use in a security research project. The only file it will access is the robots.txt file in the root of your site (example.com/robots.txt), and under normal conditions, it will only access a domain once. It can be identified by the following user-agent:
+RTSbot is a web crawler or spider that retrieves the [robots.txt](http://www.robotstxt.org/) files from web sites for use in a security research project. The only file it will access is the robots.txt file in the root of your site (example.com/robots.txt), and under normal conditions, it will only access a domain once (except for that one site I hit 40,000 times, sorry!). It can be identified by the following user-agent:
 
     Mozilla/5.0 (compatible; RTSbot/1.0; +http://adamcaudill.com/rtsbot/)
 
@@ -31,8 +31,21 @@ My goal with this project is to gather millions of these files, and through vari
 
 ## So are you hacking me?!
 
-Not at all. The goal is to get a better understanding of a potential security risk, not to exploit it. Any data released from this research will be anonymized.
+Not at all. The goal is to get a better understanding of a potential security risk, not to exploit it. Any data released publicly from this research will be anonymized.
 
 ## Should I be worried?
 
 If you aren't sure, you should look at your robots.txt file to ensure that there is no information that could aid an attacker. Remember - any information that you expose about your systems or how they work could make it easier for an attacker to determine a vector of attack.
+
+## Notes
+
+The list of domains I am pulling from is based on the zone files made available from [premiumdrops.com](http://premiumdrops.com/zones.html), and were current as of 4/14/2012. The list includes the following TLDs:
+
+* .com
+* .net
+* .org
+* .info
+* .us
+* .biz
+
+There are over 138,000,000 domains on this list (being worked in batches of 100,000); I may not complete the entire list due to time constraints. I will dedicate what resources I can over the next month or so capturing data, my goal is to get at least 50% of the list completed before starting the data-mining process.
