@@ -38,9 +38,8 @@ But I digress, back to the topic. When new programmers come out of school, they 
 
 To succeed, new programmers need to expand their knowledge and try to become true developers, not just programmers. Unless they find jobs at a major software development company, such as Microsoft, odds are they will need these extra skills to get ahead.
 
-Learning how to better troubleshoot issues, working with end users that are having issues, or have ideas for changes will be a step forward to become a developer. Another item to focus on is finding an understanding of  design and architecture so that they are more capable of designing a maintainable large-scale application; a key value for small development groups. 
+Learning how to better troubleshoot issues, working with end users that are having issues, or have ideas for changes will be a step forward to become a developer. Another item to focus on is finding an understanding of  design and architecture so that they are more capable of designing a maintainable large-scale application; a key value for small development groups.
 
 To be a great developer, programmers must have a passion for software, both in using and creating. This is something missing in many of the recent graduates I've met. These are the programmers that will end up going the route of changing careers; those without a passion simply won't make it.
 
-_Note: This is from the perspective of small software teams; larger groups may have somewhat different priorities. 
-_
+_Note: This is from the perspective of small software teams; larger groups may have somewhat different priorities.

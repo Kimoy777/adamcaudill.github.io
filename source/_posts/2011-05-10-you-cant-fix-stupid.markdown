@@ -18,11 +18,11 @@ tags:
 
 For those outside of the IT field, developers are looked at as miracle workers - through us, business leaders think anything is possible (and they often see no reason why we can't work our latest miracle by the next morning). In reality though, we do work miracles; we save companies vast amounts of money every year through increased worker efficiency and automation, we enable new lines of business that wouldn't be possible otherwise, and reduce energy costs because we keep the office lights turned off. Well, that's more or less how they see us.
 
-But for all of the wonders we are responsible for, there is one thing we can't do (no matter what amazing powers some executives _think_ we have to make them look better or earn them more bonuses):
+But for all of the wonders we are responsible for, there is one thing we can't do (no matter what amazing powers some executives _think_ we have to make them look better or earn them more bonuses):
 
 **You can't fix stupid.**
 
-I've often described development as being a professional problem solver, and we are often tasked with rather challenging problems to solve. Sometimes the problems are purely technical - making something new possible that previously was impracticable or even impossible, sometimes it's all about efficiency, other times it's about image and controlling how people see a company. When the problem is the user though, you know you're in for a rough day.
+I've often described development as being a professional problem solver, and we are often tasked with rather challenging problems to solve. Sometimes the problems are purely technical - making something new possible that previously was impracticable or even impossible, sometimes it's all about efficiency, other times it's about image and controlling how people see a company. When the problem is the user though, you know you're in for a rough day.
 
 I was recently given such a task - the users weren't listening to their supervisors and they wanted the software to force these users to do whatever it was that management told them they should be doing. I was given less than a week to find ways to make people that don't want to work, work.
 
@@ -50,7 +50,7 @@ No matter how helpful or intelligent an application is, or how idiot-proof you t
 _Somewhere, right now, idiots are working to build even better idiots - and that's a really scary thought._
 
 
-We can make a user more efficient by automating tasks, providing better information, or helping to manage their workload - what we can't do is make them smarter, make them think through their actions, or force them to do what their managers tell them. Yet we are, at least on occasion, asked to fix this problem.  
+We can make a user more efficient by automating tasks, providing better information, or helping to manage their workload - what we can't do is make them smarter, make them think through their actions, or force them to do what their managers tell them. Yet we are, at least on occasion, asked to fix this problem.
 
 
 Despite our best efforts as professionals and passionate developers; if a user won't think - we just can't fix it.

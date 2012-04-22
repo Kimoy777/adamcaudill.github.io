@@ -17,7 +17,7 @@ tags:
 [Paul Vick](http://www.panopticoncentral.net/) announced a possible change for VB 9.0, [this change](http://www.panopticoncentral.net/archive/2006/12/29/18883.aspx) would give the [IIF method](http://msdn2.microsoft.com/en-us/library/27ydhh0d(VS.80).aspx) the legitimacy it has long deserved. The issue with `IIf` is that it's not a [short-circuit operator](http://en.wikipedia.org/wiki/Minimal_evaluation), which can severely limits its usefulness. Take the following example, that will throw an exception if `obj` is `Nothing`:
 
 
-> `IIf(obj IsNot Nothing, obj.Property1, String.Empty)` 
+> `IIf(obj IsNot Nothing, obj.Property1, String.Empty)`
 
 
 Since `IIf()` is just a normal method, all parameters will be evaluated, regardless of weather `obj` is `Nothing`. This change would make `IIf` a true part of the language, a true ternary operator, instead of just another method.
