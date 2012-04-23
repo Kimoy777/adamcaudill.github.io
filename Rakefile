@@ -237,7 +237,9 @@ task :rsync do
     exclude = "--exclude-from '#{File.expand_path('./rsync-exclude')}'"
   end
   puts "## Deploying website via Rsync"
-  ok_failed system("rsync -avze 'ssh -p #{ssh_port}' #{exclude} #{"--delete" unless rsync_delete == false} #{public_dir}/ #{ssh_user}:#{document_root}")
+  ok_failed system("rsync -avze 'ssh -p #{ssh_port}' --no-owner --no-group --no-perms #{exclude} #{"--delete" unless rsync_delete == false} #{public_dir}/ #{ssh_user}:#{document_root}")
+  puts "## Updating permissions"
+  ok_failed system("ssh -p #{ssh_port} #{ssh_user} chown -R www-data:www-data #{document_root} && chmod -R 755 #{document_root}")
 end
 
 desc "deploy public directory to github pages"
