@@ -1,0 +1,37 @@
+---
+layout: post
+title: "HP Folio 13"
+date: 2012-04-23 00:01
+comments: true
+categories: 
+---
+
+When Intel and various industry partners started talking about "ultra-books" as competition against Apple and tablets, I was more than a little skeptical. Ultra-books are small and light weight - but not cheap (average price being around $1,000) and rather underpowered compared to what you can get for the same money with a more traditional laptop (they are basically MacBook Air knock-offs). I had written them off almost as soon as they were announced.
+
+I really expected the ultra-book to be a fad, and a short-lived one at that.
+
+Then came the [HP Folio 13](http://www.amazon.com/gp/product/B006OEL86Q/ref=as_li_ss_tl?ie=UTF8&tag=adamcaucom-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B006OEL86Q) - my desktop recently failed, and since then I've been using my 2+ year old ASUS G73 as my only machine. While the G73 is great - it's also massive, hot, and heavy. After parting with my unused camera gear, I acquired a Folio 13 to act as my main laptop, leaving the G73 to play the role of desktop / development machine.
+
+Within a couple hours of getting the Folio 13 it was clear, I was in love.
+
+It's not quite the love I felt when I [first found the iPad](http://adamcaudill.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/), but it's an amazing machine. Fast, super-light, and the battery goes on forever - it's the ideal laptop. With the power of my G73 available anytime via RDP, I think this combination is about as good as it gets.
+
+Here's a rough overview of the Folio:
+
+* Intel Core i3 / i5**
+* 128GB SSD
+* 4GB RAM
+* 13.3" 1366x768 display
+* 9 hour battery (so far 7-8 hours seems to be the realistic number)
+* Brushed aluminum case
+* 3.3lbs
+
+Also included are the normal things you would expect, like a web cam, Bluetooth, etc..
+
+I've been extremely impressed with what this little thing can do, from large compiles to generating [Jekyll](https://github.com/mojombo/jekyll) sites, it's more capable than I expected. So far it's handled everything I've thrown at it - and most taking around the same time as my G73 would (and some taking less, thanks to the Folio's SSD). 
+
+I'll be doing most of my writing and non-development work on the Folio, and the G73 will still be my go-to system anytime I need Visual Studio or other heavy-weight development tools (though I'd be willing to bet, it'll be via RDP from the Folio more often than not).
+
+Overall: I'm extremely pleased. It's a great device - it has the battery life and portability of a tablet (i.e. an iPad), with the power and flexibility of a traditional laptop.
+
+** The Core i3 version is less expense, and thanks to the lower power consumption, it also stretches the battery life better than the i5 - making it a win-win.
