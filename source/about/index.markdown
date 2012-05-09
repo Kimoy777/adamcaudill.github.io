@@ -14,6 +14,7 @@ I'm Adam Caudill, a 30 year-old software developer & architect with a strong foc
 
 While I tend to spend most of my time in C#, I also spend a fair bit of time developing & maintaining websites using PHP and Ruby. I also have a background in Visual Basic & C++ development, as well as a few other languages that I avoid these days. I tend to limit the number of languages I work in so that I can better focus on those I use regularly.
 
+If you want more, take a look at my [resume](/resume/).
 
 ### Software
 
