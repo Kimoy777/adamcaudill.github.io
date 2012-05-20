@@ -33,7 +33,7 @@ I currently manage a team of eight developers, both local and remote.  My respon
 * Ensuring compliance with security standards.
 * Designing, and reviewing other developer’s designs for system architectures.
 * Mentoring new developers.
-* Auditing implementations to ensure compliance with various certifications (PCI-DSS, ISO 17799, SAS 70), as well as client security policies.
+* Auditing implementations to ensure compliance with various certifications (PCI-DSS, ISO 27002, SSAE 16), as well as client security policies.
 
 During my time here, I believe I have achieved many things:
 
