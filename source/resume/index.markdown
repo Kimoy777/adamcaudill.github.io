@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "Resume"
-date: 2012-05-04 21:07
 comments: true
 sharing: true
 footer: true
