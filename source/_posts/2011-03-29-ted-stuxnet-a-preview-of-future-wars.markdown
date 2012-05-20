@@ -20,6 +20,8 @@ For those of us that have a professional interest in security, understanding the
 
 This is a must watch.
 
+{% video http://download.ted.com/talks/RalphLangner_2011-480p.mp4 720 480 http://images.ted.com/images/ted/tedindex/embed-posters/RalphLangner-2011.embed_thumbnail.jpg %}
+
 [Ralph Langner: Cracking Stuxnet, a 21st-century cyber weapon](http://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon.html)
 
 Update: If you want to dig into some technical detail, [Mark Russinovich](http://blogs.technet.com/b/markrussinovich/archive/2011/03/30/3416253.aspx) has a good write-up on it.
