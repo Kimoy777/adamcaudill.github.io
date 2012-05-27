@@ -5,42 +5,29 @@ slug: from-outlook-to-gmail-to-the-bat
 status: publish
 title: From Outlook, to Gmail, to The Bat!
 wordpress_id: '178'
-categories:
-- News &#038; Events
-- Personal
 ---
 
-Back in March, I [switched](http://adamcaudill.com/2006/03/22/move-to-outlook/http://adamcaudill.com/2006/03/22/move-to-outlook/) from [The Bat!](http://www.ritlabs.com/en/products/thebat/) to Outlook as a result of being annoyed with using two different clients (work & home)*. So today, I'm running The Bat again, thanks to [Gmail.](http://gmail.google.com/)
+Back in March, I [switched](http://adamcaudill.com/2006/03/22/move-to-outlook/) from [The Bat!](http://www.ritlabs.com/en/products/thebat/) to Outlook as a result of being annoyed with using two different clients (work & home)*. So today, I'm running The Bat again, thanks to [Gmail.](http://gmail.google.com/)
 
 **Moving to Gmail**
 
 I had been thinking about moving to Gmail for a while, the other day I decided to bite the bullet and do it. There was some pain involved, but not as bad as I expected. The process goes something like this:
-
-
-
 	
-  1. Setup any [custom From address](http://mail.google.com/support/bin/answer.py?answer=20616), personally, I had 5. _Now, here's a word of warning:_ pay close attention to the note on that page, I didn't, and it bit me quite hard, [here's why](http://pascal.vanhecke.info/2005/08/31/gmail-sender-header-makes-custom-from-address-useless-for-mailinglists/).
+1. Setup any [custom From address](http://mail.google.com/support/bin/answer.py?answer=20616), personally, I had 5. _Now, here's a word of warning:_ pay close attention to the note on that page, I didn't, and it bit me quite hard, [here's why](http://pascal.vanhecke.info/2005/08/31/gmail-sender-header-makes-custom-from-address-useless-for-mailinglists/).
 
-	
-  2. Setup [Filters](http://mail.google.com/support/bin/answer.py?answer=6579) to [Label](http://mail.google.com/support/bin/answer.py?answer=6560) your email based on the `To` address, this way you can see what account a message was sent to.
+2. Setup [Filters](http://mail.google.com/support/bin/answer.py?answer=6579) to [Label](http://mail.google.com/support/bin/answer.py?answer=6560) your email based on the `To` address, this way you can see what account a message was sent to.
 
-	
-  3. Forward your existing email account to <your_name>@gmail.com.
+3. Forward your existing email account to <your_name>@gmail.com.
 
-	
-  4. Convert/Export your email to the [mbox format](http://en.wikipedia.org/wiki/Mbox) (some clients such as Thunderbird support this natively), for some clients, you may need the help of something like [Aid4Mail](http://www.aid4mail.com/) (this is what I used, works great).
+4. Convert/Export your email to the [mbox format](http://en.wikipedia.org/wiki/Mbox) (some clients such as Thunderbird support this natively), for some clients, you may need the help of something like [Aid4Mail](http://www.aid4mail.com/) (this is what I used, works great).
 
-	
-  5. Finally, use Mark Lyon's [Gmail Loader](http://www.marklyon.org/gmail/) to read the mbox files you just created, and shoot them to your Gmail account. One note on this, it sends one email every two seconds, assuming no errors, so if you have several thousand emails, this is a slow process.
-
+5. Finally, use Mark Lyon's [Gmail Loader](http://www.marklyon.org/gmail/) to read the mbox files you just created, and shoot them to your Gmail account. One note on this, it sends one email every two seconds, assuming no errors, so if you have several thousand emails, this is a slow process.
 
 Once you've completed those 5 steps, you're done.
 
 Now, there are some things to keep in mind, if you don't want people to see your Gmail address via that custom From address, well, you're out of luck. Google sends a `Sender` header with your Gmail address. This results in a number of issues, but the most painful for me was in Outlook displaying something like this:
 
-
 > _"From <you>@gmail.com on behalf of <you>@example.com"_
-
 
 As far as I'm concerned, that's about the most unprofessional thing a business email could display. It reeks of uncaring attitudes and oozes the impression of fraud. I use my email for business, so that isn't an option.
 
