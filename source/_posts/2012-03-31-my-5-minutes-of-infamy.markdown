@@ -28,18 +28,18 @@ I went back to Visual Studio and found the code that caused it all:
 
 {% gist 2258783 %}
 
-Shifting values is obfuscation and little more, it looks like security - it might even smell like security, but it isn't. It's a false sense of safety, it was a mistake to implement and even more of a mistake to actually use in a consumer product.
+Shifting values is obfuscation and little more, it looks like security - it might even smell like security, but it isn't. It's a false sense of safety, it was a mistake to implement and even more of a mistake to actually use in a consumer product.
 
 While this is only a local information disclosure, and not something far more serious like a remote arbitrary code execution issue - it was still enough to really shake me. I had always considered myself to be a good developer, and part of that is writing secure code. This was many things - but secure isn't one of them.
 
 Thankfully, [Lostmon](http://lostmon.blogspot.com/), the finder of the issue was courteous enough to give me a couple of days advance notice before making it public. Allowing me plenty of time to get a notice up on the web site, and get the next (fixed) version ready for release. I switched from a glorified [Caesar cipher](http://en.wikipedia.org/wiki/Caesar_cipher), to [Rijndael](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard) - a significant step up I would say.
 
-Was anybody harmed by this issue? I don't believe so - it was a relativity minor issue given what was needed to get the password. Was anybody impacted? Most certainly.
+Was anybody harmed by this issue? I don't believe so - it was a relativity minor issue given what was needed to get the password. Was anybody impacted? Most certainly.
 
 
 
 	
-  * Users: They now wonder if they are secure - did somebody steal their information?
+  * Users: They now wonder if they are secure - did somebody steal their information?
 
 	
   * Company: The brand is weakened, less trusted, and questioned more.
