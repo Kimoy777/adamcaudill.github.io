@@ -10,15 +10,15 @@ For a research project I decided that I needed to monitor the traffic to and fro
 
 First, install the latest version of [Fiddler](http://www.fiddler2.com/fiddler2/version.asp), then install the iOS-compatible [certificate generator](http://www.fiddler2.com/dl/FiddlerCertMaker.exe). Now update the settings to decrypt HTTPS traffic:
 
-{% img center files/2012-06-10_1430.png %}
+{% img center http://adamcaudill.com/files/2012-06-10_1430.png %}
 
 Next, update the settings to allow remote connections (make sure that restart Fiddler after this):
 
-{% img center files/2012-06-10_1433.png %}
+{% img center http://adamcaudill.com/files/2012-06-10_1433.png %}
 
 Then export the Fiddler Root Certificate to your desktop from the options dialog:
 
-{% img center files/2012-06-10_1436.png %}
+{% img center http://adamcaudill.com/files/2012-06-10_1436.png %}
 
 Email the `FiddlerRoot.cer` file to your iPhone - you'll need to import and trust the certificate to make this work. To install certificate, just click on the attachment and click the 'Install' button.
 
