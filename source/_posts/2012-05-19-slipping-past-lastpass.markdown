@@ -8,6 +8,8 @@ categories:
 
 **Update:** LastPass has confirmed that they'll address this issue in the next release.
 
+**Update 2:** LastPass has addressed this issue in their new v2.0 release. There is still a way to bypass the password prompt in Chrome, but they will address that in the next release. Overall, it looks like we can close the books on this one.
+
 I'm a big fan of [LastPass](https://lastpass.com/) - it's a great service that has impressed me every step of the way. Though it's not perfect, and I've found a small hole that makes it easier for an attacker to get your passwords - if the following are true:
 
   1. The attacker has physical access to your PC.
