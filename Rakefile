@@ -255,7 +255,7 @@ task :rsync do
     exclude = "--exclude-from '#{File.expand_path('./rsync-exclude')}'"
   end
   puts "## Deploying website via Rsync"
-  ok_failed system("sudo cp -r #{public_dir} #{document_root}")
+  ok_failed system("sudo cp -v -r #{public_dir}/* #{document_root}")
   puts "## Fixing permissions"
   ok_failed system("sudo ./fix_perms.sh")
 end
