@@ -4,19 +4,6 @@ layout: post
 slug: pen-testing-silverlightria-with-soapui
 status: publish
 title: Pen-Testing Silverlight+RIA with SoapUI
-wordpress_id: '957'
-categories:
-- Development
-- Security
-- Technology
-tags:
-- .NET
-- Development
-- Pen-test
-- Security
-- Silverlight
-- SoapUI
-- Web Development
 ---
 
 I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a public web site. So I started searching for automated pen-testing tools that could work against Microsoft's Binary SOAP protocol (`msbin1`, a.k.a `application/soap+msbin1`) and found only disappointment. For various reasons, it's significantly more complex to pen-test a application using `msbin1` than traditional `SOAP` + `WSDL`.
@@ -62,3 +49,5 @@ Finally, to expose the `SOAP` end point:
 Finally, just follow the [instructions](http://www.soapui.org/Security/security-scans-overview.html) for SoapUI to setup your tests, and you can feel (just a little) more confident in your application. Passing with flying colors obviously doesn't mean your application is bulletproof, but it helps to confirm that web service code is solid.
 
 Now, while this does provide some insight into your application and should help find common issues, it's not a replacement for a professional assessment by a qualified auditor. If you are handling credit cards or other highly targeted information, _please_ consult a security specialist before a public deployment.
+
+**Update:** Another option is a [Burp](http://portswigger.net/burp/) plug-in offered by Gotham Digital Science, and can be found [here](http://blog.gdssecurity.com/labs/2009/11/19/wcf-binary-soap-plug-in-for-burp.html). It's a more complex workflow, but allows testing without an exposed SOAP end-point - which is great if you don't have source code access. 
