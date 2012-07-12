@@ -1,0 +1,397 @@
+---
+layout: post
+title: "Yahoo's Associated Content Hacked?"
+date: 2012-07-12 03:40
+comments: true
+categories: 
+---
+
+**Update**: [TrustedSec](https://www.trustedsec.com/) has a write up:
+
+{% tweet https://twitter.com/TrustedSec/status/223270871354183680  align='center' %}
+
+Earlier today a group called "[D33Ds Company](https://d33ds.co/)" released a large (17MB) [dump](https://d33ds.co/archive/yahoo-disclosure.txt) from a Yahoo server. The dump includes information from a MySQL database, and the email addresses and passwords from over 450k users. Based on some of the emails and the naming of the tables, I suspect that the data is from [Associated Content](http://en.wikipedia.org/wiki/Associated_Content) - a company that Yahoo bought in 2010, and closed in 2011 -  replacing it with [Yahoo Voices](http://voices.yahoo.com/).
+
+    #######################################
+    #     [ - Owned and Exposed - ]       #
+    # Brought to you by the D33Ds Company #
+    #                                     #
+    # Target: <censored>.yahoo.com        #
+    # Method: Union-based SQL Injection   #
+    #                                     #
+    #######################################
+
+The group that released the dump "censored" the name of the server in question, but they neglected to clear the HOSTNAME field in the MySQL information, exposing the server name: dbb1.ac.bf1.yahoo.com
+
+I've used the great [Pipal](http://www.digininja.org/projects/pipal.php) script to perform some analysis on the passwords:
+
+    Total entries = 442786
+    Total unique entries = 342479
+
+    Top 10 passwords
+    123456 = 1666 (0.38%)
+    password = 780 (0.18%)
+    welcome = 437 (0.1%)
+    ninja = 333 (0.08%)
+    abc123 = 250 (0.06%)
+    123456789 = 222 (0.05%)
+    12345678 = 208 (0.05%)
+    sunshine = 205 (0.05%)
+    princess = 202 (0.05%)
+    qwerty = 172 (0.04%)
+
+    Top 10 base words
+    password = 1374 (0.31%)
+    welcome = 535 (0.12%)
+    qwerty = 464 (0.1%)
+    monkey = 430 (0.1%)
+    jesus = 429 (0.1%)
+    love = 421 (0.1%)
+    money = 407 (0.09%)
+    freedom = 385 (0.09%)
+    ninja = 380 (0.09%)
+    sunshine = 367 (0.08%)
+
+    Password length (length ordered)
+    1 = 117 (0.03%)
+    2 = 70 (0.02%)
+    3 = 302 (0.07%)
+    4 = 2748 (0.62%)
+    5 = 5323 (1.2%)
+    6 = 79615 (17.98%)
+    7 = 65600 (14.82%)
+    8 = 119126 (26.9%)
+    9 = 65958 (14.9%)
+    10 = 54756 (12.37%)
+    11 = 21219 (4.79%)
+    12 = 21730 (4.91%)
+    13 = 2657 (0.6%)
+    14 = 1493 (0.34%)
+    15 = 837 (0.19%)
+    16 = 570 (0.13%)
+    17 = 263 (0.06%)
+    18 = 126 (0.03%)
+    19 = 89 (0.02%)
+    20 = 178 (0.04%)
+    21 = 11 (0.0%)
+    22 = 8 (0.0%)
+    23 = 3 (0.0%)
+    24 = 3 (0.0%)
+    27 = 2 (0.0%)
+    28 = 5 (0.0%)
+    29 = 3 (0.0%)
+    30 = 2 (0.0%)
+
+    Password length (count ordered)
+    8 = 119126 (26.9%)
+    6 = 79615 (17.98%)
+    9 = 65958 (14.9%)
+    7 = 65600 (14.82%)
+    10 = 54756 (12.37%)
+    12 = 21730 (4.91%)
+    11 = 21219 (4.79%)
+    5 = 5323 (1.2%)
+    4 = 2748 (0.62%)
+    13 = 2657 (0.6%)
+    14 = 1493 (0.34%)
+    15 = 837 (0.19%)
+    16 = 570 (0.13%)
+    3 = 302 (0.07%)
+    17 = 263 (0.06%)
+    20 = 178 (0.04%)
+    18 = 126 (0.03%)
+    1 = 117 (0.03%)
+    19 = 89 (0.02%)
+    2 = 70 (0.02%)
+    21 = 11 (0.0%)
+    22 = 8 (0.0%)
+    28 = 5 (0.0%)
+    23 = 3 (0.0%)
+    24 = 3 (0.0%)
+    29 = 3 (0.0%)
+    30 = 2 (0.0%)
+    27 = 2 (0.0%)
+
+            |
+            |
+            |
+            |
+            |
+          | |
+          | |
+          ||||
+          |||||
+          |||||
+          |||||
+          |||||
+          |||||
+          |||||||
+          |||||||
+    ||||||||||||||||||||||||||||||||
+    00000000001111111111222222222233
+    01234567890123456789012345678901
+
+    One to six characters = 88169 (19.91%)
+    One to eight characters = 272893 (61.63%)
+    More than eight characters = 169893 (38.37%)
+
+    Only lowercase alpha = 146488 (33.08%)
+    Only uppercase alpha = 1778 (0.4%)
+    Only alpha = 148266 (33.48%)
+    Only numeric = 26078 (5.89%)
+
+    First capital last symbol = 1259 (0.28%)
+    First capital last number = 17465 (3.94%)
+
+    Months
+    january = 106 (0.02%)
+    february = 30 (0.01%)
+    march = 192 (0.04%)
+    april = 284 (0.06%)
+    may = 725 (0.16%)
+    june = 386 (0.09%)
+    july = 245 (0.06%)
+    august = 238 (0.05%)
+    september = 68 (0.02%)
+    october = 182 (0.04%)
+    november = 154 (0.03%)
+    december = 130 (0.03%)
+
+    Days
+    monday = 48 (0.01%)
+    tuesday = 15 (0.0%)
+    wednesday = 9 (0.0%)
+    thursday = 18 (0.0%)
+    friday = 47 (0.01%)
+    saturday = 6 (0.0%)
+    sunday = 30 (0.01%)
+
+    Months (Abreviated)
+    jan = 1007 (0.23%)
+    feb = 172 (0.04%)
+    mar = 4718 (1.07%)
+    apr = 472 (0.11%)
+    may = 725 (0.16%)
+    jun = 797 (0.18%)
+    jul = 656 (0.15%)
+    aug = 504 (0.11%)
+    sept = 184 (0.04%)
+    oct = 425 (0.1%)
+    nov = 519 (0.12%)
+    dec = 404 (0.09%)
+
+    Days (Abreviated)
+    mon = 4428 (1.0%)
+    tues = 16 (0.0%)
+    wed = 212 (0.05%)
+    thurs = 29 (0.01%)
+    fri = 479 (0.11%)
+    sat = 365 (0.08%)
+    sun = 1237 (0.28%)
+
+    Includes years
+    1975 = 255 (0.06%)
+    1976 = 266 (0.06%)
+    1977 = 278 (0.06%)
+    1978 = 332 (0.07%)
+    1979 = 339 (0.08%)
+    1980 = 353 (0.08%)
+    1981 = 331 (0.07%)
+    1982 = 359 (0.08%)
+    1983 = 338 (0.08%)
+    1984 = 392 (0.09%)
+    1985 = 367 (0.08%)
+    1986 = 361 (0.08%)
+    1987 = 413 (0.09%)
+    1988 = 360 (0.08%)
+    1989 = 401 (0.09%)
+    1990 = 304 (0.07%)
+    1991 = 276 (0.06%)
+    1992 = 251 (0.06%)
+    1993 = 218 (0.05%)
+    1994 = 202 (0.05%)
+    1995 = 147 (0.03%)
+    1996 = 171 (0.04%)
+    1997 = 140 (0.03%)
+    1998 = 155 (0.04%)
+    1999 = 189 (0.04%)
+    2000 = 617 (0.14%)
+    2001 = 404 (0.09%)
+    2002 = 404 (0.09%)
+    2003 = 345 (0.08%)
+    2004 = 424 (0.1%)
+    2005 = 496 (0.11%)
+    2006 = 572 (0.13%)
+    2007 = 765 (0.17%)
+    2008 = 1145 (0.26%)
+    2009 = 1052 (0.24%)
+    2010 = 338 (0.08%)
+    2011 = 92 (0.02%)
+    2012 = 130 (0.03%)
+    2013 = 50 (0.01%)
+    2014 = 28 (0.01%)
+    2015 = 24 (0.01%)
+    2016 = 25 (0.01%)
+    2017 = 26 (0.01%)
+    2018 = 33 (0.01%)
+    2019 = 84 (0.02%)
+    2020 = 163 (0.04%)
+
+    Years (Top 10)
+    2008 = 1145 (0.26%)
+    2009 = 1052 (0.24%)
+    2007 = 765 (0.17%)
+    2000 = 617 (0.14%)
+    2006 = 572 (0.13%)
+    2005 = 496 (0.11%)
+    2004 = 424 (0.1%)
+    1987 = 413 (0.09%)
+    2001 = 404 (0.09%)
+    2002 = 404 (0.09%)
+
+    Colours
+    black = 706 (0.16%)
+    blue = 1143 (0.26%)
+    brown = 221 (0.05%)
+    gray = 76 (0.02%)
+    green = 655 (0.15%)
+    orange = 250 (0.06%)
+    pink = 357 (0.08%)
+    purple = 346 (0.08%)
+    red = 2201 (0.5%)
+    white = 244 (0.06%)
+    yellow = 228 (0.05%)
+    violet = 66 (0.01%)
+    indigo = 35 (0.01%)
+
+    Single digit on the end = 47386 (10.7%)
+    Two digits on the end = 73636 (16.63%)
+    Three digits on the end = 31093 (7.02%)
+
+    Last number
+    0 = 17550 (3.96%)
+    1 = 46691 (10.54%)
+    2 = 24621 (5.56%)
+    3 = 29231 (6.6%)
+    4 = 17690 (4.0%)
+    5 = 17404 (3.93%)
+    6 = 17882 (4.04%)
+    7 = 20402 (4.61%)
+    8 = 17846 (4.03%)
+    9 = 19917 (4.5%)
+
+     |
+     |
+     |
+     |
+     |
+     | |
+     | |
+     |||
+     |||
+    ||||| ||||
+    ||||||||||
+    ||||||||||
+    ||||||||||
+    ||||||||||
+    ||||||||||
+    ||||||||||
+    0123456789
+
+    Last digit
+    1 = 46691 (10.54%)
+    3 = 29231 (6.6%)
+    2 = 24621 (5.56%)
+    7 = 20402 (4.61%)
+    9 = 19917 (4.5%)
+    6 = 17882 (4.04%)
+    8 = 17846 (4.03%)
+    4 = 17690 (4.0%)
+    0 = 17550 (3.96%)
+    5 = 17404 (3.93%)
+
+    Last 2 digits (Top 10)
+    23 = 12364 (2.79%)
+    12 = 6414 (1.45%)
+    11 = 5475 (1.24%)
+    01 = 5097 (1.15%)
+    00 = 4098 (0.93%)
+    21 = 3669 (0.83%)
+    08 = 3627 (0.82%)
+    07 = 3598 (0.81%)
+    22 = 3587 (0.81%)
+    13 = 3547 (0.8%)
+
+    Last 3 digits (Top 10)
+    123 = 9446 (2.13%)
+    456 = 2442 (0.55%)
+    234 = 2160 (0.49%)
+    007 = 1477 (0.33%)
+    000 = 1268 (0.29%)
+    008 = 1150 (0.26%)
+    009 = 1086 (0.25%)
+    111 = 1056 (0.24%)
+    777 = 980 (0.22%)
+    101 = 895 (0.2%)
+
+    Last 4 digits (Top 10)
+    3456 = 2150 (0.49%)
+    1234 = 1968 (0.44%)
+    2008 = 1033 (0.23%)
+    2009 = 927 (0.21%)
+    2345 = 750 (0.17%)
+    2007 = 674 (0.15%)
+    2000 = 535 (0.12%)
+    2006 = 502 (0.11%)
+    1111 = 436 (0.1%)
+    2005 = 436 (0.1%)
+
+    Last 5 digits (Top 10)
+    23456 = 2120 (0.48%)
+    12345 = 724 (0.16%)
+    56789 = 316 (0.07%)
+    45678 = 305 (0.07%)
+    11111 = 269 (0.06%)
+    34567 = 231 (0.05%)
+    54321 = 197 (0.04%)
+    00000 = 162 (0.04%)
+    99999 = 150 (0.03%)
+    23123 = 132 (0.03%)
+
+    US Area Codes
+    456 = Inbound International (--)
+    234 = NE Ohio: Canton, Akron (OH)
+
+    Character sets
+    loweralphanum: 224080 (50.61%)
+    loweralpha: 146488 (33.08%)
+    numeric: 26078 (5.89%)
+    mixedalphanum: 23235 (5.25%)
+    loweralphaspecialnum: 6067 (1.37%)
+    mixedalpha: 5121 (1.16%)
+    upperalphanum: 3416 (0.77%)
+    mixedalphaspecialnum: 3340 (0.75%)
+    loweralphaspecial: 2079 (0.47%)
+    upperalpha: 1778 (0.4%)
+    mixedalphaspecial: 486 (0.11%)
+    upperalphaspecialnum: 222 (0.05%)
+    specialnum: 188 (0.04%)
+    upperalphaspecial: 46 (0.01%)
+    special: 16 (0.0%)
+
+    Character set ordering
+    stringdigit: 185308 (41.85%)
+    allstring: 153387 (34.64%)
+    alldigit: 26078 (5.89%)
+    othermask: 25115 (5.67%)
+    digitstring: 24961 (5.64%)
+    stringdigitstring: 18676 (4.22%)
+    digitstringdigit: 4648 (1.05%)
+    stringspecialdigit: 2359 (0.53%)
+    stringspecial: 1111 (0.25%)
+    stringspecialstring: 833 (0.19%)
+    specialstringspecial: 168 (0.04%)
+    specialstring: 126 (0.03%)
+    allspecial: 16 (0.0%)
+
+
