@@ -22,7 +22,7 @@ Security: I’m very good at breaking things. I understand the attacker’s way 
 
 Source Control: I’m familiar with Git, Mercurial, and Subversion. I’ve used SourceSafe and CVS, but I’d rather forget those.
 
-Operating systems / software: Windows, Linux (Ubuntu & Backtrack primarily), OSX. Visual Studio, Microsoft Office, Adobe Photoshop & Dreamweaver, Fiddler, Wireshark, Eclipse. Various pen-testing tools.
+Operating systems / software: Windows, Linux (Ubuntu & Backtrack primarily), and OSX. Visual Studio, Microsoft Office, Adobe Photoshop & Dreamweaver, Fiddler, Wireshark, Eclipse. Metasploit, w3af, soapUI, and various other tools.
 
 ##Expiriance
 
@@ -34,6 +34,8 @@ I currently manage a team of eight developers, both local and remote.  My respon
 * Designing, and reviewing other developer’s designs for system architectures.
 * Mentoring new developers.
 * Auditing implementations to ensure compliance with various certifications (PCI-DSS, ISO 27002, SSAE 16), as well as client security policies.
+* Designing application architectures and managing implementations.
+* Developing applications and tools in C#.
 
 During my time here, I believe I have achieved many things:
 
