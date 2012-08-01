@@ -18,7 +18,7 @@ footer: true
 
 Code: For the last few years I’ve been working in primarily in C# and VB, before that most of my time was spent with PHP (while it has a bad reputation with many, I think I’ve enjoyed it the most). I know my way around Ruby, C, Java and perhaps a few others, but not well enough to claim any expertise.
 
-Security: I’m very good at breaking things. I understand the attacker’s way of thinking, and I look at systems with that same approach. I understand that every system is hackable with enough resources – I also understand that the more time it takes an attacker, the more likely he is to give up. My job is to remove as many attack vectors as possible, and waste as much of an attackers time as I can.
+Security: I’m very good at breaking things. I understand the attacker’s way of thinking, and I look at systems with that same approach. But I also understand that security is more than just buffer overflows and SQL injection – it’s a way of thinking, it’s a way of designing, it’s about teaching and guiding – I understand that security has to be a thought process before it’ll work as a system process.
 
 Source Control: I’m familiar with Git, Mercurial, and Subversion. I’ve used SourceSafe and CVS, but I’d rather forget those.
 
