@@ -24,10 +24,10 @@ This is my first bayonet, a Turkish Model 1935, in a rather impressive condition
 I _believe_ this is a Czech VZ24 bayonet, which would place in in the WWII time period. It's not in the greatest condition but it is a rather interesting piece because of the "kill mark" notches in the handle. Here is the history, as it was sent to me:
 
 
-> _Picked this up in Slovakia while visiting a small village. It belonged to a partisan and he marked it twice for the 2 kills he had. Came from his family. _
+> _Picked this up in Slovakia while visiting a small village. It belonged to a partisan and he marked it twice for the 2 kills he had. Came from his family._
 
 
-[![Czech VZ24](http://static.flickr.com/107/275014753_abdf7b929a_t.jpg)](http://flickr.com/photos/adamcaudill/275014753/) [![Czech VZ24](http://static.flickr.com/100/275015352_abe1156070_t.jpg)](http://flickr.com/photos/adamcaudill/275015352/) [![Czech VZ24](http://static.flickr.com/118/275014140_d7ae2aba71_t.jpg)](http://flickr.com/photos/adamcaudill/275014140/) [![Czech VZ24](http://static.flickr.com/82/275014458_ec6e86223e_t.jpg)](http://flickr.com/photos/adamcaudill/275014458/)  [![Czech VZ24](http://static.flickr.com/80/275015651_e59efdeeef_t.jpg)](http://flickr.com/photos/adamcaudill/275015651/)
+[![Czech VZ24](http://static.flickr.com/107/275014753_abdf7b929a_t.jpg)](http://flickr.com/photos/adamcaudill/275014753/) [![Czech VZ24](http://static.flickr.com/100/275015352_abe1156070_t.jpg)](http://flickr.com/photos/adamcaudill/275015352/) [![Czech VZ24](http://static.flickr.com/118/275014140_d7ae2aba71_t.jpg)](http://flickr.com/photos/adamcaudill/275014140/) [![Czech VZ24](http://static.flickr.com/82/275014458_ec6e86223e_t.jpg)](http://flickr.com/photos/adamcaudill/275014458/) [![Czech VZ24](http://static.flickr.com/80/275015651_e59efdeeef_t.jpg)](http://flickr.com/photos/adamcaudill/275015651/)
 
 
 ### Spanish FR-8
@@ -43,4 +43,10 @@ This is a Spanish bayonet (I believe from the 1960s) for the [CETME](http://en.w
 
 This is a rather interesting bayonet, partly for it's origin, and partly for its great condition. The is a German made bayonet for the [Mauser](http://en.wikipedia.org/wiki/Mauser) rifle, made by [Weyersberg Kirschbaum & Co.](http://www.military-swords.com/startweb.php) with a blade made at the infamous [Krupp](http://en.wikipedia.org/wiki/Krupp) factory.
 
-[![M1895](http://static.flickr.com/106/281018298_b8ccd5c531_t.jpg)](http://flickr.com/photos/adamcaudill/281018298/)  [![M1895](http://static.flickr.com/80/281017523_8166f8a3cf_t.jpg)](http://flickr.com/photos/adamcaudill/281017523/)  [![M1895](http://static.flickr.com/122/281019057_c4788a15af_t.jpg)](http://flickr.com/photos/adamcaudill/281019057/)  [![M1895](http://static.flickr.com/115/281017940_a2e9fd15b1_t.jpg)](http://flickr.com/photos/adamcaudill/281017940/)
+[![M1895](http://static.flickr.com/106/281018298_b8ccd5c531_t.jpg)](http://flickr.com/photos/adamcaudill/281018298/) [![M1895](http://static.flickr.com/80/281017523_8166f8a3cf_t.jpg)](http://flickr.com/photos/adamcaudill/281017523/) [![M1895](http://static.flickr.com/122/281019057_c4788a15af_t.jpg)](http://flickr.com/photos/adamcaudill/281019057/) [![M1895](http://static.flickr.com/115/281017940_a2e9fd15b1_t.jpg)](http://flickr.com/photos/adamcaudill/281017940/)
+
+### German WWII era Dress
+
+This is a fairly standard German dress bayonet from the WWII period, it was made by Weyersberg, Kirschbaum & Co. The plating is nearly all worn off, which seems to be fairly common.
+
+[![German WWII era Dress](http://farm9.staticflickr.com/8440/7858241392_3e6a15bc88_t.jpg)](http://www.flickr.com/photos/adamcaudill/7858241392/) 
