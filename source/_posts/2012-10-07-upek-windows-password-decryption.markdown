@@ -28,7 +28,7 @@ Better: the key is only 56 bits.
 
 ###AES-56
 
-On the AuthenTec's website they mention using 56-bit AES (due to the old export restrictions) - this confused me for quite some time, not only does AES not support 56-bit (or anything else less that 128 bits), from looking at the algorithm trying to make it support a key size that isn't a multiple of 32 bits would be quite challenging. So how did they do it? They cheated.
+On the AuthenTec's website they mention using 56-bit AES (due to the old export restrictions) - this confused me for quite some time, not only does AES not support 56-bit (or anything else less than 128 bits), from looking at the algorithm trying to make it support a key size that isn't a multiple of 32 bits would be quite challenging. So how did they do it? They cheated.
 
 They are actually using AES-256, and padding both the 56-bit key and IV with nulls. In other words, they are taking a very strong crypto and stripping it of its value.
 
