@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+**Update 2:** The Snapchat API has changed to address the issues I pointed out to them - and the new API has issues as well. I've [posted an update](http://adamcaudill.com/2012/12/31/revisiting-snapchat-api-and-security/) that covers some of these changes.
+
 **Update:** I heard back from one of the co-founders, he said that they'd be updating the application to address this in the "very near future." I have to applaud them for the great way they handled this.
 
 [Snapchat](http://www.snapchat.me/) was recently [featured](http://techcrunch.com/2012/06/08/snapchat-110-million/) on TechCrunch, pointing out that they are expanding to Android and that they've now handled over 110M pictures. So when I see something about an application that auto-deletes messages after they are viewed - I did the only natural thing: dig in and see if it really is secure.
