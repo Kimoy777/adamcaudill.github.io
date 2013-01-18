@@ -40,7 +40,7 @@ The biometric data may be of some interest, but not to me.
 
 ###Code
 
-We've [posted](https://github.com/brandonlw/upek-ps-pass-decrypt) a proof-of-concept tool to Github, it's written in C#, and thus requires the .NET 4.0 framework be installed. I also plan to write a Metasploit post module, but it's not ready yet.
+We've [posted](https://github.com/brandonlw/upek-ps-pass-decrypt) a proof-of-concept tool to Github, it's written in C#, and thus requires the .NET 4.0 framework be installed ([download here](http://adamcaudill.com/files/FingerprintEncryption.2012.10.16.1847.zip)). I also plan to write a Metasploit post module, but it's not ready yet.
 
 ###UPDATE
 
