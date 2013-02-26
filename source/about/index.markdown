@@ -46,9 +46,9 @@ I work in the call-center industry, my team is primarily responsible developing 
 Other places you can find me include:
 
   * [Twitter](http://twitter.com/adamcaudill)
-  * [Github](https://github.com/adamcaudill)
   * [LinkedIn](http://www.linkedin.com/in/adamcaudill)
-  * [flickr](http://www.flickr.com/photos/adamcaudill/)
+  * [GitHub](https://github.com/adamcaudill)
+  * [Flickr](http://www.flickr.com/photos/adamcaudill/)
 
 ### This Site
 
