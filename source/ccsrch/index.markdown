@@ -65,7 +65,7 @@ Search for credit card data and check for Track 2 data formats with output to fi
 
 ### Output
 
-All output is tab deliminated with the following order (depending on the parameters):
+All output is tab delimited with the following order (depending on the parameters):
 
 * Source File
 * Card Type
@@ -136,9 +136,9 @@ One typical observation/complaint is the number of false positives that still co
 
 Note that since this program opens up each file and processes it, obviously the access time (in epoch seconds) will change.  If you are going to do forensics, one assumes that you have already collected an image following standard forensic practices and either have already collected and preserved the MAC times, or are using this tool on a copy of the image.
 
-For the track data search feature, the tool just examines the preceding characters before the valid credit card number and either the delimiter, or the delimeter and the characters (e.g. expiration date) following the credit card number.
+For the track data search feature, the tool just examines the preceding characters before the valid credit card number and either the delimiter, or the delimiter and the characters (e.g. expiration date) following the credit card number.
 
-We have found that for some POS software log files are generated that not only wrap across multiple lines, but insert hex representations of the ASCII values of the PAN data as well. Furthermore, these log files may contain track data. Remember that the only way that ccsrch will find the PAN data and track data is if it is contiguous. In certain instances you may luck out because the log files will contain an entire contigous PAN and will get flagged. We would encourage you to visually examine the files identified for confirmation. Introducing logic to capture all of the crazy possible storage representations of PAN and track data we've seen would make this tool a beast.
+We have found that for some POS software log files are generated that not only wrap across multiple lines, but insert hex representations of the ASCII values of the PAN data as well. Furthermore, these log files may contain track data. Remember that the only way that ccsrch will find the PAN data and track data is if it is contiguous. In certain instances you may luck out because the log files will contain an entire contiguous PAN and will get flagged. We would encourage you to visually examine the files identified for confirmation. Introducing logic to capture all of the crazy possible storage representations of PAN and track data we've seen would make this tool a beast.
 
 Please note that ccsrch recurses through the filesystem given a start directory and will attempt to open any file or object read-only one at a time. Given that this could be performance or load intensive depending on the existing load on the system or its configuration, we recommend that you run the tool on a subset or sample of directories first in order to get an idea of the potential impact. We disclaim all liability for any performance impact, outages, or problems ccsrch could cause.
 
@@ -148,7 +148,7 @@ This tool has been successfully compiled and run on the following operating syst
 
 ### Building
 
-Linux/Unix:
+Linux/Unix/Mac OSX(Intel):  
 
 ```
 $ wget -O ccsrch.tar.gz https://github.com/adamcaudill/ccsrch/tarball/master
@@ -157,7 +157,7 @@ $ cd adamcaudill-ccsrch-<rev>/
 $ make all
 ```
 
-Windows:
+Windows:  
 Install [MinGW](http://www.mingw.org/) ([installer](http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst/))  
 `mingw32-make all`
 
@@ -167,9 +167,13 @@ Install [MinGW](http://www.mingw.org/) ([installer](http://sourceforge.net/proje
 * [v1.0.8 - OSX-Intel-64](http://adamcaudill.com/files/ccsrch-1.0.8-osx_intel.zip)
 * [v1.0.8b1 - Win32](http://adamcaudill.com/files/ccsrch-1.0.8beta1.zip)
 * [v1.0.7 - Win32](http://adamcaudill.com/files/ccsrch-1.0.7.zip)
-* [v1.0.7 - Win32](http://adamcaudill.com/files/ccsrch-1.0.6.zip)
+* [v1.0.6 - Win32](http://adamcaudill.com/files/ccsrch-1.0.6.zip)
 
 ### Revisions
+
+1.0.9 (In Progress)
+
+* Better support for building on OSX.
 
 1.0.8 (May 15, 2012)
 
