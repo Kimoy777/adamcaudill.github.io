@@ -1,6 +1,6 @@
-
 .DS_Store
 /public
 .tweet-cache
 .sass-cache
 .gist-cache
+.pygments-cache
