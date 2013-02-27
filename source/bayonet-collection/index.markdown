@@ -4,7 +4,6 @@ layout: page
 slug: bayonet-collection
 status: publish
 title: Bayonet Collection
-wordpress_id: '130'
 ---
 
 This is a new hobby that I picked up recently after my father gave me a bayonet as a surprise gift. I've been rather hooked since then. Here you'll find the gallery for my small but growing collection.
@@ -47,6 +46,6 @@ This is a rather interesting bayonet, partly for it's origin, and partly for its
 
 ### German WWII era Dress
 
-This is a fairly standard German dress bayonet from the WWII period, it was made by Weyersberg, Kirschbaum & Co. The plating is nearly all worn off, which seems to be fairly common.
+This is a fairly standard German dress bayonet from the WWII period, it was made by [Weyersberg Kirschbaum & Co.](http://www.military-swords.com/startweb.php) The plating is nearly all worn off, which seems to be fairly common for this model.
 
 [![German WWII era Dress](http://farm9.staticflickr.com/8440/7858241392_3e6a15bc88_t.jpg)](http://www.flickr.com/photos/adamcaudill/7858241392/) 

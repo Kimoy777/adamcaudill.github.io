@@ -4,8 +4,9 @@ layout: page
 slug: evaltray
 status: publish
 title: evalTray
-wordpress_id: '8'
 ---
+
+**This hasn't been updated in a number of years, and no longer works as expected. There are now better options.**
 
 I've written a small utility that may be of some use to VB developers (or anyone familiar with VB or VBScript). This is basically a wrapper for the Microsoft Script Control's Eval method, the idea being to test simple lines of code or quick math tasks.  This simply executes VBScript code and returns either an error message if you made a mistake or the returned value.
 

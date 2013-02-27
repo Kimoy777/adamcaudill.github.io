@@ -4,8 +4,9 @@ layout: page
 slug: tools
 status: publish
 title: Tools
-wordpress_id: '4'
 ---
+
+*This page is painfully outdated. I'll update it, someday.*
 
 Here are a few tools I've stumbled upon on my trips across the net, these should serve to make your life easier. If there are any tools you just can't live without, [let me know](http://adamcaudill.com/contact/) and I'll add them to the list.
 

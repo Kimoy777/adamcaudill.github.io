@@ -4,7 +4,6 @@ layout: page
 slug: contact
 status: publish
 title: Contact
-wordpress_id: '6'
 ---
 
 Need to talk?

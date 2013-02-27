@@ -9,4 +9,4 @@ footer: true
 
 ##Coming ... someday.
 
-If you want to know more, ask me.
+As a teenager I released a few tools under the **Wizardry Labs** name, and one of these days, I'll bring it back (in some form).
