@@ -55,3 +55,5 @@ For example, if the attack vector was SQL injection, it's possible to exfiltrate
 **Overall**
 
 It seems that they have handled this responsibly as possible; this isn't the kind of event anybody is truly prepared for. Could it have been done better? Yes, in a few ways - but they could have done so much worse.
+
+It could be argued that in the grand scheme, [they don't care about security](http://markpercival.us/post/44391805072/evernote-doesnt-really-care-about-security) - from my experience, that's the impression I've gotten.
