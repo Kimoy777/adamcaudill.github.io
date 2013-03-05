@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+*(Update: See [here](http://arstechnica.com/security/2013/03/critics-substandard-crypto-needlessly-puts-evernote-accounts-at-risk/) for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.)*
+
 So the big news today is [Evernote being popped](http://evernote.com/corp/news/password_reset.php); with 50m users and user base that often stores sensitive material - it certainly is a tempting target for many reasons.
 
 {% tweet https://twitter.com/evernote/status/307882426129055744 align='center' %}
