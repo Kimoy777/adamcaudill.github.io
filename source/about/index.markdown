@@ -7,9 +7,9 @@ title: About
 
 ### Me
 
-I'm Adam Caudill, a 31 year-old software developer & architect, amateur security researcher, avid fan of great software, a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](/bayonet-collection/) and a [technology addict](http://flickr.com/photos/adamcaudill/165413413/in/set-72157594155854220/). In addition to all of that, I also occupy myself with [reading](/reading/) and [photography](/photo/).
+I'm Adam Caudill, a 31 year-old software developer & architect, security researcher, avid fan of great software, a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](/bayonet-collection/) and a technical elitist. In addition to all of that, I also occupy myself with [reading](/reading/) and [photography](/photo/).
 
-While I tend to spend most of my time in C# at work, I've recently become a big fan of Ruby. I also have a background in Visual Basic, C++, and PHP development, as well as a few other languages that I avoid these days. I tend to limit the number of languages I work in so that I can better focus on those I use regularly.
+While I tend to spend most of my time in C# at work, I've recently become a big fan of Ruby. I also have a background in Visual Basic, C/C++, and PHP development, as well as a few other languages that I avoid these days. I tend to limit the number of languages I work in so that I can better focus on those I use regularly.
 
 If you want more, take a look at my [resume](/resume/).
 
