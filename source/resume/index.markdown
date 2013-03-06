@@ -8,17 +8,16 @@ footer: true
 
 ##About Me
 
-* I am passionate about building great things.
+* I am passionate about my work - it's not simply a job.
 * I want to work where my skills are challenged and I can learn new things.
 * I don’t believe in giving up or settling for "good enough" – I demand better than that of myself.
 * I consider myself extremely lucky to be paid to write and break code; it’s both a hobby and profession for me.
-* I spend my evenings listening to podcasts, reading blogs, and keeping up with industry news, so I know I’m up to date, and ready for what’s happening.
 
 ##Technology
 
 Code: For the last few years I’ve been working in primarily in C# and VB, before that much of my time was spent with PHP; for personal & open source projects I'm focusing on Ruby. I know my way around C, Java, Python and perhaps a few others, but not well enough to claim any expertise.
 
-Security: I’m very good at breaking things. I understand the attacker’s mentality, and I look at systems with that same approach. I also understand that security is more than just buffer overflows and SQL injection – it’s a way of thinking, it’s a way of designing, it’s about teaching and guiding. Security has to be a thought process before it’ll work as a system process.
+Security: I have a knack for breaking things; I leverage my knowledge of developers to choose approaches that others miss. I enjoy system analysis and reverse engineering - both desktop and mobile. My free time is often occupied with independent research, and I've discovered issues in numerous products.
 
 Source Control: I’m familiar with Git, Mercurial, and Subversion. I’ve used SourceSafe and CVS, but I’d rather forget those.
 
@@ -61,7 +60,7 @@ During this time I also performed security audits on client sites, provided soft
 
 ##Open Source & Community
 
-I blog on security and development related topics, and try to stay engaged with the community via various social services. I was a moderator on what was once the largest forum for Visual Basic developers (XtremeVBTalk.com), and received their highest peer-voted award for knowledge.
+I blog on security and development related topics, and stay engaged with the community via various social services. I was a moderator on what was once the largest forum for Visual Basic developers (XtremeVBTalk.com), and received their highest peer-voted award for knowledge.
 
 I’ve contributed to a number of open source projects, including bbPress, ccsrch, and others. I’ve also managed a few open source projects – the most interesting of which was a fault-tolerant load balancing system for an IRC network that provided much better leveling that DNS round-robin could.
 
