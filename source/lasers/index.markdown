@@ -56,7 +56,7 @@ Actual: 83mW
 Source: Custom
 Status: Working
 
-This is a custom laser based on the popular PHR-803T diode (HD-DVD for Xbox 360), in a [DealExtreme 3405](http://www.dealextreme.com/details.dx/sku.3405~r.84246773) host with a [custom heatsink](http://laserpointerforums.com/f64/fs-mxdl-custom-machined-heatsinks-22511.html). The diode itself is mounted in a 12x30mm housing made by [AixiZ](http://aixiz.com/store/product_info.php?cPath=40&products_id=72), and is driven by a [rkcstr](http://rkcstr.nfshost.com/) driver at ~102mA. So far, for a improvised host (i.e. a host not meant to be a laser), the 3405 is great - it feels good in the hand, very sturdy, and plenty of room to work. It also allows for a rather beefy heatsink which makes heat a minimal issue. Stock, the 3405 is a 5W LED flashlight powered by 3 1.5V AAA batteries; as a laser it's power by three 3.6v 10440 batteries.
+This is a custom laser based on the popular PHR-803T diode (HD-DVD for Xbox 360), in a [DealExtreme 3405](http://www.dealextreme.com/details.dx/sku.3405~r.84246773) host with a [custom heatsink](http://laserpointerforums.com/f64/fs-mxdl-custom-machined-heatsinks-22511.html). The diode itself is mounted in a 12x30mm housing made by [AixiZ](http://aixiz.com/store/product_info.php?cPath=40&products_id=72), and is driven by a [rkcstr](http://rkcstr.nfshost.com/) driver at ~102mA. So far, for a improvised host (i.e. a host not meant to be a laser), the 3405 is great - it feels good in the hand, very sturdy, and plenty of room to work. It also allows for a rather beefy heat-sink which makes heat a minimal issue. Stock, the 3405 is a 5W LED flashlight powered by 3 1.5V AAA batteries; as a laser it's power by three 3.6v 10440 batteries.
 
 This should be putting out closer to 100mW than the current 83mW, the real limiting factor is the acrylic lens mounted in the AixiZ module. I will soon be ordering a [glass lens](http://aixiz.com/store/product_info.php?cPath=40&products_id=140) coated for this range, as well as adjusting the driver to 110mA.
 
@@ -123,7 +123,7 @@ Actual: 65mW
 Source: Wlaser
 Status: Scrapped
 
-This is a smaller torch-style laser that seems to be loosely based on the popular [Optotronics RPL](http://www.optotronics.com/rpl-green-lasers.php) (though much smaller). It measures 104mm x 22mm (28mm at the heatsink), and thanks to the large heatsink it is a little on the heavy side. It is in the same host as the [Rayfoss XDZ](http://rayfoss.com/productn.asp?ArticleID=111), though unlike the XDZ it is powered a single 3.0v CR123A in a case positive configuration.
+This is a smaller torch-style laser that seems to be loosely based on the popular [Optotronics RPL](http://www.optotronics.com/rpl-green-lasers.php) (though much smaller). It measures 104mm x 22mm (28mm at the heat-sink), and thanks to the large heat-sink it is a little on the heavy side. It is in the same host as the [Rayfoss XDZ](http://rayfoss.com/productn.asp?ArticleID=111), though unlike the XDZ it is powered a single 3.0v CR123A in a case positive configuration.
 
 Update: While this was a cool little laser, I had another use for its module. This was scrapped to complete the NES Zapper laser.
 
