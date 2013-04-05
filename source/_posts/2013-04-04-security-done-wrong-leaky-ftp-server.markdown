@@ -24,7 +24,7 @@ If the code was old, as it's been when products like [Symantec's were leaked](ht
 
 {% img center /files/Screenshot_4_4_13_10_04_PM.png %}
 
-References in the files indicate that the code is from sometime in February - so this is current code. For AMI, I hope they perform a security audit of their code to make sure that this leak doesn't put users at excessive risk.
+References in the files indicate that the code is from sometime in February 2012 - so this is fairly current code. For AMI, I hope they perform a security audit of their code to make sure that this leak doesn't put users at excessive risk.
 
 A foolish oversight now has the potential to impact many.
 
