@@ -6,6 +6,20 @@ comments: true
 categories: 
 ---
 
+**Update:** I've just spoken to AMI, and received some very important information; so here are the key points and clarifications:
+
+* To clarify, the 'vendor' I refer to is a customer of AMI; it is this customer's public FTP server that exposed this information.
+* Per AMI, the signing key included in the 'Ivy Bridge' archive is a *default* test key; AMI instructs customers to change the key before building for a production environment. It's not currently known if the customer was following recommended practices.
+* The 'Ivy Bridge' code was unmodified, meaning that the customer had not made any alterations to this specific copy.
+
+AMI is preparing a press release. The 'vendor' still hasn't responded (to me or AMI).
+
+Assuming the vendor was following AMI's instructions, the private key found on the vendor's public FTP server *should* have little practical value; though how this vendor was handling keys isn't known, so the usefulness of the key is also unknown. There is also the possibility of other AMI customers violating AMI's instructions. *We know we have a key; we don't know how it's been used.*
+
+Publicly revealing the source code still has some potentially interesting implications, even with the assumption that the vendor was following AMI's instructions on key handling. As this code may be under additional scrutiny from researchers, it's likely that new flaws will be found that would have been missed otherwise.
+
+--
+
 A few hours ago I received a call from my frequent research partner, [Brandon Wilson](http://brandonw.net/), about an open FTP server hosted in Taiwan serving up some rather interesting data. Internal emails, various system images (and even the Ghost software!), numerous photos - some personal, some high resolution PCB images, private specification sheets, Excel documents loaded with private information - but that wasn't the worst.
 
 In a folder called `code` was quite a treasure. The source code for different versions of [American Megatrends](http://en.wikipedia.org/wiki/American_Megatrends) (AMI) firmware - but there was even a bonus on top of that! They included their private signing key with the code in the 'Ivy Bridge' archive.
@@ -27,5 +41,3 @@ If the code was old, as it's been when products like [Symantec's were leaked](ht
 References in the files indicate that the code is from sometime in February 2012 - so this is fairly current code. For AMI, I hope they perform a security audit of their code to make sure that this leak doesn't put users at excessive risk.
 
 A foolish oversight now has the potential to impact many.
-
-*I've contacted both the vendor involved and AMI to alert them to the issue. Obviously, I won't be releasing the name of the vendor, the FTP address, or anything that was seen on the server.*
