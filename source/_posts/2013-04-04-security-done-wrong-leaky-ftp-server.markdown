@@ -8,8 +8,6 @@ categories:
 
 A few hours ago I received a call from my frequent research partner, [Brandon Wilson](http://brandonw.net/), about an open FTP server hosted in Taiwan serving up some rather interesting data. Internal emails, various system images (and even the Ghost software!), numerous photos - some personal, some high resolution PCB images, private specification sheets, Excel documents loaded with private information - but that wasn't the worst.
 
-{% img center /files/Screenshot_4_4_13_9_14_PM.png %}
-
 In a folder called `code` was quite a treasure. The source code for different versions of [American Megatrends](http://en.wikipedia.org/wiki/American_Megatrends) (AMI) firmware - but there was even a bonus on top of that! They included their private signing key with the code in the 'Ivy Bridge' archive.
 
 `308204A30201000282010100ED71D63F21FF0B4563A43D871D22448FC9...`
