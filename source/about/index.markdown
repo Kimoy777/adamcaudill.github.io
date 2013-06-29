@@ -61,5 +61,5 @@ This site is being developed and maintained with [Octopress](http://octopress.or
 
 ### Contact Me
 
-You can reach me via email at [adam@adamcaudill.com](mailto:adam@adamcaudill.com) or on Twitter at [@adamcaudill](http://twitter.com/adamcaudill).
+You can reach me via email at [adam@adamcaudill.com](mailto:adam@adamcaudill.com) or on Twitter at [@adamcaudill](http://twitter.com/adamcaudill). If you want some extra security; use my [PGP key](http://adamcaudill.com/pgp/).
 
