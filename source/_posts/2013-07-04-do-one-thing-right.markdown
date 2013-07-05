@@ -36,7 +36,7 @@ There's no doubt that crypto is hard, everybody agrees on that. Or said more acc
 
 Writing key generation code scares me, I'm paranoid that I'll get it wrong. So I take extra time to review it in detail. Then have other people review it in detail. I don't release it to a 'production' environment until I'm sure as I can be that it's right. Can mistakes still make it in that way? Sure - but the odds are a lot lower.
 
-This kind of code needs to be reviewed by those competent in crypto systems, and built to a specification that was designed by a real cryptographer. It can be expensive an time consuming, but that's what it takes to keep the promises an application like Cryptocat makes.
+This kind of code needs to be reviewed by those competent in crypto systems, and built to a specification that was designed by a real cryptographer. It can be expensive and time consuming, but that's what it takes to keep the promises an application like Cryptocat makes.
 
 {% tweet https://twitter.com/matthew_d_green/status/352816626170728450 align='center' %}
 
