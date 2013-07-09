@@ -9,6 +9,8 @@ footer: true
 
 Want to validate that I sent an email, or send me something privately? See below for my public PGP key; you can also find my key by searching for "adam@adamcaudill.com" on the keys.gnupg.net key server.
 
+Key ID: `22CAD57A659CA2BC`
+
     -----BEGIN PGP PUBLIC KEY BLOCK-----
     Version: GnuPG/MacGPG2 v2.0.19 (Darwin)
     
