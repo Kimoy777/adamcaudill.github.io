@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+*Update:* The SQL Injection vulnerability has been assigned CVE-2013-4467, and Command Injection assigned CVE-2013-4468.
+
 ## Background
 
 [VICIDIAL](http://www.vicidial.org/vicidial.php) (a.k.a. Asterisk GUI client) is an open-source dialer built on top of the Asterisk PBX. It's written in PHP, and has a significant number of security issues.
