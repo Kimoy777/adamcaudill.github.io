@@ -9,6 +9,8 @@ footer: true
 
 Want to validate that I sent an email, or send me something privately? See below for my public PGP key; you can also find my key by searching for "adam@adamcaudill.com" on the keys.gnupg.net key server.
 
+Looking for something secure, that's a bit more real-time? I can also be reached on [surespot](https://www.surespot.me/) under the user name `adamcaudill`.
+
 Key ID: `22CAD57A659CA2BC`
 
     -----BEGIN PGP PUBLIC KEY BLOCK-----

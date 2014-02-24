@@ -21,7 +21,7 @@ In the years since I've focused (almost obsessively) on software development, st
 
 I've always had a passion for the open source world and have contributed to several. A couple that are notable: I served as the Project Manager for [SWEBS](http://sourceforge.net/projects/swebs/) (a simple, lightweight HTTP server), and I've contributed to [bbPress](http://bbpress.org/) among others.
 
-{% img center http://adamcaudill.com/files/2006/02/gmail_transparent.png %}
+{% img center https://adamcaudill.com/files/2006/02/gmail_transparent.png %}
 
 Among the applications I've released publicly, GSuite (no longer available) was the most popular at around 50,000 downloads. It was the first major system tray based alert for Gmail users that they had new mail; released long before it was eventually obsoleted by an official application from Google.
 
@@ -45,7 +45,7 @@ I work in the call-center industry, my team is primarily responsible developing 
 
 Other places you can find me include:
 
-  * [Twitter](http://twitter.com/adamcaudill)
+  * [Twitter](https://twitter.com/adamcaudill)
   * [LinkedIn](http://www.linkedin.com/in/adamcaudill)
   * [GitHub](https://github.com/adamcaudill)
   * [Flickr](http://www.flickr.com/photos/adamcaudill/)
@@ -61,5 +61,4 @@ This site is being developed and maintained with [Octopress](http://octopress.or
 
 ### Contact Me
 
-You can reach me via email at [adam@adamcaudill.com](mailto:adam@adamcaudill.com) or on Twitter at [@adamcaudill](http://twitter.com/adamcaudill). If you want some extra security; use my [PGP key](http://adamcaudill.com/pgp/).
-
+You can reach me via email at [adam@adamcaudill.com](mailto:adam@adamcaudill.com) or on Twitter at [@adamcaudill](http://twitter.com/adamcaudill). If it's sensitive, please use my [PGP key](http://adamcaudill.com/pgp/). I can also be reached on [surespot](https://www.surespot.me/) under the user name `adamcaudill`.
