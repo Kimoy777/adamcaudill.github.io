@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+**Update**: I had a call with Ensafer's CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I'll post further updates.
+
 [Ensafer](http://www.ensafer.com/) is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user's files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product ([Boxcryptor](https://www.boxcryptor.com/)), so I support the concept, but what about Ensafer's implementation - does it provide the level of security desired?
 
 **Where are the details?**
