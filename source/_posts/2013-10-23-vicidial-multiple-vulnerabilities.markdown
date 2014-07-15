@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+*Update:* The VICIDIAL team has publicly released a new version that, according to them, has corrected the issues I've pointed out here. Please make sure you are using the latest version available. If you aren't sure if your instance is safe, contact your friendly local penetration tester to verify it's secure as you expect it to be.
+
 *Update:* The SQL Injection vulnerability has been assigned CVE-2013-4467, and Command Injection assigned CVE-2013-4468.
 
 ## Background
