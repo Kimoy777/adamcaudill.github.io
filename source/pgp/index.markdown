@@ -12,6 +12,7 @@ Want to validate that I sent an email, or send me something privately? See below
 Looking for something secure, that's a bit more real-time? I'm normally available via Jabber:
 
 User: adamcaudill@jabber.ccc.de
+
 OTR: `38418BE2 5547E664 5A38A196 A9CA47BB 6F69251A`
 
 PGP Key ID: `22CAD57A659CA2BC`
