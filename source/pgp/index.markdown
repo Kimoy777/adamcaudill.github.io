@@ -7,13 +7,26 @@ sharing: true
 footer: true
 ---
 
-Want to validate that I sent an email, or send me something privately? See below for my public PGP key; you can also find my key by searching for "adam@adamcaudill.com" on the keys.gnupg.net key server.
+### Messaging / Others
 
-Looking for something secure, that's a bit more real-time? I'm normally available via Jabber:
+One of teh best ways to get me is via Twitter, [@adamcaudill](http://twitter.com/adamcaudill) - this or email gets the fasted response.
 
-User: adamcaudill@jabber.ccc.de
+I'm also available on Wickr, as `adamcaudill`.
+
+
+### IM / OTR
+
+Looking for something secure, that's a bit more real-time? Just don't be surprised if I'm offline; I don't use it often.
+
+User: adamcaudill@jabber.ccc.de 
 
 OTR: `38418BE2 5547E664 5A38A196 A9CA47BB 6F69251A`
+
+### Email
+
+Address: [adam@adamcaudill.com](mailto:adam@adamcaudill.com)
+
+Want to validate that I sent an email, or send me something privately? See below for my public PGP key; you can also find my key by searching for "adam@adamcaudill.com" on the keys.gnupg.net key server.
 
 PGP Key ID: `22CAD57A659CA2BC`
 
