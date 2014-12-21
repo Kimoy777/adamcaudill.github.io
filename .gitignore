@@ -6,3 +6,5 @@
 .pygments-cache
 
 .preview-mode
+
+_deploy/
