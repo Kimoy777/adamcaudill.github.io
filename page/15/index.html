@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Ralph Langner recently spoke at TED about his team&#8217;s findings on Stuxnet; it&#8217;s a clear (and somewhat scary) insight into the wars of the &hellip;">
+  <meta name="description" content="I&#8217;m in the process of migrating my sites from  a Dreamhost VPS, to fully managed hosting by Gray Hills Software. In my tests so far, the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/11/hosting-change/">Hosting Change</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-11T19:36:27-04:00" pubdate data-updated="true">Apr 11<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m in the process of migrating my sites from  a <a href="http://www.dreamhost.com/hosting-vps.html">Dreamhost VPS</a>, to fully managed hosting by <a href="http://www.grayhills.com/">Gray Hills Software</a>. In my tests so far, the loading time has been cut in half with this switch. Pages load faster, the server is better configured (new software, and more options), and seeing as they have both Windows and Linux servers, I can use one provider with whatever technology suits me and my projects.</p>
+
+<p>There may be a few bumps as I move things, but all should stable soon.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -271,123 +309,6 @@ _</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/28/rails-3-dreamhost-ps/">Rails 3 & Dreamhost PS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-28T02:47:01-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently had an idea for a small web application, and seeing as I&#8217;ve not spent as much time as I&#8217;ve wanted to using <a href="http://rubyonrails.org/">Rails</a> - I opted to build it the latest version of Rails. A decision that caused far more grief than I expected.</p>
-
-<p>If you are using <a href="http://www.dreamhost.com/r.cgi?485850">Dreamhost&#8217;s</a> PS offering (a managed VPS for those that don&#8217;t know), the seemingly simple task of getting a Rails 3 application up and running is actually quite complex. The root cause of this is that Dreamhost&#8217;s OS image is based on Debian <a href="http://www.debian.org/releases/etch/">etch</a>, which was released in April 2009 and has since been replaced; which means etch has become fairly outdated.</p>
-
-<p>Here&#8217;s the process I used, and so far it seems to be working quite well:</p>
-
-<p><strong>Domain Setup:</strong></p>
-
-<p>When adding your domain to the Dreamhost panel, you&#8217;ll want to enable <a href="http://wiki.dreamhost.com/Passenger">Passenger</a>.</p>
-
-<p><img src="http://adamcaudill.com/files/2011-01-28_0048.png" alt="" /></p>
-
-<p>Once your application is uploaded to the server, you&#8217;ll be greeted with a particularly unhelpful error message (something like <code>uninitialized constant Bundler</code>) from Passenger (or perhaps just a 500 error page).</p>
-
-<p><strong>Server Updates:</strong></p>
-
-<p>This is where the work starts, and gets somewhat ugly. As a warning, it&#8217;s quite possible that you could damage your configuration doing this; though thankfully you can <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.reboot&amp;">restore</a> your server to a working state within a few minutes from the Dreamhost panel should something go wrong. You&#8217;ll also need to have an <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.adminusers&amp;">admin user</a> for this task, as much of what needs to be done has to be done as root.</p>
-
-<p>First step: Get your PS up to date; even after performing a restore on my server, there were a number of updates that are available to be installed. So let&#8217;s start off by getting those out of the way.</p>
-
-<pre><code>sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get -f install
-</code></pre>
-
-<p>Once you get past those three commands, the next step is to update SQLite to the latest version, as the version Dreamhost uses is quite old and won&#8217;t work with Rails 3.0 (well, to be accurate it won&#8217;t work with the latest version of sqlite3-ruby, which is the default database provider for Rails 3).</p>
-
-<pre><code>wget http://www.sqlite.org/sqlite-autoconf-3070400.tar.gz
-tar zxvf sqlite-autoconf-3070400.tar.gz
-cd sqlite-autoconf-3070400
-sudo ./configure --bindir=/usr/bin --libdir=/usr/lib
-sudo make
-sudo make install
-</code></pre>
-
-<p>If you don&#8217;t update SQLite you&#8217;ll get an error like this:</p>
-
-<pre><code>sudo gem install sqlite3
-Building native extensions.  This could take a while...
-ERROR:  Error installing sqlite3:
-    ERROR: Failed to build gem native extension.
-
-/usr/bin/ruby1.8 extconf.rb
-checking for sqlite3.h... yes
-checking for sqlite3_libversion_number() in -lsqlite3... yes
-checking for rb_proc_arity()... no
-checking for sqlite3_initialize()... no
-sqlite3-ruby only supports sqlite3 versions 3.6.16+, please upgrade!
-*** extconf.rb failed ***
-</code></pre>
-
-<p>or if you install the updated version, but don&#8217;t force it to <code>/usr/lib</code> you&#8217;ll get an error like this:</p>
-
-<pre><code>sudo gem install sqlite3
-Building native extensions.  This could take a while...
-ERROR:  Error installing sqlite3:
-    ERROR: Failed to build gem native extension.
-
-/usr/bin/ruby1.8 extconf.rb
-checking for sqlite3.h... yes
-checking for sqlite3_libversion_number() in -lsqlite3... no
-sqlite3 is missing. Try 'port install sqlite3 +universal' or 'yum
-install sqlite3-devel'
-*** extconf.rb failed ***
-</code></pre>
-
-<p>Once that is taken care of SQLite, the rest is easy.</p>
-
-<pre><code>sudo gem update
-</code></pre>
-
-<p>At this point if you visit your new Rails site, it <em>should</em> be working!</p>
-
-<p>Notes:</p>
-
-<ol>
-<li><p>I&#8217;ve not tested this extensively, and I&#8217;ve no idea if this breaks anything. All I can say for certain, if that all of <em>my</em> sites still work, but your mileage may vary. <Disclaimer /></p></li>
-<li><p>I was a fairly early Dreamhost PS adopter, and part way through this process I reset my server to get it back to a clean state. After resetting, I noticed some differences with the behavior of <code>apt-get</code> (404s on <code>update</code> and <code>upgrade</code> are gone), so for other early adopters it may be necessary to perform a reset to get your servers configuration in-sync with the latest official setup.</p></li>
-<li><p>I can&#8217;t say for a fact that this is completely necessary, though you&#8217;ll likely need to selectively update a few packages if you skip this step. Also, for me, <code>gem</code> was broken until I ran <code>sudo apt-get -f install</code>.</p></li>
-<li><p>Special thanks to <a href="http://matthewjlittle.com/">Matt</a> for helping me get this working; troubleshooting the SQLite install was more than a little time consuming.</p></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/16/">&larr; Older</a>
@@ -420,6 +341,10 @@ install sqlite3-devel'
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -433,10 +358,6 @@ install sqlite3-devel'
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

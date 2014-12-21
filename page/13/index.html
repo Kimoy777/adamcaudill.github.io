@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a &hellip;">
+  <meta name="description" content="A couple of days ago I was sent a link to Robert Cringely&#8217;s latest treatise:  The second coming of Java - and to say I disagreed was a bit of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/10/15/why-cringely-is-wrong-about-java/">Why Cringely Is Wrong About Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-15T15:47:52-04:00" pubdate data-updated="true">Oct 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple of days ago I was sent a link to Robert Cringely&#8217;s latest treatise:  <em><a href="http://www.cringely.com/2011/10/the-second-coming-of-java/">The second coming of Java</a></em> - and to say I disagreed was a bit of an understatement. To me, it represents a fundamental flaw in his perception of developers, and more importantly the economics of software development.</p>
+
+<p>The key to Cringely&#8217;s argument comes down to this:</p>
+
+<p>When SSDs gain enough capacity there will be a shift from the Ruby world back to the Java world. Not for prototyping, because, well, it’s prototyping. But simply because the statement “<strong>Ruby is <em>incredibly</em> slow but I don’t care because my database is slower</strong>” will no longer be true.</p>
+
+<p>What he&#8217;s missing here is the real reason people use frameworks like Rails; it&#8217;s not about it being Ruby, or being the latest cool thing - it&#8217;s about developer productivity. That&#8217;s it, and that&#8217;s all there is to it - Rails allows a developer to do more in less time. That&#8217;s one of the key reasons so many Java web developers jumped ship (though I can think of a few others), and what pushed Microsoft to invest so heavily in their <a href="http://www.asp.net/mvc">MVC framework</a>.</p>
+
+<p>I could fully rehash the argument, but in what I consider to be one of Jeff Atwood&#8217;s best articles,  <em><a href="http://www.codinghorror.com/blog/2008/12/hardware-is-cheap-programmers-are-expensive.html">Hardware is Cheap, Programmers are Expensive</a></em>, he covers a key point to my argument - developer time is vastly more expensive than hardware. Atwood&#8217;s take on the issue is clear:</p>
+
+<p>Clearly, <strong>hardware is cheap, and programmers are expensive</strong>. Whenever you&#8217;re provided an opportunity to leverage that imbalance, it would be incredibly foolish not to.</p>
+
+<p>When there&#8217;s a choice between developer productivity, and spending money on hardware - the conclusion should be the same. It&#8217;s much cheaper to throw more hardware at a slower framework than it is to invest more developer time in a faster framework. For any non-trivial application, throwing more front-end servers at it will always be cheaper than slowing the development process down with a non-productivity-centric toolkit.</p>
+
+<p>It&#8217;s simple economics; server hardware is getting faster and cheaper, developer time is only getting more expensive.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -314,68 +364,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/05/20/vb6-not-so-open-source/">VB6: Not So Open Source</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-20T02:33:23-04:00" pubdate data-updated="true">May 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Microsoft announces to mvps at <a href="https://twitter.com/search/%23msteched">#msteched</a> that VB6 will be released as open source on codeplex end of june! w00t</p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71287262842859520">May 19, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>Needless to say, that&#8217;s not an announcement that anybody was expecting, but given the talk going on at the time - and the high-profile people talking about it, there wasn&#8217;t much reason to doubt. Announcing a product that has been dead for years is going open source would certainly be a strategy shift for Microsoft, but does it make any sense? <a href="http://twitter.com/#!/kevindente">Kevin Dente</a> of <a href="http://herdingcode.com/">Herding Code</a> fame certainly thought that Microsoft had better things to release:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Instead of VB6 I&#8217;d rather see MS open source IE6. Then at least we could build a standalone version of it.</p>&mdash; Kevin Dente (@kevindente) <a href="https://twitter.com/kevindente/status/71292995185553408">May 19, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>Shortly after the initial tweet, <a href="http://www.dougseven.com/">Doug Seven</a>, the Director of Product Management, Visual Studio Tools &amp; Languages, <a href="http://twitter.com/#!/dseven/status/71316722854002688">replied</a> asking Roy Osherove (the original poster) to email him. Hmm, it&#8217;s starting to smell like something odd is going on. A couple of hours later, Doug set the story straight:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>The rumors of VB6 going open source are simply not true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; dseven (@dseven) <a href="https://twitter.com/dseven/status/71352709785198592">May 19, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>To which, Roy then tried to unset:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>RT @<a href="https://twitter.com/dseven">dseven</a>: The rumors of VB6 going open source are true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71355603611680769">May 19, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>It&#8217;s worth pointing out that Roy Osherove currently has a full ten-times the followers that Doug Seven has, meaning his altered retweet was seen by more people (at least initially). For several hours word was going around, and accepted by a number of people who thought Microsoft was actually going to open the code to VB6 (including journalists who were too busy writing articles to do any fact checking) - all based on one person who made it all up.</p>
-
-<p>Lesson here: be careful about what you re-tweet, it&#8217;s easy to endorse a lie as several people unwittingly did today (<a href="http://twitter.com/#!/blowdart">@blowdart</a> summed it <a href="http://twitter.com/#!/blowdart/status/71370740934524928">rather well</a>).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/14/">&larr; Older</a>
@@ -408,6 +396,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -421,10 +413,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

@@ -9,7 +9,8 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long &hellip;">
+  <meta name="description" content="There are two ways to implement security: Real security, based on empirical evidense and analysis.
+Checklist security, based on the latest checklist &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/23/jumping-through-hoops-dot-dot-dot/">Jumping Through Hoops&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T18:11:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are two ways to implement security:</p>
+
+<ul>
+<li>Real security, based on empirical evidense and analysis.</li>
+<li>Checklist security, based on the latest checklist somebody says is important.</li>
+</ul>
+
+
+<p>When security is based on real evidence and analysis, policies are enacted based on real gain and measured against the business impact. Risks are considered, and the costs versus benefits are well understood so that policy choices are based on real, useful information.</p>
+
+<p>On the other hand there&#8217;s security by checklist. Costs aren&#8217;t calculated, risks aren&#8217;t understood, business impacts are ignored. All that matters is that somebody gets to check a box on a form; there&#8217;s no understanding, no logic, and likely no real benefits involved.</p>
+
+<p>The point of security policies isn&#8217;t to show off how many hoops you&#8217;ve built that people have to jump through when doing their jobs. Yet, when a company accepts a security by checklist mentality, this is exactly what they are doing. They spend their time building hoops that they can show off later while ignoring the threats they are supposed to be addressing.</p>
+
+<p>Recently, my laptop died, the new laptop was setup with DLP, or digital loss prevention software. The main purpose of the software is to prevent me and anyone in my group from being able to use removable drives - so that we can&#8217;t load them up with private information of course.</p>
+
+<p>This was done to check a box on a form, at no point did anyone actually think about the bigger picture, what the threat was, and how it should be addressed:</p>
+
+<ul>
+<li>I have a laptop and work remotely.</li>
+<li>When I disconnect from the VPN, I have unrestricted access to the internet.</li>
+<li>I routinely work with sensitive data, so it&#8217;s not uncommon for it to be on my computer.</li>
+<li>I could easily encrypt a file full of private data, and upload it to the cloud after disconnecting from the VPN, and nobody would know.</li>
+</ul>
+
+
+<p>So, by blocking the use of removable drives, they made it much harder for me to recover from a failing laptop, and added nothing to security. Blocking thumb drives won&#8217;t stop a person from stealing data when they have other ways they could do the same thing. All it did was waste time and the company&#8217;s money.</p>
+
+<p>They built a new hoop to show off, nothing more.</p>
+
+<p>Such policies don&#8217;t help anyone - they don&#8217;t improve security, they certainly don&#8217;t prevent theft of data, and at the same time, they do have a negative business impact. Lost productivity, increased frustration, and in the end higher turn-over from employees that are fed up from the meaningless work. There&#8217;s no winner here - except the person that wants to show off all of the hoops they have.</p>
+
+<p>Security based on anything other than empirical evidence and legitimate analysis is just theater and nothing more.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -408,74 +477,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/02/25/on-opportunistic-encryption/">On Opportunistic Encryption</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-25T14:51:00-05:00" pubdate data-updated="true">Feb 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Opportunistic encryption has become quite a hot topic recently, and blew up in a big way thanks to an <a href="https://en.wikipedia.org/wiki/Internet_Draft">Internet Draft</a> that was published on February 14th for what amounts to sanctioned man-in-the-middle. Privacy advocates were quickly up in arms - but it&#8217;s not that simple (<a href="http://tools.ietf.org/html/draft-loreto-httpbis-trusted-proxy20-01">see here</a>). As <a href="http://hillbrad.typepad.com/blog/2014/02/trusted-proxies-and-privacy-wolves.html">pointed out</a> by <a href="https://twitter.com/hillbrad">Brad Hill</a>, this isn&#8217;t about HTTP<strong>S</strong> traffic, but HTTP traffic using unauthenticated TLS; thanks to poor wording in the document, it&#8217;s easy to miss that fact if you just skim it.</p>
-
-<p>It&#8217;s routine practice for ISPs to MITM unencrypted traffic today; it&#8217;s well known that <a href="https://blog.ryankearney.com/2013/01/comcast-caught-intercepting-and-altering-your-web-traffic/">Comcast does it</a>. This practice won&#8217;t change once we move to HTTP2, regardless of unauthenticated TLS - the only question is will users know about it.</p>
-
-<p>But this isn&#8217;t about that single internet draft, it&#8217;s about what this tells us about opportunistic encryption.</p>
-
-<p>We&#8217;ve seen many smart people get very upset (myself included) over a misunderstanding about how opportunistic encryption fits into the new HTTP2 paradigm. What does that tell us about how it&#8217;ll be perceived in the future?</p>
-
-<p><strong>What does opportunistic encryption buy us?</strong></p>
-
-<p>We can break attackers down into two classes:</p>
-
-<ul>
-<li>Active - Will intercept and re-route traffic, at small or large scale.</li>
-<li>Passive - Will watch what goes over the wire, but is unable or unwilling to interfere with it.</li>
-</ul>
-
-
-<p>Opportunistic encryption prevents passive attackers from being able to collect data, they will either fail or be forced into an active role (if they are positioned and financed to do so). While many talk about increasing the cost of surveillance for groups like the NSA, I doubt that will create a substantial impact - we know that they are both active and passive today. So they are positioned for active attacks when they so desire, though there may be some reduction of monitoring lower value targets due to increased complexity / resource demands.</p>
-
-<p><strong>What opportunistic encryption doesn&#8217;t do</strong></p>
-
-<p>Unauthenticated TLS skips the most vital step in the process - it doesn&#8217;t verify that the server is actually the one you intend to talk to, meaning anyone that can control network traffic between you and the end server, can pretend to be the end server, monitoring all traffic. Which is, exactly what we have today with HTTP traffic.</p>
-
-<p>So, you know your traffic is encrypted, what you don&#8217;t know is who has the keys, or how many people have seen the traffic. You&#8217;re safe from passive threats, but it provides no protection against active threats - but it&#8217;s also not intended to.</p>
-
-<p><strong>Should we pursue it?</strong></p>
-
-<p>If people weren&#8217;t involved - it eliminates a class of attacks without substantial costs, and forces passive attackers to become active. Overall, that sounds like a win, but there&#8217;s a problem: people.</p>
-
-<p>Opportunistic encryption isn&#8217;t real security, it doesn&#8217;t stand up to active attackers - it provides protection against only a specific type of attack. Real TLS provides protection against both active and passive threats. If people understood this, opportunistic encryption would be fine - but people don&#8217;t understand that, that&#8217;s clear.</p>
-
-<p>If people see it as a &#8220;just works&#8221; alternative to real TLS, then the harm it does greatly outweighs the value it provides. It will give a false sense of security, when in reality there is none.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -508,6 +509,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -521,10 +526,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

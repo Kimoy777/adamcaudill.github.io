@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I&#8217;ve been a (fairly quiet) critic of WikiLeaks for a long time, the core of the mission I agree with - information should be free, and should &hellip;">
+  <meta name="description" content="In the dark days of the web, if a service hashed your password instead of storing it in plain text, they were doing good. As sites were hacked, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/07/password-hashing-no-silver-bullets/">Password Hashing: No Silver Bullets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T18:48:00-04:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the dark days of the web, if a service hashed your password instead of storing it in plain text, they were doing good. As sites were hacked, and credentials stolen, a silver bullet emerged: always hash <em>and</em> salt passwords when storing them. Many, many services were built with this design - <a href="http://arstechnica.com/security/2013/04/why-livingsocials-50-million-password-breach-is-graver-than-you-may-think/">LivingSocial</a> is a great example. SHA1 hashing with a 40 byte salt - once upon a time, that was considered reasonable protection. Today, you&#8217;ll be blasted by industry insiders and the media for that.</p>
+
+<p>We all so often rush to criticize companies for not being on the cutting edge of security - but how often do any of us look at why? Do we ever ask who&#8217;s really at fault? Is the company at fault for not putting the money into updating systems, is it the engineers and architects for not knowing what they should do, or could it be something else - could the advice companies receive be part of the problem?</p>
+
+<p>Looking at some recent breaches and the overall security position of the companies involved - it&#8217;s easy to see which companies get it and which don&#8217;t. There&#8217;s one recent example where I really believe the company and its staff were simply incompetent. From top to bottom, they showed little thought for security, privacy, or user trust (for obvious reasons, I&#8217;m not naming names). LivingSocial and some others - I&#8217;m less sure about, when those systems were designed they were likely following &#8220;best practices&#8221; - or at least what developers thought were best practices.</p>
+
+<p>For a number of years many developers saw SHA1 + a strong salt as a silver bullet. They implemented and stopped thinking.</p>
+
+<p>The problem is, attackers are advancing far faster than companies can adapt, and best practices that may be right for today will soon fail the &#8220;reasonable protection&#8221; test. Engineers and architects see a best practices document and build to that standard - if that document is even a couple years old, what they build is hopelessly dated and won&#8217;t provide the security the need.</p>
+
+<p>Once that system is built - unless there&#8217;s a breach, what incentive is there to change it? At many companies it&#8217;s a constant fight to fund security related changes; when the change is to fix a system that&#8217;s only broken in the eyes of experts, and (to management) only matters if some other layer of security fails, you can expect a fight for that money.</p>
+
+<p>Fixing things that aren&#8217;t obviously broken is hard. For those signing the checks, it&#8217;s not obvious that what was &#8220;best practice&#8221; a few years ago is today a disaster waiting to happen.</p>
+
+<p>There are many problems here, best practices are dated and inaccurate, there isn&#8217;t enough focus on secure storage, and there needs to be more push for better, more actionable recommendations that stand the test of time. While there are no silver bullets, surely as an industry we can do better than this.</p>
+
+<p><strong>Secure Storage</strong></p>
+
+<p>If I can get everything I need to start brute-forceing passwords from a simple SQL injection attack against your <code>users</code> table - your users are at risk. It doesn&#8217;t matter if your using SHA1 or <code>scrypt</code> - one day you&#8217;ll be breached, and passwords will be exposed. It&#8217;s that simple.</p>
+
+<p>The salt, the hash, or (probably better) both should be encrypted. It won&#8217;t help you in case your server is breached, but it&#8217;ll help if you&#8217;re hit with a SQL injection attack or other attacks that allow access to data, but not the system itself. As always, it&#8217;s not a silver bullet, but it adds protection in some situations, and anything you can do to make life harder for an attacker is a good thing.</p>
+
+<p>This of course opens up the age old question of storing the encryption key, which I&#8217;ll leave as an exercise to the reader. This can be taken to the next level, encrypt the salt &amp; hash with an HSM - provides the best security, but that&#8217;s rarely an option because of expense.</p>
+
+<p>There is some debate over this in the industry, but I&#8217;m a big fan of defense in depth - don&#8217;t make things easier for attackers.</p>
+
+<p><strong>Useful Recommendations</strong></p>
+
+<p>Crypto is hard, often confusing, and too often there is conflicting information. Implementing hash + salt is easy (and stupid), PBKDF2 is fairly simple - but you have to answer a couple questions:</p>
+
+<ul>
+<li>Hash Function - SHA1-HMAC is a common option thanks to wide compatibility, though using a member of the SHA2 family would be far more appropriate.</li>
+<li>Iteration Count - There&#8217;s no real consensus on this, some say it should double every two years (so this year it would be 96,000), others say it should be tuned to your server.</li>
+</ul>
+
+
+<p>Iteration count here is a real issue - if you blindly double every two years you risk server stability, on the other hand if you tune it to your server, you risk not keeping up with attackers. There&#8217;s no winning, no easy answer. When it comes to password brute-forcing, the advantage goes to the attacker - having faster hardware and more optimized software is common. It&#8217;s the job of the defender to constantly play catch-up.</p>
+
+<p>With <code>scrypt</code> the options are even more complex, with too little obvious documentation to get developers going in the right direction.</p>
+
+<p><strong>Dynamic Adjustment</strong></p>
+
+<p>For example, the <a href="https://github.com/pbhogan/scrypt">Ruby scrypt</a> implementation makes it quite easy to dynamically adjust cost settings - though if you run it on dated hardware, you run the risk of giving the attackers even more of an advantage. For those tied to PBKDF2 for some reason (i.e. compatibility), it would be easy enough to come up with dynamic adjustment code based on either performance benchmarking or date (following the somewhat risky double every two years approach).</p>
+
+<p>Designing for dynamic adjustment gives defenders the best chance of staying current without costly upgrades. Again, not a silver bullet, but gives defenders a fighting chance of keeping up.</p>
+
+<p><strong>The Future</strong></p>
+
+<p>What I&#8217;ve been looking for is a strongly opinionated library in the spirit of NaCl - secure by default, and hard to make insecure. For now, it&#8217;s clear that it should be based on <code>scrypt</code> - but ideally it could be easily updated in the future to use the winner of the <a href="https://password-hashing.net/">Password Hashing Competition</a>.</p>
+
+<p>Here&#8217;s what I&#8217;d like to see:</p>
+
+<ul>
+<li>Based on scrypt.</li>
+<li>Easily updated to support new algorithms (with backwards compatibility).</li>
+<li>Single cost setting, ideally based on approximate execution time.</li>
+<li>Function output encrypted with AES256.</li>
+<li>Reasonable minimum settings to prevent insecure usage.</li>
+</ul>
+
+
+<p>Something like that could be handed to a developer with minimal instruction, and allow them to provide reasonable protection today and in the (near) future. There are times when giving people what they want (options, control, etc.) does more harm than good - give developers just what they need, no more, no less.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -354,90 +451,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/26/first-do-no-harm-developers-and-bad-apis/">First, Do No Harm: Developers &amp; Bad APIs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-26T21:11:00-04:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Primum non nocere</strong> (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more people would think about, developers especially - and primarily when writing new APIs. In general, developers don&#8217;t have an impressive history with security - quite frankly, developers suck. Seeing as I consider myself a developer, that&#8217;s painful to admit.</p>
-
-<p>Chris Andrè Dale posted an interesting article some time ago that got me thinking: <a href="http://www.securesolutions.no/why-its-easy-being-a-hacker/">Why it&#8217;s easy being a hacker: A SQL injection case study</a> - Chris pointed out the problems with educational material that developers are using, and just how bad the examples are. SQL injection is everywhere and very few examples encourage developers to do it the right way - for that matter, very few are telling developers that there is a right way. I&#8217;m sure we&#8217;ve all seen similar issues in other areas, not just for SQL injection.</p>
-
-<p>I had to ask, why? How did we end up in this situation? The industry has come so far in so many ways, it&#8217;s unbelievable that we still have these fundamental issues. It&#8217;s clear that the industry is failing, and these are just a few of the areas:</p>
-
-<ul>
-<li>Educational material is riddled with errors</li>
-<li>Authors rarely understand the security implications of their samples</li>
-<li>Developers aren&#8217;t taking the time to research the right way to do things</li>
-<li>Developers don&#8217;t understand the need to consider security implications</li>
-</ul>
-
-
-<p>&#8230;and I could keep going.</p>
-
-<p><strong>Whose fault is it really?</strong></p>
-
-<p>If you look at the PHP/MySQL examples that are floating around, you&#8217;ll notice something interesting: it&#8217;s really, <em>really</em> easy to write bad code. The first examples anyone sees is a simple, one line, easy to understand statement:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">mysqli_query($link, &quot;INSERT INTO Persons (FirstName) VALUES (&#39;$_POST[firstname]&#39;)&quot;)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And this simple command is what people use - with no idea how dangerous it is. The API makes writing bad code easy, but how about good code?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$stmt = $mysqli-&gt;prepare(&quot;INSERT INTO Persons (FirstName) VALUES (?)&quot;);</span>
-</span><span class='line'><span class="x">$stmt-&gt;bind_param(&quot;s&quot;, $_POST[firstname]);</span>
-</span><span class='line'><span class="x">$stmt-&gt;execute();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The first example is simple and clear, the second is a <em>bit</em> less obvious. The API design itself is leading developers down the wrong path - it supports two syntaxes, one simple and easy to comprehend - but extremely dangerous, and one that&#8217;s more complex, less obvious, but safer. Without understanding the security implications, which syntax do you think developers will pick?</p>
-
-<p>While developers should know more than they do (and I&#8217;m not trying to excuse their ignorance) - the years of effort and the daily reports of SQLi breaches should tell us that trying to educate all of the world&#8217;s developers isn&#8217;t working. As long as the <em>easy way</em> to use an API is the insecure way, we&#8217;ll continue to see a steady stream of breaches.</p>
-
-<p>While I agree with Chris that the documentation is a real issue - the APIs are just as much to blame. <em>Bad APIs make for bad developers</em>.</p>
-
-<p><strong>Secure by default</strong></p>
-
-<p>When a developer is working on a new API, they should ask if they are doing harm with the design. The maxim &#8220;first, do no harm&#8221; should be running through their head with each decision. Doing no harm - being secure by default, not leading developers astray - really should be the foremost goal of any API.</p>
-
-<p>I don&#8217;t mean to pick on PHP&#8217;s MySQL API here, it&#8217;s just one of many that are designed this way. Look at any API on any platform, odds are better than not that security was an afterthought - if it was given any thought at all.</p>
-
-<p>As anyone who writes code can attest, writing secure code is hard - but when the APIs that developers are given encourage insecure usage, it&#8217;s that much more likely that holes will be found. While organizations like <a href="https://www.owasp.org/index.php/Main_Page">OWASP</a> are making some progress in education and awareness, it&#8217;s obviously not enough. Platforms need to be updated, APIs need to be fixed - this won&#8217;t be a quick process, but we won&#8217;t see real change until the APIs are improved.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -470,6 +483,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -483,10 +500,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

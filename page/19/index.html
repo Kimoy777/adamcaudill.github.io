@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I&#8217;ve been a fan of bbPress for quite some time; I&#8217;ve even contributed code to the project. For those that aren&#8217;t familiar with it, &hellip;">
+  <meta name="description" content="When you move on to your next challenge how will those that inherit your code think of you? Noble or notorious, innovator or insane? This is a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/20/whats-your-code-legacy/">What&#8217;s Your Code Legacy?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-20T22:42:59-05:00" pubdate data-updated="true">Dec 20<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When you move on to your next challenge how will those that inherit your code think of you? Noble or notorious, innovator or insane? This is a question that all developers should ask themselves frequently; though too few ever do. You should always write with the assumption that someday a new developer will take over your code, and they will question every decision and assumption you&#8217;ve made. When this happens, what will they think of you?</p>
+
+<p>Perhaps I&#8217;m more aware of this because I maintain an internally developed shared library that my company uses in every application; but regardless of the scope of the project you should always assume that someday you will hand the project off. Many developers think little about what happens to their code after it passes on to another; what other developers will have to deal with, or how their efforts will be perceived.</p>
+
+<p>When I&#8217;m training a new developer there are a few points I try to reinforce as much as possible:</p>
+
+<ol>
+<li><p>Code is only good if other developers can work on it without extensive training. If it takes days or weeks of introduction to get a new developer up to speed, then you&#8217;ve done something wrong1.</p></li>
+<li><p>Clever solutions are no better than an ugly hack if it&#8217;s not clear what you are doing. If the code isn&#8217;t clear then it&#8217;s not maintainable, if it&#8217;s not maintainable then it&#8217;s junk.</p></li>
+<li><p>Assume you&#8217;ll be hit by a bus. Always write code with the assumption that you won&#8217;t have the opportunity to cleanly pass the code off to a new maintainer. Never assume that you&#8217;ll have time to come back and clean things up later.</p></li>
+<li><p>Always perform design reviews, no matter the size of the project2. Once you have a design in mind, talk it through with a at least two other developers. Just because you think it&#8217;s clean and clear doesn&#8217;t mean that others will see it that way as well.</p></li>
+<li><p>Be consistent, always. I&#8217;ve seen more projects ruined by people doing things &#8220;their way&#8221; than anything else. Match style and design when working on an existing project. Be careful when adding new techniques, technologies, or methodologies to an existing project; unless you are willing to update the entire code-base, you can easily create a minefield without realizing it.</p></li>
+</ol>
+
+
+<p>If you want your work to be seen positively after you move on, start thinking about your heirs today. The opinion they have of you will be almost entirely based on what they see in your code - not the stories or memories left behind.</p>
+
+<p>1 - There are always exceptions; these are generalized guidelines, not hard and fast rules.
+2 - This includes &#8220;throw away&#8221; projects, many projects that are intended to have a short life end up living far longer than intended. This is the most likely place that your heirs will find code that makes them question the quality of your work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -279,61 +333,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/07/18/start-up-tools-open-atrium/">Start-up Tools: Open Atrium</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-18T14:19:31-04:00" pubdate data-updated="true">Jul 18<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When it comes to small business project management, <a href="http://www.basecamphq.com/">Basecamp</a> by <a href="http://www.37signals.com/">37signals</a> has been the king of the hill for some time. Now though, there is an exciting new player in the field: <a href="http://openatrium.com/">Open Atrium</a>. It&#8217;s a <a href="http://drupal.org/">Drupal</a> based open source project management system somewhat like Basecamp, though with many more features.</p>
-
-<p><img src="http://adamcaudill.com/files/2009-07-18_1345.png" alt="" /></p>
-
-<p>Open Atrium is new on the scene, with beta 1 being released just 4 days ago - though it&#8217;s already rather polished and seems to work well. While there are some hiccups with the installer and a disappointing lack of documentation, it&#8217;s still very easy to install and takes only a few minutes to get running.</p>
-
-<p>It has all the major <a href="http://openatrium.com/features">features</a> that you would expect, plus a few extras such as a twitter-like shoutbox system. Here are the highlights:</p>
-
-<ul>
-<li><p>Blogging</p></li>
-<li><p>Calendar</p></li>
-<li><p>Dashboard</p></li>
-<li><p>Document Storage</p></li>
-<li><p>Task Management</p></li>
-</ul>
-
-
-<p>Being open source and self-hosted adds some nice benefits; unlimited customization, full control of your data, and my favorite: can be installed on a non-public web server. Having you project management system sit behind a VPN is a great way to avoid <a href="http://www.techcrunch.com/2009/07/14/in-our-inbox-hundreds-of-confidential-twitter-documents/">data leaks and embarrassments</a>.</p>
-
-<p>I&#8217;m still debating which is best, Basecamp or Open Atrium - but if you want to save some money, Open Atrium is worth looking into.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/20/">&larr; Older</a>
@@ -366,6 +365,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -379,10 +382,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

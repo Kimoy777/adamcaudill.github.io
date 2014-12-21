@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="If you are looking to get started working with WPF, then Tim Sneath has a great guide for where to start: Building a Perfect WPF Developer &hellip;">
+  <meta name="description" content="After reading Simon Willison&#8217;s excellent article on the topic I spent a couple hours last night looking at the current OpenID specification, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/12/21/openid-id-of-the-future/">OpenID: ID of the Future?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-12-21T20:50:43-05:00" pubdate data-updated="true">Dec 21<span>st</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading <a href="http://simonwillison.net/">Simon Willison</a>&#8217;s excellent <a href="http://simonwillison.net/2006/Dec/19/openid/">article on the topic</a> I spent a couple hours last night looking at the current <a href="http://openid.net/specs/openid-authentication-1_1.html">OpenID specification</a>, and after a fair bit of thought found the ideas behind <a href="http://openid.net/">OpenID</a> clever, but not what&#8217;s needed for the ID of the future.</p>
+
+<p><strong>What&#8217;s Right</strong></p>
+
+<p>OpenID has some really good ideas behind it. Here are a few that really stand out in my eyes.</p>
+
+<ul>
+<li><p>If you have a LiveJournal account for example, it just works, no extra sign-up, no additional work.</p></li>
+<li><p>The ID is easy to remember, a persons blog / home page URL is among the easiest things for a user to remember.</p></li>
+<li><p>De-centralized architecture that minimizes the potential for downtime.</p></li>
+<li><p>Anyone can operate an Identity Provider.</p></li>
+<li><p>Open, well documented protocol, as well as open-source libraries.</p></li>
+<li><p>ID may be portable from one Identity Provider to another without changes to the ID.</p></li>
+</ul>
+
+
+<p><strong>What&#8217;s Wrong</strong></p>
+
+<p>There are a number of issues I see with this system, while there are certain advantages; some of these disadvantages are quite disturbing. Here are the issues that strike me as most concerning (in no real order).</p>
+
+<ul>
+<li><p>SSL (HTTPS) is not <em>required</em> for any communications. This is a potential security issues, though not as large as could be due to the nature of the system.</p></li>
+<li><p>Requires editing HTML for users that do not use a hosting service that automatically adds the OpenID HTML code to the proper page(s).</p></li>
+<li><p>Not all hosting services allow the user to edit HTML directly.</p></li>
+<li><p>Does not offer a way to communicate enough information, such as would be used to expedite an e-commerce transaction. (This may be changed in future versions, or with extensions.)</p></li>
+<li><p>No trust relationships, only verifies a person controls a URL.</p></li>
+<li><p>No certification or audits for Identity Providers to ensure end-user security.</p></li>
+<li><p>Excessive bandwidth usage. Each login requires parsing at least one full HTML page to identify the Identity Provider server. If a user has <code>openid.delegate</code> included in their page, there will be another full page download/parse for each.</p></li>
+<li><p>HTML pages must be parsed to identify the Identity Provider server, parsing HTML can raise issues when it contains errors (as is quite common). Seeing as there is no standard library to perform the parsing, HTML with errors may work with some implementations but not with others.</p></li>
+<li><p>Anyone that gains access to edit the HTML of the identity URL can steal ones identity just by changing/adding an <code>openid.delegate</code>. This is a real risk in some shared hosting environments.</p></li>
+</ul>
+
+
+<p><strong>What We Need</strong></p>
+
+<p>The idea behind OpenID, to create a distributed identity system that is easy to use and can be used universally is a great idea, and one that should be pursued. If this goal could be achieved, it would be a project that would truly help to make the world a better place (at least it in that it would save everybody time). I have great respect for the work of all that have contributed to the OpenID project; it is a great idea and certainly has uses.</p>
+
+<p>To be truly useful though, an ID system needs to be easy to use for people of all skill levels, with and without web sites. It should provide an option to control how much information is shared with a web site (such as OpenID does), and should have the option to provide information such as shipping or billing information to minimize entering the same data in so many web sites. All the data should be transferred via SSL to ensure the highest level of security.</p>
+
+<p><strong>Features of The Future ID</strong></p>
+
+<ul>
+<li><p>The protocol should be completely open and well documented.</p></li>
+<li><p>The protocol should be XML based so as to be lightweight and easily implemented in any language.</p></li>
+<li><p>The ID should be easily used with not only web sites, but via desktop applications and other forms of software that require authentication.</p></li>
+<li><p>The organization backing the identity system should arrange for an optional certification program for Identity Providers to ensure that certain basic security policies are implemented. The requirements should be defined by the backing organization and the audit carried out by a third-party auditing firm.</p></li>
+<li><p>The IDs should be in an easy to remember format that is easy to type and makes translation back to the provider simple.</p></li>
+<li><p>Identity Provides should offer a way to verify that a user is who they claim, not just that they control an ID. This would be an option for users that would be quite useful in applications such as e-commerce use. (This would rely on the provider having a trusted signing certificate and following certain identity verification guidelines.)</p></li>
+</ul>
+
+
+<p>While some of these features cover far more ground than something like OpenID, this increased scope is needed to ensure that the ID service can be used in all the needed applications. While it is far more complex to add these extra features, the ability to use the resulting ID for almost any purpose makes it well worth it.</p>
+
+<p>I&#8217;m not proposing an alternative to OpenID, simply seeking feedback while passing my feedback on OpenID along for those interested.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -245,42 +334,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/12/17/things-you-shouldnt-worry-about/">Things You Shouldn’t Worry About</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-12-17T19:36:55-05:00" pubdate data-updated="true">Dec 17<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve been a fan of <a href="http://microisvjournal.wordpress.com/">Patrick&#8217;s blog</a> for some time now, and one of his recent articles, <a href="http://microisvjournal.wordpress.com/2006/12/05/things-you-shouldnt-worry-about/"><em>Things You Shouldn’t Worry About</em></a>, really shines. While I can&#8217;t agree with everything, most of the points really make sense. If you run an ISV, or are thinking about starting one, I highly recommend that you read this, it&#8217;s well worth it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/30/">&larr; Older</a>
@@ -313,6 +366,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -326,10 +383,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>

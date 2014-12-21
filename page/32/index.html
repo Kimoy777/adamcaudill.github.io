@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Yup, it&#8217;s here! The next version of the .NET Framework has been released, while this isn&#8217;t a major release (as not much has changed), it &hellip;">
+  <meta name="description" content="The Sandcastle team just announced a new toy for users of Visual Studio, the Power Toys for Visual Studio Pack Installer. This is a unified installer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/11/11/like-power-toys/">Like Power Toys?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-11-11T12:05:49-05:00" pubdate data-updated="true">Nov 11<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <a href="http://blogs.msdn.com/sandcastle/default.aspx">Sandcastle</a> team just announced a new toy for users of Visual Studio, the <a href="http://blogs.msdn.com/sandcastle/archive/2006/11/10/introducing-the-power-toys-for-visual-studio-pack-installer.aspx"><em>Power Toys for Visual Studio Pack Installer</em></a>. This is a unified installer for the various Power Toys released; no more downloading a dozen installers to get what you want, this one does it all. If you like pushing VS to be all it can be, this is worth looking at.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -230,59 +266,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/10/30/vertical-column-indicator-for-visual-studio/">Vertical Column Indicator for Visual Studio</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-10-30T20:55:08-05:00" pubdate data-updated="true">Oct 30<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The coding guidelines at my job have a rather interesting requirement: code must be wrapped at 100 characters. If you fail to meet this on any line of code, you fail the code review. In the year I&#8217;ve worked at this company I&#8217;ve learned to guess how long a line is quite well. As of today, no more guessing.</p>
-
-<p>Here&#8217;s a quick registry hack to add a vertical line in the editor at any column you wish, just double click the <a href="http://adamcaudill.com/files/2006/10/vscolumnline.zip">REG file</a> and you&#8217;re set. The contents of the file look something like this:</p>
-
-<pre><code>Windows Registry Editor Version 5.00
-
-[HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\8.0\Text Editor]
-"Guides"="RGB(128, 128, 128) 100"
-
-[HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\7.1\Text Editor]
-"Guides"="RGB(128, 128, 128) 100"`
-</code></pre>
-
-<p>The setting works something like this: The <code>RGB()</code> part defines the color of the line, the number at the end defines the column the line is displayed at. If your style defines a limit on the length of a line, this is a great way to see at a glance if you&#8217;re going too long.</p>
-
-<p><em>Note:</em> This adds the key for both Visual Studio 2003 and Visual Studio 2005.</p>
-
-<p><strong>Update:</strong> The original REG file I linked to had a formatting error that caused the data to import improperly. I&#8217;ve replaced the file with a working copy.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/33/">&larr; Older</a>
@@ -315,6 +298,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
@@ -328,10 +315,6 @@
     
       <li class="post">
         <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
       </li>
     
   </ul>
