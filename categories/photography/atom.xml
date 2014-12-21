@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Photography | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/photography/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/photography/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Lumix DMC-FZ8 & Infrared]]></title>
-    <link href="http://adamcaudill.github.com/2009/06/21/lumix-dmc-fz8-infrared/"/>
+    <link href="https://adamcaudill.com//2009/06/21/lumix-dmc-fz8-infrared/"/>
     <updated>2009-06-21T17:35:10-04:00</updated>
-    <id>http://adamcaudill.github.com/2009/06/21/lumix-dmc-fz8-infrared</id>
+    <id>https://adamcaudill.com//2009/06/21/lumix-dmc-fz8-infrared</id>
     <content type="html"><![CDATA[<p>After several months of tests and experiments, I have finally determined something: <a href="http://en.wikipedia.org/wiki/Infrared_photography">Infrared</a> with the Lumix <a href="http://www.dpreview.com/news/0701/07013106panasonicfz8.asp">DMC-FZ8</a> just doesn't work.
 <a href="http://www.flickr.com/photos/adamcaudill/2789422097"></a></p>
 

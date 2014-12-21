@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Personal | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/personal/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/personal/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Working Late, Again]]></title>
-    <link href="http://adamcaudill.github.com/2008/12/08/working-late-again/"/>
+    <link href="https://adamcaudill.com//2008/12/08/working-late-again/"/>
     <updated>2008-12-08T04:16:50-05:00</updated>
-    <id>http://adamcaudill.github.com/2008/12/08/working-late-again</id>
+    <id>https://adamcaudill.com//2008/12/08/working-late-again</id>
     <content type="html"><![CDATA[<p>Ladies, do you know where your husband is? If he's anything like me (or the rest of my team), he's at the office. At 4AM. Again.</p>
 
 <p>For the third week in a row I find myself at work at the wee hours of the morning preparing for a project launch. Though today more than ever I find myself asking questions; what takes priority, the needs of a company, or the needs of a relationship? What's more important, the health of a project, or my own health? Should I be working to make this project a success, or sleeping to stay healthy?</p>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[Is this thing on?]]></title>
-    <link href="http://adamcaudill.github.com/2008/11/16/is-this-thing-on/"/>
+    <link href="https://adamcaudill.com//2008/11/16/is-this-thing-on/"/>
     <updated>2008-11-16T16:23:06-05:00</updated>
-    <id>http://adamcaudill.github.com/2008/11/16/is-this-thing-on</id>
+    <id>https://adamcaudill.com//2008/11/16/is-this-thing-on</id>
     <content type="html"><![CDATA[<p>Wow! It's been over a year since this blog o' mine has seen any activity, though I've certainly not forgot about it. A lot has happened in the last year, so I'll use this post as a bit of an update (and a warm-up for my return to blogging).</p>
 
 <p>I'm not going to promise you'll see a new post daily as was once the case, though I'll try to ensure something new is up at least once a week.</p>
@@ -71,9 +71,9 @@
   
   <entry>
     <title type="html"><![CDATA[Switching to Gmail, Again]]></title>
-    <link href="http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again/"/>
+    <link href="https://adamcaudill.com//2007/10/09/switching-to-gmail-again/"/>
     <updated>2007-10-09T01:15:44-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again</id>
+    <id>https://adamcaudill.com//2007/10/09/switching-to-gmail-again</id>
     <content type="html"><![CDATA[<p>Once <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/">again</a>, I've decided to switch email clients; this time from <a href="http://www.ritlabs.com/en/products/thebat/">The Bat</a> to Gmail, or more specifically, to <a href="https://www.google.com/a/">Google Apps</a>. After some recent issues with The Bat (mostly relating to a recent update), I decided to make another go at switching to Gmail; but this time trying the Google Apps version.</p>
 
 <p>After my last attempt, I was <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/#comment-387">informed</a> that the Google Apps edition of Gmail doesn't suffer the <code>Sender</code> issue that so plagued me before. After almost a full day of work, the transition is complete. And I couldn't be happier.</p>
@@ -108,9 +108,9 @@
   
   <entry>
     <title type="html"><![CDATA[Well, looks like I was wrong...]]></title>
-    <link href="http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong/"/>
+    <link href="https://adamcaudill.com//2007/08/25/well-looks-like-i-was-wrong/"/>
     <updated>2007-08-25T20:01:06-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong</id>
+    <id>https://adamcaudill.com//2007/08/25/well-looks-like-i-was-wrong</id>
     <content type="html"><![CDATA[<p>Well, it was a while back that I said I would start writing again - that just never quite happened.</p>
 
 <p>Much interesting has happened in these months, a few co-workers left the company, a few new faces came in; there was also a promotion and a number of new projects. Oh, and there's a new relationship, and a fair bit of time now going to my old profession and now hobby of photography. Between all of these, spare time isn't something I have much of - if any.</p>
@@ -125,9 +125,9 @@
   
   <entry>
     <title type="html"><![CDATA[A bit behind...]]></title>
-    <link href="http://adamcaudill.github.com/2007/05/27/a-bit-behind/"/>
+    <link href="https://adamcaudill.com//2007/05/27/a-bit-behind/"/>
     <updated>2007-05-27T22:52:48-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/05/27/a-bit-behind</id>
+    <id>https://adamcaudill.com//2007/05/27/a-bit-behind</id>
     <content type="html"><![CDATA[<p>Well, it was about a month ago that I wrote commenting on being sick, and letting you all know that I would be getting back to my normal writing schedule. That didn't happen. Work happened.</p>
 
 <p>All my time since then has been spent managing between 2 and 5 developers, and trying to get a project that would end up weighing in at almost 50,000 lines of code completed and to production. Seeing as we started without specs, and made the deadline, I'm quite happy about how it went. I learned some interesting things on this project, if I can find a way to write about it without breaking my confidentiality agreement; you may see more about it soon.</p>

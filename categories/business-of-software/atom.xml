@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Business of Software | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/business-of-software/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/business-of-software/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Cringely is wrong about Java]]></title>
-    <link href="http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java/"/>
+    <link href="https://adamcaudill.com//2011/10/15/why-cringely-is-wrong-about-java/"/>
     <updated>2011-10-15T15:47:52-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java</id>
+    <id>https://adamcaudill.com//2011/10/15/why-cringely-is-wrong-about-java</id>
     <content type="html"><![CDATA[<p>A couple of days ago I was sent a link to Robert Cringely's latest treatise:  <em><a href="http://www.cringely.com/2011/10/the-second-coming-of-java/">The second coming of Java</a></em> - and to say I disagreed was a bit of an understatement. To me, it represents a fundamental flaw in his perception of developers, and more importantly the economics of software development.</p>
 
 <p>The key to Cringely's argument comes down to this:</p>
@@ -38,9 +38,9 @@
   
   <entry>
     <title type="html"><![CDATA[Microsoft & Skype: PR Failure?]]></title>
-    <link href="http://adamcaudill.github.com/2011/05/11/microsoft-skype-pr-failure/"/>
+    <link href="https://adamcaudill.com//2011/05/11/microsoft-skype-pr-failure/"/>
     <updated>2011-05-11T02:44:32-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/11/microsoft-skype-pr-failure</id>
+    <id>https://adamcaudill.com//2011/05/11/microsoft-skype-pr-failure</id>
     <content type="html"><![CDATA[<p>While looking at the reactions to Microsoft's <a href="http://www.microsoft.com/Presspass/press/2011/may11/05-10CorpNewsPR.mspx">acquisition of Skype</a>, I found one tweet that really stood out:</p>
 
 <p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>How you know you have a PR problem: As soon as you buy popular service X, their userbase starts posting alternatives <a href="https://twitter.com/search/%23skype">#skype</a> <a href="https://twitter.com/search/%23Microsoft">#Microsoft</a></p>&mdash; Ted Han (@knowtheory) <a href="https://twitter.com/knowtheory/status/68139224028819456">May 11, 2011</a></blockquote>
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[You can't fix stupid...]]></title>
-    <link href="http://adamcaudill.github.com/2011/05/10/you-cant-fix-stupid/"/>
+    <link href="https://adamcaudill.com//2011/05/10/you-cant-fix-stupid/"/>
     <updated>2011-05-10T02:06:05-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/10/you-cant-fix-stupid</id>
+    <id>https://adamcaudill.com//2011/05/10/you-cant-fix-stupid</id>
     <content type="html"><![CDATA[<p>For those outside of the IT field, developers are looked at as miracle workers - through us, business leaders think anything is possible (and they often see no reason why we can't work our latest miracle by the next morning). In reality though, we do work miracles; we save companies vast amounts of money every year through increased worker efficiency and automation, we enable new lines of business that wouldn't be possible otherwise, and reduce energy costs because we keep the office lights turned off. Well, that's more or less how they see us.</p>
 
 <p>But for all of the wonders we are responsible for, there is one thing we can't do (no matter what amazing powers some executives <em>think</em> we have to make them look better or earn them more bonuses):</p>
@@ -104,9 +104,9 @@
   
   <entry>
     <title type="html"><![CDATA[...and thanks for the fish (Twitter v. Developers)]]></title>
-    <link href="http://adamcaudill.github.com/2011/03/12/and-thanks-for-the-fish-twitter-v-developers/"/>
+    <link href="https://adamcaudill.com//2011/03/12/and-thanks-for-the-fish-twitter-v-developers/"/>
     <updated>2011-03-12T00:20:59-05:00</updated>
-    <id>http://adamcaudill.github.com/2011/03/12/and-thanks-for-the-fish-twitter-v-developers</id>
+    <id>https://adamcaudill.com//2011/03/12/and-thanks-for-the-fish-twitter-v-developers</id>
     <content type="html"><![CDATA[<p>On March 11, 2011, Twitter said goodbye to some of it's most loyal and passionate users.</p>
 
 <p>In a message on their <a href="http://groups.google.com/group/twitter-development-talk">Development Talk</a> group entitled "<a href="http://groups.google.com/group/twitter-development-talk/browse_thread/thread/c82cd59c7a87216a#">consistency and ecosystem opportunities</a>" - they make their position clear: we no longer need you. To demonstrate this, let me point out a couple quotes that deserve attention:</p>
@@ -132,9 +132,9 @@ _</p>
   
   <entry>
     <title type="html"><![CDATA[Being Fair]]></title>
-    <link href="http://adamcaudill.github.com/2010/12/01/being-fair/"/>
+    <link href="https://adamcaudill.com//2010/12/01/being-fair/"/>
     <updated>2010-12-01T04:47:14-05:00</updated>
-    <id>http://adamcaudill.github.com/2010/12/01/being-fair</id>
+    <id>https://adamcaudill.com//2010/12/01/being-fair</id>
     <content type="html"><![CDATA[<p>A couple weeks ago, Hulu Plus shed its beta tag and opened to the general public. When this happened, the price was changed and a new one week free trial was added. As a subscriber I was happy to hear about the new lower price, though my main concern was wondering if I would have to contact them to get the price break. That concern, thankfully, was the furthest thing from the truth. Soon as the news hit, I found this email waiting for me:</p>
 
 <blockquote><p>Hi Adam,</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Security | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/security/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/security/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Poking Mykonos]]></title>
-    <link href="http://adamcaudill.github.com/2012/01/23/poking-mykonos/"/>
+    <link href="https://adamcaudill.com//2012/01/23/poking-mykonos/"/>
     <updated>2012-01-23T22:28:56-05:00</updated>
-    <id>http://adamcaudill.github.com/2012/01/23/poking-mykonos</id>
+    <id>https://adamcaudill.com//2012/01/23/poking-mykonos</id>
     <content type="html"><![CDATA[<p>While checking on the latest updates in the start-up world from TechCrunch, I came across <a href="http://techcrunch.com/2012/01/23/mykonos-helps-companies-battle-hackers-raises-4-million/">their article</a> on <a href="http://www.mykonossoftware.com/">Mykonos</a>; the important part of their article (at least for me), is this:</p>
 
 <p><em>Mykonos’s Web Security product uses deception to “detect, confuse, slow down and prevent attackers” in real-time in order to help companies protect their websites and Web apps from malicious hacker and proactively prevent fraud and theft.</em></p>
@@ -114,9 +114,9 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   
   <entry>
     <title type="html"><![CDATA[Google Chrome Leaking Credit Card Data?]]></title>
-    <link href="http://adamcaudill.github.com/2012/01/15/google-chrome-leaking-credit-card-data/"/>
+    <link href="https://adamcaudill.com//2012/01/15/google-chrome-leaking-credit-card-data/"/>
     <updated>2012-01-15T11:04:04-05:00</updated>
-    <id>http://adamcaudill.github.com/2012/01/15/google-chrome-leaking-credit-card-data</id>
+    <id>https://adamcaudill.com//2012/01/15/google-chrome-leaking-credit-card-data</id>
     <content type="html"><![CDATA[<p>While testing <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a> I noticed a number that looked familiar - my debit card number. Now, being just a little paranoid, I don't leave such information on my system unencrypted - so seeing it was a real surprise. But, here's the real kicker: it was on my work PC, where it never should have been. But there it was, plain as day, in clear text. I spent a couple of minutes staring at the log trying to figure out why it would be there.</p>
 
 <p>Once I saw the file name, a sinking feeling set in and the answer became clear:</p>
@@ -214,9 +214,9 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   
   <entry>
     <title type="html"><![CDATA[CCSRCH v1.0.5]]></title>
-    <link href="http://adamcaudill.github.com/2012/01/14/ccsrch-v1-0-5/"/>
+    <link href="https://adamcaudill.com//2012/01/14/ccsrch-v1-0-5/"/>
     <updated>2012-01-14T08:08:39-05:00</updated>
-    <id>http://adamcaudill.github.com/2012/01/14/ccsrch-v1-0-5</id>
+    <id>https://adamcaudill.com//2012/01/14/ccsrch-v1-0-5</id>
     <content type="html"><![CDATA[<p>During my employers annual <a href="https://www.pcisecuritystandards.org/">PCI</a> audit, our auditor requested that we perform a search of all of our servers for credit card data. He recommended a tool called "ccsrch" - which like many open source projects had a couple of issues, and hadn't been updated in years. So, I fixed it.</p>
 
 <p>CCSRCH is a cross-platform, command-line application that reads every file from the starting point passed in, and scans them for what looks like credit card numbers (and using the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> to check each possible result). It's fairly brute-force, but it gets the scans required for PCI - though I would be careful about using it during production hours, it can have a pretty significant impact on a server's I/O performance.</p>
@@ -239,9 +239,9 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   
   <entry>
     <title type="html"><![CDATA[A brief look at the latest @LulzSec release]]></title>
-    <link href="http://adamcaudill.github.com/2011/06/16/a-brief-look-at-the-latest-lulzsec-release/"/>
+    <link href="https://adamcaudill.com//2011/06/16/a-brief-look-at-the-latest-lulzsec-release/"/>
     <updated>2011-06-16T20:01:41-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/06/16/a-brief-look-at-the-latest-lulzsec-release</id>
+    <id>https://adamcaudill.com//2011/06/16/a-brief-look-at-the-latest-lulzsec-release</id>
     <content type="html"><![CDATA[<p>Earlier today, the hacker collective <a href="http://lulzsecurity.com/">Lulz Security</a> released a batch of 62,156 email/password combinations from unknown sites; I decided to take a look at the data and see if there was anything to be learned from it.</p>
 
 <p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>And as always, LulzSec delivers: <a href="http://t.co/yQlcu5x" title="http://www.mediafire.com/?9em5xp7r0rd2yod">mediafire.com/?9em5xp7r0rd2y…</a> 62,000+ emails/passwords just for you. Enjoy.</p>&mdash; The Lulz Boat (@LulzSec) <a href="https://twitter.com/LulzSec/status/81327464156119040">June 16, 2011</a></blockquote>
@@ -274,9 +274,9 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   
   <entry>
     <title type="html"><![CDATA[TED: Stuxnet: a preview of future wars]]></title>
-    <link href="http://adamcaudill.github.com/2011/03/29/ted-stuxnet-a-preview-of-future-wars/"/>
+    <link href="https://adamcaudill.com//2011/03/29/ted-stuxnet-a-preview-of-future-wars/"/>
     <updated>2011-03-29T19:28:29-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/03/29/ted-stuxnet-a-preview-of-future-wars</id>
+    <id>https://adamcaudill.com//2011/03/29/ted-stuxnet-a-preview-of-future-wars</id>
     <content type="html"><![CDATA[<p><a href="http://www.langner.com/en/">Ralph Langner</a> recently spoke at TED about his team's findings on <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>; it's a clear (and somewhat scary) insight into the wars of the future. Instead of sending fighters and bombers to take out <a href="http://articles.cnn.com/2010-09-29/world/iran.cyberattack_1_nuclear-program-bushehr-nuclear-plant-malware?_s=PM:WORLD">Iran's nuclear program</a>, as was done in 1981 to eliminate <a href="http://en.wikipedia.org/wiki/Operation_Opera">Iraq's program</a>, a carefully crafted virus slowly and methodologically damaged or destroyed vital equipment.</p>
 
 <p>How long until this is used as a standard part of 'softening' a target by taking out key infrastructure (flight systems, power plants, telephone &amp; internet, etc.) before the bombs start to fly?</p>

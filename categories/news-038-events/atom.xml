@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: News &#038; Events | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/news-038-events/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/news-038-events/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Google Chrome and H.264]]></title>
-    <link href="http://adamcaudill.github.com/2011/01/12/google-chrome-and-h-264/"/>
+    <link href="https://adamcaudill.com//2011/01/12/google-chrome-and-h-264/"/>
     <updated>2011-01-12T02:00:42-05:00</updated>
-    <id>http://adamcaudill.github.com/2011/01/12/google-chrome-and-h-264</id>
+    <id>https://adamcaudill.com//2011/01/12/google-chrome-and-h-264</id>
     <content type="html"><![CDATA[<p>In a somewhat (but not entirely) surprising <a href="http://blog.chromium.org/2011/01/html-video-codec-support-in-chrome.html">announcement</a>, Google is removing support for <a href="http://en.wikipedia.org/wiki/H.264/MPEG-4_AVC">H.264</a> video from Chrome. This change to their implementation of the often controversial HTML5 <code>&lt;video&gt;</code> tag is both a major step by Google and a furtherance of the already complicated world of video online.</p>
 
 <p><em>... To that end, we are changing Chrome’s HTML5  support to make it consistent with the codecs already supported by the open Chromium project. Specifically, we are supporting the WebM (VP8) and Theora video codecs, and will consider adding support for other high-quality open codecs in the future. Though H.264 plays an important role in video, as our goal is to enable open innovation, <strong>support for the codec will be removed</strong> and our resources directed towards completely open codec technologies.</em></p>
@@ -62,9 +62,9 @@
   
   <entry>
     <title type="html"><![CDATA[Switching hosts, again.]]></title>
-    <link href="http://adamcaudill.github.com/2009/06/13/switching-hosts-again/"/>
+    <link href="https://adamcaudill.com//2009/06/13/switching-hosts-again/"/>
     <updated>2009-06-13T13:07:39-04:00</updated>
-    <id>http://adamcaudill.github.com/2009/06/13/switching-hosts-again</id>
+    <id>https://adamcaudill.com//2009/06/13/switching-hosts-again</id>
     <content type="html"><![CDATA[<p>So here we go again - my 4th hosting company since I started this blog. Maybe I'll have better luck this time? For those interested, here's the rundown of which hosts I've used, and what I'm doing today.</p>
 
 <p><a href="http://radicalv.com/"><strong>Radical Vision</strong></a><strong> - Lasted 4 years</strong></p>
@@ -101,9 +101,9 @@
   
   <entry>
     <title type="html"><![CDATA[Switching to Gmail, Again]]></title>
-    <link href="http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again/"/>
+    <link href="https://adamcaudill.com//2007/10/09/switching-to-gmail-again/"/>
     <updated>2007-10-09T01:15:44-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again</id>
+    <id>https://adamcaudill.com//2007/10/09/switching-to-gmail-again</id>
     <content type="html"><![CDATA[<p>Once <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/">again</a>, I've decided to switch email clients; this time from <a href="http://www.ritlabs.com/en/products/thebat/">The Bat</a> to Gmail, or more specifically, to <a href="https://www.google.com/a/">Google Apps</a>. After some recent issues with The Bat (mostly relating to a recent update), I decided to make another go at switching to Gmail; but this time trying the Google Apps version.</p>
 
 <p>After my last attempt, I was <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/#comment-387">informed</a> that the Google Apps edition of Gmail doesn't suffer the <code>Sender</code> issue that so plagued me before. After almost a full day of work, the transition is complete. And I couldn't be happier.</p>
@@ -138,9 +138,9 @@
   
   <entry>
     <title type="html"><![CDATA[Well, looks like I was wrong...]]></title>
-    <link href="http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong/"/>
+    <link href="https://adamcaudill.com//2007/08/25/well-looks-like-i-was-wrong/"/>
     <updated>2007-08-25T20:01:06-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong</id>
+    <id>https://adamcaudill.com//2007/08/25/well-looks-like-i-was-wrong</id>
     <content type="html"><![CDATA[<p>Well, it was a while back that I said I would start writing again - that just never quite happened.</p>
 
 <p>Much interesting has happened in these months, a few co-workers left the company, a few new faces came in; there was also a promotion and a number of new projects. Oh, and there's a new relationship, and a fair bit of time now going to my old profession and now hobby of photography. Between all of these, spare time isn't something I have much of - if any.</p>
@@ -155,9 +155,9 @@
   
   <entry>
     <title type="html"><![CDATA[Another one bites the dust...]]></title>
-    <link href="http://adamcaudill.github.com/2007/05/27/another-one-bites-the-dust/"/>
+    <link href="https://adamcaudill.com//2007/05/27/another-one-bites-the-dust/"/>
     <updated>2007-05-27T23:58:51-04:00</updated>
-    <id>http://adamcaudill.github.com/2007/05/27/another-one-bites-the-dust</id>
+    <id>https://adamcaudill.com//2007/05/27/another-one-bites-the-dust</id>
     <content type="html"><![CDATA[<p>Later this week I'll start the process of closing my start-up, aDeVIX Software. After months of planning and development, the decision has finally been made to call it a day. It was a great idea, but time and money conspired against us, with great effect.</p>
 
 <p>We had a great product in mind, just not the resources to make it happen. I do believe that it would have been quite a success, but it takes a fair bit of time, and even more money to launch a commercial product aimed at mid-size businesses. It's not a simple thing to sell software costing more than $10,000 per install; and being a company with no reputation, it's almost impossible.</p>

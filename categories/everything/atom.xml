@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Everything | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/everything/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/everything/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Facebook Scams]]></title>
-    <link href="http://adamcaudill.github.com/2011/05/14/facebook-scams/"/>
+    <link href="https://adamcaudill.com//2011/05/14/facebook-scams/"/>
     <updated>2011-05-14T20:43:12-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/14/facebook-scams</id>
+    <id>https://adamcaudill.com//2011/05/14/facebook-scams</id>
     <content type="html"><![CDATA[<p>As a tip for all my Facebook friends, despite the promises you see spreading wildly across Facebook, you can't see who's looking at your profile. If you ever see anything like this, it's a scam - pure and simple:</p>
 
 <p><img src="http://adamcaudill.com/files/2011-05-14_2015.png" alt="" /></p>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hosting Change]]></title>
-    <link href="http://adamcaudill.github.com/2011/04/11/hosting-change/"/>
+    <link href="https://adamcaudill.com//2011/04/11/hosting-change/"/>
     <updated>2011-04-11T19:36:27-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/04/11/hosting-change</id>
+    <id>https://adamcaudill.com//2011/04/11/hosting-change</id>
     <content type="html"><![CDATA[<p>I'm in the process of migrating my sites from  a <a href="http://www.dreamhost.com/hosting-vps.html">Dreamhost VPS</a>, to fully managed hosting by <a href="http://www.grayhills.com/">Gray Hills Software</a>. In my tests so far, the loading time has been cut in half with this switch. Pages load faster, the server is better configured (new software, and more options), and seeing as they have both Windows and Linux servers, I can use one provider with whatever technology suits me and my projects.</p>
 
 <p>There may be a few bumps as I move things, but all should stable soon.</p>
@@ -45,9 +45,9 @@
   
   <entry>
     <title type="html"><![CDATA[Need a cheap phone charger quick? Buy a Tracfone.]]></title>
-    <link href="http://adamcaudill.github.com/2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone/"/>
+    <link href="https://adamcaudill.com//2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone/"/>
     <updated>2011-02-11T15:15:15-05:00</updated>
-    <id>http://adamcaudill.github.com/2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone</id>
+    <id>https://adamcaudill.com//2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone</id>
     <content type="html"><![CDATA[<p>I recently discovered that I had left the changer for my BlackBerry Tour behind (I'm in the process of moving, and left my changer at the old house), and needed a new one that night. So being late in the evening, my only option was a trip to the local Wal-Mart were I found the typical cheap off-brand charger for a somewhat pricey $15.</p>
 
 <p>Had the quality been better, I wouldn't have given it a second thought - but I've purchased a number of those changers in the past and they are poorly made and it never fails that they break within a few months.</p>
@@ -62,9 +62,9 @@
   
   <entry>
     <title type="html"><![CDATA[Thoughts on the iPad, from an Apple hater]]></title>
-    <link href="http://adamcaudill.github.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/"/>
+    <link href="https://adamcaudill.com//2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/"/>
     <updated>2011-01-02T17:34:07-05:00</updated>
-    <id>http://adamcaudill.github.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater</id>
+    <id>https://adamcaudill.com//2011/01/02/thoughts-on-the-ipad-from-an-apple-hater</id>
     <content type="html"><![CDATA[<p>Before I get started, let me make a couple of things clear:</p>
 
 <ol>
@@ -96,9 +96,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rosen Shingle Creek]]></title>
-    <link href="http://adamcaudill.github.com/2010/12/19/rosen-shingle-creek/"/>
+    <link href="https://adamcaudill.com//2010/12/19/rosen-shingle-creek/"/>
     <updated>2010-12-19T13:22:30-05:00</updated>
-    <id>http://adamcaudill.github.com/2010/12/19/rosen-shingle-creek</id>
+    <id>https://adamcaudill.com//2010/12/19/rosen-shingle-creek</id>
     <content type="html"><![CDATA[<p>I recently had a great idea; a trip down to Florida to visit family and celebrate our second anniversary - the idea turned out to be a bit less great than I had hoped. Of the seven days we were there, on three the wind-chill was less than 40F. On the upside, I had booked a room at a newer (opened in 2006) 4-star hotel; if we're going to be stuck inside, no reason not to be in a great room.</p>
 
 <p>The hotel was <a href="http://www.rosenshinglecreek.com/">Rosen Shingle Creek</a>, a rather large (1,500 rooms plus a 450,000 sq. ft. conference area) and quite impressive facility. The view as you drive up to the main entrance is most impressive; 14-stories tall and inspired by <a href="http://en.wikipedia.org/wiki/Spanish_Colonial_Revival_architecture">Spanish Colonial Revival</a> architecture that was so popular in Florida during the early 1900s. As you approach the hotel, you'll notice that the driveway is offset to the left to enhance the initial impression.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Development | Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/categories/development/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//categories/development/atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[CCSRCH v1.0.7]]></title>
-    <link href="http://adamcaudill.github.com/2012/02/29/ccsrch-v1-0-7/"/>
+    <link href="https://adamcaudill.com//2012/02/29/ccsrch-v1-0-7/"/>
     <updated>2012-02-29T23:47:17-05:00</updated>
-    <id>http://adamcaudill.github.com/2012/02/29/ccsrch-v1-0-7</id>
+    <id>https://adamcaudill.com//2012/02/29/ccsrch-v1-0-7</id>
     <content type="html"><![CDATA[<p>I've released a new version of <a href="https://github.com/adamcaudill/ccsrch">CCSRCH</a>, the open-source PAN (a.k.a credit card number) search tool to help companies maintain PCI compliance. This is a fairly minor release, primarily focusing on reducing false positives. The scanner has been updated to exclude the following:</p>
 
 <ul>
@@ -46,9 +46,9 @@ $ make all
   
   <entry>
     <title type="html"><![CDATA[Why Cringely is wrong about Java]]></title>
-    <link href="http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java/"/>
+    <link href="https://adamcaudill.com//2011/10/15/why-cringely-is-wrong-about-java/"/>
     <updated>2011-10-15T15:47:52-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java</id>
+    <id>https://adamcaudill.com//2011/10/15/why-cringely-is-wrong-about-java</id>
     <content type="html"><![CDATA[<p>A couple of days ago I was sent a link to Robert Cringely's latest treatise:  <em><a href="http://www.cringely.com/2011/10/the-second-coming-of-java/">The second coming of Java</a></em> - and to say I disagreed was a bit of an understatement. To me, it represents a fundamental flaw in his perception of developers, and more importantly the economics of software development.</p>
 
 <p>The key to Cringely's argument comes down to this:</p>
@@ -69,9 +69,9 @@ $ make all
   
   <entry>
     <title type="html"><![CDATA[Happy 20th birthday Visual Basic!]]></title>
-    <link href="http://adamcaudill.github.com/2011/05/21/happy-20th-birthday-visual-basic/"/>
+    <link href="https://adamcaudill.com//2011/05/21/happy-20th-birthday-visual-basic/"/>
     <updated>2011-05-21T01:50:19-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/21/happy-20th-birthday-visual-basic</id>
+    <id>https://adamcaudill.com//2011/05/21/happy-20th-birthday-visual-basic</id>
     <content type="html"><![CDATA[<p>Today I saw a post on Facebook by a friend of mine, <a href="http://inotifythoughtschanging.net/blog/">Anthony Green</a>, about writing his first blog post as a Microsoft employee (he has a personal blog as well, unfortunately he's not written anything since 2008) - when I saw the title, I couldn't believe it was 20 years already - seems just yesterday that I wrote about its <a href="http://adamcaudill.com/2006/05/27/happy-belated-birthday-vb/">15th birthday</a>:</p>
 
 <p><a href="http://blogs.msdn.com/b/vbteam/archive/2011/05/20/happy-20th-birthday-visual-basic.aspx">Happy 20th Birthday Visual Basic!</a></p>
@@ -88,9 +88,9 @@ $ make all
   
   <entry>
     <title type="html"><![CDATA[VB6: Not so open source]]></title>
-    <link href="http://adamcaudill.github.com/2011/05/20/vb6-not-so-open-source/"/>
+    <link href="https://adamcaudill.com//2011/05/20/vb6-not-so-open-source/"/>
     <updated>2011-05-20T02:33:23-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/20/vb6-not-so-open-source</id>
+    <id>https://adamcaudill.com//2011/05/20/vb6-not-so-open-source</id>
     <content type="html"><![CDATA[<p>Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world:</p>
 
 <p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Microsoft announces to mvps at <a href="https://twitter.com/search/%23msteched">#msteched</a> that VB6 will be released as open source on codeplex end of june! w00t</p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71287262842859520">May 19, 2011</a></blockquote>
@@ -119,9 +119,9 @@ $ make all
   
   <entry>
     <title type="html"><![CDATA[Errors on 'gem install mysql2']]></title>
-    <link href="http://adamcaudill.github.com/2011/05/16/errors-on-gem-install-mysql2/"/>
+    <link href="https://adamcaudill.com//2011/05/16/errors-on-gem-install-mysql2/"/>
     <updated>2011-05-16T01:29:19-04:00</updated>
-    <id>http://adamcaudill.github.com/2011/05/16/errors-on-gem-install-mysql2</id>
+    <id>https://adamcaudill.com//2011/05/16/errors-on-gem-install-mysql2</id>
     <content type="html"><![CDATA[<p>On my fresh Ubuntu 11.04 box running Ruby 1.9.2 instead of the standard Ruby 1.8, I ran into some undocumented errors while installing the <code>mysql2</code> gem. Here's what I was seeing:</p>
 
 <pre><code>$ gem install mysql2

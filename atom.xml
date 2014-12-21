@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Adam Caudill]]></title>
-  <link href="http://adamcaudill.github.com/atom.xml" rel="self"/>
-  <link href="http://adamcaudill.github.com/"/>
-  <updated>2014-12-20T20:59:27-05:00</updated>
-  <id>http://adamcaudill.github.com/</id>
+  <link href="https://adamcaudill.com//atom.xml" rel="self"/>
+  <link href="https://adamcaudill.com//"/>
+  <updated>2014-12-20T21:21:52-05:00</updated>
+  <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Orwellian Justice]]></title>
-    <link href="http://adamcaudill.github.com/2014/12/03/orwellian-justice/"/>
+    <link href="https://adamcaudill.com//2014/12/03/orwellian-justice/"/>
     <updated>2014-12-03T16:18:00-05:00</updated>
-    <id>http://adamcaudill.github.com/2014/12/03/orwellian-justice</id>
+    <id>https://adamcaudill.com//2014/12/03/orwellian-justice</id>
     <content type="html"><![CDATA[<p>A few hours ago, a Grand Jury in New York decided that the video-taped murder of an unarmed man didn’t justify a trial to determine if those, clearly seen and identified, who killed him had broken any laws. The man I speak of is <a href="https://en.wikipedia.org/wiki/Death_of_Eric_Garner">Eric Garner</a>. What struck me immediately, was the Orwellian undertones that this event has.</p>
 
 <h3>Grand Juries &amp; Time Control</h3>
@@ -36,7 +36,7 @@
 <p>Suppress useful evidence, call questionable witnesses, present confusing and unclear information, question the integrity of everything presented - there are so many options available to ensure that the jury won’t see clear guilt. With some time, the prosecutor becomes the master of the past, painting the picture that he wants the jury to see - free from disagreement or dissenting views.</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Grand juries have enormous independence on paper, but almost impossible to exercise in practice. All evidence seen via prosecutor&#39;s lens.</p>&mdash; matt blaze (@mattblaze) <a href="https://twitter.com/mattblaze/status/540238535274418176">December 3, 2014</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <h3>Just a little doublethink…</h3>
@@ -58,7 +58,7 @@
 <p>Control, intimidation, and fierce reprisal to any that dare resist is the hallmark of enforcement today - “justice” is granted to the favored, retribution to the rest. Enforce and control has become the unspoken replacement to “protect and serve” - a statement that meant little, and now serves as an insult to those, that for one reason or another, find themselves outside of the “favored” group.</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Crimes committed by LEOs should be prosecuted by a special prosecutor; the risk &amp; impact of them acting as a defense attorney is too great.</p>&mdash; Adam Caudill (@adamcaudill) <a href="https://twitter.com/adamcaudill/status/540249660947181568">December 3, 2014</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>Who enforces against the enforcers? Who can be objective when dealing with a person inside the system that supports them? For any chance at justice, when a member of law enforcement is accused of a crime, it should be an outside prosecutor that brings the case to the grand jury. While there’s still risk of the prosecutor acting more as a defender, by appointing a special prosector from outside the normal system, there’s at least some chance that the grand jury will see the unaltered truth. Then, maybe, there will be a chance for real justice.</p>
@@ -75,14 +75,14 @@
   
   <entry>
     <title type="html"><![CDATA[Speaking at SC Magazine Congress]]></title>
-    <link href="http://adamcaudill.github.com/2014/11/23/speaking-at-sc-magazine-congress/"/>
+    <link href="https://adamcaudill.com//2014/11/23/speaking-at-sc-magazine-congress/"/>
     <updated>2014-11-23T17:12:00-05:00</updated>
-    <id>http://adamcaudill.github.com/2014/11/23/speaking-at-sc-magazine-congress</id>
+    <id>https://adamcaudill.com//2014/11/23/speaking-at-sc-magazine-congress</id>
     <content type="html"><![CDATA[<p>Last week <a href="http://brandonw.net/">Brandon Wilson</a> and I gave the lunch keynote at the <a href="http://congress.scmagazine.com/page.cfm/link=16">SC Magazine Congress</a> event in Chicago. It was a fun, more executive level event - a big thanks to Eric Green and team. The talk was mostly an executive overview of what was discussed at <a href="https://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">our DerbyCon talk</a>, with some updates, and some insights.</p>
 
 <p>Here are the slides, and a rough transcript from the event:</p>
 
-<iframe src="http://adamcaudill.github.com//www.slideshare.net/slideshow/embed_code/41900274" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<iframe src="https://adamcaudill.com///www.slideshare.net/slideshow/embed_code/41900274" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 
 <p><em>(This is based on the speaker notes - so it doesn’t include the discussion and other bits that were said)</em></p>
@@ -239,11 +239,11 @@
   
   <entry>
     <title type="html"><![CDATA[On NSA-Proof Security]]></title>
-    <link href="http://adamcaudill.github.com/2014/10/19/on-nsa-proof-security/"/>
+    <link href="https://adamcaudill.com//2014/10/19/on-nsa-proof-security/"/>
     <updated>2014-10-19T18:51:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/10/19/on-nsa-proof-security</id>
+    <id>https://adamcaudill.com//2014/10/19/on-nsa-proof-security</id>
     <content type="html"><![CDATA[<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/KimZetter">@KimZetter</a> We need to distinguish between &quot;proof against NSA dragnet&quot;, &quot;proof against NSA PRISM&quot;, and &quot;proof against NSA TAO&quot;. <a href="https://twitter.com/runasand">@runasand</a></p>&mdash; zooko (@zooko) <a href="https://twitter.com/zooko/status/512264453228744704">September 17, 2014</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>For a long time, “military grade encryption” has been a red flag for snake oil, over-hyped, under-performing garbage, so much so that it’s become a punchline. Anytime that phrase is seen, it’s assumed that the product is a joke - quite possibly doing more harm than good.</p>
@@ -306,9 +306,9 @@
   
   <entry>
     <title type="html"><![CDATA[A backdoor by any other name...]]></title>
-    <link href="http://adamcaudill.github.com/2014/10/17/a-backdoor-by-any-other-name/"/>
+    <link href="https://adamcaudill.com//2014/10/17/a-backdoor-by-any-other-name/"/>
     <updated>2014-10-17T17:14:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/10/17/a-backdoor-by-any-other-name</id>
+    <id>https://adamcaudill.com//2014/10/17/a-backdoor-by-any-other-name</id>
     <content type="html"><![CDATA[<p>Yesterday James B. Comey, the Director of the FBI continued the propaganda campaign against encryption with a fresh batch of lies and misdirection. The FBI has been pushing to add backdoors to cryptosystems around the world - no matter how many people they put at risk in the process. Starting in the 1990’s, the FBI has been at the forefront of trying to make their job easier by endangering the world.</p>
 
 <p>What Comey did today was to lay the foundation for a renewed push for a new, expansive, <a href="https://en.wikipedia.org/wiki/Communications_Assistance_for_Law_Enforcement_Act">CALEA</a> type law that would give <em>governments</em> access - via court orders or surreptitiously, to all of your data. In 2013 they were pushing for <a href="https://freedom-to-tinker.com/blog/felten/calea-ii-risks-of-wiretap-modifications-to-endpoints/">CALEA 2</a>, which would have expanded their ability to secretly access your data in a massive way. Thankfully the Snowden documents put an end to that - at least for awhile.</p>
@@ -378,9 +378,9 @@
   
   <entry>
     <title type="html"><![CDATA[On The Ethics of BadUSB]]></title>
-    <link href="http://adamcaudill.github.com/2014/10/03/on-the-ethics-of-badusb/"/>
+    <link href="https://adamcaudill.com//2014/10/03/on-the-ethics-of-badusb/"/>
     <updated>2014-10-03T12:28:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/10/03/on-the-ethics-of-badusb</id>
+    <id>https://adamcaudill.com//2014/10/03/on-the-ethics-of-badusb</id>
     <content type="html"><![CDATA[<p>Last Friday, <a href="http://www.brandonw.net/">Brandon Wilson</a> and I gave a talk on BadUSB at DerbyCon - I wrote some <a href="https://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">about it yesterday</a>. Yesterday, Wired <a href="http://www.wired.com/2014/10/code-published-for-unfixable-usb-attack/">published</a> an article on the talk, kicking off several others - only the authors of the Wired and <a href="http://threatpost.com/badusb-attack-code-publicly-disclosed">Threatpost</a> articles contacted us for input.</p>
 
 <p>There has been some questions raised as to the responsibility of releasing the code - so I want to take a few minutes to talk about what we released, why, and what the risks actually are.</p>
@@ -499,19 +499,19 @@
   
   <entry>
     <title type="html"><![CDATA[Making BadUSB Work For You - DerbyCon]]></title>
-    <link href="http://adamcaudill.github.com/2014/10/02/making-badusb-work-for-you-derbycon/"/>
+    <link href="https://adamcaudill.com//2014/10/02/making-badusb-work-for-you-derbycon/"/>
     <updated>2014-10-02T22:15:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/10/02/making-badusb-work-for-you-derbycon</id>
+    <id>https://adamcaudill.com//2014/10/02/making-badusb-work-for-you-derbycon</id>
     <content type="html"><![CDATA[<p>Last week <a href="http://www.brandonw.net/">Brandon Wilson</a> and I were honored to speak at <a href="https://www.derbycon.com/">DerbyCon</a>, on the work we’ve been doing on the Phison controller found in many USB thumb drives. This was my first time speaking at DerbyCon - it’s a great event, with a fantastic team making the magic happen.</p>
 
 <p>Slides:</p>
 
-<iframe src="http://adamcaudill.github.com//www.slideshare.net/slideshow/embed_code/39583508" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<iframe src="https://adamcaudill.com///www.slideshare.net/slideshow/embed_code/39583508" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 
 <p>Video (which I’ve haven’t been able to bring myself to watch):</p>
 
-<iframe width="854" height="510" src="http://adamcaudill.github.com//www.youtube.com/embed/xcsxeJz3blI" frameborder="0" allowfullscreen></iframe>
+<iframe width="854" height="510" src="https://adamcaudill.com///www.youtube.com/embed/xcsxeJz3blI" frameborder="0" allowfullscreen></iframe>
 
 
 <p>Now that the dust has settled, I would like to provide some updates, thoughts, and extra information - and <em>maybe</em> correct an error I made during the presentation.</p>
@@ -584,9 +584,9 @@
   
   <entry>
     <title type="html"><![CDATA[IETF Action on Secure Email]]></title>
-    <link href="http://adamcaudill.github.com/2014/08/25/ietf-action-on-secure-email/"/>
+    <link href="https://adamcaudill.com//2014/08/25/ietf-action-on-secure-email/"/>
     <updated>2014-08-25T11:02:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/08/25/ietf-action-on-secure-email</id>
+    <id>https://adamcaudill.com//2014/08/25/ietf-action-on-secure-email</id>
     <content type="html"><![CDATA[<p>Early last week I emailed a group of IETF Area Directors, for the Security and Applications areas, asking them to start the process of creating a new Working Group to address the issues around email security. (Thanks Adrian Farrel for the prodding!)</p>
 
 <p>Today, the first result of the effort has been completed - the new <a href="https://www.ietf.org/mailman/listinfo/endymail">endymail</a> mailing list. An IETF venue to discuss how these issues can be addressed, hopefully laying the ground work updated standards to improve email as we know it today, and eventually standardizing a replacement to SMTP and related protocols. Here&#8217;s the description that the group came up with for the new list:</p>
@@ -604,14 +604,14 @@
   
   <entry>
     <title type="html"><![CDATA[SMIMP at the DEFCON Crypto Village]]></title>
-    <link href="http://adamcaudill.github.com/2014/08/16/smimp-at-the-defcon-cryptovillage/"/>
+    <link href="https://adamcaudill.com//2014/08/16/smimp-at-the-defcon-cryptovillage/"/>
     <updated>2014-08-16T00:00:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/08/16/smimp-at-the-defcon-cryptovillage</id>
+    <id>https://adamcaudill.com//2014/08/16/smimp-at-the-defcon-cryptovillage</id>
     <content type="html"><![CDATA[<p>Last week I gave a lighting talk at the DEFCON CryptoVillage on <a href="http://smimp.org/">SMIMP</a>. The talk went over the basics of why the project is needed, and how the specification works.</p>
 
 <p>Here are the slides:</p>
 
-<iframe src="http://adamcaudill.github.com//www.slideshare.net/slideshow/embed_code/38040741?rel=0&startSlide=2" width="512" height="421" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<iframe src="https://adamcaudill.com///www.slideshare.net/slideshow/embed_code/38040741?rel=0&startSlide=2" width="512" height="421" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 
 <p>Here is a rough transcript of the talk:</p>
@@ -714,9 +714,9 @@
   
   <entry>
     <title type="html"><![CDATA[On Strong Identity Management]]></title>
-    <link href="http://adamcaudill.github.com/2014/07/26/on-strong-identity-management/"/>
+    <link href="https://adamcaudill.com//2014/07/26/on-strong-identity-management/"/>
     <updated>2014-07-26T22:16:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/07/26/on-strong-identity-management</id>
+    <id>https://adamcaudill.com//2014/07/26/on-strong-identity-management</id>
     <content type="html"><![CDATA[<p>Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG, Alice would look up his address on a key server, the issue is of course that anyone can upload a key associated with Bob&#8217;s address.</p>
 
 <p>Using the &#8220;web of trust&#8221; model, Alice would look at the different keys and see which ones are signed, and if any of them are signed by people she knows. The problem is that Alice doesn&#8217;t normally use GPG, and she hasn&#8217;t marked the keys of the people she knows as trusted (I expect this is true for most casual GPG users), thus, she can&#8217;t tell what key is signed by keys she should trust, versus the ones signed by keys she shouldn&#8217;t.</p>
@@ -778,9 +778,9 @@
   
   <entry>
     <title type="html"><![CDATA[Jumping through hoops...]]></title>
-    <link href="http://adamcaudill.github.com/2014/07/23/jumping-through-hoops-dot-dot-dot/"/>
+    <link href="https://adamcaudill.com//2014/07/23/jumping-through-hoops-dot-dot-dot/"/>
     <updated>2014-07-23T18:11:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/07/23/jumping-through-hoops-dot-dot-dot</id>
+    <id>https://adamcaudill.com//2014/07/23/jumping-through-hoops-dot-dot-dot</id>
     <content type="html"><![CDATA[<p>There are two ways to implement security:</p>
 
 <ul>
@@ -819,9 +819,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Sinking Ship of E-Mail Security]]></title>
-    <link href="http://adamcaudill.github.com/2014/06/27/the-sinking-ship-of-email-security/"/>
+    <link href="https://adamcaudill.com//2014/06/27/the-sinking-ship-of-email-security/"/>
     <updated>2014-06-27T23:32:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/06/27/the-sinking-ship-of-email-security</id>
+    <id>https://adamcaudill.com//2014/06/27/the-sinking-ship-of-email-security</id>
     <content type="html"><![CDATA[<p>E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long been the &#8220;killer app&#8221; of the internet. While so many companies try to make the next great thing that&#8217;ll capture users around the world - none of these compare to the success of e-mail. It is likely the single most entrenched application-layer protocol used today.</p>
 
 <p>Thanks to <a href="https://en.wikipedia.org/wiki/Stellar_Wind">STELLARWIND</a> and other NSA programs, we have also seen that it has failed in a very real, and very important way.</p>
@@ -898,9 +898,9 @@
   
   <entry>
     <title type="html"><![CDATA[phpMyID: Fixing Abandoned OSS Software]]></title>
-    <link href="http://adamcaudill.github.com/2014/04/19/phpmyid-fixing-abandoned-oss-software/"/>
+    <link href="https://adamcaudill.com//2014/04/19/phpmyid-fixing-abandoned-oss-software/"/>
     <updated>2014-04-19T12:43:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/04/19/phpmyid-fixing-abandoned-oss-software</id>
+    <id>https://adamcaudill.com//2014/04/19/phpmyid-fixing-abandoned-oss-software</id>
     <content type="html"><![CDATA[<p><a href="http://siege.org/phpmyid">phpMyID</a> is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in 2008. Despite this, there&#8217;s still quite a few people that use it, because it&#8217;s the easiest single-user OpenID option available.</p>
 
 <p>Unfortunately, the author didn&#8217;t follow best practices when building the software, and as a result multiple security flaws were introduced. In 2008, a XSS was identified and never fixed (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2008-4730">CVE-2008-4730</a>), in the years since then it seems the software has been below the radar. While conducting a pentest I discovered a previously undocumented XSS (CVE-2014-2890) - which left me with a dilemma - what to do about it?</p>
@@ -949,9 +949,9 @@
   
   <entry>
     <title type="html"><![CDATA[Security By Buzzword - Why I don't support Ensafer]]></title>
-    <link href="http://adamcaudill.github.com/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/"/>
+    <link href="https://adamcaudill.com//2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/"/>
     <updated>2014-03-23T12:28:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer</id>
+    <id>https://adamcaudill.com//2014/03/23/security-by-buzzword-why-i-dont-support-ensafer</id>
     <content type="html"><![CDATA[<p><strong>Update</strong>: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I&#8217;ll post further updates.</p>
 
 <p><a href="http://www.ensafer.com/">Ensafer</a> is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user&#8217;s files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product (<a href="https://www.boxcryptor.com/">Boxcryptor</a>), so I support the concept, but what about Ensafer&#8217;s implementation - does it provide the level of security desired?</p>
@@ -968,7 +968,7 @@
 <p>In December of 2012 I started asking about details, they pointed me back to the web site - when I pushed for more, I was told that they were working on a whitepaper to explain their implementation:</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> We have not published all technical details, but we&#39;re working on a whitepaper which will be published later. ^LS</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/275616564085149698">December 3, 2012</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>More than a year later, I&#8217;m still waiting to see those details.</p>
@@ -978,7 +978,7 @@
 <p>Since they haven&#8217;t released details publicly, if they conducted an external audit, that would bring some trust. So, recently I asked, and this is what they had to say:</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> Thanks for your important question. There hasn’t been an audit yet due to work in progress, but will be done this year.</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/447156694041509889">March 21, 2014</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>After the delay in getting useful details published, I&#8217;m not hopeful that we&#8217;ll see the results of an audit in the near future.</p>
@@ -987,7 +987,7 @@
 
 <p>I really wish that the lack of details was the only concern - but it&#8217;s not. The first thing I noticed is that their web site doesn&#8217;t force TLS, so I manually switched to HTTPS, unfortunately the result wasn&#8217;t what I was hoping for:</p>
 
-<p><img class="center" src="http://adamcaudill.github.com/files/Ensafer_SSL_Error.png"></p>
+<p><img class="center" src="https://adamcaudill.com//files/Ensafer_SSL_Error.png"></p>
 
 <p>Well, that&#8217;s not encouraging. Let&#8217;s take a look at the download link:</p>
 
@@ -996,7 +996,7 @@
 
 <p>When you try the same link over HTTPS, it&#8217;s even worse:</p>
 
-<p><img class="center" src="http://adamcaudill.github.com/files/ensafer_dl_no_tls.png"></p>
+<p><img class="center" src="https://adamcaudill.com//files/ensafer_dl_no_tls.png"></p>
 
 <p>For a security product, I&#8217;d expect the download to be over HTTPS to prevent an attacker from redirecting a victim to a malicious version. This isn&#8217;t the kind of mistake I&#8217;d expect from people building advanced security tools. When you see issues like this, it&#8217;s common to see more problems, so this may just be the tip of the iceberg.</p>
 
@@ -1010,18 +1010,18 @@
   
   <entry>
     <title type="html"><![CDATA[HTTP Considered Harmful - The Need For Negative Feedback]]></title>
-    <link href="http://adamcaudill.github.com/2014/03/15/http-considered-harmful-the-need-for-negative-feedback/"/>
+    <link href="https://adamcaudill.com//2014/03/15/http-considered-harmful-the-need-for-negative-feedback/"/>
     <updated>2014-03-15T17:53:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2014/03/15/http-considered-harmful-the-need-for-negative-feedback</id>
+    <id>https://adamcaudill.com//2014/03/15/http-considered-harmful-the-need-for-negative-feedback</id>
     <content type="html"><![CDATA[<p>We all know, and well understand what this means when we see it in a browser:</p>
 
-<p><img class="center" src="http://adamcaudill.github.com/files/GitHub_EV_Cert.png"></p>
+<p><img class="center" src="https://adamcaudill.com//files/GitHub_EV_Cert.png"></p>
 
 <p>It means that the connection is encrypted, and that some degree of validation has occurred to verify that the server is who it claims to be. Through the years, users have been taught to trust sites when they see that, or the all too familiar &#8216;lock&#8217; icon - when users see it, they assume their data is safe.</p>
 
 <p>But what about this?</p>
 
-<p><img class="center" src="http://adamcaudill.github.com/files/reddit_no_ssl-2.png"></p>
+<p><img class="center" src="https://adamcaudill.com//files/reddit_no_ssl-2.png"></p>
 
 <p>There&#8217;s no lock to tell them they are safe, but there&#8217;s also no warning to indicate that the connection isn&#8217;t secure. There&#8217;s no encryption, no validation, - no protection at all. With HTTP, users are afforded nothing at all to protect them - but we all know that, right? Does the average user understand that though? Do they understand how easily they could be <a href="http://arstechnica.com/tech-policy/2014/02/new-snowden-docs-show-nsa-gchq-spied-on-wikileaks-pirate-bay-users/">monitored</a>, or how easily traffic can be <a href="https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html">altered</a>?</p>
 
@@ -1029,7 +1029,7 @@
 
 <p>Strong negative feedback has long been used in browsers to warn against invalid or expired certificates - but there&#8217;s no feedback to warn users of just how dangerous HTTP can be. After a discussion on Twitter, a friend of mine, <a href="https://twitter.com/defusesec">Taylor Hornby</a>, created a <a href="https://defuse.ca/web-browser-negative-feedback.htm">mockup</a> of what could be done in Firefox to warn users:</p>
 
-<p><img class="center" src="http://adamcaudill.github.com/files/ff_no_ssl_xmockup-1.png"></p>
+<p><img class="center" src="https://adamcaudill.com//files/ff_no_ssl_xmockup-1.png"></p>
 
 <p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
 
@@ -1039,9 +1039,9 @@
   
   <entry>
     <title type="html"><![CDATA[On Opportunistic Encryption]]></title>
-    <link href="http://adamcaudill.github.com/2014/02/25/on-opportunistic-encryption/"/>
+    <link href="https://adamcaudill.com//2014/02/25/on-opportunistic-encryption/"/>
     <updated>2014-02-25T14:51:00-05:00</updated>
-    <id>http://adamcaudill.github.com/2014/02/25/on-opportunistic-encryption</id>
+    <id>https://adamcaudill.com//2014/02/25/on-opportunistic-encryption</id>
     <content type="html"><![CDATA[<p>Opportunistic encryption has become quite a hot topic recently, and blew up in a big way thanks to an <a href="https://en.wikipedia.org/wiki/Internet_Draft">Internet Draft</a> that was published on February 14th for what amounts to sanctioned man-in-the-middle. Privacy advocates were quickly up in arms - but it&#8217;s not that simple (<a href="http://tools.ietf.org/html/draft-loreto-httpbis-trusted-proxy20-01">see here</a>). As <a href="http://hillbrad.typepad.com/blog/2014/02/trusted-proxies-and-privacy-wolves.html">pointed out</a> by <a href="https://twitter.com/hillbrad">Brad Hill</a>, this isn&#8217;t about HTTP<strong>S</strong> traffic, but HTTP traffic using unauthenticated TLS; thanks to poor wording in the document, it&#8217;s easy to miss that fact if you just skim it.</p>
 
 <p>It&#8217;s routine practice for ISPs to MITM unencrypted traffic today; it&#8217;s well known that <a href="https://blog.ryankearney.com/2013/01/comcast-caught-intercepting-and-altering-your-web-traffic/">Comcast does it</a>. This practice won&#8217;t change once we move to HTTP2, regardless of unauthenticated TLS - the only question is will users know about it.</p>
@@ -1080,9 +1080,9 @@
   
   <entry>
     <title type="html"><![CDATA[VICIDIAL: Multiple Vulnerabilities]]></title>
-    <link href="http://adamcaudill.github.com/2013/10/23/vicidial-multiple-vulnerabilities/"/>
+    <link href="https://adamcaudill.com//2013/10/23/vicidial-multiple-vulnerabilities/"/>
     <updated>2013-10-23T02:20:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2013/10/23/vicidial-multiple-vulnerabilities</id>
+    <id>https://adamcaudill.com//2013/10/23/vicidial-multiple-vulnerabilities</id>
     <content type="html"><![CDATA[<p><em>Update:</em> The VICIDIAL team has publicly released a new version that, according to them, has corrected the issues I&#8217;ve pointed out here. Please make sure you are using the latest version available. If you aren&#8217;t sure if your instance is safe, contact your friendly local penetration tester to verify it&#8217;s secure as you expect it to be.</p>
 
 <p><em>Update:</em> The SQL Injection vulnerability has been assigned CVE-2013-4467, and Command Injection assigned CVE-2013-4468.</p>
@@ -1273,9 +1273,9 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   
   <entry>
     <title type="html"><![CDATA[Worried about the NSA? Try AES-512!]]></title>
-    <link href="http://adamcaudill.github.com/2013/09/08/worried-about-the-nsa-try-aes-512/"/>
+    <link href="https://adamcaudill.com//2013/09/08/worried-about-the-nsa-try-aes-512/"/>
     <updated>2013-09-08T13:07:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2013/09/08/worried-about-the-nsa-try-aes-512</id>
+    <id>https://adamcaudill.com//2013/09/08/worried-about-the-nsa-try-aes-512</id>
     <content type="html"><![CDATA[<p><em>[…or, The Cost of Wild Speculation]</em></p>
 
 <p>&#8220;We need to boost our security - I think the NSA has broken everything we use. AES-256 is too weak, I don&#8217;t trust it. Find a way to implement AES-512.&#8221;</p>
@@ -1380,9 +1380,9 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   
   <entry>
     <title type="html"><![CDATA[Crypto, the NSA, and Broken Trust]]></title>
-    <link href="http://adamcaudill.github.com/2013/09/07/crypto-the-nsa-and-broken-trust/"/>
+    <link href="https://adamcaudill.com//2013/09/07/crypto-the-nsa-and-broken-trust/"/>
     <updated>2013-09-07T13:04:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2013/09/07/crypto-the-nsa-and-broken-trust</id>
+    <id>https://adamcaudill.com//2013/09/07/crypto-the-nsa-and-broken-trust</id>
     <content type="html"><![CDATA[<p>Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&#8217;s so elegantly simple, and yet massively complex. There is one very unusual property of crypto though - it&#8217;s not about math or modes, it&#8217;s about trust.</p>
 
 <p>Cryptography, especially as used today, has the most wonderful dichotomy of trust; on one hand crypto, by it&#8217;s very nature, is used in situations lacking trust. On the other hand, to use crypto - you have to trust <em>it</em>.</p>
@@ -1392,7 +1392,7 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 <p>This is where it gets interesting - let&#8217;s say you download <a href="https://gpgtools.org/">GPGTools</a>, what is the chain of trust?</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Has anyone verified that the GPGtools binaries match the source code in the git repo? Im suspicious of any binary distro encryption software</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376323020945514497">September 7, 2013</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>Here are some of the assumptions you make:</p>
@@ -1429,7 +1429,7 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 <p>I&#8217;m a big fan of taking the &#8220;trust no one&#8221; position (and myself least of all), but in the world of cryptography - it&#8217;s not that easy. Every step of the way you have to trust something.</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gentmatt">@gentmatt</a> way to miss the point. &quot;Trust, but verify&quot;. The time for verification has come.</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376328406419243008">September 7, 2013</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>Some say, &#8220;trust but verify&#8221; - and I agree, but full verification is a dream that will never come true. There aren&#8217;t enough qualified eyes, and there is far too much code involved.</p>
@@ -1444,9 +1444,9 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   
   <entry>
     <title type="html"><![CDATA[Making Android NSA-Proof]]></title>
-    <link href="http://adamcaudill.github.com/2013/09/06/making-android-nsa-proof/"/>
+    <link href="https://adamcaudill.com//2013/09/06/making-android-nsa-proof/"/>
     <updated>2013-09-06T23:34:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2013/09/06/making-android-nsa-proof</id>
+    <id>https://adamcaudill.com//2013/09/06/making-android-nsa-proof</id>
     <content type="html"><![CDATA[<p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
 
 <p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
@@ -1484,7 +1484,7 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 <p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
@@ -1501,9 +1501,9 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   
   <entry>
     <title type="html"><![CDATA[Is moving offshore really crazy?]]></title>
-    <link href="http://adamcaudill.github.com/2013/08/27/is-moving-offshore-really-crazy/"/>
+    <link href="https://adamcaudill.com//2013/08/27/is-moving-offshore-really-crazy/"/>
     <updated>2013-08-27T18:49:00-04:00</updated>
-    <id>http://adamcaudill.github.com/2013/08/27/is-moving-offshore-really-crazy</id>
+    <id>https://adamcaudill.com//2013/08/27/is-moving-offshore-really-crazy</id>
     <content type="html"><![CDATA[<p>Today ZDNet published an article titled &#8221;<a href="http://www.zdnet.com/the-lunacy-of-trying-to-avoid-nsa-spying-by-moving-e-mail-and-cloud-out-of-the-us-7000019908/">The lunacy of trying to avoid NSA spying by moving e-mail and cloud out of the US</a>&#8221; - I&#8217;m still trying to figure out if the position is naive, or intentionally ignores important facts.</p>
 
 <p>In short, the author (<a href="http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/">Steven J. Vaughan-Nichols</a>) states that your data is safer in the US because outside of the US, the NSA has much less restrictive rules to operate under. This is actually true - the NSA is a spy agency; like most spy agencies, they spy on people.</p>
@@ -1517,7 +1517,7 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 <p>When somebody posted a link to the article, I made my point short and sweet:</p>
 
 <div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gattaca">@gattaca</a> It&#39;s a lot harder to break crypto than it is to order a provider to just hand over the data. With good crypto, offshore is safer.</p>&mdash; Adam Caudill (@adamcaudill) <a href="https://twitter.com/adamcaudill/statuses/372469441922998272">August 27, 2013</a></blockquote>
-<script async src="http://adamcaudill.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 
 <p>It&#8217;s hard to break properly implemented, strong cryptography - on the other hand, getting FISC to order a provider to hand over your data seems to be <a href="https://www.eff.org/deeplinks/2013/08/nsa-spying-three-pillars-government-trust-have-fallen">quite simple</a>. Given the choice of relying on encryption or a rubber-stamp court to protect my data - the right choice seems obvious.</p>
