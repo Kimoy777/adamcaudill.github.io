@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="A friend of mine has been evaluating an open source instant messaging client called Spark, which can be linked to Active Directory for authentication &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/8">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/27/decrypting-spark-saved-passwords/">Decrypting Spark Saved Passwords</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T00:44:00-04:00" pubdate data-updated="true">Jul 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A friend of mine has been evaluating an open source instant messaging client called <a href="http://www.igniterealtime.org/projects/spark/http://www.igniterealtime.org/projects/spark/">Spark</a>, which can be linked to Active Directory for authentication. Like most IM clients, Spark allows users to save their password - and me being me, I was curious as to how it&#8217;s doing this - as storing Windows domain logins is kinda a big deal.</p>
+
+<p>So, within a few minutes I found all of the details - and none of them make me feel any better. Here are the important bits:</p>
+
+<ul>
+<li>Encrypted with Triple DES in ECB mode.</li>
+<li>IV isn&#8217;t being set.</li>
+<li>Encryption key is <strong>hardcoded</strong>.</li>
+</ul>
+
+
+<p>This means that all users have the same, <a href="http://svn.igniterealtime.org/svn/repos/spark/trunk/src/java/org/jivesoftware/spark/util/Encryptor.java">publicly documented</a> encryption key protecting their password. What&#8217;s the key? It&#8217;s <code>ugfpV1dMC5jyJtqwVAfTpHkxqJ0+E0ae</code> in Base64 encoding - and thanks to this, it&#8217;s trivial to write code to reverse the &#8220;protection&#8221; and make the credentials (which may well be domain credentials) available to anyone with access to the users profile.</p>
+
+<p>So, that&#8217;s what <a href="https://github.com/adamcaudill/sparkim-passview">I did</a>. This is simple code that will scan a machine looking for Spark configuration files (named <code>spark.properties</code>) and checks each to see if a password can be extracted. You can also pass in a NetBIOS name, and it will attempt to use the administrative share (C$) to access the profiles on the system. Take a look at the <a href="https://github.com/adamcaudill/sparkim-passview#spark-im-password-decrypter">README</a> for more details.</p>
+
+<p>The saving grace here, is that you have to have access to the user profiles, so if a system is locked down throughly, you likely won&#8217;t make much progress. But if you can get a local administrator account to run this from - it may make a pentest go a little quicker.</p>
+
+<p>I&#8217;ve tried to find a way to disable the &#8216;Save Password&#8217; feature, but it seems that the only option was to <a href="http://community.igniterealtime.org/thread/37785">patch the source</a>. If you are using Spark within your environment, I strongly recommend that you carefully consider how it&#8217;s used and integrated with AD or other systems.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/12/yahoos-associated-content-hacked/">Yahoo&#8217;s Associated Content Hacked?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-12T03:40:00-04:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update</strong>: <a href="https://www.trustedsec.com/">TrustedSec</a> has a write up:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Yahoo! Voice compromised. Over 400K clear-text accounts. Analysis and story here: <a href="http://t.co/B8ko49pB" title="http://bit.ly/Niz4Dw">bit.ly/Niz4Dw</a> - Still unconfirmed.</p>&mdash; TrustedSec(@TrustedSec) <a href="https://twitter.com/TrustedSec/status/223270871354183680">July 12, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Earlier today a group called &#8221;<a href="https://d33ds.co/">D33Ds Company</a>&#8221; released a large (17MB) <a href="https://d33ds.co/archive/yahoo-disclosure.txt">dump</a> from a Yahoo server. The dump includes information from a MySQL database, and the email addresses and passwords from over 450k users. Based on some of the emails and the naming of the tables, I suspect that the data is from <a href="http://en.wikipedia.org/wiki/Associated_Content">Associated Content</a> - a company that Yahoo bought in 2010, and closed in 2011 -  replacing it with <a href="http://voices.yahoo.com/">Yahoo Voices</a>.</p>
+
+<pre><code>#######################################
+#     [ - Owned and Exposed - ]       #
+# Brought to you by the D33Ds Company #
+#                                     #
+# Target: &lt;censored&gt;.yahoo.com        #
+# Method: Union-based SQL Injection   #
+#                                     #
+#######################################
+</code></pre>
+
+<p>The group that released the dump &#8220;censored&#8221; the name of the server in question, but they neglected to clear the HOSTNAME field in the MySQL information, exposing the server name: dbb1.ac.bf1.yahoo.com</p>
+
+<p>I&#8217;ve used the great <a href="http://www.digininja.org/projects/pipal.php">Pipal</a> script to perform some analysis on the passwords:</p>
+
+<pre><code>Total entries = 442786
+Total unique entries = 342479
+
+Top 10 passwords
+123456 = 1666 (0.38%)
+password = 780 (0.18%)
+welcome = 437 (0.1%)
+ninja = 333 (0.08%)
+abc123 = 250 (0.06%)
+123456789 = 222 (0.05%)
+12345678 = 208 (0.05%)
+sunshine = 205 (0.05%)
+princess = 202 (0.05%)
+qwerty = 172 (0.04%)
+
+Top 10 base words
+password = 1374 (0.31%)
+welcome = 535 (0.12%)
+qwerty = 464 (0.1%)
+monkey = 430 (0.1%)
+jesus = 429 (0.1%)
+love = 421 (0.1%)
+money = 407 (0.09%)
+freedom = 385 (0.09%)
+ninja = 380 (0.09%)
+sunshine = 367 (0.08%)
+
+Password length (length ordered)
+1 = 117 (0.03%)
+2 = 70 (0.02%)
+3 = 302 (0.07%)
+4 = 2748 (0.62%)
+5 = 5323 (1.2%)
+6 = 79615 (17.98%)
+7 = 65600 (14.82%)
+8 = 119126 (26.9%)
+9 = 65958 (14.9%)
+10 = 54756 (12.37%)
+11 = 21219 (4.79%)
+12 = 21730 (4.91%)
+13 = 2657 (0.6%)
+14 = 1493 (0.34%)
+15 = 837 (0.19%)
+16 = 570 (0.13%)
+17 = 263 (0.06%)
+18 = 126 (0.03%)
+19 = 89 (0.02%)
+20 = 178 (0.04%)
+21 = 11 (0.0%)
+22 = 8 (0.0%)
+23 = 3 (0.0%)
+24 = 3 (0.0%)
+27 = 2 (0.0%)
+28 = 5 (0.0%)
+29 = 3 (0.0%)
+30 = 2 (0.0%)
+
+Password length (count ordered)
+8 = 119126 (26.9%)
+6 = 79615 (17.98%)
+9 = 65958 (14.9%)
+7 = 65600 (14.82%)
+10 = 54756 (12.37%)
+12 = 21730 (4.91%)
+11 = 21219 (4.79%)
+5 = 5323 (1.2%)
+4 = 2748 (0.62%)
+13 = 2657 (0.6%)
+14 = 1493 (0.34%)
+15 = 837 (0.19%)
+16 = 570 (0.13%)
+3 = 302 (0.07%)
+17 = 263 (0.06%)
+20 = 178 (0.04%)
+18 = 126 (0.03%)
+1 = 117 (0.03%)
+19 = 89 (0.02%)
+2 = 70 (0.02%)
+21 = 11 (0.0%)
+22 = 8 (0.0%)
+28 = 5 (0.0%)
+23 = 3 (0.0%)
+24 = 3 (0.0%)
+29 = 3 (0.0%)
+30 = 2 (0.0%)
+27 = 2 (0.0%)
+
+        |
+        |
+        |
+        |
+        |
+      | |
+      | |
+      ||||
+      |||||
+      |||||
+      |||||
+      |||||
+      |||||
+      |||||||
+      |||||||
+||||||||||||||||||||||||||||||||
+00000000001111111111222222222233
+01234567890123456789012345678901
+
+One to six characters = 88169 (19.91%)
+One to eight characters = 272893 (61.63%)
+More than eight characters = 169893 (38.37%)
+
+Only lowercase alpha = 146488 (33.08%)
+Only uppercase alpha = 1778 (0.4%)
+Only alpha = 148266 (33.48%)
+Only numeric = 26078 (5.89%)
+
+First capital last symbol = 1259 (0.28%)
+First capital last number = 17465 (3.94%)
+
+Months
+january = 106 (0.02%)
+february = 30 (0.01%)
+march = 192 (0.04%)
+april = 284 (0.06%)
+may = 725 (0.16%)
+june = 386 (0.09%)
+july = 245 (0.06%)
+august = 238 (0.05%)
+september = 68 (0.02%)
+october = 182 (0.04%)
+november = 154 (0.03%)
+december = 130 (0.03%)
+
+Days
+monday = 48 (0.01%)
+tuesday = 15 (0.0%)
+wednesday = 9 (0.0%)
+thursday = 18 (0.0%)
+friday = 47 (0.01%)
+saturday = 6 (0.0%)
+sunday = 30 (0.01%)
+
+Months (Abreviated)
+jan = 1007 (0.23%)
+feb = 172 (0.04%)
+mar = 4718 (1.07%)
+apr = 472 (0.11%)
+may = 725 (0.16%)
+jun = 797 (0.18%)
+jul = 656 (0.15%)
+aug = 504 (0.11%)
+sept = 184 (0.04%)
+oct = 425 (0.1%)
+nov = 519 (0.12%)
+dec = 404 (0.09%)
+
+Days (Abreviated)
+mon = 4428 (1.0%)
+tues = 16 (0.0%)
+wed = 212 (0.05%)
+thurs = 29 (0.01%)
+fri = 479 (0.11%)
+sat = 365 (0.08%)
+sun = 1237 (0.28%)
+
+Includes years
+1975 = 255 (0.06%)
+1976 = 266 (0.06%)
+1977 = 278 (0.06%)
+1978 = 332 (0.07%)
+1979 = 339 (0.08%)
+1980 = 353 (0.08%)
+1981 = 331 (0.07%)
+1982 = 359 (0.08%)
+1983 = 338 (0.08%)
+1984 = 392 (0.09%)
+1985 = 367 (0.08%)
+1986 = 361 (0.08%)
+1987 = 413 (0.09%)
+1988 = 360 (0.08%)
+1989 = 401 (0.09%)
+1990 = 304 (0.07%)
+1991 = 276 (0.06%)
+1992 = 251 (0.06%)
+1993 = 218 (0.05%)
+1994 = 202 (0.05%)
+1995 = 147 (0.03%)
+1996 = 171 (0.04%)
+1997 = 140 (0.03%)
+1998 = 155 (0.04%)
+1999 = 189 (0.04%)
+2000 = 617 (0.14%)
+2001 = 404 (0.09%)
+2002 = 404 (0.09%)
+2003 = 345 (0.08%)
+2004 = 424 (0.1%)
+2005 = 496 (0.11%)
+2006 = 572 (0.13%)
+2007 = 765 (0.17%)
+2008 = 1145 (0.26%)
+2009 = 1052 (0.24%)
+2010 = 338 (0.08%)
+2011 = 92 (0.02%)
+2012 = 130 (0.03%)
+2013 = 50 (0.01%)
+2014 = 28 (0.01%)
+2015 = 24 (0.01%)
+2016 = 25 (0.01%)
+2017 = 26 (0.01%)
+2018 = 33 (0.01%)
+2019 = 84 (0.02%)
+2020 = 163 (0.04%)
+
+Years (Top 10)
+2008 = 1145 (0.26%)
+2009 = 1052 (0.24%)
+2007 = 765 (0.17%)
+2000 = 617 (0.14%)
+2006 = 572 (0.13%)
+2005 = 496 (0.11%)
+2004 = 424 (0.1%)
+1987 = 413 (0.09%)
+2001 = 404 (0.09%)
+2002 = 404 (0.09%)
+
+Colours
+black = 706 (0.16%)
+blue = 1143 (0.26%)
+brown = 221 (0.05%)
+gray = 76 (0.02%)
+green = 655 (0.15%)
+orange = 250 (0.06%)
+pink = 357 (0.08%)
+purple = 346 (0.08%)
+red = 2201 (0.5%)
+white = 244 (0.06%)
+yellow = 228 (0.05%)
+violet = 66 (0.01%)
+indigo = 35 (0.01%)
+
+Single digit on the end = 47386 (10.7%)
+Two digits on the end = 73636 (16.63%)
+Three digits on the end = 31093 (7.02%)
+
+Last number
+0 = 17550 (3.96%)
+1 = 46691 (10.54%)
+2 = 24621 (5.56%)
+3 = 29231 (6.6%)
+4 = 17690 (4.0%)
+5 = 17404 (3.93%)
+6 = 17882 (4.04%)
+7 = 20402 (4.61%)
+8 = 17846 (4.03%)
+9 = 19917 (4.5%)
+
+ |
+ |
+ |
+ |
+ |
+ | |
+ | |
+ |||
+ |||
+||||| ||||
+||||||||||
+||||||||||
+||||||||||
+||||||||||
+||||||||||
+||||||||||
+0123456789
+
+Last digit
+1 = 46691 (10.54%)
+3 = 29231 (6.6%)
+2 = 24621 (5.56%)
+7 = 20402 (4.61%)
+9 = 19917 (4.5%)
+6 = 17882 (4.04%)
+8 = 17846 (4.03%)
+4 = 17690 (4.0%)
+0 = 17550 (3.96%)
+5 = 17404 (3.93%)
+
+Last 2 digits (Top 10)
+23 = 12364 (2.79%)
+12 = 6414 (1.45%)
+11 = 5475 (1.24%)
+01 = 5097 (1.15%)
+00 = 4098 (0.93%)
+21 = 3669 (0.83%)
+08 = 3627 (0.82%)
+07 = 3598 (0.81%)
+22 = 3587 (0.81%)
+13 = 3547 (0.8%)
+
+Last 3 digits (Top 10)
+123 = 9446 (2.13%)
+456 = 2442 (0.55%)
+234 = 2160 (0.49%)
+007 = 1477 (0.33%)
+000 = 1268 (0.29%)
+008 = 1150 (0.26%)
+009 = 1086 (0.25%)
+111 = 1056 (0.24%)
+777 = 980 (0.22%)
+101 = 895 (0.2%)
+
+Last 4 digits (Top 10)
+3456 = 2150 (0.49%)
+1234 = 1968 (0.44%)
+2008 = 1033 (0.23%)
+2009 = 927 (0.21%)
+2345 = 750 (0.17%)
+2007 = 674 (0.15%)
+2000 = 535 (0.12%)
+2006 = 502 (0.11%)
+1111 = 436 (0.1%)
+2005 = 436 (0.1%)
+
+Last 5 digits (Top 10)
+23456 = 2120 (0.48%)
+12345 = 724 (0.16%)
+56789 = 316 (0.07%)
+45678 = 305 (0.07%)
+11111 = 269 (0.06%)
+34567 = 231 (0.05%)
+54321 = 197 (0.04%)
+00000 = 162 (0.04%)
+99999 = 150 (0.03%)
+23123 = 132 (0.03%)
+
+US Area Codes
+456 = Inbound International (--)
+234 = NE Ohio: Canton, Akron (OH)
+
+Character sets
+loweralphanum: 224080 (50.61%)
+loweralpha: 146488 (33.08%)
+numeric: 26078 (5.89%)
+mixedalphanum: 23235 (5.25%)
+loweralphaspecialnum: 6067 (1.37%)
+mixedalpha: 5121 (1.16%)
+upperalphanum: 3416 (0.77%)
+mixedalphaspecialnum: 3340 (0.75%)
+loweralphaspecial: 2079 (0.47%)
+upperalpha: 1778 (0.4%)
+mixedalphaspecial: 486 (0.11%)
+upperalphaspecialnum: 222 (0.05%)
+specialnum: 188 (0.04%)
+upperalphaspecial: 46 (0.01%)
+special: 16 (0.0%)
+
+Character set ordering
+stringdigit: 185308 (41.85%)
+allstring: 153387 (34.64%)
+alldigit: 26078 (5.89%)
+othermask: 25115 (5.67%)
+digitstring: 24961 (5.64%)
+stringdigitstring: 18676 (4.22%)
+digitstringdigit: 4648 (1.05%)
+stringspecialdigit: 2359 (0.53%)
+stringspecial: 1111 (0.25%)
+stringspecialstring: 833 (0.19%)
+specialstringspecial: 168 (0.04%)
+specialstring: 126 (0.03%)
+allspecial: 16 (0.0%)
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/20/assange-ecuador-and-the-cyberarmy/">Assange, Ecuador, and the Cyberarmy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-20T03:15:00-04:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>ALERT: Julian Assange has requested political asylum and is under the protection of the Ecuadorian embassy in London<a href="http://t.co/bz4O9bjF" title="http://justice4assange.com/donate.html">justice4assange.com/donate.html</a></p>&mdash; WikiLeaks (@wikileaks) <a href="https://twitter.com/wikileaks/status/215152161502412801">June 19, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>The news that Julian Assange has <a href="http://www.cnn.com/2012/06/19/world/europe/ecuador-assange-asylum/index.html">asked Ecuador</a> for political asylum is flooding twitter as his supporters do their best to attract attention to his cause, and rally everyone they can to contact Ecuador&#8217;s embassy in London to urge them to grant Assange&#8217;s request. While I&#8217;ve watched the Assange case since before the first allegations came out of Sweden - that&#8217;s not my interest here, my interest is in what Ecuador <em>could</em> do if they wanted to.</p>
+
+<h3>Building a cyber-army</h3>
+
+<p>Ecuador has an interesting problem right now, they can offer to help Assange - which will certainly draw the ire of the US and its closest allies, or they can do nothing - and possibly lose a chance at building a new army. Let me explain&#8230;</p>
+
+<p>The governments of the US and other large powers are spending a lot of money to recruit and train what the press has dubbed &#8216;cyber-warriors&#8217; (i.e. hackers) to perform offensive operations. For smaller countries - throwing a huge budget at something like this just isn&#8217;t possible, but they do have another option. If a country was to offer safe harbor to those at risk of being prosecuted for hacking and related crimes in exchange for assisting their military - they could define a new form of super-power.</p>
+
+<p>The US and UK  both make a habit of throwing their best hackers in prison - if Ecuador helps Assange, it could set the stage for them to help others accused of similar crimes in the future. If they are smart about who they help - they could easily build an army of hackers, an army that could set a new standard for power and control of the technology that we are so dependant on.</p>
+
+<p>(Yes, I realize that Assange isn&#8217;t a hacker himself, but he has a loyal following of those that are - and the action would set the precedent making this possible.)</p>
+
+<p>Wether it will be Ecuador today, or some other small state later I don&#8217;t know - but I&#8217;m willing to bet money that it will happen.</p>
+
+<h3>The future of war</h3>
+
+<p>War has evolved in interesting ways - from arrows, to guns, then to bombs - but the next step is clear: the electron. War (and the power to make war, which I would argue is what&#8217;s really important) will be more about espionage and sabotage than it&#8217;s ever been before. Power grids, banks, communications, and industrial systems will all be targets - and the ability to manipulate these systems will define who the real super powers are.</p>
+
+<p>Imagine the impact to the economy should one of the stock exchanges be attacked, and fake trades generated to drive the price of stocks down. Would we see the <a href="https://en.wikipedia.org/wiki/Wall_Street_Crash_of_1929">crash of 1929</a> again?</p>
+
+<p>There are also far more subtle attacks that could be perpetrated against a countries ability to make war. Changing technical drawings for example, that could cause a breakdown in a supply chain rendering supplies and equipment useless (e.g. guns bored wrong, missiles wired improperly). Something as simple as changing the quantity or product code on a military order could prevent operations due to a lack of necessary supplies. It&#8217;s attacks like these that would likely target less secure, lower priority systems, that would cause the most chaos.</p>
+
+<p>It&#8217;ll be interesting to see what happens next, whatever it is - it&#8217;s sure to have repercussions for years to come.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/16/snapchat-api-and-security/">Snapchat: API &amp; Security</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-16T21:06:00-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update 2:</strong> The Snapchat API has changed to address the issues I pointed out to them - and the new API has issues as well. I&#8217;ve <a href="http://adamcaudill.com/2012/12/31/revisiting-snapchat-api-and-security/">posted an update</a> that covers some of these changes.</p>
+
+<p><strong>Update:</strong> I heard back from one of the co-founders, he said that they&#8217;d be updating the application to address this in the &#8220;very near future.&#8221; I have to applaud them for the great way they handled this.</p>
+
+<p><a href="http://www.snapchat.me/">Snapchat</a> was recently <a href="http://techcrunch.com/2012/06/08/snapchat-110-million/">featured</a> on TechCrunch, pointing out that they are expanding to Android and that they&#8217;ve now handled over 110M pictures. So when I see something about an application that auto-deletes messages after they are viewed - I did the only natural thing: dig in and see if it really is secure.</p>
+
+<p>I <a href="http://adamcaudill.com/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">monitored</a> the messages being sent back and forth, and mapped out the APIs they use. They have a simple API, which uses both JSON and form-encoding to transfer data. The API itself is fairly clean and easy to understand. Writing a new client against this API is fairly simple - <em>including a client that automatically saves all image received</em>.</p>
+
+<h3>Downloading Images</h3>
+
+<p>The process to download images is pretty simple, it can be as simple as two API calls. The first API needed is <code>ss_auth</code> - the API is used to create sessions. The call to login looks like this:</p>
+
+<pre><code>POST https://feelinsonice.appspot.com/ss_auth HTTP/1.1
+Host: feelinsonice.appspot.com
+User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
+Content-Length: 32
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Accept-Encoding: gzip
+Connection: close
+Proxy-Connection: close
+
+u=&lt;user&gt;&amp;t=&lt;password&gt;&amp;a=login
+</code></pre>
+
+<p>This will return JSON containing couple useful things:</p>
+
+<ol>
+<li>The session token, which is required for all other calls.</li>
+<li>A list of images that haven&#8217;t been viewed yet (the &#8220;id&#8221; field being the most important).</li>
+</ol>
+
+
+<p>Once the returned JSON is parsed, the rest is just making calls to the <code>blob</code> API - this is the API that actually returns the image data (as a JPG), and can then be saved to disk. The URLs to retrieve an image look like this:</p>
+
+<pre><code>https://feelinsonice.appspot.com/blob?u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;i=&lt;image-id&gt;
+</code></pre>
+
+<p>This allows images to be easily downloaded, without them being removed.</p>
+
+<h3>How it normally works&#8230;</h3>
+
+<p>In the mobile application, a call to the <code>ss_pa</code> API is made when an image is viewed, this removes the image - and once this is called, there doesn&#8217;t seem to be a way to get the image back.</p>
+
+<pre><code>POST https://feelinsonice.appspot.com/ss_pa HTTP/1.1
+Host: feelinsonice.appspot.com
+User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
+Content-Length: 102
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Accept-Encoding: gzip
+Connection: close
+Proxy-Connection: close
+
+u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3A%22&lt;unix-timestamp&gt;%22%7D
+</code></pre>
+
+<p>This API call is the key to keeping the image from being accessed again. If a client didn&#8217;t implement this API, it would allow users to access the images any time they like - completely bypassing the entire point of the application.</p>
+
+<h3>Other APIs</h3>
+
+<p>Here are some of the other APIs used:</p>
+
+<ul>
+<li><code>ss_refresh</code> - pull the list of images (this API returns a subset of what&#8217;s returned by <code>ss_auth</code>)</li>
+<li><code>nsp</code> - uploads an image</li>
+<li><code>clear</code> - clears the user&#8217;s history</li>
+<li><code>auth</code> - used to destroy the session, not to be confused with <code>ss_auth</code></li>
+</ul>
+
+
+<p>All of these are easily understood and implemented. There are other APIs, for things like registration that I didn&#8217;t look into, as they are beyond the scope of this research.</p>
+
+<h3>Unofficial clients</h3>
+
+<p>With such a simple API I&#8217;d be amazed if other, unofficial, clients didn&#8217;t start turning up - with saving images being their primary feature. A crappy but functional Android client that supports saving could be built in a couple hours.</p>
+
+<p>For now I&#8217;m not making any proof-of-concept code available, as I believe that this article makes it sufficiently clear how easy it is to write an unofficial client for this service that allows images to be saved. The goal here isn&#8217;t to exploit this hole, but to point out the risk of untrusted clients.</p>
+
+<h3>Overall</h3>
+
+<p>Session management is fairly well done - and would certainly make unofficial clients that aren&#8217;t full-featured less attractive due to needing to login so often; but this certainly doesn&#8217;t provide any protection. The API itself seems to have no protection against untrusted clients, making it trivial to save images or perform other unintended actions.</p>
+
+<p>I did contact the authors to suggest that they encrypt the image data when it&#8217;s sent to the client, making it harder to get the data without reverse engineering the application. It wouldn&#8217;t stop everyone, but it would make the task less trivial.</p>
+
+<p>Given the nature of the application, I suspect unofficial clients are unavoidable though - especially as the service grows in popularity (as I expect it will once the official Android client is released).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">Monitor iPhone HTTP(S) Traffic With Fiddler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T14:10:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For a research project I decided that I needed to monitor the traffic to and from my iPhone - both HTTP and HTTPS. Having had so much luck with Fiddler in the past, it was the first place I looked. There are a number of posts on this topic, but few that provide a clear and complete picture of what&#8217;s needed. So I wrote one.</p>
+
+<p>First, install the latest version of <a href="http://www.fiddler2.com/fiddler2/version.asp">Fiddler</a>, then install the iOS-compatible <a href="http://www.fiddler2.com/dl/FiddlerCertMaker.exe">certificate generator</a>. Now update the settings to decrypt HTTPS traffic:</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1430.png"></p>
+
+<p>Next, update the settings to allow remote connections (make sure that restart Fiddler after this):</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1433.png"></p>
+
+<p>Then export the Fiddler Root Certificate to your desktop from the options dialog:</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1436.png"></p>
+
+<p>Email the <code>FiddlerRoot.cer</code> file to your iPhone - you&#8217;ll need to import and trust the certificate to make this work. To install certificate, just click on the attachment and click the &#8216;Install&#8217; button.</p>
+
+<p>Now configure your iPhone to use the Fiddler proxy. The setting can be found at Setting -> Wi-Fi -> (your network) -> HTTP Proxy -> Manual. Set the &#8216;Server&#8217; to the IP address of of your PC, then set &#8216;Port&#8217; to 8888, and &#8216;Authentication&#8217; to off.</p>
+
+<p>You should now be able to see all of the HTTP and HTTPS traffic going across your phone. It&#8217;s worth noting though, that some applications won&#8217;t work while using the proxy - Twitter being one, though most work without issue.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/9/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/7/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

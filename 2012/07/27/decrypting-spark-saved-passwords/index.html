@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Decrypting Spark Saved Passwords - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="A friend of mine has been evaluating an open source instant messaging client called Spark, which can be linked to Active Directory for authentication &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2012/07/27/decrypting-spark-saved-passwords">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Decrypting Spark Saved Passwords</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T00:44:00-04:00" pubdate data-updated="true">Jul 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>A friend of mine has been evaluating an open source instant messaging client called <a href="http://www.igniterealtime.org/projects/spark/http://www.igniterealtime.org/projects/spark/">Spark</a>, which can be linked to Active Directory for authentication. Like most IM clients, Spark allows users to save their password - and me being me, I was curious as to how it&#8217;s doing this - as storing Windows domain logins is kinda a big deal.</p>
+
+<p>So, within a few minutes I found all of the details - and none of them make me feel any better. Here are the important bits:</p>
+
+<ul>
+<li>Encrypted with Triple DES in ECB mode.</li>
+<li>IV isn&#8217;t being set.</li>
+<li>Encryption key is <strong>hardcoded</strong>.</li>
+</ul>
+
+
+<p>This means that all users have the same, <a href="http://svn.igniterealtime.org/svn/repos/spark/trunk/src/java/org/jivesoftware/spark/util/Encryptor.java">publicly documented</a> encryption key protecting their password. What&#8217;s the key? It&#8217;s <code>ugfpV1dMC5jyJtqwVAfTpHkxqJ0+E0ae</code> in Base64 encoding - and thanks to this, it&#8217;s trivial to write code to reverse the &#8220;protection&#8221; and make the credentials (which may well be domain credentials) available to anyone with access to the users profile.</p>
+
+<p>So, that&#8217;s what <a href="https://github.com/adamcaudill/sparkim-passview">I did</a>. This is simple code that will scan a machine looking for Spark configuration files (named <code>spark.properties</code>) and checks each to see if a password can be extracted. You can also pass in a NetBIOS name, and it will attempt to use the administrative share (C$) to access the profiles on the system. Take a look at the <a href="https://github.com/adamcaudill/sparkim-passview#spark-im-password-decrypter">README</a> for more details.</p>
+
+<p>The saving grace here, is that you have to have access to the user profiles, so if a system is locked down throughly, you likely won&#8217;t make much progress. But if you can get a local administrator account to run this from - it may make a pentest go a little quicker.</p>
+
+<p>I&#8217;ve tried to find a way to disable the &#8216;Save Password&#8217; feature, but it seems that the only option was to <a href="http://community.igniterealtime.org/thread/37785">patch the source</a>. If you are using Spark within your environment, I strongly recommend that you carefully consider how it&#8217;s used and integrated with AD or other systems.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T00:44:00-04:00" pubdate data-updated="true">Jul 27<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/12/yahoos-associated-content-hacked/" title="Previous Post: Yahoo's Associated Content Hacked?">&laquo; Yahoo's Associated Content Hacked?</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/08/12/neoinvoice-blind-sql-injection-cve-2012-3477/" title="Next Post: NeoInvoice Blind SQL Injection (CVE-2012-3477)">NeoInvoice Blind SQL Injection (CVE-2012-3477) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

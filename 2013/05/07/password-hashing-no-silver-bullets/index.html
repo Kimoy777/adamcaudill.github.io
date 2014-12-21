@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Password Hashing: No Silver Bullets - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="In the dark days of the web, if a service hashed your password instead of storing it in plain text, they were doing good. As sites were hacked, and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/05/07/password-hashing-no-silver-bullets">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Password Hashing: No Silver Bullets</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T18:48:00-04:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the dark days of the web, if a service hashed your password instead of storing it in plain text, they were doing good. As sites were hacked, and credentials stolen, a silver bullet emerged: always hash <em>and</em> salt passwords when storing them. Many, many services were built with this design - <a href="http://arstechnica.com/security/2013/04/why-livingsocials-50-million-password-breach-is-graver-than-you-may-think/">LivingSocial</a> is a great example. SHA1 hashing with a 40 byte salt - once upon a time, that was considered reasonable protection. Today, you&#8217;ll be blasted by industry insiders and the media for that.</p>
+
+<p>We all so often rush to criticize companies for not being on the cutting edge of security - but how often do any of us look at why? Do we ever ask who&#8217;s really at fault? Is the company at fault for not putting the money into updating systems, is it the engineers and architects for not knowing what they should do, or could it be something else - could the advice companies receive be part of the problem?</p>
+
+<p>Looking at some recent breaches and the overall security position of the companies involved - it&#8217;s easy to see which companies get it and which don&#8217;t. There&#8217;s one recent example where I really believe the company and its staff were simply incompetent. From top to bottom, they showed little thought for security, privacy, or user trust (for obvious reasons, I&#8217;m not naming names). LivingSocial and some others - I&#8217;m less sure about, when those systems were designed they were likely following &#8220;best practices&#8221; - or at least what developers thought were best practices.</p>
+
+<p>For a number of years many developers saw SHA1 + a strong salt as a silver bullet. They implemented and stopped thinking.</p>
+
+<p>The problem is, attackers are advancing far faster than companies can adapt, and best practices that may be right for today will soon fail the &#8220;reasonable protection&#8221; test. Engineers and architects see a best practices document and build to that standard - if that document is even a couple years old, what they build is hopelessly dated and won&#8217;t provide the security the need.</p>
+
+<p>Once that system is built - unless there&#8217;s a breach, what incentive is there to change it? At many companies it&#8217;s a constant fight to fund security related changes; when the change is to fix a system that&#8217;s only broken in the eyes of experts, and (to management) only matters if some other layer of security fails, you can expect a fight for that money.</p>
+
+<p>Fixing things that aren&#8217;t obviously broken is hard. For those signing the checks, it&#8217;s not obvious that what was &#8220;best practice&#8221; a few years ago is today a disaster waiting to happen.</p>
+
+<p>There are many problems here, best practices are dated and inaccurate, there isn&#8217;t enough focus on secure storage, and there needs to be more push for better, more actionable recommendations that stand the test of time. While there are no silver bullets, surely as an industry we can do better than this.</p>
+
+<p><strong>Secure Storage</strong></p>
+
+<p>If I can get everything I need to start brute-forceing passwords from a simple SQL injection attack against your <code>users</code> table - your users are at risk. It doesn&#8217;t matter if your using SHA1 or <code>scrypt</code> - one day you&#8217;ll be breached, and passwords will be exposed. It&#8217;s that simple.</p>
+
+<p>The salt, the hash, or (probably better) both should be encrypted. It won&#8217;t help you in case your server is breached, but it&#8217;ll help if you&#8217;re hit with a SQL injection attack or other attacks that allow access to data, but not the system itself. As always, it&#8217;s not a silver bullet, but it adds protection in some situations, and anything you can do to make life harder for an attacker is a good thing.</p>
+
+<p>This of course opens up the age old question of storing the encryption key, which I&#8217;ll leave as an exercise to the reader. This can be taken to the next level, encrypt the salt &amp; hash with an HSM - provides the best security, but that&#8217;s rarely an option because of expense.</p>
+
+<p>There is some debate over this in the industry, but I&#8217;m a big fan of defense in depth - don&#8217;t make things easier for attackers.</p>
+
+<p><strong>Useful Recommendations</strong></p>
+
+<p>Crypto is hard, often confusing, and too often there is conflicting information. Implementing hash + salt is easy (and stupid), PBKDF2 is fairly simple - but you have to answer a couple questions:</p>
+
+<ul>
+<li>Hash Function - SHA1-HMAC is a common option thanks to wide compatibility, though using a member of the SHA2 family would be far more appropriate.</li>
+<li>Iteration Count - There&#8217;s no real consensus on this, some say it should double every two years (so this year it would be 96,000), others say it should be tuned to your server.</li>
+</ul>
+
+
+<p>Iteration count here is a real issue - if you blindly double every two years you risk server stability, on the other hand if you tune it to your server, you risk not keeping up with attackers. There&#8217;s no winning, no easy answer. When it comes to password brute-forcing, the advantage goes to the attacker - having faster hardware and more optimized software is common. It&#8217;s the job of the defender to constantly play catch-up.</p>
+
+<p>With <code>scrypt</code> the options are even more complex, with too little obvious documentation to get developers going in the right direction.</p>
+
+<p><strong>Dynamic Adjustment</strong></p>
+
+<p>For example, the <a href="https://github.com/pbhogan/scrypt">Ruby scrypt</a> implementation makes it quite easy to dynamically adjust cost settings - though if you run it on dated hardware, you run the risk of giving the attackers even more of an advantage. For those tied to PBKDF2 for some reason (i.e. compatibility), it would be easy enough to come up with dynamic adjustment code based on either performance benchmarking or date (following the somewhat risky double every two years approach).</p>
+
+<p>Designing for dynamic adjustment gives defenders the best chance of staying current without costly upgrades. Again, not a silver bullet, but gives defenders a fighting chance of keeping up.</p>
+
+<p><strong>The Future</strong></p>
+
+<p>What I&#8217;ve been looking for is a strongly opinionated library in the spirit of NaCl - secure by default, and hard to make insecure. For now, it&#8217;s clear that it should be based on <code>scrypt</code> - but ideally it could be easily updated in the future to use the winner of the <a href="https://password-hashing.net/">Password Hashing Competition</a>.</p>
+
+<p>Here&#8217;s what I&#8217;d like to see:</p>
+
+<ul>
+<li>Based on scrypt.</li>
+<li>Easily updated to support new algorithms (with backwards compatibility).</li>
+<li>Single cost setting, ideally based on approximate execution time.</li>
+<li>Function output encrypted with AES256.</li>
+<li>Reasonable minimum settings to prevent insecure usage.</li>
+</ul>
+
+
+<p>Something like that could be handed to a developer with minimal instruction, and allow them to provide reasonable protection today and in the (near) future. There are times when giving people what they want (options, control, etc.) does more harm than good - give developers just what they need, no more, no less.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T18:48:00-04:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/04/29/the-wikileaks-we-deserve/" title="Previous Post: The WikiLeaks We Deserve">&laquo; The WikiLeaks We Deserve</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/06/19/opsec-the-nsa-and-you/" title="Next Post: OPSEC, The NSA, and You">OPSEC, The NSA, and You &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

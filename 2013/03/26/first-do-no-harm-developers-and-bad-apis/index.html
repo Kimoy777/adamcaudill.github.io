@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>First, Do No Harm: Developers &amp; Bad APIs - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Primum non nocere (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/03/26/first-do-no-harm-developers-and-bad-apis">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">First, Do No Harm: Developers &amp; Bad APIs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-26T21:11:00-04:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>Primum non nocere</strong> (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more people would think about, developers especially - and primarily when writing new APIs. In general, developers don&#8217;t have an impressive history with security - quite frankly, developers suck. Seeing as I consider myself a developer, that&#8217;s painful to admit.</p>
+
+<p>Chris Andrè Dale posted an interesting article some time ago that got me thinking: <a href="http://www.securesolutions.no/why-its-easy-being-a-hacker/">Why it&#8217;s easy being a hacker: A SQL injection case study</a> - Chris pointed out the problems with educational material that developers are using, and just how bad the examples are. SQL injection is everywhere and very few examples encourage developers to do it the right way - for that matter, very few are telling developers that there is a right way. I&#8217;m sure we&#8217;ve all seen similar issues in other areas, not just for SQL injection.</p>
+
+<p>I had to ask, why? How did we end up in this situation? The industry has come so far in so many ways, it&#8217;s unbelievable that we still have these fundamental issues. It&#8217;s clear that the industry is failing, and these are just a few of the areas:</p>
+
+<ul>
+<li>Educational material is riddled with errors</li>
+<li>Authors rarely understand the security implications of their samples</li>
+<li>Developers aren&#8217;t taking the time to research the right way to do things</li>
+<li>Developers don&#8217;t understand the need to consider security implications</li>
+</ul>
+
+
+<p>&#8230;and I could keep going.</p>
+
+<p><strong>Whose fault is it really?</strong></p>
+
+<p>If you look at the PHP/MySQL examples that are floating around, you&#8217;ll notice something interesting: it&#8217;s really, <em>really</em> easy to write bad code. The first examples anyone sees is a simple, one line, easy to understand statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">mysqli_query($link, &quot;INSERT INTO Persons (FirstName) VALUES (&#39;$_POST[firstname]&#39;)&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this simple command is what people use - with no idea how dangerous it is. The API makes writing bad code easy, but how about good code?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$stmt = $mysqli-&gt;prepare(&quot;INSERT INTO Persons (FirstName) VALUES (?)&quot;);</span>
+</span><span class='line'><span class="x">$stmt-&gt;bind_param(&quot;s&quot;, $_POST[firstname]);</span>
+</span><span class='line'><span class="x">$stmt-&gt;execute();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first example is simple and clear, the second is a <em>bit</em> less obvious. The API design itself is leading developers down the wrong path - it supports two syntaxes, one simple and easy to comprehend - but extremely dangerous, and one that&#8217;s more complex, less obvious, but safer. Without understanding the security implications, which syntax do you think developers will pick?</p>
+
+<p>While developers should know more than they do (and I&#8217;m not trying to excuse their ignorance) - the years of effort and the daily reports of SQLi breaches should tell us that trying to educate all of the world&#8217;s developers isn&#8217;t working. As long as the <em>easy way</em> to use an API is the insecure way, we&#8217;ll continue to see a steady stream of breaches.</p>
+
+<p>While I agree with Chris that the documentation is a real issue - the APIs are just as much to blame. <em>Bad APIs make for bad developers</em>.</p>
+
+<p><strong>Secure by default</strong></p>
+
+<p>When a developer is working on a new API, they should ask if they are doing harm with the design. The maxim &#8220;first, do no harm&#8221; should be running through their head with each decision. Doing no harm - being secure by default, not leading developers astray - really should be the foremost goal of any API.</p>
+
+<p>I don&#8217;t mean to pick on PHP&#8217;s MySQL API here, it&#8217;s just one of many that are designed this way. Look at any API on any platform, odds are better than not that security was an afterthought - if it was given any thought at all.</p>
+
+<p>As anyone who writes code can attest, writing secure code is hard - but when the APIs that developers are given encourage insecure usage, it&#8217;s that much more likely that holes will be found. While organizations like <a href="https://www.owasp.org/index.php/Main_Page">OWASP</a> are making some progress in education and awareness, it&#8217;s obviously not enough. Platforms need to be updated, APIs need to be fixed - this won&#8217;t be a quick process, but we won&#8217;t see real change until the APIs are improved.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-26T21:11:00-04:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/03/02/evernote-doing-it-mostly-right/" title="Previous Post: Evernote: Doing it (mostly) right">&laquo; Evernote: Doing it (mostly) right</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/04/04/security-done-wrong-leaky-ftp-server/" title="Next Post: Security Done Wrong: Leaky FTP Server">Security Done Wrong: Leaky FTP Server &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

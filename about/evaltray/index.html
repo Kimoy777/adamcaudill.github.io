@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>evalTray - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="evalTray Feb 25th, 2006 This hasn&#8217;t been updated in a number of years, and no longer works as expected. There are now better options. I&#8217; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/about/evaltray">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">evalTray</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-02-25T18:29:34-05:00" pubdate data-updated="true">Feb 25<span>th</span>, 2006</time></p>
+  </header>
+  
+  <p><strong>This hasn&#8217;t been updated in a number of years, and no longer works as expected. There are now better options.</strong></p>
+
+<p>I&#8217;ve written a small utility that may be of some use to VB developers (or anyone familiar with VB or VBScript). This is basically a wrapper for the Microsoft Script Control&#8217;s Eval method, the idea being to test simple lines of code or quick math tasks.  This simply executes VBScript code and returns either an error message if you made a mistake or the returned value.</p>
+
+<p>This makes use of both the Microsoft Script Control to allow the execution of VBScript; as well .NET&#8217;s ability to compile on the fly. This allows the user to execute code using either engine, depending on the task. VBScript is faster, though a more limited language while .NET is slowly, but offers the full power of the .NET Framework.</p>
+
+<p>It&#8217;s just a simple tool in a developers toolkit, but something you might find useful.</p>
+
+<p>IMPORTANT: evalTray currently crashes when used on Windows 7. I am in the process of re-writing evalTray and will be posting an updated version soon.</p>
+
+<h3>Changes</h3>
+
+<p><em>2007.0.2.0 (Dec. 20, 2007)</em></p>
+
+<ul>
+<li><p>Major codebase cleanup.</p></li>
+<li><p>Added support for VB.NET Code.</p></li>
+<li><p>Now runs against the .NET Framework 2.0.</p></li>
+<li><p>Corrected issue with Uptime function.</p></li>
+<li><p>Changed data returned by OSVersion.</p></li>
+<li><p>Google - Launches the default browser and performs a search on the string provided.</p></li>
+<li><p>HostName - Returns the local PC name.</p></li>
+<li><p>IPAddress - Returns a list of all IP addresses assigned to the local PC.</p></li>
+<li><p>NSLookup - Return the IP address associated with the PC name specified.</p></li>
+</ul>
+
+
+<p><em>2006.0.1.81 (Feb. 26, 2006)</em></p>
+
+<ul>
+<li><p>ToBase64 - Encodes a string using the Base 64 algorithm.</p></li>
+<li><p>FromBase64 - Decodes a Base 64 string.</p></li>
+<li><p>Fixed Copy from Result window issue.</p></li>
+<li><p>Parameters are now automatically formatted.</p></li>
+</ul>
+
+
+<p><em>2005.0.1.53  (Sept. 29, 2005)</em></p>
+
+<ul>
+<li><p>&#8220;exit&#8221; exit&#8217;s the application</p></li>
+<li><p>&#8220;close&#8221; closes the window</p></li>
+<li><p>Alt+F3 opens the code window</p></li>
+<li><p>&#8220;uptime&#8221; returns the current system uptime.</p></li>
+</ul>
+
+
+<p><em>2004.0.2.49 (Oct. 6, 2004)</em></p>
+
+<ul>
+<li><p>More robust error handling.</p></li>
+<li><p>Added F4 hot-key. Inserts: (&#8220;&#8221;)</p></li>
+<li><p>MB - One argument wrapper for MessageBox.Show</p></li>
+<li><p>HtmlEncode</p></li>
+<li><p>HtmlDecode</p></li>
+<li><p>UrlDecode</p></li>
+<li><p>UrlEncode</p></li>
+<li><p>UrlPathEncode</p></li>
+<li><p>ShellEx</p></li>
+<li><p>SCrypt - Simple value-swapping encryption.</p></li>
+<li><p>AsciiToHex</p></li>
+<li><p>HexToAscii</p></li>
+<li><p>MD5</p></li>
+<li><p>SHA1</p></li>
+<li><p>CRC32</p></li>
+</ul>
+
+
+<p><em>2004.0.1.35 (Oct. 4, 2004)</em></p>
+
+<ul>
+<li><p>DNSResolve - Resolve a domain name to a IP address. Sample: dnsresolve(&#8220;www.google.com&#8221;)</p></li>
+<li><p>OSVersion - Returns the version number of Windows.</p></li>
+<li><p>TickCount - Retrieves the system tick count.</p></li>
+<li><p>SysDir - Returns the path of the System folder.</p></li>
+<li><p>Enviro - Expands environmental variables. Sample: enviro(&#8220;%SystemRoot%&#8221;)</p></li>
+<li><p>CLR - Returns the runtime version number.</p></li>
+</ul>
+
+
+<p><em>2004.0.0.24 (Oct. 3, 2004)</em></p>
+
+<ul>
+<li>Initial Release</li>
+</ul>
+
+
+<h3>Support</h3>
+
+<p>I&#8217;ll do my best to support this as my time allows. I&#8217;d also like to hear your feedback, comments, feature requests, or anything else you feel like saying. <a href="mailto:adam@adamcaudill.com">Contact me</a>.</p>
+
+<h3>Download</h3>
+
+<p>Requirements:</p>
+
+<ul>
+<li><p>.NET Framework 2.0</p></li>
+<li><p>A Computer</p></li>
+</ul>
+
+
+<p><a href="http://www.adamcaudill.com/files/evalBarInstall.exe">Mirror 1
+</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-02-25T18:29:34-05:00" pubdate data-updated="true">Feb 25<span>th</span>, 2006</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

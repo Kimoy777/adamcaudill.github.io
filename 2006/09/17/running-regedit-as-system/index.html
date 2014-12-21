@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Running RegEdit as SYSTEM - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="While facing an interesting research challenge, digging into the inner working of Windows, I realized that I needed to change a registry value. That &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2006/09/17/running-regedit-as-system">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Running RegEdit as SYSTEM</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-09-17T19:59:49-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While facing an interesting research challenge, digging into the inner working of Windows, I realized that I needed to change a registry value. That&#8217;s simple enough, I fire up RegEdit, make the change, then politely as RegEdit knows how, it told me that I <em>couldn&#8217;t change the value</em>! Being one that hates when <em>my</em> computer tells <em>me</em> I can&#8217;t do something, I had to find another option.</p>
+
+<p>So after some research, I found my answer: <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/sc.mspx?mfr=true">sc</a>. This is a great little utility (included with Windows), and made the task of running an application as SYSTEM*  much easier. At this point some of you may be wondering why I didn&#8217;t just use <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/runas.mspx?mfr=true">RunAs</a> instead, as it&#8217;s designed to allow execution as another user. Well, from all that I&#8217;ve found, there is no way to get RunAs to spawn a process as SYSTEM, one of the downsides of SYSTEM not being a true user.</p>
+
+<p>Another option that I found (somewhat) attractive initially is <a href="http://www.codeproject.com/system/RunUser.asp">RunAsEx</a>, an open source, GUI based version of RunAs. This could be useful, but I found it to be more hassle than it was worth. Still might be useful for somethings, but with all the bugs I found in it, I knew there was a better way.</p>
+
+<p>Now, back to the solution I chose: Using sc to create a service that will execute the application I&#8217;m after. This works because by default all services execute under the SYSTEM user context, so all we have to do is create a service to call the application we need. Surprisingly simple, and it works quite well.</p>
+
+<p>Creating the service looks something like this:</p>
+
+<p><code>SC CREATE AcDebugSvc binPath= "regedit.exe" type= own type= interact</code> <em>**</em></p>
+
+<p>This creates the service, so that now all you have to do is start the service (<code>SC START AcDebugSvc</code> ***) and you&#8217;ll see your copy of RegEdit. If you check in Task Manager, you&#8217;ll be able to confirm that it is actually running as SYSTEM. This is an extremely powerful debugging tool, as it allows you to instantly execute any application as the most powerful user that Windows offers.</p>
+
+<p>Once you are done with your work, just delete the service (<code>SC DELETE AcDebugSvc</code>) and call it a day, that simple. This can also easily be scripted if you tire of typing the commands so often, and it can also be used with most applications. Using this for the Command Prompt (<code>binPath= "cmd.exe /K start"</code>) and for Task Manager (<code>binPath= "taskmgr.exe"</code>) both strike me as being quite useful.</p>
+
+<ul>
+<li><strong>WARNING</strong>: As I hope most of you know, System is a very powerful account, it&#8217;s almost limitless in what it can do. If you aren&#8217;t careful while working under this user context; you may end up with a rather expensive paperweight instead of a computer. You have been warned.</li>
+</ul>
+
+
+<p>** Note: As odd as it is, the spaces after the equals and before the value of the parameters is quite important, the call will fail if you omit them.</p>
+
+<p>*** Note: You&#8217;ll get an error message (&#8221;<code>The service did not respond to the start or control request in a timely fashion.</code>&#8221;) when you call this, it&#8217;s nothing to worry about. The reason that it occurs is that to respond to the message it receives the target application must be designed to operate as a service. Since we are using this for other purposes we, we don&#8217;t really care.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-09-17T19:59:49-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2006</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/development/'>Development</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2006/09/17/firefox-toys-errorzilla/" title="Previous Post: FireFox Toys: ErrorZilla">&laquo; FireFox Toys: ErrorZilla</a>
+      
+      
+        <a class="basic-alignment right" href="/2006/09/20/vbnet-2005-interop-toolkit/" title="Next Post: VB.NET 2005 Interop Toolkit">VB.NET 2005 Interop Toolkit &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

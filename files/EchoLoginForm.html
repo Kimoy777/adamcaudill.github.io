@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Echo Login Form</title>
+    <style type="text/css">
+      body {
+          background-color: #4B7399;
+          font-family: Verdana, Helvetica, Arial;
+          font-size: 14px;
+      }
+      
+      a img {
+          border: none;
+      }
+      
+      a {
+          color: #0000FF;
+      }
+      
+      .clear {
+          clear: both;
+          height: 0;
+          overflow: hidden;
+      }
+      
+      #container {
+          width: 75%;
+          margin: 0 auto;
+          background-color: #FFF;
+          padding: 20px 40px;
+          border: solid 1px black;
+          margin-top: 20px;
+      }
+      
+      form label {
+          display: block;
+          margin-bottom: 2px;
+      }
+      
+      form .field, form .actions {
+          margin: 12px 0;
+      } 
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body class="home">
+    <div id="container">
+      
+      <div id="title">
+        <h2>Echo Login Form</h2>
+      </div> 
+
+      <p>This will echo the values entered into the below login form. This will be displayed in clear, plain text - so don't use it with real data if people can see over your shoulder.</p>
+      <p>No data is being sent back to the server, so nothing gets logged - but I would still advise that you not use this with data of any value.</p>
+
+      <form>
+        <div class="field">
+          <label for="username">User</label>
+          <input id="username" name="username" type="text" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="text" />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" />
+        </div>
+        <div class="actions">
+          <input name="commit" type="submit" value="Log in" disabled="disabled" />
+        </div>
+      </form>
+      
+      <h2>Password</h2>
+      <p id="passval">Password: (none)</p>
+      
+      <p>Copyright 2012 <a href="http://adamcaudill.com">Adam Caudill</a></p>
+    </div>
+
+    <script>
+      $("#password").bind('input', passval);
+      $("#password").bind('change', passval);
+      
+      function passval() {
+            var str = "Password: ";
+            var val = $(this).val();
+            
+            if (val == "")
+              val = "(none)";
+              
+            str += val;
+            $("#passval").text(str);
+      }
+    </script>
+  </body>
+</html>

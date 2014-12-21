@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Sinking Ship of E-Mail Security - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/06/27/the-sinking-ship-of-email-security">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Sinking Ship of E-Mail Security</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T23:32:00-04:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long been the &#8220;killer app&#8221; of the internet. While so many companies try to make the next great thing that&#8217;ll capture users around the world - none of these compare to the success of e-mail. It is likely the single most entrenched application-layer protocol used today.</p>
+
+<p>Thanks to <a href="https://en.wikipedia.org/wiki/Stellar_Wind">STELLARWIND</a> and other NSA programs, we have also seen that it has failed in a very real, and very important way.</p>
+
+<p>But this isn&#8217;t exactly news is it?</p>
+
+<p>The security issues around e-mail - or rather the complete lack of security in the protocol has been well understood for decades. Yet, in all those years of existence, all we, as those that care about security have managed to do is glue ineffective solutions on it.</p>
+
+<p><strong>STARTTLS</strong></p>
+
+<p>In the last year, since the scope of NSA&#8217;s spying has been made clear to the world - and the reminder that the NSA isn&#8217;t the only player in this game, the use of STARTTLS has <a href="https://www.google.com/transparencyreport/saferemail/?hl=en">spread dramatically</a>. Many people have worked hard to make this happen - and it really has made things better. Kinda.</p>
+
+<p>While STARTTLS does enable TLS, thus encrypting the data over the wire, it&#8217;s far from perfect:</p>
+
+<ul>
+<li>Opportunistic - In the majority of occasions the encryption is opportunistic; meaning that certificates aren&#8217;t validated, and if something goes wrong in the TLS negotiation, the connection will fail-open - passing data in the clear.</li>
+<li>Server Trust - E-mail as it exists today places complete trust in not only the sending server, but also the recipients server - and every other relaying server. Any of these can log all correspondence, as the data is only encrypted during the transport. TLS can be added or dropped at any point in the chain, and this exposes multiple possible intercept points.</li>
+</ul>
+
+
+<p>Based on the famous &#8220;SSL added and removed here&#8221; NSA slide, we see that even if the messages are sent over an encrypted connection, that doesn&#8217;t mean they stay encrypted when moved around within a company. There are so many failure points that can lead to an attacker being able to collect data.</p>
+
+<p>So if groups like the NSA want e-mail, it takes some extra effort thanks to STARTTLS, but it doesn&#8217;t solve the problem.</p>
+
+<p><strong>PGP / GPG</strong></p>
+
+<p>PGP, and the compatible (and likely more commonly used) GPG are one of the best options people have to encrypt their email - but there&#8217;s still a great deal of data exposed.</p>
+
+<ul>
+<li>UX - The user experience for most applications goes beyond unfriendly, to the point of being actively hostile. I recently walked an experienced developer through setting up a key with Gpg4win - the process of getting everything setup and working was beyond painful. The only GPG wrapper that I&#8217;ve seen that isn&#8217;t unreasonably difficult is GPGTools for OSX.</li>
+<li>Web of Trust - The web of trust model that PGP uses is both genius and terrible. When a news organization started using PGP, I noticed that none of their keys were signed by anyone - so I tried explaining the concept to one of their journalists. After several tweets we moved the conversation to e-mail, which led to several multi-page emails. By the end, I think he was more confused than ever. Last I checked, their keys still aren&#8217;t signed.</li>
+<li>Metadata - <a href="http://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata/">Metadata kills</a>. It&#8217;s scary but true - people die based on who they talk to. How long till an investigative journalist reporting on an organization not friendly to the US gets droned for emailing the wrong people? PGP doesn&#8217;t hide who is emailed, the subject, or any of the headers. PGP encrypted email leaks useful information like a sieve.</li>
+<li>Client Integration - Not many email clients natively support PGP, so most users have to encrypt manually, or use a third-party add-on. This can lead to interesting information leaks, such as saving unencrypted drafts to the server.</li>
+<li>Mobile - Using PGP on a mobile device can be risky, as it requires storing the private key on devices that are likely to have known security issues. Many people recommend against it, as it puts the private key at too much risk.</li>
+</ul>
+
+
+<p>So while PGP / GPG protects the content of email, it still is subject to metadata collection.</p>
+
+<p><strong>S/MIME</strong></p>
+
+<p>For those that don&#8217;t like PGP, or want a better chance of having native support, there&#8217;s S/MIME. Like PGP, S/MIME has it&#8217;s share of issues which leave users with less protection than they realize.</p>
+
+<ul>
+<li>Certificates - To use S/MIME, you have to have a certificate issued from a CA. The question is, how trustworthy is it? CAs have been hacked to issue bad certificates in the past, and nobody knows what an NSL could be used for when issued to a CA.</li>
+<li>Key Escrow - Some CAs generate the private key on their side to allow them to provide a key escrow service. While this can be useful if you ever lose your key and want to read your email again, it also runs the risk of an unauthorized party getting access to the key.</li>
+<li>Metadata - The metadata issues noted for PGP applies here as well. The subject, the recipients, the headers are all in clear text.</li>
+</ul>
+
+
+<p>There are other various complaints around S/MIME that are well documented, and have been discussed countless times. The point is, it&#8217;s another partial solution just glued onto email in an attempt to make it do something it was never designed to do. Be secure.</p>
+
+<p><strong>The list goes on&#8230;</strong></p>
+
+<p>Much work has went into other various add-ons, such as SPF and DKIM and others that attempt to do things that could have been done by default if e-mail had been designed with authentication, privacy, and security in mind.</p>
+
+<p>When e-mail was designed, none of these issues were considered - people have been trying to find ways to fix that mistake for years. E-mail was open, plain text, security and privacy weren&#8217;t considered - or at least not to the extent required.</p>
+
+<p>For a system like e-mail to be secure, security has to be part of the core design, considered at every step. When security &amp; privacy are an afterthought, something to just glue on - it&#8217;s impossible to achieve either.</p>
+
+<p>There are many efforts underway now to improve the situation, some such as <a href="https://www.mailpile.is/">Mailpile</a>, I greatly respect. Their goals are noble, their purpose is true - but I also think they are fighting the wrong battle. E-mail as we know it is flawed beyond repair - we can make it leak less, but for all the work trying to overcome the design flaws, it&#8217;ll always be flawed. There&#8217;s only one way for e-mail to ever be secure.</p>
+
+<p><strong>Time for action!</strong></p>
+
+<p>Over the past few months I&#8217;ve been working on a specification for a system to replace e-mail. I don&#8217;t know if it&#8217;ll ever go anywhere - but that&#8217;s not the point. E-mail as we know it needs to be replaced - it can&#8217;t be fixed. We need to be discussing how to eliminate email, not new ways to glue partial solutions on to it. STARTTLS isn&#8217;t the answer, PGP isn&#8217;t the answer, S/MIME isn&#8217;t the answer - an entirely new protocol is.</p>
+
+<p>I&#8217;m hoping to make the first public draft available in the next few weeks. If it&#8217;s well received, I&#8217;ll try to do what I can to get the system built. If not, then hopefully others will write competing specifications, and I&#8217;ll aide them as I can.</p>
+
+<p>My goal for the specification I&#8217;m writing is to encourage discussion - to get people talking about how to solve the problem. If it contributes in any way to a new system, a system that&#8217;s designed from the beginning to be secure, then it&#8217;s worth every minute that&#8217;s been invested in it. We need to find a viable option that can replace the monstrosity that we have today.</p>
+
+<p>I encourage everyone to think about solutions to this - how can we build a viable replacement to e-mail that meets the privacy and security goals, while being user friendly, and meeting the requirements of business and government environments. It&#8217;s a hard problem to solve, but it can be solved. It&#8217;s up to us to do it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T23:32:00-04:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/04/19/phpmyid-fixing-abandoned-oss-software/" title="Previous Post: phpMyID: Fixing Abandoned OSS Software">&laquo; phpMyID: Fixing Abandoned OSS Software</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/07/23/jumping-through-hoops-dot-dot-dot/" title="Next Post: Jumping through hoops...">Jumping through hoops... &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

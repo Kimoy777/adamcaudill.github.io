@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pen-Testing Silverlight+RIA with SoapUI - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2011/07/06/pen-testing-silverlightria-with-soapui">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Pen-Testing Silverlight+RIA With SoapUI</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-06T17:39:37-04:00" pubdate data-updated="true">Jul 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a public web site. So I started searching for automated pen-testing tools that could work against Microsoft&#8217;s Binary SOAP protocol (<code>msbin1</code>, a.k.a <code>application/soap+msbin1</code>) and found only disappointment. For various reasons, it&#8217;s significantly more complex to pen-test a application using <code>msbin1</code> than traditional <code>SOAP</code> + <code>WSDL</code>.</p>
+
+<p>To properly test the services, I had to make a compromise: temporarily modify the application to expose a <code>SOAP</code> endpoint. While this changes the state of the application and thus reduces the validity of the tests, it does provide a reasonable way of testing the web services to ensure that they are behaving as intended.</p>
+
+<p>The recently released <a href="http://www.soapui.org/About-SoapUI/go-pro.html">SoapUI Pro 4</a> adds new <a href="http://www.soapui.org/Security/getting-started.html">security testing tools</a> that makes this a viable (and attractive option). To get this working, there are a few small changes that need to be made to the solution:</p>
+
+<p>First, you&#8217;ll need to add a reference to <code>Microsoft.ServiceModel.DomainServices.Hosting.EndPoints</code> which is part of the RIA Services Toolkit; this allows you to expose different End Points for the service such as <code>SOAP</code> and <code>OData</code>.</p>
+
+<p>Next, you&#8217;ll want to add the following <code>configSections</code> entry to your <code>Web.config</code>:</p>
+
+<pre><code>&lt;configuration&gt;
+ &lt;configSections&gt;
+   &lt;sectionGroup name="system.serviceModel"&gt;
+     &lt;section name="domainServices"
+      type="System.ServiceModel.DomainServices.Hosting.DomainServicesSection,
+      System.ServiceModel.DomainServices.Hosting,
+      Version=4.0.0.0,
+      Culture=neutral,
+      PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/sectionGroup&gt;
+ &lt;/configSections&gt;
+ ...
+</code></pre>
+
+<p>Finally, to expose the <code>SOAP</code> end point:</p>
+
+<pre><code>&lt;configuration&gt;
+ ...
+ &lt;system.serviceModel&gt;
+  ...
+  &lt;domainServices&gt;
+   &lt;endpoints&gt;
+    &lt;add name="Soap"
+     type="Microsoft.ServiceModel.DomainServices.Hosting.SoapXmlEndpointFactory,
+     Microsoft.ServiceModel.DomainServices.Hosting,
+     Version=4.0.0.0,
+     Culture=neutral, PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/endpoints&gt;
+  &lt;/domainServices&gt;
+  ...
+</code></pre>
+
+<p>Finally, just follow the <a href="http://www.soapui.org/Security/security-scans-overview.html">instructions</a> for SoapUI to setup your tests, and you can feel (just a little) more confident in your application. Passing with flying colors obviously doesn&#8217;t mean your application is bulletproof, but it helps to confirm that web service code is solid.</p>
+
+<p>Now, while this does provide some insight into your application and should help find common issues, it&#8217;s not a replacement for a professional assessment by a qualified auditor. If you are handling credit cards or other highly targeted information, <em>please</em> consult a security specialist before a public deployment.</p>
+
+<p><strong>Update:</strong> Another option is a <a href="http://portswigger.net/burp/">Burp</a> plug-in offered by Gotham Digital Science, and can be found <a href="http://blog.gdssecurity.com/labs/2009/11/19/wcf-binary-soap-plug-in-for-burp.html">here</a>. It&#8217;s a more complex workflow, but allows testing without an exposed SOAP end-point - which is great if you don&#8217;t have source code access.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-06T17:39:37-04:00" pubdate data-updated="true">Jul 6<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/06/16/a-brief-look-at-the-latest-lulzsec-release/" title="Previous Post: A brief look at the latest @LulzSec release">&laquo; A brief look at the latest @LulzSec release</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/10/15/why-cringely-is-wrong-about-java/" title="Next Post: Why Cringely is wrong about Java">Why Cringely is wrong about Java &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

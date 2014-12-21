@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="The fact that LinkedIn was breached has been well covered and confirmed, but in their confirmation they said something that I personally found &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/9">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/06/linkedin-a-little-common-sense/">LinkedIn: A Little Common Sense</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-06T18:28:00-04:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The fact that LinkedIn was breached has been well covered and <a href="http://blog.linkedin.com/2012/06/06/linkedin-member-passwords-compromised/">confirmed</a>, but in their confirmation they said something that I personally found insulting, more than anything else:</p>
+
+<blockquote><p>It is worth noting that the affected members who update their passwords and members whose passwords have not been compromised benefit from the enhanced security we just recently put in place, which includes hashing and salting of our current password databases.</p></blockquote>
+
+
+<p>So, they just recently started salting their hashes? Seriously?</p>
+
+<p>Storing passwords via unsalted SHA-1 is not only unsafe, it&#8217;s reckless. When you store user credentials, you have a responsibility to your users to keep their data safe - in this case LinkedIn failed, epicly. Had they bothered to think about security, or hired people that understood even the most basic principles of secure application development - this wouldn&#8217;t have happened.</p>
+
+<p>When properly implemented, hashed data shouldn&#8217;t be (practically) reversible to its original value - that is, after all, the purpose of hashing. Tweets like this though, make it painfully clear just how wrong LinkedIn got it:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>So far 3,427,202 passwords have cracked from LinkedIn List Almost 50%Its been about 24 hours - The longest? a 29 letter sentence from Bible</p>&mdash; KoreLogic(@CrackMeIfYouCan) <a href="https://twitter.com/CrackMeIfYouCan/status/210474428407103490">June 6, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>They violated the most basic security principles, but more importantly, they violated their users&#8217; trust.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/20/piracy-is-not-theft/">Piracy Is Not Theft</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-20T18:31:00-04:00" pubdate data-updated="true">May 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For many years now groups like the MPAA and RIAA have tried to convince the public that piracy (that is, copyright infringement) is theft - and many people have come to believe this, but it&#8217;s not true. In reality, copyright infringement is far more analogous to trespassing than it is to theft in its core concepts - and even moreso in the digital world.</p>
+
+<p>To make it clear, I am looking at this from a largely historical perspective, looking at the origins of copyright and how it was intended to be used. This gives us a better view than the current laws that have been greatly influenced and complicated by politics and money from those that have a vested interest in maximizing copyright protections and broadening its definitions.</p>
+
+<p>First, let&#8217;s look at the legal definition of theft - this specific definition is from British law, from which many early American laws derived.</p>
+
+<blockquote><p>A person is guilty of theft, if he dishonestly appropriates property belonging to another with the intention of permanently depriving the other of it&#8230;</p></blockquote>
+
+
+<p>Next, let&#8217;s take a look at this excerpt from the <a href="http://en.wikipedia.org/wiki/Copyright_Act_of_1790">Copyright Act of 1790</a>, the first copyright act at the federal level in the United States - which was heavily influenced by the 1710 <a href="http://en.wikipedia.org/wiki/Statute_of_Anne">Statute of Anne</a>:</p>
+
+<blockquote><p>&#8230;the author and authors of any map, chart, book or books already printed within these United States, &#8230;, who halt or have not transferred to any other person the copyright of such map, chart, book or books, share or shares thereof; and any other person or persons, &#8230;, shall have the sole right and liberty of printing, reprinting, publishing and vending such map, chart, book or books, for the term of fourteen years from the recording the title thereof in the clerk’s office&#8230;</p></blockquote>
+
+
+<p>Copyright, in its origin and intended forms provides something very simple: the right to control how a work (primarily a book) is copied. That&#8217;s it, that simple.</p>
+
+<p>So from a historical perspective, a copyright violation was to create a copy of book without the authors permission - theft would have been to take a book that the author printed, permanently depriving him of that asset. These are clearly not the same thing - despite the assertions of certain powerful groups.</p>
+
+<p>I&#8217;m not defending or down playing piracy, but let&#8217;s talk about it in the proper context - it&#8217;s a property rights issue, not theft.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/19/slipping-past-lastpass/">Slipping Past LastPass</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-19T13:54:00-04:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update:</strong> LastPass has confirmed that they&#8217;ll address this issue in the next release.</p>
+
+<p><strong>Update 2:</strong> LastPass has addressed this issue in their new v2.0 release. There is still a way to bypass the password prompt in Chrome, but they will address that in the next release. Overall, it looks like we can close the books on this one.</p>
+
+<p>I&#8217;m a big fan of <a href="https://lastpass.com/">LastPass</a> - it&#8217;s a great service that has impressed me every step of the way. Though it&#8217;s not perfect, and I&#8217;ve found a small hole that makes it easier for an attacker to get your passwords - if the following are true:</p>
+
+<ol>
+<li>The attacker has physical access to your PC.</li>
+<li>You&#8217;ve made the mistake of not locking your PC when you walk away.</li>
+<li>You&#8217;ve select the option to stay logged on - which happens to be a default, or, you&#8217;ve left your browser open (as I expect most people do).</li>
+</ol>
+
+
+<p><img class="center" src="http://adamcaudill.com/files/lastpass_default_opt.png"></p>
+
+<p>If all three of these are true (or your PC is otherwise compromised) - you probably shouldn&#8217;t expect much in the way of security, but LastPass does protect you - most of the time. If you try to copy or view a password, you&#8217;ll be prompted to enter your Master Password - but there&#8217;s one case that can easily expose your passwords without needing to know the Master Password.</p>
+
+<p>The issue is that LastPass allows you to change the address associated with a login without confirming your master password. This would allow an attacker to update an entry in your vault to a specially crafted page to echo the password - allowing the attacker to see the password and leave minimal tracks behind. I setup a <a href="http://adamcaudill.com/files/EchoLoginForm.html">special page</a> to test this, it echoes the password as soon as LastPass enters it, allowing me to see the password in a few seconds without providing the master password (it&#8217;s also possible to update the password without providing the Master Password, providing another opportunity for mischief).</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/lastpass_edit.png"></p>
+
+<p><strong>Automation</strong></p>
+
+<p>While I&#8217;ve not taken the time to build a tool to automate this - it would be a fairly simple process to do, just a matter of investing the time (which unfortunately I don&#8217;t have). The obvious solution would be to automate the GUI interaction to perform the following steps:</p>
+
+<ul>
+<li>Change the URL to a malicious page.</li>
+<li>Navigate to the page, and log the login data.</li>
+<li>Revert the URL to the original value.</li>
+</ul>
+
+
+<p>Using this method it would be possible to collect all of a users credentials within just a few minutes. It&#8217;s possible there may be a simpler &amp; faster route available by interacting directly with the plug-ins, though in looking at the exports and COM interfaces I didn&#8217;t see an obvious way to achieve this (which as a LastPass user, this makes me happy).</p>
+
+<p>For an attacker, one substantial upside is that there would be little evidence of the event - while the LastPass Vault will show that all entries have been &#8220;touched&#8221; recently, I would venture to say that very few users would actually notice.</p>
+
+<p>While this attack requires full access as the logged-in user, if a PC is otherwise compromised (perhaps as part of an APT type attack), it could allow an attacker to greatly expand their activities with a minimal time investment. This is the type of situation that could take a fairly small local information disclosure and turn it into a real nightmare scenario for a targeted user.</p>
+
+<p><strong>Solution</strong></p>
+
+<p>The simplest solution for this issue is to require Master Password verification if the URL changes, or at least require it if the domain changes. This should be a minor change for them and will eliminate this attack vector. Thankfully this is a minor issue, due to the three requirements required to pull this off - so I don&#8217;t believe there is too much risk due to this oversight.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/13/minipwner/">MiniPwner</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T16:24:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently finished building my first <a href="http://minipwner.com/">MiniPwner</a> - a tiny <a href="https://openwrt.org/">OpenWrt</a>-based system for pen-testing. At only 2.25 x 2.25 inches, the device plus battery is still extremely small - it easily fits in a pocket, and could be hidden anywhere.</p>
+
+<p>The device is based on the <a href="http://wiki.openwrt.org/toh/tp-link/tl-wr703n">TP-LINK TL-WR703N</a>, which uses a 400Mhz Atheros AR7240 CPU - not exactly a power-house, but enough power for standard pen-testing (or even just as a super-portable linux box). In cases where the 400Mhz CPU and 32MB RAM aren&#8217;t enough, you can easily use OpenVPN as a tunnel to run your tests remotely.</p>
+
+<p>The total investment for the build was only $38 - though next time I&#8217;ll pay a little extra and get the <a href="http://www.amazon.com/gp/product/B005FYNSZA/ref=as_li_ss_tl?ie=UTF8&amp;tag=adamcaucom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005FYNSZA">16GB drive</a> - mostly for extra room when working with logs. The 4GB drive used in the standard build has plenty of room for the software - but I&#8217;d rather have the extra room to work with.</p>
+
+<p>The build process was process was simple - thankfully the <a href="http://minipwner.com/index.php/minipwner-build">instructions</a> are quite good, though I did have to change a few things to make it all work.</p>
+
+<p>Step 1): To save looking, <a href="http://downloads.openwrt.org/snapshots/trunk/ar71xx/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin">here&#8217;s</a> a direct link to the OpenWrt image.</p>
+
+<p>Step 4): I formated the thumb drive by mounting it in a Ubuntu VM, and used <a href="http://gparted.sourceforge.net/">GParted</a> to delete the existing partition, and created a 512MB swap partition, then the rest is ext4.</p>
+
+<p>Step 16): Read step 17 first so you don&#8217;t feel so stupid for wasting time trying to figure out why step 16 doesn&#8217;t seem to do anything.</p>
+
+<p>Step 21): I use WPA2 on my network, so I had to edit the <code>/etc/config/wireless</code> a little differently:</p>
+
+<pre><code>config wifi-iface
+        option device   wlan0
+        option network  wan
+        option mode     sta
+        option ssid     &lt;ssid&gt;
+        option encryption psk2+tkip
+        option key &lt;password&gt;
+</code></pre>
+
+<p>More information about the wireless setup can be found <a href="http://wiki.openwrt.org/doc/uci/wireless">here</a>.</p>
+
+<p>Step 24): My local wireless network is in the 192.168.1.x range, so this wasn&#8217;t working for me. Seeing as changing the wireless doesn&#8217;t make sense for me (way too many static devices), I had to change the IP address of <code>eth0</code> to deal with the issue. I updated my <code>/etc/config/network</code> to look something like this:</p>
+
+<pre><code>config 'interface' 'lan'
+        option 'ifname' 'eth0'
+        option 'type' 'bridge'
+        option 'proto' 'static'
+        option 'ipaddr' '192.168.2.1'
+        option 'netmask' '255.255.255.0'
+</code></pre>
+
+<p>Once the change is made, you&#8217;ll need to execute <code>/etc/init.d/network restart</code> - then update your PC&#8217;s static IP address to &#8220;192.168.2.111&#8221; and reconnect your telnet session.</p>
+
+<p>Step 27): When executing the installs I was receiving this error:</p>
+
+<pre><code>opkg_install_cmd: Cannot install package &lt;package-name&gt;
+</code></pre>
+
+<p>To correct this error, I had to run <code>opkg update</code> - after this the installs started working fine.</p>
+
+<p>Step 27b): The install for <code>samba2-client</code> was failing, as there isn&#8217;t a package by that name - though <code>samba36-client</code> installed fine.</p>
+
+<p>Overall, it&#8217;s a great little setup - I&#8217;m quite pleased.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/13/gpg4win-idea/">Gpg4win & IDEA</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T03:22:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Huge PGP files, an ancient version of PGP, and errors every time they tried to decrypt a file - that was my completely unexpected challenge on Friday. Dealing with file processing issues really isn&#8217;t part of my job description, but I&#8217;m the closest thing my company has to an expert when it comes to encryption, so the task fell to me.</p>
+
+<p>After looking at the options and issues to get the server upgraded to a non-stone-age version of the PGP software, the easiest answer looked like decrypting the files with GPG - it wasn&#8217;t as easy as expected, but I did get some useful information that may help others.</p>
+
+<h3>IDEA</h3>
+
+<p>If it wasn&#8217;t for <a href="http://en.wikipedia.org/wiki/International_Data_Encryption_Algorithm">IDEA</a> this would have been easy, but the keys used for this transfer were old (thankfully the data isn&#8217;t sensitive) and IDEA it was. GPG <a href="http://www.gnupg.org/faq/why-not-idea.en.html">doesn&#8217;t support IDEA</a> due to various patents (most if not all of which are now expired), so that leaves us to use a rather old plug-in to fill in the gap. Unfortunately for me, the server that hosts up that plug-in is misconfigured, making it impossible to retrieve the file.</p>
+
+<p>Thankfully there are <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/gpg-idea.htm">other sources</a> (<a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, <a href="http://adamcaudill.com/files/ideadll.zip">mirror</a>).</p>
+
+<h3>Gpg4win</h3>
+
+<p>I used <a href="http://www.gpg4win.org/">Gpg4win</a> so I could decrypt the files from Windows - which had unexpected consequences. The current version of Gpg4win uses gpg version 2.0, which isn&#8217;t compatible with the IDEA plug-in - a fact that isn&#8217;t pointed out anywhere.</p>
+
+<p>The key to making this work was to use an older version of Gpg4win - I used <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">v1.1.4</a>, which thankfully is compatible with the plug-in. Though I do wish I found this out a few hours sooner than I did.</p>
+
+<h3>Setup</h3>
+
+<p>The setup for this is pretty simple, it&#8217;s documented in a few places, but here is a quick wrap-up:</p>
+
+<ol>
+<li>Install <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">Gpg4win v1.1.4</a></li>
+<li>Download the <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, and copy to <code>C:\Program Files (x86)\GNU\GnuPG\lib</code></li>
+<li><p>Update (or create if it’s not there) the <code>C:\Users\&lt;user&gt;\AppData\Roaming\gnupg\gpg.conf</code> file to include the following:</p>
+
+<p> <code>load-extension "C:\Program Files (x86)\GNU\GnuPG\lib\idea.dll"</code></p></li>
+</ol>
+
+
+<p>Once this is done, you can run <code>gpg --version</code> which will give you information about what algorithms are supported. It should look like this:</p>
+
+<pre><code>&gt;gpg --version
+gpg (GnuPG) 1.4.9 (Gpg4win 1.1.4)
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Home: C:/Users/Adam/AppData/Roaming/gnupg
+Supported algorithms:
+Pubkey: RSA, RSA-E, RSA-S, ELG-E, DSA
+Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH
+Hash: MD5, SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224
+Compression: Uncompressed, ZIP, ZLIB, BZIP2
+</code></pre>
+
+<p>If you note the first item on the &#8220;Cipher&#8221; line is IDEA, that means it worked. If you don&#8217;t see that - something went wrong, probably a bad path.</p>
+
+<p>This version is able to handle the large files that old versions of PGP can&#8217;t, and it allowed for a quick solution to the problem until we can upgrade the server.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/10/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

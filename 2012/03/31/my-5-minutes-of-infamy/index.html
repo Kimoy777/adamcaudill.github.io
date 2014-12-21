@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My 5 minutes of infamy - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="October 28, 2004 is a day I&#8217;ll remember for the rest of my life. I was coding away on the next version of a small product called GSuite that I &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2012/03/31/my-5-minutes-of-infamy">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">My 5 Minutes of Infamy</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-31T01:19:23-04:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>October 28, 2004 is a day I&#8217;ll remember for the rest of my life.</p>
+
+<p>I was coding away on the next version of a small product called GSuite that I was building for a tiny (and now nonexistent) software company called Imspire Software. It was a simple tool that provided some goodies for Gmail users, and had a few thousand users (it eventually died as a result of rapid API changes and new tools directly from Google). As I took a break to check my email, I saw something that shocked me:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>###############################################
+</span><span class='line'>######    Gmail suit decripting password     ##########
+</span><span class='line'>###############################################
+</span><span class='line'>os:win 2000 sp 4 ie 6.x whith all fixes
+</span><span class='line'>vendor url:http://www.imspire.com/gsuite/index.html
+</span><span class='line'>impact: disclosure user information decript password
+</span><span class='line'>
+</span><span class='line'>gmail suit is an application that offers different utilities for
+</span><span class='line'>contextual gmail and adds menus our explorer for as much being able to
+</span><span class='line'>consult as to send post office to gmail from this suit
+</span><span class='line'>
+</span><span class='line'>Gmail suit once installed leaves in the user folder:
+</span><span class='line'>(documents and settings\user_name\Application Data\GSuit\) creates a
+</span><span class='line'>called file 'settings.xml' if we watched within this file we see
+</span><span class='line'>several data:
+</span><span class='line'>
+</span><span class='line'>&lt;configuration&gt;
+</span><span class='line'>&lt;User&gt;
+</span><span class='line'>  &lt;Email&gt;User_name_login&lt;/Email&gt;
+</span><span class='line'>  &lt;Password&gt;ìóåPassword&gt;
+</span><span class='line'>&lt;/User&gt;
+</span><span class='line'>&lt;/configuration&gt;
+</span><span class='line'>
+</span><span class='line'>1 name of user of the account of gmail
+</span><span class='line'>2 password codified
+</span><span class='line'>
+</span><span class='line'>somehow password codified has the same length of characters that
+</span><span class='line'>password in flat text introduced by the  user to know like decoding as
+</span><span class='line'>simple the one whom serious as to pass character through character to
+</span><span class='line'>its 128 to him value ASCII(http://www.bbsinc.com/symbol.html) of
+</span><span class='line'>reducing and the turn out to watch in table ASCII and we will have the
+</span><span class='line'>correct character of password
+</span><span class='line'>
+</span><span class='line'>example:
+</span><span class='line'>
+</span><span class='line'>ì236-128)=108
+</span><span class='line'>108 = a
+</span><span class='line'>
+</span><span class='line'>another
+</span><span class='line'>
+</span><span class='line'>á225-128)=97
+</span><span class='line'>97=a
+</span><span class='line'>
+</span><span class='line'>ìóå loislane
+</span><span class='line'>
+</span><span class='line'>atentamente:
+</span><span class='line'>
+</span><span class='line'>Lostmon (lostmon(at)gmail.com)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>[The full email is still <a href="http://osvdb.org/ref/11/11176-gsuite.txt">posted</a> over at osvdb, and I make a point to go and look at it and the <a href="http://osvdb.org/show/osvdb/11176">details</a> once a year or so - just to remind myself of what can happen.]</p>
+
+<p>As I worked through the somewhat iffy English of the email I was in shock. I instantly understood the issue, I could see the code in my mind. It was written by another developer, and I could remember questioning its security - but I had other things I was supposed to be doing and didn&#8217;t worry about it. What a mistake that was.</p>
+
+<p>I went back to Visual Studio and found the code that caused it all:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='vbnet'><span class='line'><span class="k">Public</span> <span class="k">Function</span> <span class="nf">Crypt</span><span class="p">(</span><span class="k">ByVal</span> <span class="n">strText</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+</span><span class='line'>    <span class="k">Dim</span> <span class="n">strTempChar</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">i</span> <span class="ow">As</span> <span class="kt">Integer</span>
+</span><span class='line'>    <span class="k">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">To</span> <span class="n">Len</span><span class="p">(</span><span class="n">strText</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">If</span> <span class="n">Asc</span><span class="p">(</span><span class="n">Mid$</span><span class="p">(</span><span class="n">strText</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">128</span> <span class="k">Then</span>
+</span><span class='line'>            <span class="n">strTempChar</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'>      <span class="k">CType</span><span class="p">(</span><span class="n">Asc</span><span class="p">(</span><span class="n">Mid$</span><span class="p">(</span><span class="n">strText</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">128</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">ElseIf</span> <span class="n">Asc</span><span class="p">(</span><span class="n">Mid$</span><span class="p">(</span><span class="n">strText</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">128</span> <span class="k">Then</span>
+</span><span class='line'>            <span class="n">strTempChar</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'>      <span class="k">CType</span><span class="p">(</span><span class="n">Asc</span><span class="p">(</span><span class="n">Mid$</span><span class="p">(</span><span class="n">strText</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">128</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">End</span> <span class="k">If</span>
+</span><span class='line'>        <span class="n">Mid$</span><span class="p">(</span><span class="n">strText</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">_</span>
+</span><span class='line'>            <span class="n">Chr</span><span class="p">(</span><span class="k">CType</span><span class="p">(</span><span class="n">strTempChar</span><span class="p">,</span> <span class="kt">Integer</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">Next</span> <span class="n">i</span>
+</span><span class='line'>    <span class="k">Return</span> <span class="n">strText</span>
+</span><span class='line'><span class="k">End</span> <span class="k">Function</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Shifting values is obfuscation and little more, it looks like security - it might even smell like security, but it isn&#8217;t. It&#8217;s a false sense of safety, it was a mistake to implement and even more of a mistake to actually use in a consumer product.</p>
+
+<p>While this is only a local information disclosure, and not something far more serious like a remote arbitrary code execution issue - it was still enough to really shake me. I had always considered myself to be a good developer, and part of that is writing secure code. This was many things - but secure isn&#8217;t one of them.</p>
+
+<p>Thankfully, <a href="http://lostmon.blogspot.com/">Lostmon</a>, the finder of the issue was courteous enough to give me a couple of days advance notice before making it public. Allowing me plenty of time to get a notice up on the web site, and get the next (fixed) version ready for release. I switched from a glorified <a href="http://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a>, to <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard">Rijndael</a> - a significant step up I would say.</p>
+
+<p>Was anybody harmed by this issue? I don&#8217;t believe so - it was a relativity minor issue given what was needed to get the password. Was anybody impacted? Most certainly.</p>
+
+<ul>
+<li>Users: They now wonder if they are secure - did somebody steal their information?</li>
+<li>Company: The brand is weakened, less trusted, and questioned more.</li>
+<li>Developers: Confidence is lost, self doubts start creeping in.</li>
+</ul>
+
+
+<p>Because of this, every time I release an application I give much more thought to what I&#8217;m exposing and how it could be leveraged in an attack against my users. The only way I&#8217;ll agree to an application release is if I&#8217;m completely certain that I&#8217;m not risking a user&#8217;s security - if there are any unknowns, any doubts, then it&#8217;s not worth the risk. Just that simple.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-31T01:19:23-04:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/02/29/ccsrch-v1-0-7/" title="Previous Post: CCSRCH v1.0.7">&laquo; CCSRCH v1.0.7</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/04/05/quickpacket-hosting/" title="Next Post: QuickPacket Hosting">QuickPacket Hosting &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Evernote: Doing it (mostly) right - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="(Update: See here for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.) So &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/03/02/evernote-doing-it-mostly-right">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Evernote: Doing It (Mostly) Right</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-02T18:29:00-05:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>(Update: See <a href="http://arstechnica.com/security/2013/03/critics-substandard-crypto-needlessly-puts-evernote-accounts-at-risk/">here</a> for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.)</em></p>
+
+<p>So the big news today is <a href="http://evernote.com/corp/news/password_reset.php">Evernote being popped</a>; with 50m users and user base that often stores sensitive material - it certainly is a tempting target for many reasons.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Important: Evernote just implemented a service-wide password reset. Please read our post for details and instructions <a href="http://t.co/4LQABJBYnJ" title="http://ow.ly/icT02">ow.ly/icT02</a></p>&mdash; evernote (@evernote) <a href="https://twitter.com/evernote/status/307882426129055744">March 2, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>CNET was able to <a href="http://news.cnet.com/8301-1009_3-57572212-83/online-note-service-evernote-latest-firm-to-get-hacked/">get a quote</a> from Evernote on the issue, providing some extra insight compared to what&#8217;s in their announcement:</p>
+
+<blockquote><p>Our operations and security team caught this at what we believe to be the beginning stages of a sophisticated attack. They are continuing to investigate the details. We believe this activity follows a similar pattern of the many high profile attacks on other Internet-based companies that have taken place over the last several weeks.</p><footer><strong>Evernote Representative</strong> <cite>CNET</cite></footer></blockquote>
+
+
+<p>But there&#8217;s plenty being written about the hack - what I&#8217;m more interested in is the response. Let&#8217;s take a look at what&#8217;s happened (publicly, at least):</p>
+
+<p><em>Feb 28th:</em> Evernote&#8217;s Operations &amp; Security team notices potentially malicious activity.</p>
+
+<p><em>This Morning:</em> User&#8217;s started noticing that the client stopped syncing, complaining of a password issue. If a user logs into the web interface, they are prompted to set a new password.</p>
+
+<p><em>10:57AM EST:</em> Evernote posted a blog post and linked to it on Twitter (see above); within a few minutes their blog was returning a database connection error. Later visiting the blog returned a maintenance page, a database error, or a 503 error.</p>
+
+<p><em>11:57AM EST:</em> Evernote posted a new link and redirected the original blog post.</p>
+
+<p><em>1:45PM EST:</em> Received email notifying of incident and password reset. As this email was sent to ~50m users, it&#8217;s to be expected that there&#8217;s a large window during which users received it.</p>
+
+<p><em>What&#8217;s not happened yet:</em> Despite several requests from different people, they have yet to release any technical information on how the passwords were stored, beyond that they were hashed &amp; salted.</p>
+
+<p><strong>What&#8217;s Right &amp; What&#8217;s Wrong</strong></p>
+
+<p><em>Two days from finding issue to notifying users</em> - I&#8217;ve seen some people complain about this delay, but given that the priority is stopping the attack first, and the need to capture evidence as quickly as possible to give the best chance of understanding just what happened - I&#8217;d call this quite reasonable. Compared to some other companies that waited weeks or even months, I&#8217;d say they got this one right.</p>
+
+<p><em>User notification</em> - This is a hard one, on one hand you have the need to secure accounts as soon as possible while on the other, is letting users know why they are being required to change their password. I wish they had been able to get the email notification out sooner, but it was more important that they secure the accounts.</p>
+
+<p>Because of the delay in notifying users, it&#8217;s possible for some users to change their password and go on with their day without knowing why they needed to change the password - or that if they use that same password elsewhere it needs to be changed there as well. They should have made what happened clear when changing the password.</p>
+
+<p>Now, the email itself deserves to be called out - it&#8217;s known that the email addresses where in the stolen data, so emails claiming to be from Evernote require an extra look to make sure they aren&#8217;t phishing. Evernote, to add to the confusion, made a huge mistake: the links in the email don&#8217;t go to <code>evernote.com</code> - they go to <code>links.evernote.mkt5371.com/ctt?...</code>. That raises a few red flags&#8230;</p>
+
+<p><em>The blog post</em> - I love WordPress, but it&#8217;s not always the best choice when you are expecting <em>lots</em> of traffic. They really should have hosted the notice from a static page from the beginning instead of trying to keep WordPress up under that much pressure.</p>
+
+<p><em>The password reset process</em> - To reset the password, all you had to do was login with the existing password to the web site - the same password that was just stolen. No proof of identity at all. If the attackers were able to crack the hashed passwords, they could easily change the password themselves and access the account.</p>
+
+<p>This really should have been done better.</p>
+
+<p><em>Disclosing technical details of password storage</em> - As I stated above, this hasn&#8217;t happened despite numerous requests. While researchers need to know this to understand the risks of the passwords being cracked, unfortunately it&#8217;s possible that this information could help the attackers if they weren&#8217;t able to acquire source code that reveals the inner workings of their password handling.</p>
+
+<p>For example, if the attack vector was SQL injection, it&#8217;s possible to exfiltrate the data without being able to get to code.</p>
+
+<p><strong>Overall</strong></p>
+
+<p>It seems that they have handled this responsibly as possible; this isn&#8217;t the kind of event anybody is truly prepared for. Could it have been done better? Yes, in a few ways - but they could have done so much worse.</p>
+
+<p>It could be argued that in the grand scheme, <a href="http://markpercival.us/post/44391805072/evernote-doesnt-really-care-about-security">they don&#8217;t care about security</a> - from my experience, that&#8217;s the impression I&#8217;ve gotten.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-02T18:29:00-05:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/12/31/revisiting-snapchat-api-and-security/" title="Previous Post: Revisiting Snapchat API & Security">&laquo; Revisiting Snapchat API & Security</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/03/26/first-do-no-harm-developers-and-bad-apis/" title="Next Post: First, Do No Harm: Developers &amp; Bad APIs">First, Do No Harm: Developers &amp; Bad APIs &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

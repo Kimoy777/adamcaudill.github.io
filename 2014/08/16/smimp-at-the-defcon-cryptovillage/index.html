@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SMIMP at the DEFCON Crypto Village - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Last week I gave a lighting talk at the DEFCON CryptoVillage on SMIMP. The talk went over the basics of why the project is needed, and how the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/08/16/smimp-at-the-defcon-cryptovillage">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SMIMP at the DEFCON Crypto Village</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-16T00:00:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last week I gave a lighting talk at the DEFCON CryptoVillage on <a href="http://smimp.org/">SMIMP</a>. The talk went over the basics of why the project is needed, and how the specification works.</p>
+
+<p>Here are the slides:</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38040741?rel=0&startSlide=2" width="512" height="421" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p>Here is a rough transcript of the talk:</p>
+
+<p><em>Slide 1:</em> I&#8217;m Adam Caudill, I’m a developer and security researcher; I work on a number of different things, but my recent work has been around privacy and secure messaging.</p>
+
+<p>We all know that email security is a real problem, and thanks to a certain whistleblower we know those weaknesses are actively being exploited on a massive scale. I&#8217;m here to talk about some of the issues, and a project I&#8217;ve been working on called SMIMP. It&#8217;s a secure messaging protocol that aims to address the use cases of email, and to be a viable option to replace email as we know it.</p>
+
+<p><em>Slide 2:</em> This image illustrates the issues with email better than anything I&#8217;ve seen.</p>
+
+<p>It&#8217;s decades old, wasn&#8217;t designed for the threats that exist today, and as a result - this is what we&#8217;ve done to it. We&#8217;ve glued on various bits to make it look and feel like something it isn&#8217;t. STARTTLS helps protect from passive monitoring, but that&#8217;s only one attack vector out of so many - and even then, it&#8217;s often opportunistic, so it fails open and is subject to Man In The Middle attacks.</p>
+
+<p>GPG helps protect message content, but it&#8217;s hard for the average user to understand and doesn&#8217;t do anything for metadata.</p>
+
+<p>No matter what we try to glue on to email, it&#8217;s still a protocol that fails on many fronts.</p>
+
+<p><em>Slide 3:</em> Not only is email as it exists today not designed to provide any protection from state-level attackers, it doesn&#8217;t even provide any protection from a rogue sysadmin. Thanks to the various bits that have been glued on over the years, it&#8217;s a bit better when circumstances are ideal - but it still fails on so many fronts.</p>
+
+<p>For a messaging protocol to have any chance of being secure, privacy and security need to be evaluated and included in every design decision, from the very first day - attempting to glue them on after the fact leads to the kind of failure we&#8217;ve seen with email.</p>
+
+<p>I know I&#8217;m preaching to the choir here. We all know it&#8217;s a mess, we all know it&#8217;s a problem that needs to be addressed.</p>
+
+<p><em>Slide 4:</em> There are many people looking to make the situation better, and on many fronts, and these efforts  do help a little bit at a time - but often only for people that know how to leverage the tools, or can get others to implement solutions. For the vast majority of users, the current state of email security is pretty dismal.</p>
+
+<p>The question is, does it make sense, in the long term, to keep trying to find ways to improve email with security focused clients (such as Mailpile), better self-hosting setups, fighting companies to implement STARTTLS, and so on. Or, should we be pushing for a new protocol that&#8217;s built for security and privacy from the ground up? Avoiding the mistakes of the past, shedding the dead weight of obsolete protocols and techniques.</p>
+
+<p>There are huge compatibility and interoperability issues that have to be addressed for any protocol to be successful of course - when you are trying to replace a system used by billions, dealing with legacy systems is something of a big deal.</p>
+
+<p>The fact is, it <em>needs</em> to be replaced with something better, but even calling such an effort a massive undertaking is an understatement. But, if it is to be replaced, it needs to start with groups like this, so that what&#8217;s built will live up to the demands that will be placed on it.</p>
+
+<p><em>Slide 5:</em> Towards the goal of finding a better option for email, I began writing a specification. If I&#8217;m going to complain about a problem I should offer a solution, right?</p>
+
+<p>SMIMP is a general purpose messaging system designed with a few key goals in mind:</p>
+
+<ul>
+<li>Minimal metadata</li>
+<li>Encrypt as much as possible</li>
+<li>Covers existing email use cases</li>
+<li>Simple to use; normal users need to be able to use it</li>
+<li>Useable in corporate environments that have special handling requirements - such as HIPAA, SarbOx, etc. - This is a big advantage against options like bitmessage; there has to be a balance between security, and meeting the varying demands of the different environments this could be used in.</li>
+</ul>
+
+
+<p>Another goal is ease of implementation - on both the client and server ends; so it&#8217;s a REST-like web service, and the data is passed as JSON. This way developers can leverage well-tested code instead of writing everything from scratch. This also means that it&#8217;s easy for people to host their own server with a minimal time / effort investment.</p>
+
+<p><em>Slide 6:</em> SMIMP is made up of two major components, identity management and messaging. I believe it&#8217;s critical that these are combined into a single protocol to allow for key pain points in traditional email to be addressed - the largest being public key discovery. For GPG, this can be a real challenge for users, especially when trying to find the key for certain high-profile people; has anyone looked for Jacob Applebaum&#8217;s key? It&#8217;s Bad.</p>
+
+<p>Every user has one public signing key in their profile information - the key is tied to the user&#8217;s address, so to find a user&#8217;s key, all you need is their address. This provides a clean, simple way to identify the appropriate key for a user. Of course, ideally users should verify public signing keys via a trusted channel such as a phone call.</p>
+
+<p>To protect the integrity of the profile information, all changes are signed with the user&#8217;s signing key, and includes the hash of the prior change - creating a hash chain from the first, to the most recent change, allowing for simple validation that the records haven&#8217;t been altered.</p>
+
+<p>To protect against a malicious server, there are a couple checks that clients can perform:</p>
+
+<ul>
+<li>Pin the most recent signing key, if it disappears from the user&#8217;s profile, then the information is being truncated, possibly to force the use of a compromised key.</li>
+<li>Pin the original signing key from when the account was created; if that ever changes, that is a clear indication that the entire history for a user has been replaced.</li>
+</ul>
+
+
+<p>On the messaging side, all messages and most metadata is encrypted; the only data exposed is the data needed for the server to function. There are multiple message types, so not only does it support email like messages, it supports custom, application specific messages; this allows other message-centric applications to use SMIMP as a transport, making it easier to build secure messaging applications.</p>
+
+<p>There are a few anti-spam protections in place - seeing as the server won&#8217;t be able to scan content anymore.</p>
+
+<ul>
+<li>Dynamic hashcash-like proof of work</li>
+<li>Blacklists to reject everything from an address or domain</li>
+<li>Whitelists to allow addresses or domains to bypass the proof of work check.</li>
+</ul>
+
+
+<p>The envelope is JSON, for email, the message is JSON, the formats are extensible, making it easy to add new functionality.</p>
+
+<p>Everything is designed around a simple set of principles:</p>
+
+<ul>
+<li>Secure</li>
+<li>Private</li>
+<li>Easy to implement</li>
+<li>Hard to screw-up</li>
+</ul>
+
+
+<p><em>Slide 7:</em> So, what&#8217;s the status today&#8230;</p>
+
+<p>The specification is still a work in progress and is available from smimp.org, along with more background of what it is, and why it&#8217;s designed the way it is.</p>
+
+<p>I wouldn&#8217;t try building against it just yet, it&#8217;s still too immature, but if anybody wants to put their 2 cents in, the specification is on github and pull requests are welcome. The goal here is to get feedback, address issues, and try to build a community driven specification - my goal isn&#8217;t to write a specification myself and then push it on the world assuming it&#8217;s perfect.</p>
+
+<p>I&#8217;ve invested a fair bit of time into SMIMP, but it&#8217;s certainly not perfect, and the final solution to the email problem may not be anything like SMIMP - and I&#8217;m fine with that.</p>
+
+<p>What&#8217;s needed is more people looking not at how to we glue more things on email, but looking at how could we replace it. We need to get more people talking about possible solutions, for more people to contribute to specifications, or write new ones, to get more people focused on the one goal that will actually fix email security - replacing it.</p>
+
+<p><em>Slide 8:</em> I encourage you to look at the specification, to think about how replacing email could be achieved, and find people to work with to achieve this.</p>
+
+<p>If you have any questions, suggestions, or complaints - I&#8217;ll be in the area for a bit.</p>
+
+<p>Thanks!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-16T00:00:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/07/26/on-strong-identity-management/" title="Previous Post: On Strong Identity Management">&laquo; On Strong Identity Management</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/08/25/ietf-action-on-secure-email/" title="Next Post: IETF Action on Secure Email">IETF Action on Secure Email &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

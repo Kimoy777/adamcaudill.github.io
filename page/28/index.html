@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Brandon Paddock is writing what promises to to an interesting series on creating a Windows PowerToy on the Windows Shell Team blog. This series &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/28">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/01/04/building-a-windows-powertoy/">Building a Windows PowerToy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-01-04T22:38:14-05:00" pubdate data-updated="true">Jan 4<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://brandonlive.com/">Brandon Paddock</a> is writing what promises to to an interesting series on creating a Windows PowerToy on the <a href="http://shellrevealed.com/blogs/shellblog/archive/2007/01/04/Building-a-Windows-PowerToy-_2D00_-Part-1.aspx">Windows Shell Team blog</a>. This series promises to provide an interesting insight into the process of developing my favorite part of Windows: PowerToys. I&#8217;ve always looked forward to seeing the next generation of Power Toys after a new version of Windows is released; seeing the process of one being developed will be a real treat.</p>
+
+<p>This looks like one worth watching.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/12/30/iif-may-get-a-dose-of-legitimacy/">IIf() May Get a Dose of Legitimacy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-12-30T22:52:30-05:00" pubdate data-updated="true">Dec 30<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.panopticoncentral.net/">Paul Vick</a> announced a possible change for VB 9.0, <a href="http://www.panopticoncentral.net/archive/2006/12/29/18883.aspx">this change</a> would give the <a href="http://msdn2.microsoft.com/en-us/library/27ydhh0d(VS.80">IIF method</a>.aspx) the legitimacy it has long deserved. The issue with <code>IIf</code> is that it&#8217;s not a <a href="http://en.wikipedia.org/wiki/Minimal_evaluation">short-circuit operator</a>, which can severely limits its usefulness. Take the following example, that will throw an exception if <code>obj</code> is <code>Nothing</code>:</p>
+
+<blockquote><p><code>IIf(obj IsNot Nothing, obj.Property1, String.Empty)</code></p></blockquote>
+
+<p>Since <code>IIf()</code> is just a normal method, all parameters will be evaluated, regardless of weather <code>obj</code> is <code>Nothing</code>. This change would make <code>IIf</code> a true part of the language, a true ternary operator, instead of just another method.</p>
+
+<p><code>IIf</code> is largely avoided due to performance issues, and its limited usefulness for the reason above. Now that <code>IIf</code> <em>may</em> function as a true operator (though still wrapped in the cloak of a method), it will be a truly useful part of the language, one that I&#8217;ve long wished for.  I&#8217;ve always been a fan of <code>IIf</code>, it&#8217;ll be nice to be able to use it again, without the overheard and issues that has long went with its use.</p>
+
+<p>Mr. Vick is still soliciting comments on this change, so now is the time to <a href="http://www.panopticoncentral.net/archive/2006/12/29/18883.aspx#FeedBack">make your opinion known</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/12/23/assertiveness-for-software-developers/">Assertiveness for Software Developers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-12-23T21:59:34-05:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is a quick read from <a href="http://www.codinghorror.com/blog/">Jeff Atwood</a>  that all developers should read: <a href="http://www.codinghorror.com/blog/archives/000752.html"><em>Assertiveness for Software Developers</em></a>. Jeff brings up a great point, developers aren&#8217;t assertive enough; and that ends up biting us later (I know it&#8217;s bitten me a few times).</p>
+
+<p>This is well worth reading, and well worth some serious thought for next time your manager hands you an impossible deadline.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/12/23/holiday-schwag/">Holiday Schwag</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-12-23T17:27:37-05:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <a href="http://store.valleyschwag.com/">Valleyschwag</a> crew has released their 5th package, a <a href="http://valleyschwag.com/chronicles/2006/12/13/all-hail-the-holiday-schwag/">holiday package</a> no less. I ordered mine a few days ago, and it arrived today. While I believe the guys behind Valleyschwag made a <a href="http://adamcaudill.com/2006/10/05/not-not-a-good-idea/">real mistake</a>, it&#8217;s nice to see that they are still hard at it.</p>
+
+<blockquote><p><a href="http://www.flickr.com/photos/adamcaudill/331186229/"><img src="http://farm1.static.flickr.com/149/331186229_b2a9f03349_m.jpg" alt="Valleyschwag #5" /></a></p></blockquote>
+
+<p>This is a nice package, with goodies from <a href="http://www.guba.com/">Guba</a>, <a href="http://minglenow.com/">mingle</a> and <a href="http://www.webshots.com/">WebShots</a> (along with a few others). All in all, a rather nice package.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/12/21/openid-id-of-the-future/">OpenID: ID of the Future?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-12-21T20:50:43-05:00" pubdate data-updated="true">Dec 21<span>st</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading <a href="http://simonwillison.net/">Simon Willison</a>&#8217;s excellent <a href="http://simonwillison.net/2006/Dec/19/openid/">article on the topic</a> I spent a couple hours last night looking at the current <a href="http://openid.net/specs/openid-authentication-1_1.html">OpenID specification</a>, and after a fair bit of thought found the ideas behind <a href="http://openid.net/">OpenID</a> clever, but not what&#8217;s needed for the ID of the future.</p>
+
+<p><strong>What&#8217;s Right</strong></p>
+
+<p>OpenID has some really good ideas behind it. Here are a few that really stand out in my eyes.</p>
+
+<ul>
+<li><p>If you have a LiveJournal account for example, it just works, no extra sign-up, no additional work.</p></li>
+<li><p>The ID is easy to remember, a persons blog / home page URL is among the easiest things for a user to remember.</p></li>
+<li><p>De-centralized architecture that minimizes the potential for downtime.</p></li>
+<li><p>Anyone can operate an Identity Provider.</p></li>
+<li><p>Open, well documented protocol, as well as open-source libraries.</p></li>
+<li><p>ID may be portable from one Identity Provider to another without changes to the ID.</p></li>
+</ul>
+
+
+<p><strong>What&#8217;s Wrong</strong></p>
+
+<p>There are a number of issues I see with this system, while there are certain advantages; some of these disadvantages are quite disturbing. Here are the issues that strike me as most concerning (in no real order).</p>
+
+<ul>
+<li><p>SSL (HTTPS) is not <em>required</em> for any communications. This is a potential security issues, though not as large as could be due to the nature of the system.</p></li>
+<li><p>Requires editing HTML for users that do not use a hosting service that automatically adds the OpenID HTML code to the proper page(s).</p></li>
+<li><p>Not all hosting services allow the user to edit HTML directly.</p></li>
+<li><p>Does not offer a way to communicate enough information, such as would be used to expedite an e-commerce transaction. (This may be changed in future versions, or with extensions.)</p></li>
+<li><p>No trust relationships, only verifies a person controls a URL.</p></li>
+<li><p>No certification or audits for Identity Providers to ensure end-user security.</p></li>
+<li><p>Excessive bandwidth usage. Each login requires parsing at least one full HTML page to identify the Identity Provider server. If a user has <code>openid.delegate</code> included in their page, there will be another full page download/parse for each.</p></li>
+<li><p>HTML pages must be parsed to identify the Identity Provider server, parsing HTML can raise issues when it contains errors (as is quite common). Seeing as there is no standard library to perform the parsing, HTML with errors may work with some implementations but not with others.</p></li>
+<li><p>Anyone that gains access to edit the HTML of the identity URL can steal ones identity just by changing/adding an <code>openid.delegate</code>. This is a real risk in some shared hosting environments.</p></li>
+</ul>
+
+
+<p><strong>What We Need</strong></p>
+
+<p>The idea behind OpenID, to create a distributed identity system that is easy to use and can be used universally is a great idea, and one that should be pursued. If this goal could be achieved, it would be a project that would truly help to make the world a better place (at least it in that it would save everybody time). I have great respect for the work of all that have contributed to the OpenID project; it is a great idea and certainly has uses.</p>
+
+<p>To be truly useful though, an ID system needs to be easy to use for people of all skill levels, with and without web sites. It should provide an option to control how much information is shared with a web site (such as OpenID does), and should have the option to provide information such as shipping or billing information to minimize entering the same data in so many web sites. All the data should be transferred via SSL to ensure the highest level of security.</p>
+
+<p><strong>Features of The Future ID</strong></p>
+
+<ul>
+<li><p>The protocol should be completely open and well documented.</p></li>
+<li><p>The protocol should be XML based so as to be lightweight and easily implemented in any language.</p></li>
+<li><p>The ID should be easily used with not only web sites, but via desktop applications and other forms of software that require authentication.</p></li>
+<li><p>The organization backing the identity system should arrange for an optional certification program for Identity Providers to ensure that certain basic security policies are implemented. The requirements should be defined by the backing organization and the audit carried out by a third-party auditing firm.</p></li>
+<li><p>The IDs should be in an easy to remember format that is easy to type and makes translation back to the provider simple.</p></li>
+<li><p>Identity Provides should offer a way to verify that a user is who they claim, not just that they control an ID. This would be an option for users that would be quite useful in applications such as e-commerce use. (This would rely on the provider having a trusted signing certificate and following certain identity verification guidelines.)</p></li>
+</ul>
+
+
+<p>While some of these features cover far more ground than something like OpenID, this increased scope is needed to ensure that the ID service can be used in all the needed applications. While it is far more complex to add these extra features, the ability to use the resulting ID for almost any purpose makes it well worth it.</p>
+
+<p>I&#8217;m not proposing an alternative to OpenID, simply seeking feedback while passing my feedback on OpenID along for those interested.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/29/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/27/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

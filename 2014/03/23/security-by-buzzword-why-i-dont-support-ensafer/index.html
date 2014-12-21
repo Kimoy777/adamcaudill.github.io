@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Security By Buzzword - Why I don't support Ensafer - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Update: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Security by Buzzword - Why I Don't Support Ensafer</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T12:28:00-04:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>Update</strong>: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I&#8217;ll post further updates.</p>
+
+<p><a href="http://www.ensafer.com/">Ensafer</a> is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user&#8217;s files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product (<a href="https://www.boxcryptor.com/">Boxcryptor</a>), so I support the concept, but what about Ensafer&#8217;s implementation - does it provide the level of security desired?</p>
+
+<p><strong>Where are the details?</strong></p>
+
+<p>If you look at Ensafer&#8217;s site, you&#8217;ll find precious few details on what they are doing - plenty of security buzzwords, but no specifics. Let&#8217;s take a look at the <a href="https://ensafer.zendesk.com/hc/en-us/articles/200797297-Industry-standard-RSA-and-AES-cryptography">one page with details</a>:</p>
+
+<blockquote><p>Ensafer believes in standards and we don&#8217;t use any custom encryption algorithms. Our encryption platform is built on:</p><p>2048-bit RSA keys<br/>256-bit AES encryption<br/>2048-bit SSL<br/>PKCS#12 key containers<br/>X.509 certificates</p></blockquote>
+
+
+<p>We see some algorithm names - but what about key derivation, or symmetric encryption modes? How about hashing algorithms? How and where is your password stored? There are so many implementation details that are critical for security, yet aren&#8217;t talked about at all.</p>
+
+<p>In December of 2012 I started asking about details, they pointed me back to the web site - when I pushed for more, I was told that they were working on a whitepaper to explain their implementation:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> We have not published all technical details, but we&#39;re working on a whitepaper which will be published later. ^LS</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/275616564085149698">December 3, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>More than a year later, I&#8217;m still waiting to see those details.</p>
+
+<p><strong>So have they conducted an audit?</strong></p>
+
+<p>Since they haven&#8217;t released details publicly, if they conducted an external audit, that would bring some trust. So, recently I asked, and this is what they had to say:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> Thanks for your important question. There hasn’t been an audit yet due to work in progress, but will be done this year.</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/447156694041509889">March 21, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>After the delay in getting useful details published, I&#8217;m not hopeful that we&#8217;ll see the results of an audit in the near future.</p>
+
+<p><strong>TLS &amp; Safe Downloads</strong></p>
+
+<p>I really wish that the lack of details was the only concern - but it&#8217;s not. The first thing I noticed is that their web site doesn&#8217;t force TLS, so I manually switched to HTTPS, unfortunately the result wasn&#8217;t what I was hoping for:</p>
+
+<p><img class="center" src="/files/Ensafer_SSL_Error.png"></p>
+
+<p>Well, that&#8217;s not encouraging. Let&#8217;s take a look at the download link:</p>
+
+<pre><code>http://get.ensafer.com/mac/prod/Ensafer-1.0.8.dmg
+</code></pre>
+
+<p>When you try the same link over HTTPS, it&#8217;s even worse:</p>
+
+<p><img class="center" src="/files/ensafer_dl_no_tls.png"></p>
+
+<p>For a security product, I&#8217;d expect the download to be over HTTPS to prevent an attacker from redirecting a victim to a malicious version. This isn&#8217;t the kind of mistake I&#8217;d expect from people building advanced security tools. When you see issues like this, it&#8217;s common to see more problems, so this may just be the tip of the iceberg.</p>
+
+<p><strong>Is it trustworthy?</strong></p>
+
+<p>I would like to say that it&#8217;s safe to use, and that it lives up to the promises made - but they haven&#8217;t made enough information available for people to make an informed decision. If you add the lack of information with such basic mistakes as not making the download available over HTTPS, it doesn&#8217;t instill much confidence. Companies focused on security should know better.</p>
+
+<p>When you make decisions about what tools you use, you have to look at the full picture - and Ensafer is a great example of that. They&#8217;ve focused first on a pretty website, adding features - but not assuring trust. At this point, the only evidence of their security is the use of buzzwords.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T12:28:00-04:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/03/15/http-considered-harmful-the-need-for-negative-feedback/" title="Previous Post: HTTP Considered Harmful - The Need For Negative Feedback">&laquo; HTTP Considered Harmful - The Need For Negative Feedback</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/04/19/phpmyid-fixing-abandoned-oss-software/" title="Next Post: phpMyID: Fixing Abandoned OSS Software">phpMyID: Fixing Abandoned OSS Software &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

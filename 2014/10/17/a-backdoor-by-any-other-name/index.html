@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A backdoor by any other name... - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Yesterday James B. Comey, the Director of the FBI continued the propaganda campaign against encryption with a fresh batch of lies and misdirection. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/10/17/a-backdoor-by-any-other-name">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Backdoor by Any Other Name...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-17T17:14:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Yesterday James B. Comey, the Director of the FBI continued the propaganda campaign against encryption with a fresh batch of lies and misdirection. The FBI has been pushing to add backdoors to cryptosystems around the world - no matter how many people they put at risk in the process. Starting in the 1990’s, the FBI has been at the forefront of trying to make their job easier by endangering the world.</p>
+
+<p>What Comey did today was to lay the foundation for a renewed push for a new, expansive, <a href="https://en.wikipedia.org/wiki/Communications_Assistance_for_Law_Enforcement_Act">CALEA</a> type law that would give <em>governments</em> access - via court orders or surreptitiously, to all of your data. In 2013 they were pushing for <a href="https://freedom-to-tinker.com/blog/felten/calea-ii-risks-of-wiretap-modifications-to-endpoints/">CALEA 2</a>, which would have expanded their ability to secretly access your data in a massive way. Thankfully the Snowden documents put an end to that - at least for awhile.</p>
+
+<p>I use the term governments instead of specifying the US Government very intentionally. Under CALEA, certain systems must be compliant to be sold in the US - so companies add support, and then ship them all over the world instead of supporting two versions. So the FBI’s desire to have easy access to anything they want puts people around the world at risk. But surely nobody would abuse this, right?</p>
+
+<p>In 2004, thanks to support for this type of “lawful intercept” support, <a href="https://en.wikipedia.org/wiki/Greek_wiretapping_case_2004%E2%80%9305">Vodaphone in Greece was hacked</a> - tapping top government and civil leaders. Who did it still isn’t known, but many suspect that the US Government was behind it. Then there’s <a href="https://firstlook.org/theintercept/2014/05/19/data-pirates-caribbean-nsa-recording-every-cell-phone-call-bahamas/">SOMALGET</a>, the NSA program to collect all calls made in the Bahamas. The DEA was given access to their phone systems for the purposes of “lawful intercept” - again, a CALEA compliant setup, which was then used to collect everything they were able to get. These are just two high profile examples, there are many cases where researchers have found flaws in these systems, making them easy prey.</p>
+
+<p>For years, it’s been made clear that such backdoors were disasters - and it’s not just CALEA compliance either. There’s the infamous <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a> which would encrypt voice calls, but allow the government to easily listen in - but thanks to fatal flaws, anyone else could as well.</p>
+
+<p>Thanks to this, pretty much everybody agrees that backdoors are a bad idea, so the FBI had a great idea - call it something else!</p>
+
+<h3>A rose by any other name…</h3>
+
+<p>Comey, deciding that he shouldn’t have to deal with reality, and that the best way to address the public was misdirection:</p>
+
+<blockquote><p>We aren’t seeking a back-door approach. We want to use the front door, with clarity and transparency, and with clear guidance provided by law.</p></blockquote>
+
+
+<p>And by “front door”, he means some new backdoor into everything.</p>
+
+<p>He wants the ability to decrypt data, without having to get information from the suspect; which means adding a backdoor to systems, to allow them - and likely many others to get in. This is no different than the disastrous Clipper chip idea.</p>
+
+<p>The FBI is trying to misdirect the public, lead them to believe in some magical, secure backdoor that is abuse-proof. But when such an idea is being pushed by an organization that has so much abuse and illegal activity in its history - should anyone trust what they say?</p>
+
+<h3>Putting enforcement first</h3>
+
+<p>At one point Comey said something that I found shocking:</p>
+
+<blockquote><p>Are we so mistrustful of government—and of law enforcement—that we are willing to let bad guys walk away&#8230;</p></blockquote>
+
+
+<p>If you read the US Constitution, this is answered for him - in many places it is made clear, it’s better to let a criminal walk free than to infringe on the rights of the innocent. Preserving the rights of the people trumps everything.</p>
+
+<p>For law enforcement, this isn’t about justice, or the rule of law - this is about their power, their ability to get what they want, when they want it. If they put people in harms way in the process, that’s a price they are willing to let the public pay.</p>
+
+<h3>Only one government?</h3>
+
+<p>In the discussions about this, one major point keeps being missed - this isn’t just about the US Government, but about the governments all around the world. If companies are forced to add backdoors to products for the US market, you can bet that same backdoor will be shipped to every country they work in.</p>
+
+<p>So the danger is global - but as this is something that can be used for intelligence, as CALEA has been used for in the past, I’m sure this fact hasn’t escaped the attention of planners at the NSA. For the NSA, a CALEA 2 style law would give them easy access to expend their already vast - and illegal - collection operations. It would be a dream come true.</p>
+
+<p>There’s also another international component to this issue - many major tech companies operate in several countries, making them subject to local courts. What happens when they receive a court order for access to this backdoor and a gag order, to prevent them from talking about it? Suddenly American data will be at risk from foreign powers.</p>
+
+<p>There are so many issues opened up when backdoors are added, that one could talk for days and still not cover all the ways it could be abused.</p>
+
+<h3>Lies and mistrust</h3>
+
+<blockquote><p>Perhaps it’s time to suggest that the post-Snowden pendulum has swung too far in one direction—in a direction of fear and mistrust.</p></blockquote>
+
+
+<p>It seems that Comey is surprised that people don’t trust the government, after lies, deception, and violations of law are revealed. How shocking.</p>
+
+<p>The US Government has failed to uphold the Constitution, and technology companies have stepped up to provide a level of protection in the face of a Government that has ignored its obligations. I’m sure that the FBI would love to go back the old days - where we assume the government is doing the right thing while secretly violating the Constitution and ignoring international law. Anything to give them more power and control.</p>
+
+<h3>The New Crypto Wars</h3>
+
+<p>In the 1990s, the first crypto war was fought, and many believed that the public had won. What we are seeing is, without question, that a new war has started. Apple’s decision to change the way they encrypt phones wasn’t what started it - the writing had been on the walls for some time, it was just the ammunition they were waiting to go on the attack.</p>
+
+<p>Those that work with cryptography daily fighting to protect users, while the government is busy trying to protect what they want, over the rights and protection of the people. Expect it to get ugly.</p>
+
+<p>It’s going to be a fight, and what happens in the next year or two will be critical. If the FBI wins, privacy dies.</p>
+
+<p><em>(Sorry for the ranty nature of this post - it’s an issue I feel strongly about, and something that we must take action on.)</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-17T17:14:00-04:00" pubdate data-updated="true">Oct 17<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/10/03/on-the-ethics-of-badusb/" title="Previous Post: On The Ethics of BadUSB">&laquo; On The Ethics of BadUSB</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/10/19/on-nsa-proof-security/" title="Next Post: On NSA-Proof Security">On NSA-Proof Security &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

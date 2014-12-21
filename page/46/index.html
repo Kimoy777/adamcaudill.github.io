@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="When I buy something, I expect support. When I buy something expensive, I expect really good support. That may be asking too much, but that&#8217;s &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/46">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/17/wheres-the-service/">Where&#8217;s the Service?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-17T21:25:12-05:00" pubdate data-updated="true">Mar 17<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When I buy something, I expect support. When I buy something expensive, I expect really good support. That may be asking too much, but that&#8217;s just how I think. Now, when I contact the vendor for support, I expect to talk to somebody that understands the product. When I bring up an issue that gets me on a conference call with a Vice President and a Project Manager, I expect them to give me accurate data.</p>
+
+<p>Seems not everybody thinks that way.</p>
+
+<p>We recently installed a new communications system at work, this is basically two servers (one was an old database server we already had), and a bunch of wires. This $40,000 gadget manages our phone systems, one of its components is a <em>$14,000</em> reporting system (that&#8217;s what the old DB server was used for). This reporting system is a rather complex bit of software, one that I&#8217;ve spent the last 5 weeks trying to figure out.</p>
+
+<p>When I first heard we were installing this system, I was rather excited as it uses MS SQL Server as a back-end, so writing custom reports should be easy. So I dug into the (limited) documentation and set to work. After a couple days I had everything in place for my most important reporting project (it&#8217;s used to report details for part of a major banks customer service department). After a few bumps, it was done and was a bit of a hero for getting it running so quickly.</p>
+
+<p>There were several more bumps on the road, most due to odd, conflicting, or confusing data, but it looked like we were slowly getting there. About a week ago, an issue was brought to my attention, one of the numbers looked wrong, so I dug into the data deeper than ever. I almost had a heart attack. Two of the most important items on the report were wrong, wrong by almost 50%. Not good.</p>
+
+<p>So several phone calls later, we hit a dead end, we just can&#8217;t get any answers. So one of our executives asked if we had cut the check for the system, turns out we hadn&#8217;t. So the word went out to not pay until we could get some answers. Not too surprisingly, when the vendor found out we hand no intention of paying until it was working properly, they finally agreed to give us what we were asking for: answers.</p>
+
+<p>Those answers came in the form of a conference call with a Vice President and Project Manager from the company that created the software, if anybody understood this software, it would be them. I guess luck wasn&#8217;t on our side. Of all the information we gathered from them (and confirmed more today), here&#8217;s the parts that matter:</p>
+
+<ul>
+<li><p>The documentation is completely wrong</p></li>
+<li><p>They don&#8217;t understand the settings for their own product</p></li>
+<li><p>They don&#8217;t truly understand how their own product works</p></li>
+<li><p>They can&#8217;t answer a question without first blaming it on something else</p></li>
+</ul>
+
+
+<p>Somehow, I was hoping for real answers, not  more clueless people.</p>
+
+<p>After spending $14,000 on the system, as of yesterday, they wanted another $27,000 to create reports and add-ons to do what was promised when we bought it. That&#8217;s doesn&#8217;t include any user training, or the thousands we lost due to under billing because of the bad data.</p>
+
+<p>I expect good support, seems not everybody thinks that way.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/11/common-sense-email/">Common Sense Email</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-11T16:03:57-05:00" pubdate data-updated="true">Mar 11<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While reading a post on <a href="http://www.paulstovell.net/Posts/Post.aspx?postId=aae38564-acd9-4601-9b09-2252598f55f1">Paul&#8217;s</a> blog, I came across a rather interesting guide to &#8220;better email&#8221; - while I tend to disagree with ever deleting an email as author suggests often, this looks like a worthy read.</p>
+
+<p><a href="http://www.ssw.com.au/ssw/Standards/Rules/RulesToBetterEmail.aspx">SSW Rules to Better Email </a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/11/wordpress-update/">WordPress Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-11T14:04:39-05:00" pubdate data-updated="true">Mar 11<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday the WordPress team <a href="http://wordpress.org/development/2006/03/security-202/">announced</a> a new version of WordPress, the blogging software that powers this site, that resolves a couple security issues. So me, being the security conscious  person that I am, decided I had to upgrade, that was a <em>two hour</em> adventure.</p>
+
+<p>Due to some of the unique aspects of my theme, I&#8217;ve had to modify some of the core WordPress files, that turned out to be a bad idea. I had to convert all of the PHP &amp; JS files to DOS format (after finding a Windows version of unix2dos) and then convert the diff file to DOS format, then the patching began. Getting the patch to apply to my modified files turned out to be an interesting experience, to say the least. Though after about 30 minutes of tweaking, the patch finally applied cleanly.</p>
+
+<p>All in all, it took a little more than two hours, but now I&#8217;m secure again. :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/08/the-magician/">The Magician</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-08T22:32:07-05:00" pubdate data-updated="true">Mar 8<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://rentacoder.com/RentACoder/misc/BidRequests/ShowBidRequest.asp?lngBidRequestId=423023">Rent-A-Coder</a> attracts all types, to that I&#8217;m sure everybody can agree. It not only receives traffic from legitimate users seeking professional assistance and are willing to pay for it, but also from people seeking code gurus that work for peanuts. This is a case where even peanuts might be asking a bit much.</p>
+
+<p>Here&#8217;s the vital details:</p>
+
+<ul>
+<li><p>ASP-based solution.</p></li>
+<li><p>Converts HTML to a PDF file.</p></li>
+<li><p>Does not require the end user to have Acrobat installed.</p></li>
+<li><p>Can be completed in two hours.</p></li>
+</ul>
+
+
+<p>This project is flagged as an emergency, with a requested turn-around of <em>two hours</em>. Not leaving much time is he? The other note is that the page should generate a PDF, yet doesn&#8217;t require Acrobat be installed to view this file. That&#8217;s going to be a challenge.</p>
+
+<p>Now we come to the <em>piece de resistance</em>, the price: To quote our requester:</p>
+
+<blockquote><p>&#8220;as this is small job i will pay only 10 $&#8221;</p></blockquote>
+
+<p>What do people think, that we can work magic?!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/08/new-windows-xp-theme/">New Windows XP Theme</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-08T18:30:10-05:00" pubdate data-updated="true">Mar 8<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve stumbled upon a great new XP Theme (actually from Windows Media Centre 2005), seems this has been around for a while as a modified version of the WMC theme, though it&#8217;s now been officially released by Microsoft for XP.</p>
+
+<p>It&#8217;s certainly worth the <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=15373C73-D5F6-4AF0-B583-D633CB021612&amp;displaylang=en">download</a>.</p>
+
+<p><img src="http://adamcaudill.com/files/2006/03/royale_theme_thumb.png" alt="XP - Royale Screenshot" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/47/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/45/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

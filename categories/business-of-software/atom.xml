@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Business of Software | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/business-of-software/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Cringely is wrong about Java]]></title>
+    <link href="http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java/"/>
+    <updated>2011-10-15T15:47:52-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java</id>
+    <content type="html"><![CDATA[<p>A couple of days ago I was sent a link to Robert Cringely's latest treatise:  <em><a href="http://www.cringely.com/2011/10/the-second-coming-of-java/">The second coming of Java</a></em> - and to say I disagreed was a bit of an understatement. To me, it represents a fundamental flaw in his perception of developers, and more importantly the economics of software development.</p>
+
+<p>The key to Cringely's argument comes down to this:</p>
+
+<p>When SSDs gain enough capacity there will be a shift from the Ruby world back to the Java world. Not for prototyping, because, well, it’s prototyping. But simply because the statement “<strong>Ruby is <em>incredibly</em> slow but I don’t care because my database is slower</strong>” will no longer be true.</p>
+
+<p>What he's missing here is the real reason people use frameworks like Rails; it's not about it being Ruby, or being the latest cool thing - it's about developer productivity. That's it, and that's all there is to it - Rails allows a developer to do more in less time. That's one of the key reasons so many Java web developers jumped ship (though I can think of a few others), and what pushed Microsoft to invest so heavily in their <a href="http://www.asp.net/mvc">MVC framework</a>.</p>
+
+<p>I could fully rehash the argument, but in what I consider to be one of Jeff Atwood's best articles,  <em><a href="http://www.codinghorror.com/blog/2008/12/hardware-is-cheap-programmers-are-expensive.html">Hardware is Cheap, Programmers are Expensive</a></em>, he covers a key point to my argument - developer time is vastly more expensive than hardware. Atwood's take on the issue is clear:</p>
+
+<p>Clearly, <strong>hardware is cheap, and programmers are expensive</strong>. Whenever you're provided an opportunity to leverage that imbalance, it would be incredibly foolish not to.</p>
+
+<p>When there's a choice between developer productivity, and spending money on hardware - the conclusion should be the same. It's much cheaper to throw more hardware at a slower framework than it is to invest more developer time in a faster framework. For any non-trivial application, throwing more front-end servers at it will always be cheaper than slowing the development process down with a non-productivity-centric toolkit.</p>
+
+<p>It's simple economics; server hardware is getting faster and cheaper, developer time is only getting more expensive.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Microsoft & Skype: PR Failure?]]></title>
+    <link href="http://adamcaudill.github.com/2011/05/11/microsoft-skype-pr-failure/"/>
+    <updated>2011-05-11T02:44:32-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/05/11/microsoft-skype-pr-failure</id>
+    <content type="html"><![CDATA[<p>While looking at the reactions to Microsoft's <a href="http://www.microsoft.com/Presspass/press/2011/may11/05-10CorpNewsPR.mspx">acquisition of Skype</a>, I found one tweet that really stood out:</p>
+
+<p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>How you know you have a PR problem: As soon as you buy popular service X, their userbase starts posting alternatives <a href="https://twitter.com/search/%23skype">#skype</a> <a href="https://twitter.com/search/%23Microsoft">#Microsoft</a></p>&mdash; Ted Han (@knowtheory) <a href="https://twitter.com/knowtheory/status/68139224028819456">May 11, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div></p>
+
+<p>While many users are busy joking about names (personally my money is on "Microsoft Live Skype" - my only hope is that there isn't an "Ultimate Edition" or "<a href="http://twitter.com/#!/shanselman/status/68147795852394496">Unicorn Edition</a>" tacked to the end of the name) Microsoft has a significant problem, and I really hope they are looking at public reaction. Users are concerned; what will Microsoft do to the brand, and how will the brand and service change - users need to be reassured that what they love about the service won't go away.</p>
+
+<p>I use Skype on a daily basis, and for me this brings back memories of AOL's <a href="http://www.slate.com/id/2109615/">failed</a> acquisition of Nullsoft (the maker of WinAmp) in 1999, which took a great piece of software and a well-respected brand, and rendered it little better than RealPlayer (and don't get me started on the <a href="http://money.cnn.com/1998/11/24/technology/aol/">Netscape acquisition</a>). I can see this easily going down the same path; as the brand is diluted and merged with others to help boost their marketing goals, and the software is integrated tightly with other products (creating that tight, but invasive feel that the EU had so many issue with when they did it with IE); they could easily find themselves in the same position that <a href="http://www.businessweek.com/technology/content/oct2007/tc2007101_499889.htm">eBay did back in 2007</a>.</p>
+
+<p>Microsoft desperately needs to build their online brand to recover the <a href="http://techcrunch.com/2011/04/29/microsoft-internet-bloodbath/">billions that they are losing</a>, and I have to assume they see Skype as a key player in this quest; the question is can the keep their newly acquired user-base from jumping ship.</p>
+
+<p>I don't think Skype will live or die on technology at this point, I think PR is a far larger issue for them right now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[You can't fix stupid...]]></title>
+    <link href="http://adamcaudill.github.com/2011/05/10/you-cant-fix-stupid/"/>
+    <updated>2011-05-10T02:06:05-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/05/10/you-cant-fix-stupid</id>
+    <content type="html"><![CDATA[<p>For those outside of the IT field, developers are looked at as miracle workers - through us, business leaders think anything is possible (and they often see no reason why we can't work our latest miracle by the next morning). In reality though, we do work miracles; we save companies vast amounts of money every year through increased worker efficiency and automation, we enable new lines of business that wouldn't be possible otherwise, and reduce energy costs because we keep the office lights turned off. Well, that's more or less how they see us.</p>
+
+<p>But for all of the wonders we are responsible for, there is one thing we can't do (no matter what amazing powers some executives <em>think</em> we have to make them look better or earn them more bonuses):</p>
+
+<p><strong>You can't fix stupid.</strong></p>
+
+<p>I've often described development as being a professional problem solver, and we are often tasked with rather challenging problems to solve. Sometimes the problems are purely technical - making something new possible that previously was impracticable or even impossible, sometimes it's all about efficiency, other times it's about image and controlling how people see a company. When the problem is the user though, you know you're in for a rough day.</p>
+
+<p>I was recently given such a task - the users weren't listening to their supervisors and they wanted the software to force these users to do whatever it was that management told them they should be doing. I was given less than a week to find ways to make people that don't want to work, work.</p>
+
+<p>Basically, users fall into three simple categories:</p>
+
+<ul>
+<li><p>Power Users - these users understand software, and require little, if any instruction - more than anything, you give these users a tool and stay out of their way.</p></li>
+<li><p>Average Users - odds are, your mother or father falls into this category. They understand enough to get by, and with a little instruction they should have no trouble.</p></li>
+<li><p>Idiots* - odds are, you work with one of these users. You lead them by they hand, and show them exactly what to do - just in time for the boss to walk by and praise them for doing a good job (and 10 minutes later you find them playing in traffic, somehow defying <a href="http://en.wikipedia.org/wiki/Survival_of_the_fittest">Darwin</a> in the process).</p></li>
+</ul>
+
+
+<p>For users of the last category, there's just not much you can do.</p>
+
+<p>I always do my due diligence while building software; doing all I can to make it simple to use, flexible, and forgiving of user error. I always use extensive data validation, carefully worded instructions and dialogs, and do my best to follow the various best-practice guides for UI and UX; yet for all this effort and design - I can't write software that thinks for people or makes judgement calls based on business rules that only they know (probably because they make it up as they go).</p>
+
+<p>No matter how helpful or intelligent an application is, or how idiot-proof you think you've made it, reality is that you simply can't fix stupid - you can't take an incompetent person that refuses to think for themselves and turn them to into a great, productive asset. After years in this industry (which has made me just a little cynical [in the way that <a href="http://en.wikipedia.org/wiki/Sun">Sol</a> only seems little when compared to <a href="http://en.wikipedia.org/wiki/Betelgeuse">Betelgeuse</a>]), I've come to understand something rather disturbing: idiots keep getting better.</p>
+
+<p><em>Somewhere, right now, idiots are working to build even better idiots - and that's a really scary thought.</em></p>
+
+<p>We can make a user more efficient by automating tasks, providing better information, or helping to manage their workload - what we can't do is make them smarter, make them think through their actions, or force them to do what their managers tell them. Yet we are, at least on occasion, asked to fix this problem.</p>
+
+<p>Despite our best efforts as professionals and passionate developers; if a user won't think - we just can't fix it.</p>
+
+<ul>
+<li><ul>
+<li>I define an idiot about the same way I do someone that's lazy; they have no medical issues or legitimate handicap. They just don't want to think or work (probably both). Those that are handicap or have learning or medical issues are a very different story and not the target of this article; I donated time and services to charities that served the disabled for a number of years, I highly recommend that all developers do it - it's a very rewarding experience to see your work make somebody's life better and it teaches you quite a bit about how people interact with technology.</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[...and thanks for the fish (Twitter v. Developers)]]></title>
+    <link href="http://adamcaudill.github.com/2011/03/12/and-thanks-for-the-fish-twitter-v-developers/"/>
+    <updated>2011-03-12T00:20:59-05:00</updated>
+    <id>http://adamcaudill.github.com/2011/03/12/and-thanks-for-the-fish-twitter-v-developers</id>
+    <content type="html"><![CDATA[<p>On March 11, 2011, Twitter said goodbye to some of it's most loyal and passionate users.</p>
+
+<p>In a message on their <a href="http://groups.google.com/group/twitter-development-talk">Development Talk</a> group entitled "<a href="http://groups.google.com/group/twitter-development-talk/browse_thread/thread/c82cd59c7a87216a#">consistency and ecosystem opportunities</a>" - they make their position clear: we no longer need you. To demonstrate this, let me point out a couple quotes that deserve attention:</p>
+
+<p>_Twitter will provide the primary mainstream consumer client experience on phones, computers, and other devices by which millions of people access Twitter content (tweets, trends, profiles, etc.), and send tweets.
+_</p>
+
+<p>and this gem:</p>
+
+<p><em>More specifically, developers ask us if they should build client apps that mimic or reproduce the mainstream Twitter consumer client experience.  <strong>The answer is no.</strong></em></p>
+
+<p>Independent, 3rd-party developers have driven the progression of Twitter from an extremely simplistic <a href="http://techcrunch.com/2006/07/15/is-twttr-interesting/">group SMS</a> service, to a massive and near ubiquitous communications system used by millions of people.  As Twitter fought whales and struggled to keep servers running, outside developers were busy building new and better ways of using the service; now that Twitter has gone mainstream and is doubtlessly looking at revenue options, they've told these passionate users that they are no longer needed. The users that evangelized the service, and promoted it in countless ways, suffering through long stretches of downtime remained loyal and energized, pushing the service to become ever more. Twitter, it seems, has no such loyalty to these champions and flag bearers of the service.</p>
+
+<p>If you want to build an application in the Twitter ecosystem now, you are pushed to the outskirts; building integration as a feature of a separate system (such as <a href="http://instagr.am/">instagram</a>), or building for vertical markets which by definition have a far more limited market potential. This is a dangerous time to be invested in an application that relies too much on Twitter; there's no telling what or who they will ban next.</p>
+
+<p>Twitter did make it fairly clear that existing applications can "continue to serve your user base" - there was an air of a threat in the statement, and given their willingness to <a href="http://techcrunch.com/2011/02/18/twitter-suspends-ubermedia-clients-ubertwitter-and-twidroyd-for-violating-policies/">ban a major player</a>, I can't help but think that they will be looking for chances to kill off other clients, to further solidify their control of what users see.</p>
+
+<p><em>If you are an existing developer of client apps, you can continue to serve your user base, but we will be holding you to high standards to ensure you do not violate users’ privacy, that you provide consistency in the user experience, and that you rigorously adhere to all areas of our Terms of Service.</em></p>
+
+<p>At best Twitter has alienated passionate users, at worst they have inspired new competition with the goal of being what many of these users wanted Twitter to become, before they shifted their strategy away from the core service, to controlling and enforcing a sub-par user experience.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Being Fair]]></title>
+    <link href="http://adamcaudill.github.com/2010/12/01/being-fair/"/>
+    <updated>2010-12-01T04:47:14-05:00</updated>
+    <id>http://adamcaudill.github.com/2010/12/01/being-fair</id>
+    <content type="html"><![CDATA[<p>A couple weeks ago, Hulu Plus shed its beta tag and opened to the general public. When this happened, the price was changed and a new one week free trial was added. As a subscriber I was happy to hear about the new lower price, though my main concern was wondering if I would have to contact them to get the price break. That concern, thankfully, was the furthest thing from the truth. Soon as the news hit, I found this email waiting for me:</p>
+
+<blockquote><p>Hi Adam,</p>
+
+<p>Thanks for being a subscriber to Hulu Plus during our preview. We've been hard at work refining our existing applications, expanding the device coverage, and extending our content lineup. We're excited to announce that today, Hulu Plus is officially launching out of preview to anyone in the U.S. for just $7.99/month.</p>
+
+<p><strong>Since we're now offering Hulu Plus at a lower price than during the preview, your subscription fee has been lowered to $7.99/month, and on your next billing cycle, we'll also automatically credit your account with $2 for each month you've been a subscriber. In addition, we're now offering a 1-week free trial for all new subscribers, so we'll be issuing you an additional $2 credit since the free trial wasn't in place during the preview.</strong></p>
+
+<p>We'd also like to offer you the chance to earn more free time on Hulu Plus by helping us spread the word about the service. For each friend who uses your referral to join Hulu Plus, we'll give you two additional weeks for free, up to 20 weeks total. Each of your referrals will also receive two weeks free on their first month's subscription. For more details on the program and to invite your friends, please visit <a href="http://www.hulu.com/profile/referrals?src=plus_launch">http://www.hulu.com/profile/referrals</a>.</p>
+
+<p>Since the Hulu Plus preview began, we've added more TV shows and extended our device coverage. To see which shows are now available on Hulu Plus, please visit <a href="http://www.hulu.com/plus?src=plus_launch#content">http://www.hulu.com/plus/content</a>, and to see the most up-to-date list of supported TVs, Blu-ray players, set-top boxes, mobile phones, and tablets visit <a href="http://www.hulu.com/plus?src=plus_launch#devices">http://www.hulu.com/plus/devices</a>.</p>
+
+<p>Thanks for supporting us during the Hulu Plus preview. We look forward to continuing to work on your behalf in the months and years to come.</p>
+
+<p>The Hulu Team</p></blockquote>
+
+<p>(emphasis added)</p>
+
+<p>This is about the last thing I expected, especially from a company <a href="http://en.wikipedia.org/wiki/Hulu#History">backed</a> by major media players. I would hate to imaging how much this move cost them, but I know it bought them plenty of loyalty; it's rare to to see companies go out of their way to be fair to customers, and even moreso when it means giving back money they've already collected. If you want to win the hearts of your customers, this is the kind of move that does it.</p>
+
+<p>If you change the price on a service or application – how will you current customers feel? Will they feel cheated for being an early adopter? It's your current customers that will bring in new customers; make sure you take good care of them, and they will take care of you.</p>
+]]></content>
+  </entry>
+  
+</feed>

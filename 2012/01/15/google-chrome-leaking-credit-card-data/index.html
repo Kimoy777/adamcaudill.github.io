@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Google Chrome Leaking Credit Card Data? - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="While testing ccsrch I noticed a number that looked familiar - my debit card number. Now, being just a little paranoid, I don&#8217;t leave such &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2012/01/15/google-chrome-leaking-credit-card-data">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Google Chrome Leaking Credit Card Data?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-15T11:04:04-05:00" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While testing <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a> I noticed a number that looked familiar - my debit card number. Now, being just a little paranoid, I don&#8217;t leave such information on my system unencrypted - so seeing it was a real surprise. But, here&#8217;s the real kicker: it was on my work PC, where it never should have been. But there it was, plain as day, in clear text. I spent a couple of minutes staring at the log trying to figure out why it would be there.</p>
+
+<p>Once I saw the file name, a sinking feeling set in and the answer became clear:</p>
+
+<p><code>%LocalAppData%\Google\Chrome\User Data\Default\Sync Data\SyncData.sqlite3</code></p>
+
+<p>So it turns out that it&#8217;s Chrome&#8217;s <a href="http://support.google.com/chrome/bin/answer.py?hl=en&amp;answer=165139">sync</a> feature that was saving my information, but why?</p>
+
+<p>It turns out that auto-fill data is synced with your Google account (if you&#8217;re signed in and have the feature enable, of course), and all of the computers you&#8217;re signed into - and by default, without the benefit of encryption. This file may contain any number of things, from mine I was able to extract the following:</p>
+
+<ul>
+<li><p>Full name</p></li>
+<li><p>Wife&#8217;s full name</p></li>
+<li><p>Date of birth</p></li>
+<li><p>Wife&#8217;s date of birth</p></li>
+<li><p>Social Security Number</p></li>
+<li><p>Multiple credit card numbers</p></li>
+<li><p>Multiple <a href="http://en.wikipedia.org/wiki/Card_security_code">CVV</a>s</p></li>
+<li><p>Bank account &amp; routing number</p></li>
+</ul>
+
+
+<p>Not to mention quite a few websites I&#8217;ve been to, various addresses, employer&#8217;s name and other various useful tidbits. All would be quite useful for identity theft or highly targeted <a href="http://www.fbi.gov/news/stories/2009/april/spearphishing_040109">spear phishing</a>.</p>
+
+<p>Now am I saying that syncing auto-fill is bad? No, not at all. It&#8217;s a very useful time saver, but what takes it from a useful feature to security issue is the fact that by default, this <em>data isn&#8217;t encrypted</em>!</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0905.png" alt="Default Encryption Setting" /></p>
+
+<p><strong>What are the risks?</strong></p>
+
+<p>There are three significant risks I see here:</p>
+
+<p>1). <em>Disclosure to less trusted systems</em>:</p>
+
+<p>In my case, I trust my laptop to be secure; between full-disk encryption (via <a href="http://www.truecrypt.org/">TrueCrypt</a>) and other precautions, I know that I don&#8217;t have too much to worry about. On the other hard, my Work PC is on a corporate domain, and at least a couple dozen people have permissions sufficient to access my personal files - thus I don&#8217;t trust anything too valuable on it.</p>
+
+<p>Now because of the fact that this feature is insecure by default, that data is exposed to a less trusted system.</p>
+
+<p>It can also go the other way: a number of auto-fill entries on my personal laptop were from forms on internal-only applications that only my Work PC would be able to access. So this means that anything sensitive could be leaked to home networks which are typically less secure than corporate environments. If you routinely handle PCI, HIPAA, or other restricted information - this type of leak could be a major issue.</p>
+
+<p>2). <em>Spear Phishing</em>:</p>
+
+<p>Let&#8217;s imagine a scenario:</p>
+
+<p>You work for a defense contractor and I work for a foreign intelligence agency. Through some targeted attacks I manage to penetrate your home network, but have been unable to make it into your corporate network. I grab the sync database file from your home PC and extract one of your credit card numbers. I look up the <a href="http://en.wikipedia.org/wiki/List_of_Issuer_Identification_Numbers">IIN</a> and find out what bank the card is from. Once I have this, I build a PDF with the latest 0day exploit, and send it with a convincing subject line:</p>
+
+<p>&#8220;Important Information about your Bank of America credit card ending in 7850&#8221;</p>
+
+<p>Normally you&#8217;d dismiss it as spam, but the last four digits are right - so you open it, just in case. The exploit kicks in. I&#8217;m in, you&#8217;re done.</p>
+
+<p>This is just a simple and quite contrived example, but you get the idea.</p>
+
+<p>3). <em>Google Data Mining</em>:</p>
+
+<p>This is the most paranoid and least likely, but given Google&#8217;s issues in controlling their people - I&#8217;d say not impossible (see <a href="http://www.electronista.com/articles/10/05/14/google.admits.collecting.wi.fi.info.with.map.team/">here</a>, <a href="http://searchengineland.com/google-chrome-page-will-have-pagerank-reduced-due-to-sponsored-posts-106551">here</a>, and <a href="http://boingboing.net/2012/01/13/google-fraudulently-solicits-f.html">here</a>).</p>
+
+<p>Just for a moment, think about the fact that Google has the following:</p>
+
+<ul>
+<li><p>Your account data (name, email, etc.)</p></li>
+<li><p>Your auto-fill history (see the list of items I found above)</p></li>
+<li><p>Tons of data from their other services</p></li>
+<li><p>At least parts of your browsing history, if not much of it</p></li>
+<li><p>Engineers that truly enjoy data mining</p></li>
+</ul>
+
+
+<p>Most other companies I wouldn&#8217;t worry about; but knowing the people that Google hires, and the skill they have in manipulating data - you know that some engineer is using his <a href="http://www.nytimes.com/2007/10/21/jobs/21pre.html">20% time</a> to do this (or at least is wishing he could).</p>
+
+<p>If nothing else, I know if I worked at Google - playing with this data would be tons of fun. ;)</p>
+
+<p><strong>Want to see your data?</strong></p>
+
+<p>To see what Chrome has saved about you, download <a href="http://sqlitebrowser.sourceforge.net/">SQLite Browser</a>, and open the file I mentioned above. Go to the &#8220;Browse Data&#8221; tab, and select the &#8220;metas&#8221; table. What you&#8217;re looking for is in the &#8220;non_unique_name&#8221; column (among other places). You should see something like this:</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0942.png" alt="SQLite Browser" /></p>
+
+<p>The entries starting with &#8220;autofill_entry&#8221; are the ones you are interested in, but you&#8217;ll likely find some of the other records interesting as well. If you see the word &#8220;encrypted&#8221; then your data is already encrypted, and you don&#8217;t have to worry about this.</p>
+
+<p><strong>Is this a vulnerability in Chrome?</strong></p>
+
+<p>No, not at all - though it was a mistake. They should encrypt everything by default, and not provide an option to do otherwise. There&#8217;s no reason to expose users to a potential security risk when there&#8217;s a simple fix. Security isn&#8217;t something users should have to opt-in to; and unless there&#8217;s a very good reason, they shouldn&#8217;t have a way to opt-out.</p>
+
+<p>Google should understand security and the value of the data they hold; they should be more responsible for the data (and faith) people give them.</p>
+
+<p><strong>How do I fix it?</strong></p>
+
+<p>Simple, from the &#8220;wrench&#8221; menu, select Options -> Personal Stuff -> Sign In -> Advanced&#8230; and then under &#8220;Encrypted data types&#8221; select &#8220;Encrypt all synced data&#8221; - and that&#8217;s it. After a couple of minutes the entries that were visible before will now just display the word &#8220;encrypted.&#8221;</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0944.png" alt="Encrypt all data" /></p>
+
+<p>You can also go a step further, and get rid of this data by disabling auto-fill to ensure that potentially sensitive information isn&#8217;t being persisted when it shouldn&#8217;t be.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-15T11:04:04-05:00" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/security/'>Security</a>, <a class='category' href='/categories/technology/'>Technology</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/14/ccsrch-v1-0-5/" title="Previous Post: CCSRCH v1.0.5">&laquo; CCSRCH v1.0.5</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/23/poking-mykonos/" title="Next Post: Poking Mykonos">Poking Mykonos &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

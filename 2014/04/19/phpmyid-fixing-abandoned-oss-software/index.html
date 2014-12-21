@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>phpMyID: Fixing Abandoned OSS Software - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="phpMyID is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/04/19/phpmyid-fixing-abandoned-oss-software">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">phpMyID: Fixing Abandoned OSS Software</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-19T12:43:00-04:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://siege.org/phpmyid">phpMyID</a> is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in 2008. Despite this, there&#8217;s still quite a few people that use it, because it&#8217;s the easiest single-user OpenID option available.</p>
+
+<p>Unfortunately, the author didn&#8217;t follow best practices when building the software, and as a result multiple security flaws were introduced. In 2008, a XSS was identified and never fixed (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2008-4730">CVE-2008-4730</a>), in the years since then it seems the software has been below the radar. While conducting a pentest I discovered a previously undocumented XSS (CVE-2014-2890) - which left me with a dilemma - what to do about it?</p>
+
+<p>Looking at the code, I found a couple more potential XSS vulnerabilities - so the application clearly needed help, and if the author won&#8217;t do it, somebody should. Ethically, it seemed wrong to disclose the issue but leave users to fend for themselves; full disclosure is normally used to push a vendor into acting - but in this case it&#8217;s assured that there won&#8217;t be a vendor response.</p>
+
+<p><strong>Fixing The Code</strong></p>
+
+<p>One good thing is if a OSS project is abandoned, anyone can prepare patches to fix the issues. So, <a href="https://github.com/adamcaudill/phpMyID">that&#8217;s what I did</a>. I&#8217;ve committed fixes for both CVE-2008-4730 and CVE-2014-2890, as well as a couple potential issues. In both cases, the fix was easy:</p>
+
+<p>CVE-2008-4730:</p>
+
+<pre><code>@@ -439,7 +439,7 @@ function checkid ( $wait ) {
+    if ($trust_root != $return_to) {
+        // the urls are not the same, be sure return decends from trust
+        if (! url_descends($return_to, $trust_root))
+ -          error_500('Invalid trust_root: "' . $trust_root . '"');
+ +          error_500('Invalid trust_root: "' . htmlentities($trust_root, ENT_QUOTES) . '"');
+
+    }
+</code></pre>
+
+<p>CVE-2014-2890:</p>
+
+<pre><code>@@ -568,7 +568,7 @@ function checkid_setup_mode () {
+   */
+  function error_mode () {
+    isset($_REQUEST['openid_error']) 
+ -      ? wrap_html($_REQUEST['openid_error'])
+ +      ? wrap_html(htmlentities($_REQUEST['openid_error'], ENT_QUOTES))
+        : error_500();
+  }
+</code></pre>
+
+<p>I&#8217;ve only given the code a quick once-over, so there may be other issues - if I find time for a more thorough review I may commit additional fixes.</p>
+
+<p><strong>Status of phpMyID</strong></p>
+
+<p>I&#8217;m not taking over the maintenance of the project, I simply don&#8217;t have time to do the cleanup needed to bring it up to reasonable standards. I&#8217;d love to see somebody with a little time to invest cleanup the code and add more defensive measures. It needs some help, that&#8217;s clear.</p>
+
+<p>One of the things I&#8217;d love to see fixed is the way the user&#8217;s password is stored - it&#8217;s currently stored in the <code>MyID.config.php</code> file as a MD5 hash - making brute-forcing entirely too easy. Hopefully <a href="http://tools.ietf.org/html/draft-ietf-httpauth-digest-06">this</a> Internet Draft will be adopted soon, obsoleting <a href="http://tools.ietf.org/html/rfc2617">RFC 2617</a>, which will be an easy win to improve the security of the password when in transit. There are many places where the code can be improved by somebody with a little time.</p>
+
+<p>If you are using phpMyID today, replace the <code>MyID.php</code> file with the one <a href="https://raw.githubusercontent.com/adamcaudill/phpMyID/master/MyID.php">here</a> (it also fixes compatibility with PHP 5.4).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-19T12:43:00-04:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/" title="Previous Post: Security By Buzzword - Why I don't support Ensafer">&laquo; Security By Buzzword - Why I don't support Ensafer</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/06/27/the-sinking-ship-of-email-security/" title="Next Post: The Sinking Ship of E-Mail Security">The Sinking Ship of E-Mail Security &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

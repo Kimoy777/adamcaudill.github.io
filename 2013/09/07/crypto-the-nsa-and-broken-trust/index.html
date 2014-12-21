@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Crypto, the NSA, and Broken Trust - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/09/07/crypto-the-nsa-and-broken-trust">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Crypto, the NSA, and Broken Trust</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-07T13:04:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&#8217;s so elegantly simple, and yet massively complex. There is one very unusual property of crypto though - it&#8217;s not about math or modes, it&#8217;s about trust.</p>
+
+<p>Cryptography, especially as used today, has the most wonderful dichotomy of trust; on one hand crypto, by it&#8217;s very nature, is used in situations lacking trust. On the other hand, to use crypto - you have to trust <em>it</em>.</p>
+
+<p><strong>But what is <em>it</em>?</strong></p>
+
+<p>This is where it gets interesting - let&#8217;s say you download <a href="https://gpgtools.org/">GPGTools</a>, what is the chain of trust?</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Has anyone verified that the GPGtools binaries match the source code in the git repo? Im suspicious of any binary distro encryption software</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376323020945514497">September 7, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Here are some of the assumptions you make:</p>
+
+<ul>
+<li>The installer hasn&#8217;t been tampered with by your ISP, their upstream providers, GPGTools&#8217; hosting company - all of this is before you even get to the people that publish the software! (And <a href="http://projects.wsj.com/surveillance-catalog/documents/267850-merged-finfly-isp/">we know</a> this is being done.)</li>
+<li>The computer that built the binaries was free of malware, or other backdoors.</li>
+<li>The source code hadn&#8217;t been modified, without the knowledge of the developers.</li>
+<li>The developers haven&#8217;t modified the code to add backdoors or otherwise weaken it.</li>
+<li>The compiler, and other libraries are free of backdoors or other modifications that would alter the resulting binaries.</li>
+</ul>
+
+
+<p>I could keep going, there&#8217;s more - but this gives an idea of how many things you have to trust, not just for every application - but every update of every application.</p>
+
+<p>You could compile everything yourself of course (if its&#8217; open source that is) - but that only eliminates some of these issues. You still have to trust the code, you still have to trust the developers.</p>
+
+<p>Well, you could audit the code. If you know what you&#8217;re doing - in a few weeks you might actually get to the point of installing it. Which of course there will be a new update by then.</p>
+
+<p><strong>Can&#8217;t we fix this?</strong></p>
+
+<p>Some of it, yes - maybe. The Tor project is working on <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">deterministic builds</a>, which would allow others to verify that the released binary was built from a specific revision of the source code. This is really quite impressive, and something I truly applaud them for.</p>
+
+<p>But, that doesn&#8217;t lessen the trust you place in the developers and the code - is it actually secure? Are the even competent to be doing this work? Are there bugs in the PRNG or key negotiation that could render the system pointless? There&#8217;s still a level of trust required.</p>
+
+<p><strong>What about the standards?</strong></p>
+
+<p>We know that the government has sought to backdoor or weaken systems in the past - from things like the <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a>; enforcing illogical <a href="https://en.wikipedia.org/wiki/Export_of_cryptography_in_the_United_States">export restrictions</a>, and trying to enact laws that <a href="https://www.eff.org/deeplinks/2013/05/caleatwo">mandate backdoors</a> (CALEA II). Now, we know that after losing the Crypto Wars of the past, they have been clandestinely doing the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">same things</a>.</p>
+
+<p>The single biggest things that you have to trust are the protocols and algorithms - they are the most complicated, and only a very small number of people are qualified to audit them. If the protocol has deliberate flaws, or there is a backdoor in the algorithm - then your efforts to encrypt may be for nothing.</p>
+
+<p><strong>It&#8217;s all about trust</strong></p>
+
+<p>I&#8217;m a big fan of taking the &#8220;trust no one&#8221; position (and myself least of all), but in the world of cryptography - it&#8217;s not that easy. Every step of the way you have to trust something.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gentmatt">@gentmatt</a> way to miss the point. &quot;Trust, but verify&quot;. The time for verification has come.</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376328406419243008">September 7, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Some say, &#8220;trust but verify&#8221; - and I agree, but full verification is a dream that will never come true. There aren&#8217;t enough qualified eyes, and there is far too much code involved.</p>
+
+<p>With so many dependencies, so many places something malicious could be injected - it&#8217;s almost overwhelming to think about. In my eyes though, the first, and most important step, is helping people to understand the chain of trust. If you understand what you are trusting, you can ask better questions.</p>
+
+<p>There is no real answer here - this is simply how it is. If you use cryptography (and you aren&#8217;t a true cryptographer), then you&#8217;re taking a leap of faith. If you didn&#8217;t compile all of the tools you use - it&#8217;s an even bigger leap.</p>
+
+<p><em>[N.B. This article was planned before the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">Bullrun</a> story broke; but in light of these recent events, I&#8217;ve updated and published this ahead of schedule.]</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-07T13:04:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/09/06/making-android-nsa-proof/" title="Previous Post: Making Android NSA-Proof">&laquo; Making Android NSA-Proof</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/09/08/worried-about-the-nsa-try-aes-512/" title="Next Post: Worried about the NSA? Try AES-512!">Worried about the NSA? Try AES-512! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

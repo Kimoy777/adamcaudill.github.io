@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/software/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[QuickPacket Hosting]]></title>
+    <link href="http://adamcaudill.github.com/2012/04/05/quickpacket-hosting/"/>
+    <updated>2012-04-05T02:00:21-04:00</updated>
+    <id>http://adamcaudill.github.com/2012/04/05/quickpacket-hosting</id>
+    <content type="html"><![CDATA[<p>Continuing my long tradition of frequent host changes, this site has been moved to yet another host. In the last few years I've used a <a href="http://adamcaudill.com/2009/06/13/switching-hosts-again/">number of hosts</a> (and there's a couple more not on that list), and this time I'm taking a bit of a risk - so it'll be interesting to see how this one works out. I've switched to a company called <a href="https://www.quickpacket.com/">QuickPacket</a>, but this time instead of a fairly beefy VPS, I've went in the opposite direction - absolute minimum.</p>
+
+<p>The new plan is about as minimal as it gets:</p>
+
+<ul>
+<li><p>128 MB RAM</p></li>
+<li><p>256 MB vSwap</p></li>
+<li><p>1 CPU Cores</p></li>
+<li><p>20 GB Disk Space</p></li>
+<li><p>500 GB Bandwidth</p></li>
+</ul>
+
+
+<p>The upside to this? It's only <a href="http://www.lowendbox.com/blog/quickpacket-4-99m-128mb-xen-in-atlanta-ga-san-jose-ca-openvz-also-available/">$15 per year</a>.</p>
+
+<p>So I'm going to focus on caching and optimization to keep this and a few other sites running on such lean resources. In theory WordPress should be able to do it, if it can't - I'll switch to <a href="http://octopress.org/">Octopress</a> or something similar.</p>
+
+<p>This should be a fun challenge.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IIN (BIN) Database]]></title>
+    <link href="http://adamcaudill.github.com/2012/01/26/iin-bin-database/"/>
+    <updated>2012-01-26T12:58:28-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/01/26/iin-bin-database</id>
+    <content type="html"><![CDATA[<p>An <a href="http://en.wikipedia.org/wiki/ISO/IEC_7812">Issuer Identification Number</a> (IIN, more commonly called a BIN) is the first 6 digits of a credit or debit card, and it identifies the bank that issued it - and if you want to know if a number is a real credit card or just a bunch or random digits, it's a huge help. While credit card numbers do use the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> (mod 10 check) to see if the number is valid, it still produces a huge false-positive rate.</p>
+
+<p>For an application like <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a>, having this data available would be very handy to reduce false positives when scanning a large file system (scanning a large server produces a huge number of possible hits), but for what I would call fairly misguided reasons, the official registrar of these numbers (the <a href="http://www.aba.com/default.htm">ABA</a>) doesn't make this data publicly available. As a result many people have pulled together what data they could find and made it freely available.</p>
+
+<p>So I'll add my name to that list.</p>
+
+<p>I've pulled data from many public sources (sorry, I didn't keep very good notes as to the sources) and cleaned it up to a reasonable point. All told, I've probably spent 40 hours or more cleaning this data up and getting it to a usable state. It contains over 60,000 entries, including major credit cards (Visa, MasterCard, Amex, Discover) as well as a few merchant entries.</p>
+
+<p>Each record contains the following:</p>
+
+<ul>
+<li><p>IIN</p></li>
+<li><p>Type (Mastercard, Visa, Visa Credit, etc.)</p></li>
+<li><p>Name (Issuer name)</p></li>
+<li><p>Length</p></li>
+</ul>
+
+
+<p><strong>Data Quality</strong></p>
+
+<p>It's not perfect. It's from public sources so there may be errors, and there are some duplicates from cases where I wasn't able to determine who the IIN actually belongs to. I've also updated for name changes and mergers where possible, but I'm sure I've missed a few and there are some where the assets where split, so I don't know who the correct owner actually is (Washing Mutual being the leading example of this).</p>
+
+<p>In general, I leaned to the side of caution - so if I didn't know for sure, I left the duplicate in.</p>
+
+<p>If you need absolutely correct data - contact the ABA, they are the only source that can give you the completely accurate listing. If you need to have a decent idea if a number is valid for most cases - I would say that this data is good enough.</p>
+
+<p><strong>Warranty</strong></p>
+
+<p>Just to make it really, really, really clear: There is no guarantee that this data is accurate, that it won't cause to lose your job, cause your house to burn down, or cause Rebecca Black's <a href="http://www.youtube.com/watch?v=kfVsfOSbJY0">Friday</a> to get stuck in your head (yup, you're welcome ;)).</p>
+
+<p><strong>Copyright</strong></p>
+
+<p>Based on my understanding of US copyright law, it is my understanding that this data is not subject to copyright as it is a compilation of facts and doesn't constitute an original expression. Thus, to the best of my knowledge, this data is in the public domain.</p>
+
+<p><strong>Download</strong></p>
+
+<p><a href="http://adamcaudill.com/files/2012/01/IIN.zip">Here</a> (zipped CSV)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Cringely is wrong about Java]]></title>
+    <link href="http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java/"/>
+    <updated>2011-10-15T15:47:52-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/10/15/why-cringely-is-wrong-about-java</id>
+    <content type="html"><![CDATA[<p>A couple of days ago I was sent a link to Robert Cringely's latest treatise:  <em><a href="http://www.cringely.com/2011/10/the-second-coming-of-java/">The second coming of Java</a></em> - and to say I disagreed was a bit of an understatement. To me, it represents a fundamental flaw in his perception of developers, and more importantly the economics of software development.</p>
+
+<p>The key to Cringely's argument comes down to this:</p>
+
+<p>When SSDs gain enough capacity there will be a shift from the Ruby world back to the Java world. Not for prototyping, because, well, it’s prototyping. But simply because the statement “<strong>Ruby is <em>incredibly</em> slow but I don’t care because my database is slower</strong>” will no longer be true.</p>
+
+<p>What he's missing here is the real reason people use frameworks like Rails; it's not about it being Ruby, or being the latest cool thing - it's about developer productivity. That's it, and that's all there is to it - Rails allows a developer to do more in less time. That's one of the key reasons so many Java web developers jumped ship (though I can think of a few others), and what pushed Microsoft to invest so heavily in their <a href="http://www.asp.net/mvc">MVC framework</a>.</p>
+
+<p>I could fully rehash the argument, but in what I consider to be one of Jeff Atwood's best articles,  <em><a href="http://www.codinghorror.com/blog/2008/12/hardware-is-cheap-programmers-are-expensive.html">Hardware is Cheap, Programmers are Expensive</a></em>, he covers a key point to my argument - developer time is vastly more expensive than hardware. Atwood's take on the issue is clear:</p>
+
+<p>Clearly, <strong>hardware is cheap, and programmers are expensive</strong>. Whenever you're provided an opportunity to leverage that imbalance, it would be incredibly foolish not to.</p>
+
+<p>When there's a choice between developer productivity, and spending money on hardware - the conclusion should be the same. It's much cheaper to throw more hardware at a slower framework than it is to invest more developer time in a faster framework. For any non-trivial application, throwing more front-end servers at it will always be cheaper than slowing the development process down with a non-productivity-centric toolkit.</p>
+
+<p>It's simple economics; server hardware is getting faster and cheaper, developer time is only getting more expensive.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[bbPress 2.0 (beta-1) released!]]></title>
+    <link href="http://adamcaudill.github.com/2011/05/21/bbpress-2-0-beta-1-released/"/>
+    <updated>2011-05-21T14:25:18-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/05/21/bbpress-2-0-beta-1-released</id>
+    <content type="html"><![CDATA[<p>This morning, the latest version of my favorite forum software, bbPress, was <a href="http://bbpress.org/blog/2011/05/bbpress-2-0-beta-1/">released</a>. While this is a beta and not a final release, it's still a major event for the project: this release is in the form of a WordPress plugin, instead of a stand-alone application as it's been in the past. In December 2009 <a href="http://adamcaudill.com/2009/12/16/bbpress-is-the-end-near/">I wrote about this decision</a> - and at the time I was rather disappointed with the change in direction; but now my views have changed. I'm also excited to see that <a href="http://ma.tt/">Matt</a> and his company, <a href="http://automattic.com/">Automattic</a> have decided to invest the time and money needed to make this happen; there for a while it looked like bbPress really was dying.</p>
+
+<p>Thanks to services like <a href="http://stackexchange.com/">StackExchange</a> and its numerous clones, it seems the days of standalone forums are numbered; when combined with the increasing strength of WordPress as a full-blown CMS, this move actually makes a lot of sense.</p>
+
+<p>I'm excited both as a user and developer - this opens many new doors from both perspectives, and will certainly increase adoption of the software, as integration with the current version is <a href="http://adamcaudill.com/2011/03/06/bbpress-wordpress-3-1-registration-issues/">a bit tricky</a>.</p>
+
+<p>Congratulations to the entire team on this release; it really is a major milestone for the project!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VB6: Not so open source]]></title>
+    <link href="http://adamcaudill.github.com/2011/05/20/vb6-not-so-open-source/"/>
+    <updated>2011-05-20T02:33:23-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/05/20/vb6-not-so-open-source</id>
+    <content type="html"><![CDATA[<p>Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world:</p>
+
+<p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Microsoft announces to mvps at <a href="https://twitter.com/search/%23msteched">#msteched</a> that VB6 will be released as open source on codeplex end of june! w00t</p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71287262842859520">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div></p>
+
+<p>Needless to say, that's not an announcement that anybody was expecting, but given the talk going on at the time - and the high-profile people talking about it, there wasn't much reason to doubt. Announcing a product that has been dead for years is going open source would certainly be a strategy shift for Microsoft, but does it make any sense? <a href="http://twitter.com/#!/kevindente">Kevin Dente</a> of <a href="http://herdingcode.com/">Herding Code</a> fame certainly thought that Microsoft had better things to release:</p>
+
+<p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Instead of VB6 I'd rather see MS open source IE6. Then at least we could build a standalone version of it.</p>&mdash; Kevin Dente (@kevindente) <a href="https://twitter.com/kevindente/status/71292995185553408">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div></p>
+
+<p>Shortly after the initial tweet, <a href="http://www.dougseven.com/">Doug Seven</a>, the Director of Product Management, Visual Studio Tools &amp; Languages, <a href="http://twitter.com/#!/dseven/status/71316722854002688">replied</a> asking Roy Osherove (the original poster) to email him. Hmm, it's starting to smell like something odd is going on. A couple of hours later, Doug set the story straight:</p>
+
+<p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>The rumors of VB6 going open source are simply not true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; dseven (@dseven) <a href="https://twitter.com/dseven/status/71352709785198592">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div></p>
+
+<p>To which, Roy then tried to unset:</p>
+
+<p><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>RT @<a href="https://twitter.com/dseven">dseven</a>: The rumors of VB6 going open source are true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71355603611680769">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div></p>
+
+<p>It's worth pointing out that Roy Osherove currently has a full ten-times the followers that Doug Seven has, meaning his altered retweet was seen by more people (at least initially). For several hours word was going around, and accepted by a number of people who thought Microsoft was actually going to open the code to VB6 (including journalists who were too busy writing articles to do any fact checking) - all based on one person who made it all up.</p>
+
+<p>Lesson here: be careful about what you re-tweet, it's easy to endorse a lie as several people unwittingly did today (<a href="http://twitter.com/#!/blowdart">@blowdart</a> summed it <a href="http://twitter.com/#!/blowdart/status/71370740934524928">rather well</a>).</p>
+]]></content>
+  </entry>
+  
+</feed>

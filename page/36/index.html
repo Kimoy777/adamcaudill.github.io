@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Microsoft&#8217;s Chris Lovett (of System.Xml fame) has released XML Notepad 2006 - a simple, easy to use, and free, XML editor. For those that &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/36">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/09/03/xml-notepad-2006/">XML Notepad 2006</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-09-03T14:26:19-04:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://adamcaudill.com/files/2006/09/sc22708156232.png"><img src="http://adamcaudill.com/files/2006/09/sc22708156232b.png" alt="XMLNotepad 2006" /></a> Microsoft&#8217;s Chris Lovett (of System.Xml fame) has released <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=72d6aa49-787d-4118-ba5f-4f30fe913628&amp;DisplayLang=en">XML Notepad 2006</a> - a simple, easy to use, and free, XML editor. For those that regularly work with XML, an editor of this type can be an invaluable addition to your toolbox.</p>
+
+<p>XML Notepad offers a basic set of features, great for those quick jobs where using an IDE or a more full-featured application would be overkill. While XML Notepad doesn&#8217;t offer a great range of features, it does offer some of the most important features needed to get the job done.</p>
+
+<p>As a real bonus, XML Notepad was released complete with its design documentation and source code. Always nice to take a peak under the hood of the projects Microsoft releases.</p>
+
+<p>The only major gripe I have with this tool is the lack of a syntax-highlighted viewer for the XML source. In fact, it uses its non-XML cousin, Notepad to view the underlying XML. Thankfully, as this project was released with source, it should be easy to add a few new features such as this.</p>
+
+<p>For those interested, here&#8217;s the feature overview:</p>
+
+<ul>
+<li><p>Tree View synchronized with Node Text View for quick editing of node names and values.</p></li>
+<li><p>Incremental search (Ctrl+I) in both tree and text views, so as you type it navigates to matching nodes.</p></li>
+<li><p>Cut/copy/paste with full namespace support.</p></li>
+<li><p>Drag/drop support for easy manipulation of the tree, even across different instances of XML Notepad and from the file system.</p></li>
+<li><p>Infinite undo/redo for all edit operations.</p></li>
+<li><p>In place popup multi-line editing of large text node values.</p></li>
+<li><p>Configurable fonts and colors via the options dialog.</p></li>
+<li><p>Full find/replace dialog with support for regex and XPath.</p></li>
+<li><p>Good performance on large XML documents, loading a 3mb document in about one second.</p></li>
+<li><p>Instant XML schema validation while you edit with errors and warnings shown in the task list window.</p></li>
+<li><p>Intellisense based on expected elements and attributes and enumerated simple type values.</p></li>
+<li><p>Support for custom editors for date, dateTime and time datatypes and other types like color.</p></li>
+<li><p>Handy nudge tool bar buttons for quick movement of nodes up and down the tree.</p></li>
+<li><p>Inplace HTML viewer for processing xml-stylesheet processing instructions.</p></li>
+<li><p>Built-in XML Diff tool.</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/08/09/hosting-woes-and-down-time/">Hosting Woes and Down Time</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-08-09T00:04:21-04:00" pubdate data-updated="true">Aug 9<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the last couple days my various web sites have seen far more downtime than normal. My hosting provide, <a href="http://radicalv.com/">Radical Vision</a> has apparently been having issues with the MySQL server that powers not only this blog, but even their <em>support system</em>.</p>
+
+<p>Yep, you heard me right, the support system that you have to use to contact them about any issues relies on MySQL, the very same instance that everybody else uses. The same one that was down for several hours today. What&#8217;s the point of a support system if you can&#8217;t report issues?</p>
+
+<p>Yesterday&#8217;s outage was blamed on a bad script being ran by another user, as for today, I&#8217;ve yet to hear a word.</p>
+
+<p>When I opened my account with RadicalV almost three years ago, you could simply email a support address and expect a response within a couple minutes. Then, &#8220;to provide better support&#8221; they disabled this simple support system and replaced it with a web page. Now, this is easy to use, and I&#8217;m sure that it makes their lives easier, but what about the life of the customers on days like today?</p>
+
+<p>Now, I still firmly believe that RadicalV is the best hosting service I&#8217;ve used, and I&#8217;m still impressed with the support. Where many hosting services respond to support questions within a day, RadicalV typically responds within an hour or two. I guess like all good companies, they grow up and change focus. The days of the 5 minute support response are over.</p>
+
+<p>It&#8217;s too bad, and if the downtime continues as it for the last month or two, perhaps my $35 a month will go to someone else.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/08/08/vbnet-2005-performance-issues/">VB.NET 2005 Performance Issues</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-08-08T00:49:39-04:00" pubdate data-updated="true">Aug 8<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Seeing slowdowns in large VB 2005 projects? Well, I think I just found <a href="http://www.panopticoncentral.net/archive/2006/08/03/13539.aspx">the answer</a>. There&#8217;s now a <a href="http://support.microsoft.com/kb/920805/en-us">QFE released</a> that may help address these issues. One of the applications I maintain is a 25,000 line solution made up of 9 projects, I&#8217;m hoping this fix will resolve the issues we&#8217;ve seen compiling it (not to mention the frequent <a href="http://www.paulstovell.net/Posts/Post.aspx?postId=5d7312bc-80fa-4ce3-b69e-12d55857d502">compiler</a> <a href="http://support.microsoft.com/kb/915038/en-us"> crashes</a>).</p>
+
+<p>Here&#8217;s the list of symptoms addressed:</p>
+
+<ul>
+<li><p>You experience a slow response time when you use single-step debugging. For example, the response time is slow when you press F10 to step into a line of code.</p></li>
+<li><p>You experience a slow response time when the Error List or the Task List is updated by Visual Studio 2005.</p></li>
+<li><p>You experience a slow response time when you use the IntelliSense feature.</p></li>
+</ul>
+
+
+<p>Once I hear back from Microsoft support, I&#8217;ll post details if it makes any difference.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/07/30/wordpress-204/">WordPress 2.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-07-30T15:41:45-04:00" pubdate data-updated="true">Jul 30<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It&#8217;s upgrade time again, <a href="http://wordpress.org/development/2006/07/wordpress-204/">WordPress 2.0.4</a> has been <a href="http://wordpress.org/download/">released</a> (<a href="http://markjaquith.wordpress.com/2006/07/30/wordpress-204-upgrade-changed-files-zip-changes-diff-changed-files-list/">changed files list &amp; zip</a>), and after a fairly painless upgrade (<a href="http://codex.wordpress.org/Upgrading_WordPress#Upgrade_2.0.3_to_2.0.4">instructions</a>, though I didn&#8217;t follow the method they suggest), seems quite stable. This release sports over <a href="http://trac.wordpress.org/query?status=closed&amp;milestone=2.0.4">60 changes</a>, clearing up a fair number of small issues, as well as a few security fixes.</p>
+
+<p>If you have a WordPress powered blog, it&#8217;s worth the upgrade.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/07/22/what-it-takes-to-be-a-great-developer/">What It Takes to Be a Great Developer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-07-22T14:20:35-04:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently a programmer I know decided that it was time for a career change, leaving the IT field entirely. This gave me cause to think; what does it take to be a great developer. Many people go through school believing they have what it takes, only to receive a rude awaking once they enter the real world.</p>
+
+<p>Before I go on, I think it&#8217;s important to define what I mean by developer, and the differences between a developer and a programmer. Here are a few key aspects that every great developer most possess:</p>
+
+<ul>
+<li><p>Is able to take a very basic list of requirements and develop a stable and maintainable application design and architecture.</p></li>
+<li><p>Understands that working with end users is critical in creating great software.</p></li>
+<li><p>Has an intense desire to not just learn, but to know everything about the field they work in.</p></li>
+<li><p>Loves software, and creating it.</p></li>
+</ul>
+
+
+<p>There are many programmers, but developers are fewer but add far more value than a programmer. <a href="http://software.ericsink.com/entries/No_Great_Hackers.html">Eric Sink</a> defines a developer as &#8221;<em>programmers who also contribute in non-coding ways</em>&#8221; - I think it&#8217;s important to understand that coding is just one part of creating great software, and the great <a href="http://www.acm.org/ubiquity/views/v7i07_pfeiffer.html">user experience</a> that goes with it.</p>
+
+<p>But I digress, back to the topic. When new programmers come out of school, they often have little idea of what the industry is truly like. They often believe that they have a strong understanding of the industry, the methods and techniques used, and what life will be like working as a programmer. The reality they expect many times doesn&#8217;t resemble the reality they experience.</p>
+
+<p>To succeed, new programmers need to expand their knowledge and try to become true developers, not just programmers. Unless they find jobs at a major software development company, such as Microsoft, odds are they will need these extra skills to get ahead.</p>
+
+<p>Learning how to better troubleshoot issues, working with end users that are having issues, or have ideas for changes will be a step forward to become a developer. Another item to focus on is finding an understanding of  design and architecture so that they are more capable of designing a maintainable large-scale application; a key value for small development groups.</p>
+
+<p>To be a great developer, programmers must have a passion for software, both in using and creating. This is something missing in many of the recent graduates I&#8217;ve met. These are the programmers that will end up going the route of changing careers; those without a passion simply won&#8217;t make it.</p>
+
+<p>_Note: This is from the perspective of small software teams; larger groups may have somewhat different priorities.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/37/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/35/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

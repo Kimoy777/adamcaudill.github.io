@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Technology | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/technology/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CCSRCH v1.0.7]]></title>
+    <link href="http://adamcaudill.github.com/2012/02/29/ccsrch-v1-0-7/"/>
+    <updated>2012-02-29T23:47:17-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/02/29/ccsrch-v1-0-7</id>
+    <content type="html"><![CDATA[<p>I've released a new version of <a href="https://github.com/adamcaudill/ccsrch">CCSRCH</a>, the open-source PAN (a.k.a credit card number) search tool to help companies maintain PCI compliance. This is a fairly minor release, primarily focusing on reducing false positives. The scanner has been updated to exclude the following:</p>
+
+<ul>
+<li><p>Results made up of the same two digits repeating (i.e. 5454545454545454).</p></li>
+<li><p>Results that have seven or more of the same digits repeating (i.e. 5555555555554444).</p></li>
+</ul>
+
+
+<p>I also fixed a bug that I introduced in v1.0.6 that prevented it from compiling on certain *nix systems; while I was in there I also fixed several instances of this building warning on newer Linux distros:</p>
+
+<pre><code>warning: call to __builtin___strncat_chk might overflow destination buffer
+ [enabled by default]
+</code></pre>
+
+<p>I also took the time to write-up really simple build instructions for *nix users:</p>
+
+<pre><code>$ wget -O ccsrch.tar.gz https://github.com/adamcaudill/ccsrch/tarball/master
+$ tar -xvzf ccsrch.tar.gz
+$ cd adamcaudill-ccsrch-&lt;rev&gt;/
+$ make all
+</code></pre>
+
+<p>This will probably be the last release for now unless a bug turns up; to improve results further I'm working on a new project (<a href="https://github.com/adamcaudill/ccsrch-score">ccsrch-score</a>), hopefully it'll be released soon.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Poking Mykonos]]></title>
+    <link href="http://adamcaudill.github.com/2012/01/23/poking-mykonos/"/>
+    <updated>2012-01-23T22:28:56-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/01/23/poking-mykonos</id>
+    <content type="html"><![CDATA[<p>While checking on the latest updates in the start-up world from TechCrunch, I came across <a href="http://techcrunch.com/2012/01/23/mykonos-helps-companies-battle-hackers-raises-4-million/">their article</a> on <a href="http://www.mykonossoftware.com/">Mykonos</a>; the important part of their article (at least for me), is this:</p>
+
+<p><em>Mykonos’s Web Security product uses deception to “detect, confuse, slow down and prevent attackers” in real-time in order to help companies protect their websites and Web apps from malicious hacker and proactively prevent fraud and theft.</em></p>
+
+<p>A couple of minutes of reading, and my interest was piqued - to say the least. The thing that most interested me was the claim of no false positives, while they do <a href="http://www.mykonossoftware.com/early-detection.php">talk about it</a> - I really wanted to see it for myself. Assuming they used their own product to protect their site, I took a few minutes to see what I could find - and find I did.</p>
+
+<p>The first thing I did was a view-source to see what I could learn about their site - mainly to see if there were any obvious signs of using one CMS or another. The first thing that jumps out at me is this from the HTML:</p>
+
+<pre><code>&lt;!-- InstanceBegin template="/Templates/mykonos.dwt.php"
+     codeOutsideHTMLIsLocked="false" --&gt;
+</code></pre>
+
+<p>So, this tells us they are using Dreamweaver, and the name of the template. So, the next question is, does that <a href="http://www.mykonossoftware.com/Templates/"><code>/Templates/</code></a> directory exist on the server?</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-23_1930.png" alt="File Listing" /></p>
+
+<p>Yup.</p>
+
+<p>So, not only does it exist, they have directory listings turned on - which to me was a real shock. Unfortunately for us though, these files are named with the <code>.php</code> extension and not the <code>.dwt</code> I was hoping for, so we can't get much useful from them.</p>
+
+<p>So, from looking at the source of the home page, we can see that the css files are stored in a <a href="http://www.mykonossoftware.com/css/">/css/</a> directory - maybe that'll be interesting.</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-23_1935.png" alt="File Listing" /></p>
+
+<p>It's there, and like last time, we can see all of the files. While CSS files are of no real interest, the <a href="http://www.mykonossoftware.com/css/_notes/">/_notes/</a> directory is, because it'll contain a file called <code>dwsync.xml</code> - which can be quite interesting (since we knew they are using Dreamweaver, it's not too surprising to see this). This file contains data about the last time the site was pushed from Dreamweaver, and will contain one entry per file, and looks like this:</p>
+
+<pre><code>&lt;file name="style.css"
+ server="ftp.belincreative.com/public_html/clients/mykonos/site/"
+ local="129651858311162109"
+ remote="129651936600000000"/&gt;
+</code></pre>
+
+<p>The most interesting thing there is the <code>server</code> entry, as it tells us a little about the file-system; which if we were really trying to attack the site, knowing that would be handy. The other thing of interest is that when you see one <code>/_notes/</code> directory, you'll see lots more, as Dreamweaver likes to put them everywhere.</p>
+
+<p>So, let's see if there's one in the root - that should be the most interesting one. Sure enough: <a href="http://www.mykonossoftware.com/_notes/">/_notes/</a></p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-23_1949.png" alt="" /></p>
+
+<p>This one has a few interesting entries, such as a <a href="http://www.mykonossoftware.com/TechSpecsWhatsNew.html">PHP file</a> that is named with an HTML extension - causing the code not to execute. Viewing the source of that file in the browser exposes the <a href="http://www.mykonossoftware.com/inc/">/inc/</a> directory; potentially interesting, but yields little information. The next file I tried (knowing it would be way too easy if it worked), was the <a href="http://www.mykonossoftware.com/.htaccess">.htaccess</a> file:</p>
+
+<pre><code>&lt;files "webadmin.pl"&gt;
+    AuthUserFile /usr/local/www/public_html/.htpasswd
+    AuthType Basic
+    AuthName "Server Administration"
+    require valid-user
+&lt;/files&gt;
+</code></pre>
+
+<p>Now, at first glance things look too good to be true - and that's because they are. Look at the path in <code>AuthUserFile</code> and compare that to the entries from the <code>dwsync.xml</code> files. This <code>.htaccess</code> file is part of the trap, which is all but confirmed if you try to go to the <a href="http://www.mykonossoftware.com/.htpasswd">.htpasswd</a> file which shouldn't work, since the path isn't what we would expect.</p>
+
+<p>Now, while mucking around looking at the aforementioned files, and others such as <a href="http://www.mykonossoftware.com/robots.txt">robots.txt</a>, I would periodically see this, which I would assume is part of that "no false positive" promise:</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-23_1716.png" alt="" /></p>
+
+<p>I was hoping to run into the firewall (for lack of a better term) - looks like I got my wish; though since I wasn't using anything automated and was just poking around by hand, it didn't have any impact. Not terribly exciting, but it did provide some insight into what they are doing.</p>
+
+<p>So far we've found a few interesting things, and bumped into their firewall, but that all pales in comparison to the last entry in the <code>dwsync.xml</code> file:</p>
+
+<pre><code>&lt;file name="local-site.zip"
+ server="ftp.belincreative.com/public_html/clients/mykonos/site/"
+ local="129695851046591796"
+ remote="129695888400000000"/&gt;
+</code></pre>
+
+<p>When I saw the file name I was shocked - could it really be? But I was right. It's a 59MB file containing everything on the site - all the PHP and everything else. Out of curiosity, I compared the <code>.htaccess</code> to that in the zip file, as expected it's quite different and more believable:</p>
+
+<pre><code>Options +FollowSymlinks
+RewriteEngine on
+rewritecond %{http_host} ^mykonossoftware.com [nc]
+rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
+</code></pre>
+
+<p>That confirms what I suspected, the file I saw earlier was just part of the trap.</p>
+
+<p><strong>So what have we learned?</strong></p>
+
+<p>1). Mykonos makes a really cool product, and had I not known what I was up against (and thus less skeptical about everything) it probably would have killed a lot of my time - just as intended.</p>
+
+<p>2). No matter what you put in front or your site or application,<em> human mistakes are still your greatest risk</em>. A second set of eyes and a little paranoia go a long way in securing your systems, and stopping hackers.</p>
+
+<p>3). Mykonos was either lucky or smart in that there was little on their site that shouldn't be seen by the public. If they were using a CMS with a database back-end instead of simple (mostly-)static pages, this could have been worse. If they had source code or other valuable IP on the server, a mistake like this could be devastating.</p>
+
+<p>4). Mykonos should take some of their new-found cash and hire somebody to finish the audit of their site that I started. ;)</p>
+
+<p><em>Note:</em> I notified Mykonos about that zip file before posting this (through a couple of channels), and I'm intentionally not linking to it. While I didn't see anything in there that would be an issue to be publicly disclosed, I'm sure they don't want it getting out. Hopefully by the time anybody reads this, they will have taken care of that file.</p>
+
+<p><em><strong>Update:</strong></em> As expect, they've cleaned up the files I mentioned - and a bit more. In a <a href="http://twitter.com/#!/dkoretz/status/162033710202486786">tweet</a> from the company's CEO, <a href="http://www.davidkoretz.com/">David Koretz</a>, he mentioned that they had left a surprise for me. So I went to my starting point (the <code>/Templates/</code> directory), and was greeted with this:</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-25_0005.png" alt="Welcome &amp; Thanks" /></p>
+
+<p>Yeah, cool product and cool people. I'm impressed.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Google Chrome Leaking Credit Card Data?]]></title>
+    <link href="http://adamcaudill.github.com/2012/01/15/google-chrome-leaking-credit-card-data/"/>
+    <updated>2012-01-15T11:04:04-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/01/15/google-chrome-leaking-credit-card-data</id>
+    <content type="html"><![CDATA[<p>While testing <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a> I noticed a number that looked familiar - my debit card number. Now, being just a little paranoid, I don't leave such information on my system unencrypted - so seeing it was a real surprise. But, here's the real kicker: it was on my work PC, where it never should have been. But there it was, plain as day, in clear text. I spent a couple of minutes staring at the log trying to figure out why it would be there.</p>
+
+<p>Once I saw the file name, a sinking feeling set in and the answer became clear:</p>
+
+<p><code>%LocalAppData%\Google\Chrome\User Data\Default\Sync Data\SyncData.sqlite3</code></p>
+
+<p>So it turns out that it's Chrome's <a href="http://support.google.com/chrome/bin/answer.py?hl=en&amp;answer=165139">sync</a> feature that was saving my information, but why?</p>
+
+<p>It turns out that auto-fill data is synced with your Google account (if you're signed in and have the feature enable, of course), and all of the computers you're signed into - and by default, without the benefit of encryption. This file may contain any number of things, from mine I was able to extract the following:</p>
+
+<ul>
+<li><p>Full name</p></li>
+<li><p>Wife's full name</p></li>
+<li><p>Date of birth</p></li>
+<li><p>Wife's date of birth</p></li>
+<li><p>Social Security Number</p></li>
+<li><p>Multiple credit card numbers</p></li>
+<li><p>Multiple <a href="http://en.wikipedia.org/wiki/Card_security_code">CVV</a>s</p></li>
+<li><p>Bank account &amp; routing number</p></li>
+</ul>
+
+
+<p>Not to mention quite a few websites I've been to, various addresses, employer's name and other various useful tidbits. All would be quite useful for identity theft or highly targeted <a href="http://www.fbi.gov/news/stories/2009/april/spearphishing_040109">spear phishing</a>.</p>
+
+<p>Now am I saying that syncing auto-fill is bad? No, not at all. It's a very useful time saver, but what takes it from a useful feature to security issue is the fact that by default, this <em>data isn't encrypted</em>!</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0905.png" alt="Default Encryption Setting" /></p>
+
+<p><strong>What are the risks?</strong></p>
+
+<p>There are three significant risks I see here:</p>
+
+<p>1). <em>Disclosure to less trusted systems</em>:</p>
+
+<p>In my case, I trust my laptop to be secure; between full-disk encryption (via <a href="http://www.truecrypt.org/">TrueCrypt</a>) and other precautions, I know that I don't have too much to worry about. On the other hard, my Work PC is on a corporate domain, and at least a couple dozen people have permissions sufficient to access my personal files - thus I don't trust anything too valuable on it.</p>
+
+<p>Now because of the fact that this feature is insecure by default, that data is exposed to a less trusted system.</p>
+
+<p>It can also go the other way: a number of auto-fill entries on my personal laptop were from forms on internal-only applications that only my Work PC would be able to access. So this means that anything sensitive could be leaked to home networks which are typically less secure than corporate environments. If you routinely handle PCI, HIPAA, or other restricted information - this type of leak could be a major issue.</p>
+
+<p>2). <em>Spear Phishing</em>:</p>
+
+<p>Let's imagine a scenario:</p>
+
+<p>You work for a defense contractor and I work for a foreign intelligence agency. Through some targeted attacks I manage to penetrate your home network, but have been unable to make it into your corporate network. I grab the sync database file from your home PC and extract one of your credit card numbers. I look up the <a href="http://en.wikipedia.org/wiki/List_of_Issuer_Identification_Numbers">IIN</a> and find out what bank the card is from. Once I have this, I build a PDF with the latest 0day exploit, and send it with a convincing subject line:</p>
+
+<p>"Important Information about your Bank of America credit card ending in 7850"</p>
+
+<p>Normally you'd dismiss it as spam, but the last four digits are right - so you open it, just in case. The exploit kicks in. I'm in, you're done.</p>
+
+<p>This is just a simple and quite contrived example, but you get the idea.</p>
+
+<p>3). <em>Google Data Mining</em>:</p>
+
+<p>This is the most paranoid and least likely, but given Google's issues in controlling their people - I'd say not impossible (see <a href="http://www.electronista.com/articles/10/05/14/google.admits.collecting.wi.fi.info.with.map.team/">here</a>, <a href="http://searchengineland.com/google-chrome-page-will-have-pagerank-reduced-due-to-sponsored-posts-106551">here</a>, and <a href="http://boingboing.net/2012/01/13/google-fraudulently-solicits-f.html">here</a>).</p>
+
+<p>Just for a moment, think about the fact that Google has the following:</p>
+
+<ul>
+<li><p>Your account data (name, email, etc.)</p></li>
+<li><p>Your auto-fill history (see the list of items I found above)</p></li>
+<li><p>Tons of data from their other services</p></li>
+<li><p>At least parts of your browsing history, if not much of it</p></li>
+<li><p>Engineers that truly enjoy data mining</p></li>
+</ul>
+
+
+<p>Most other companies I wouldn't worry about; but knowing the people that Google hires, and the skill they have in manipulating data - you know that some engineer is using his <a href="http://www.nytimes.com/2007/10/21/jobs/21pre.html">20% time</a> to do this (or at least is wishing he could).</p>
+
+<p>If nothing else, I know if I worked at Google - playing with this data would be tons of fun. ;)</p>
+
+<p><strong>Want to see your data?</strong></p>
+
+<p>To see what Chrome has saved about you, download <a href="http://sqlitebrowser.sourceforge.net/">SQLite Browser</a>, and open the file I mentioned above. Go to the "Browse Data" tab, and select the "metas" table. What you're looking for is in the "non_unique_name" column (among other places). You should see something like this:</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0942.png" alt="SQLite Browser" /></p>
+
+<p>The entries starting with "autofill_entry" are the ones you are interested in, but you'll likely find some of the other records interesting as well. If you see the word "encrypted" then your data is already encrypted, and you don't have to worry about this.</p>
+
+<p><strong>Is this a vulnerability in Chrome?</strong></p>
+
+<p>No, not at all - though it was a mistake. They should encrypt everything by default, and not provide an option to do otherwise. There's no reason to expose users to a potential security risk when there's a simple fix. Security isn't something users should have to opt-in to; and unless there's a very good reason, they shouldn't have a way to opt-out.</p>
+
+<p>Google should understand security and the value of the data they hold; they should be more responsible for the data (and faith) people give them.</p>
+
+<p><strong>How do I fix it?</strong></p>
+
+<p>Simple, from the "wrench" menu, select Options -> Personal Stuff -> Sign In -> Advanced... and then under "Encrypted data types" select "Encrypt all synced data" - and that's it. After a couple of minutes the entries that were visible before will now just display the word "encrypted."</p>
+
+<p><img src="http://adamcaudill.com/files/2012-01-15_0944.png" alt="Encrypt all data" /></p>
+
+<p>You can also go a step further, and get rid of this data by disabling auto-fill to ensure that potentially sensitive information isn't being persisted when it shouldn't be.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CCSRCH v1.0.5]]></title>
+    <link href="http://adamcaudill.github.com/2012/01/14/ccsrch-v1-0-5/"/>
+    <updated>2012-01-14T08:08:39-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/01/14/ccsrch-v1-0-5</id>
+    <content type="html"><![CDATA[<p>During my employers annual <a href="https://www.pcisecuritystandards.org/">PCI</a> audit, our auditor requested that we perform a search of all of our servers for credit card data. He recommended a tool called "ccsrch" - which like many open source projects had a couple of issues, and hadn't been updated in years. So, I fixed it.</p>
+
+<p>CCSRCH is a cross-platform, command-line application that reads every file from the starting point passed in, and scans them for what looks like credit card numbers (and using the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> to check each possible result). It's fairly brute-force, but it gets the scans required for PCI - though I would be careful about using it during production hours, it can have a pretty significant impact on a server's I/O performance.</p>
+
+<p>I've forked the application and setup a new <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a> project over at github (the original is on <a href="http://sourceforge.net/projects/ccsrch/">SourceForge</a>), and made a few modifications to better suit my needs (from the <a href="https://github.com/adamcaudill/ccsrch#readme">change log</a>):</p>
+
+<ul>
+<li><p>Added option to output the file name, and how many hits were found to the console when using -o (see -c in usage).</p></li>
+<li><p>Added option to limit the number of results from a single file before going on to the next file (see -l in usage).</p></li>
+<li><p>Added option to exclude certain file types from the scan (see -n in usage).</p></li>
+<li><p>Fix for ignoring NULL, CR &amp; LF.</p></li>
+<li><p>Ignore dash when scanning.</p></li>
+<li><p>Exclude results with the last 8 digits repeating (very unlikely to be a real PAN).</p></li>
+</ul>
+
+
+<p>I've <a href="https://github.com/adamcaudill/ccsrch/downloads">uploaded</a> a Windows build of the new 1.0.5 release to github, and for *nix systems, you can just download the latest <a href="https://github.com/adamcaudill/ccsrch/tags">tag</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SOPA Is Inevitable]]></title>
+    <link href="http://adamcaudill.github.com/2012/01/07/sopa-is-inevitable/"/>
+    <updated>2012-01-07T02:10:53-05:00</updated>
+    <id>http://adamcaudill.github.com/2012/01/07/sopa-is-inevitable</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Stop_Online_Piracy_Act">SOPA</a>, while it's not likely to be passed as-is, I would be willing to bet money that something SOPA-like will be passed. It may be watered down with many of the most offending parts removed, but for those backing SOPA it'll still be a real victory. For them getting it on the books, even in a weakened form means it can be tweaked (and extended) later.</p>
+
+<p>There's been an amazing resistance to SOPA, from the <a href="http://arstechnica.com/tech-policy/news/2011/12/victory-boycott-forces-godaddy-to-drop-its-support-for-sopa.ars">boycott of GoDaddy</a> to public statements from celebrities such as <a href="http://www.popularmechanics.com/science/mythbusters/articles/mythbuster-adam-savage-sopa-could-destroy-the-internet-as-we-know-it-6620300">Adam Savage</a> - the public outcry against this horrid piece of legislation has been quite inspiring. But how often will you be able to get so many people to stand up and take action before they start to lose interest? How many times can you raise the troops before the numbers start to dwindle; how long before the celebrities start fearing they'll be branded in the media as extremist or crazy? How many times can you raise the call of breaking the internet and freedom of speech before the public gets bored and goes to read about the latest Hollywood divorce instead?</p>
+
+<p>Here's how I see it going:</p>
+
+<ol>
+<li><p>Strip many of the worst parts of SOPA and get it through congress. By removing these offending pieces, those backing SOPA will try to make themselves look responsive to the community, and it'll be played as a victory for the community in the media. All in all, if you aren't paying attention it'll look like a victory for the people.</p></li>
+<li><p>Next year, introduce a bill to modify SOPA to change the wording here are there, edging it just a little closer to the original. If done carefully, it'll be easy to dismiss those that try to stir up another outcry as over-reacting or even paranoid.</p></li>
+<li><p>In a few years after a series of modifications, we have SOPA, just as broad and dangerous as originally intended - and the vast majority of people who fought SOPA would have no idea.</p></li>
+</ol>
+
+
+<p>If you have a financial motivation to get something like this passed, they key to success would be patience. Chip away slowly at <a href="http://www.chillingeffects.org/dmca512/">DMCA Safe Harbor</a> protections, at what requires a judge instead of an administrative action, at transparency so that any action ends up happening behind closed doors. In enough time you've established a law that gives the US Federal Government a massive amount of control of the internet, without oversight - all in a way designed to get offending web sites off the internet as quickly as possible. To say it would be ripe for abuse would be a massive understatement.</p>
+
+<p>Am I being paranoid? I honestly hope so - I really hope that there aren't people out there looking to limit the freedoms we cherish for their own profit, but the fact that SOPA was introduced in the first place makes that hard to believe.</p>
+]]></content>
+  </entry>
+  
+</feed>

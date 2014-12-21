@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Book Reviews | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/book-reviews/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Advanced .NET Programming]]></title>
+    <link href="http://adamcaudill.github.com/2006/03/29/advanced-net-programming/"/>
+    <updated>2006-03-29T23:46:23-05:00</updated>
+    <id>http://adamcaudill.github.com/2006/03/29/advanced-net-programming</id>
+    <content type="html"><![CDATA[<p><a href="http://adamcaudill.com/files/1861006292.01._SCLZZZZZZZ_.jpg"><img src="http://adamcaudill.com/files/2006/03/1861006292.01._SCTZZZZZZZ_.jpg" alt="Advanced .NET Programming" /></a> <a href="http://www.amazon.com/exec/obidos/tg/detail/-/1861006292/">Advanced .NET Programming</a>,<br/>
+by Simon Robinson</p>
+
+<p>This is a book I picked on clearance at the local Books-A-Million, being targeted at the 1.0 release of the Framework I was aware it was rather dated, though it was still a decent looking book (and it was cheap). The author doesn't jest when he uses the word <em>advanced</em>, this is an in-depth book.</p>
+
+<p>While I tend to be forgiving of small typos in books, this book has an unforgivable number of errors. While much of the content is useful (and seems correct), there are enough editing issues to make me second-guess <em>everything</em>. With as many errors as I saw, I was almost wondering if was a test printing of the manuscript, though after some checking, that doesn't seem to be the case. This book had the potential to be one of my favorites due to the way the author explains topics, and the vast amount of hard to find information included.</p>
+
+<p>Yet, it leaves me disappointed.</p>
+
+<p>I'd like to say that this is a book everyone should read, but due to countless editing errors, all this one is - is a 'could have'</p>
+]]></content>
+  </entry>
+  
+</feed>

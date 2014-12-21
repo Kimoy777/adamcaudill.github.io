@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Personal | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/personal/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Working Late, Again]]></title>
+    <link href="http://adamcaudill.github.com/2008/12/08/working-late-again/"/>
+    <updated>2008-12-08T04:16:50-05:00</updated>
+    <id>http://adamcaudill.github.com/2008/12/08/working-late-again</id>
+    <content type="html"><![CDATA[<p>Ladies, do you know where your husband is? If he's anything like me (or the rest of my team), he's at the office. At 4AM. Again.</p>
+
+<p>For the third week in a row I find myself at work at the wee hours of the morning preparing for a project launch. Though today more than ever I find myself asking questions; what takes priority, the needs of a company, or the needs of a relationship? What's more important, the health of a project, or my own health? Should I be working to make this project a success, or sleeping to stay healthy?</p>
+
+<p>Normally these questions are simple and obvious - yet so often we choose our projects over ourselves, our companies over our loved ones. Why? Is it the drive for success, the challenge of doing the impossible? Maybe it's the money? Why do developers so often sacrifice so much?</p>
+
+<p>This isn't a guide to better managing time, or a treatise on setting priorities; no, it's a developer's lament. So much is given for a company that does little but ask for more; yet more we always give. We know there are things far more important, but yet so much rides on our efforts, so many people counting on us; how could we dare let them down? Though I appreciate my paycheck, it doesn't drive me to do more - it's the people, the challenge, the fact only I can make this happen.</p>
+
+<p>Sometimes though, I wish I could bring myself to accept failure; maybe then the pressure wouldn't be so great. Maybe then, I could sleep at night.</p>
+
+<p>But this is what we do, we make the miracles; we do the impossible. Every day we face another challenge, every day we find another solution. Now if we could just find a solution for all this time lost from what matters most.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Is this thing on?]]></title>
+    <link href="http://adamcaudill.github.com/2008/11/16/is-this-thing-on/"/>
+    <updated>2008-11-16T16:23:06-05:00</updated>
+    <id>http://adamcaudill.github.com/2008/11/16/is-this-thing-on</id>
+    <content type="html"><![CDATA[<p>Wow! It's been over a year since this blog o' mine has seen any activity, though I've certainly not forgot about it. A lot has happened in the last year, so I'll use this post as a bit of an update (and a warm-up for my return to blogging).</p>
+
+<p>I'm not going to promise you'll see a new post daily as was once the case, though I'll try to ensure something new is up at least once a week.</p>
+
+<p><a href="http://adamcaudill.com/files/2008/11/cx7_ext1.jpg"><img src="http://adamcaudill.com/files/2008/11/cx7_ext1-150x150.jpg" alt="Mazda CX-7" /></a></p>
+
+<p><strong>Life</strong> - It's been an exciting year; I've moved into a <a href="http://www.flickr.com/photos/adamcaudill/sets/72157603919212651/">new house</a>, now engaged (the big day is in May), and I'm now driving a <a href="http://www.mazdausa.com/MusaWeb/displayPage.action?pageParameter=modelsMain&amp;vehicleCode=CX7">Mazda CX-7</a>. There's a lot more, but I'll not bore you with too many details.</p>
+
+<p>The house is a restored 1880's farmhouse that has some great history. Buying a house is an adventure, especially in this market. Scary might be a better word. The only real problem, is much like <a href="http://www.37signals.com/svn/posts/1332-rural-internet-stuck-in-the-slow-zone">Jeff's</a> (of <a href="http://www.37signals.com">37signals</a> fame), it's in the middle of nowhere. My solution for the Internet issue was to sign up for <a href="http://en.wikipedia.org/wiki/Satellite_internet">Satellite Internet</a>; it's laggy but it works.</p>
+
+<p>The new ride replaced my <a href="http://www.flickr.com/photos/adamcaudill/sets/72157600242021713/">'07 Jetta</a> (which was a great car), the CX-7 has lots of power (244 <a href="http://en.wikipedia.org/wiki/Horsepower">HP</a>), full-time all-wheel drive, and a very sporty feel. It's a great car, and for a mid-size SUV it does pretty well on fuel.</p>
+
+<p><strong>Hosting</strong> - When I last posted I had been with <a href="http://radicalv.com/">RadicalV</a> for a few weeks shy of four years. When I left they were pretty much falling apart - downtime was common, no support at all, and numerous other issues. Once I moved to the next host, it took them three months to cancel the account and stop billing me. It started out as the best host I'd ever used, and ended as the worst. My understanding is that the company was sold since then, so hopefully things have improved for their remaining customers.</p>
+
+<p>After leaving RadicalV, I went a fairly new (at the time) host, <a href="http://www.hostingrails.com/">HostingRails</a>. I was mostly happy with them; great service, reasonable prices, and the very latest of everything. The major downside though was the server loads. It wasn't uncommon for the load to be so high that it was grinding to a halt. Great service but it seems they are pretty over-sold.</p>
+
+<p>And now? I'm currently on <a href="http://www.servage.net/">Servage</a> because of its clustered environment and low prices. As time goes on, I'll post updates on how this one works out.</p>
+
+<p><strong><a href="http://adamcaudill.com/files/2008/11/inspiron-910.jpg"><img src="http://adamcaudill.com/files/2008/11/inspiron-910-150x150.jpg" alt="Dell Mini 9" /></a>Computers</strong> - My primary laptop has changed from my trusty Acer to the ultra mobile <a href="http://www.dell.com/content/products/productdetails.aspx/laptop-inspiron-9?cs=19&amp;s=dhs&amp;ref=homepg">Dell Mini 9</a>. At just over two pounds and up to four hours of battery life, it's a carry anywhere on the go  type system. It's great.</p>
+
+<p>It's not the cheapest of the so called netbooks, but with a little work it's a great system. I'm running Windows 2008 Server with the <a href="http://blogs.msdn.com/vijaysk/archive/2008/02/11/using-windows-server-2008-as-a-super-desktop-os.aspx">Desktop Experience Pack</a>. When configured correctly, it's a killer system.</p>
+
+<p><strong>Work</strong> - I'm still at the same company, though my responsibilities have changed. I've crossed the line into management. I've often heard the joke that managing developers is more like <a href="http://www.amazon.com/Herding-Cats-Primer-Programmers-Lead/dp/1590590171">herding cats</a> - it's quite true.</p>
+
+<p><strong>This Site</strong> - I've upgraded the site to the latest beta release of WordPress, <a href="http://wordpress.org/development/2008/11/wordpress-27-beta-3/">2.7 Beta 3</a>. What does this mean for you? Not too much, it did allow me to add a '<a href="http://adamcaudill.com/tags/">Tags</a>' page, but most of the changes are behind the scenes. If you have a blog, I <em>highly</em> recommend you upgrade. I upgraded from 2.2 and it was quite painless.</p>
+
+<p>I'll be posting on management styles and tools and tricks soon.</p>
+
+<p>So, there we go - I think we're all caught up now. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Switching to Gmail, Again]]></title>
+    <link href="http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again/"/>
+    <updated>2007-10-09T01:15:44-04:00</updated>
+    <id>http://adamcaudill.github.com/2007/10/09/switching-to-gmail-again</id>
+    <content type="html"><![CDATA[<p>Once <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/">again</a>, I've decided to switch email clients; this time from <a href="http://www.ritlabs.com/en/products/thebat/">The Bat</a> to Gmail, or more specifically, to <a href="https://www.google.com/a/">Google Apps</a>. After some recent issues with The Bat (mostly relating to a recent update), I decided to make another go at switching to Gmail; but this time trying the Google Apps version.</p>
+
+<p>After my last attempt, I was <a href="http://adamcaudill.com/2007/02/06/from-outlook-to-gmail-to-the-bat/#comment-387">informed</a> that the Google Apps edition of Gmail doesn't suffer the <code>Sender</code> issue that so plagued me before. After almost a full day of work, the transition is complete. And I couldn't be happier.</p>
+
+<p>The only downside is the expense - all in all, it cost $78.95 to go through this process. This was spent on two tools that made the process possible:</p>
+
+<ul>
+<li><p><a href="http://www.aid4mail.com/">Aid4Mail</a> - A key application used for converting the various mail-storage file formats.</p></li>
+<li><p><a href="http://www.limitnone.com/products.php?p=gmove">gMOVE</a> - Used for importing PST files into Gmail.</p></li>
+</ul>
+
+
+<p>The process itself was simple, once I had found the software I needed, which took some doing. Here's an overview, and some notes if you happen to try something like this (this assumes that you have Outlook installed).</p>
+
+<ul>
+<li><p>Export messages to <a href="http://en.wikipedia.org/wiki/Mbox">mailbox</a> format. (If you are moving from Thunderbird this isn't necessary as it already is stored in that format.)</p></li>
+<li><p>Use Aid4Mail to convert the mbox files to PSTs</p></li>
+<li><p>Load PSTs into Outlook and cleanup as necessary (remove duplicates, cleanup directory structure)</p></li>
+<li><p>Launch gMOVE and use it to import the messages from Outlook to Gmail</p></li>
+</ul>
+
+
+<p>There are a couple major differences in this attempt, compared to the last. A few things annoyed me about the way things worked after the last time, not the least of which is that by using <a href="http://www.marklyon.org/gmail/">Gmail Loader</a> you loose all meaningful timestamps. So you don't know when a message was sent or received.</p>
+
+<p>gMOVE eliminated that problem. It sends the messages to a special POP3 server, and automatically configures your Gmail account to use it. That way, they can control the timestamps, and set them to what they originally were 1.</p>
+
+<p>So after all is said and done; I think I'm happy with this system; much better than last time. I simply can't justify using a desktop based email client anymore. It just leaves you too out of touch.</p>
+
+<blockquote><p>1). There is a security issue here, so I wouldn't do this with anything containing sensitive information.</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Well, looks like I was wrong...]]></title>
+    <link href="http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong/"/>
+    <updated>2007-08-25T20:01:06-04:00</updated>
+    <id>http://adamcaudill.github.com/2007/08/25/well-looks-like-i-was-wrong</id>
+    <content type="html"><![CDATA[<p>Well, it was a while back that I said I would start writing again - that just never quite happened.</p>
+
+<p>Much interesting has happened in these months, a few co-workers left the company, a few new faces came in; there was also a promotion and a number of new projects. Oh, and there's a new relationship, and a fair bit of time now going to my old profession and now hobby of photography. Between all of these, spare time isn't something I have much of - if any.</p>
+
+<p>With all this in mind, many people would give up and walk away - but I see this as being important enough to fight for. It's a matter of priorities and time management. For a developer, being active in the community is important; it's easy to be left behind once you find yourself outside the loop. So, I'll simply have to make community involvement a higher priority than it's been. As for time management though, the story isn't so simple.</p>
+
+<p>I've been using <a href="http://crowdfavorite.com/tasks/">Tasks</a> (which I <a href="http://adamcaudill.com/2007/01/21/task-management-with-tasks/">highly recommend</a>) for a while now to keep track of what I'm working on, and for that it is quite effective. For time management though, I need to reevaluate how I work completely; find a method that allows me to be as productive as possible. I've seen a number of articles, guides, and books on the topic, so I believe I've a fair bit of reading in front of me. As I go through this process, I'll write about my findings, and share any solutions I find.</p>
+
+<p>If anybody has advice on how to make time for everything, I would certainly like to hear it. Hopefully, this time when I say this blog is coming back to life, it actually will.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A bit behind...]]></title>
+    <link href="http://adamcaudill.github.com/2007/05/27/a-bit-behind/"/>
+    <updated>2007-05-27T22:52:48-04:00</updated>
+    <id>http://adamcaudill.github.com/2007/05/27/a-bit-behind</id>
+    <content type="html"><![CDATA[<p>Well, it was about a month ago that I wrote commenting on being sick, and letting you all know that I would be getting back to my normal writing schedule. That didn't happen. Work happened.</p>
+
+<p>All my time since then has been spent managing between 2 and 5 developers, and trying to get a project that would end up weighing in at almost 50,000 lines of code completed and to production. Seeing as we started without specs, and made the deadline, I'm quite happy about how it went. I learned some interesting things on this project, if I can find a way to write about it without breaking my confidentiality agreement; you may see more about it soon.</p>
+
+<p>There are more projects, with similar near-impossible deadlines ahead, but hopefully I'll be able to keep my head a bit more above the water.</p>
+]]></content>
+  </entry>
+  
+</feed>

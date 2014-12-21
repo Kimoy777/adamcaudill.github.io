@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/3">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/06/27/the-sinking-ship-of-email-security/">The Sinking Ship of E-Mail Security</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T23:32:00-04:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long been the &#8220;killer app&#8221; of the internet. While so many companies try to make the next great thing that&#8217;ll capture users around the world - none of these compare to the success of e-mail. It is likely the single most entrenched application-layer protocol used today.</p>
+
+<p>Thanks to <a href="https://en.wikipedia.org/wiki/Stellar_Wind">STELLARWIND</a> and other NSA programs, we have also seen that it has failed in a very real, and very important way.</p>
+
+<p>But this isn&#8217;t exactly news is it?</p>
+
+<p>The security issues around e-mail - or rather the complete lack of security in the protocol has been well understood for decades. Yet, in all those years of existence, all we, as those that care about security have managed to do is glue ineffective solutions on it.</p>
+
+<p><strong>STARTTLS</strong></p>
+
+<p>In the last year, since the scope of NSA&#8217;s spying has been made clear to the world - and the reminder that the NSA isn&#8217;t the only player in this game, the use of STARTTLS has <a href="https://www.google.com/transparencyreport/saferemail/?hl=en">spread dramatically</a>. Many people have worked hard to make this happen - and it really has made things better. Kinda.</p>
+
+<p>While STARTTLS does enable TLS, thus encrypting the data over the wire, it&#8217;s far from perfect:</p>
+
+<ul>
+<li>Opportunistic - In the majority of occasions the encryption is opportunistic; meaning that certificates aren&#8217;t validated, and if something goes wrong in the TLS negotiation, the connection will fail-open - passing data in the clear.</li>
+<li>Server Trust - E-mail as it exists today places complete trust in not only the sending server, but also the recipients server - and every other relaying server. Any of these can log all correspondence, as the data is only encrypted during the transport. TLS can be added or dropped at any point in the chain, and this exposes multiple possible intercept points.</li>
+</ul>
+
+
+<p>Based on the famous &#8220;SSL added and removed here&#8221; NSA slide, we see that even if the messages are sent over an encrypted connection, that doesn&#8217;t mean they stay encrypted when moved around within a company. There are so many failure points that can lead to an attacker being able to collect data.</p>
+
+<p>So if groups like the NSA want e-mail, it takes some extra effort thanks to STARTTLS, but it doesn&#8217;t solve the problem.</p>
+
+<p><strong>PGP / GPG</strong></p>
+
+<p>PGP, and the compatible (and likely more commonly used) GPG are one of the best options people have to encrypt their email - but there&#8217;s still a great deal of data exposed.</p>
+
+<ul>
+<li>UX - The user experience for most applications goes beyond unfriendly, to the point of being actively hostile. I recently walked an experienced developer through setting up a key with Gpg4win - the process of getting everything setup and working was beyond painful. The only GPG wrapper that I&#8217;ve seen that isn&#8217;t unreasonably difficult is GPGTools for OSX.</li>
+<li>Web of Trust - The web of trust model that PGP uses is both genius and terrible. When a news organization started using PGP, I noticed that none of their keys were signed by anyone - so I tried explaining the concept to one of their journalists. After several tweets we moved the conversation to e-mail, which led to several multi-page emails. By the end, I think he was more confused than ever. Last I checked, their keys still aren&#8217;t signed.</li>
+<li>Metadata - <a href="http://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata/">Metadata kills</a>. It&#8217;s scary but true - people die based on who they talk to. How long till an investigative journalist reporting on an organization not friendly to the US gets droned for emailing the wrong people? PGP doesn&#8217;t hide who is emailed, the subject, or any of the headers. PGP encrypted email leaks useful information like a sieve.</li>
+<li>Client Integration - Not many email clients natively support PGP, so most users have to encrypt manually, or use a third-party add-on. This can lead to interesting information leaks, such as saving unencrypted drafts to the server.</li>
+<li>Mobile - Using PGP on a mobile device can be risky, as it requires storing the private key on devices that are likely to have known security issues. Many people recommend against it, as it puts the private key at too much risk.</li>
+</ul>
+
+
+<p>So while PGP / GPG protects the content of email, it still is subject to metadata collection.</p>
+
+<p><strong>S/MIME</strong></p>
+
+<p>For those that don&#8217;t like PGP, or want a better chance of having native support, there&#8217;s S/MIME. Like PGP, S/MIME has it&#8217;s share of issues which leave users with less protection than they realize.</p>
+
+<ul>
+<li>Certificates - To use S/MIME, you have to have a certificate issued from a CA. The question is, how trustworthy is it? CAs have been hacked to issue bad certificates in the past, and nobody knows what an NSL could be used for when issued to a CA.</li>
+<li>Key Escrow - Some CAs generate the private key on their side to allow them to provide a key escrow service. While this can be useful if you ever lose your key and want to read your email again, it also runs the risk of an unauthorized party getting access to the key.</li>
+<li>Metadata - The metadata issues noted for PGP applies here as well. The subject, the recipients, the headers are all in clear text.</li>
+</ul>
+
+
+<p>There are other various complaints around S/MIME that are well documented, and have been discussed countless times. The point is, it&#8217;s another partial solution just glued onto email in an attempt to make it do something it was never designed to do. Be secure.</p>
+
+<p><strong>The list goes on&#8230;</strong></p>
+
+<p>Much work has went into other various add-ons, such as SPF and DKIM and others that attempt to do things that could have been done by default if e-mail had been designed with authentication, privacy, and security in mind.</p>
+
+<p>When e-mail was designed, none of these issues were considered - people have been trying to find ways to fix that mistake for years. E-mail was open, plain text, security and privacy weren&#8217;t considered - or at least not to the extent required.</p>
+
+<p>For a system like e-mail to be secure, security has to be part of the core design, considered at every step. When security &amp; privacy are an afterthought, something to just glue on - it&#8217;s impossible to achieve either.</p>
+
+<p>There are many efforts underway now to improve the situation, some such as <a href="https://www.mailpile.is/">Mailpile</a>, I greatly respect. Their goals are noble, their purpose is true - but I also think they are fighting the wrong battle. E-mail as we know it is flawed beyond repair - we can make it leak less, but for all the work trying to overcome the design flaws, it&#8217;ll always be flawed. There&#8217;s only one way for e-mail to ever be secure.</p>
+
+<p><strong>Time for action!</strong></p>
+
+<p>Over the past few months I&#8217;ve been working on a specification for a system to replace e-mail. I don&#8217;t know if it&#8217;ll ever go anywhere - but that&#8217;s not the point. E-mail as we know it needs to be replaced - it can&#8217;t be fixed. We need to be discussing how to eliminate email, not new ways to glue partial solutions on to it. STARTTLS isn&#8217;t the answer, PGP isn&#8217;t the answer, S/MIME isn&#8217;t the answer - an entirely new protocol is.</p>
+
+<p>I&#8217;m hoping to make the first public draft available in the next few weeks. If it&#8217;s well received, I&#8217;ll try to do what I can to get the system built. If not, then hopefully others will write competing specifications, and I&#8217;ll aide them as I can.</p>
+
+<p>My goal for the specification I&#8217;m writing is to encourage discussion - to get people talking about how to solve the problem. If it contributes in any way to a new system, a system that&#8217;s designed from the beginning to be secure, then it&#8217;s worth every minute that&#8217;s been invested in it. We need to find a viable option that can replace the monstrosity that we have today.</p>
+
+<p>I encourage everyone to think about solutions to this - how can we build a viable replacement to e-mail that meets the privacy and security goals, while being user friendly, and meeting the requirements of business and government environments. It&#8217;s a hard problem to solve, but it can be solved. It&#8217;s up to us to do it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/19/phpmyid-fixing-abandoned-oss-software/">phpMyID: Fixing Abandoned OSS Software</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-19T12:43:00-04:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://siege.org/phpmyid">phpMyID</a> is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in 2008. Despite this, there&#8217;s still quite a few people that use it, because it&#8217;s the easiest single-user OpenID option available.</p>
+
+<p>Unfortunately, the author didn&#8217;t follow best practices when building the software, and as a result multiple security flaws were introduced. In 2008, a XSS was identified and never fixed (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2008-4730">CVE-2008-4730</a>), in the years since then it seems the software has been below the radar. While conducting a pentest I discovered a previously undocumented XSS (CVE-2014-2890) - which left me with a dilemma - what to do about it?</p>
+
+<p>Looking at the code, I found a couple more potential XSS vulnerabilities - so the application clearly needed help, and if the author won&#8217;t do it, somebody should. Ethically, it seemed wrong to disclose the issue but leave users to fend for themselves; full disclosure is normally used to push a vendor into acting - but in this case it&#8217;s assured that there won&#8217;t be a vendor response.</p>
+
+<p><strong>Fixing The Code</strong></p>
+
+<p>One good thing is if a OSS project is abandoned, anyone can prepare patches to fix the issues. So, <a href="https://github.com/adamcaudill/phpMyID">that&#8217;s what I did</a>. I&#8217;ve committed fixes for both CVE-2008-4730 and CVE-2014-2890, as well as a couple potential issues. In both cases, the fix was easy:</p>
+
+<p>CVE-2008-4730:</p>
+
+<pre><code>@@ -439,7 +439,7 @@ function checkid ( $wait ) {
+    if ($trust_root != $return_to) {
+        // the urls are not the same, be sure return decends from trust
+        if (! url_descends($return_to, $trust_root))
+ -          error_500('Invalid trust_root: "' . $trust_root . '"');
+ +          error_500('Invalid trust_root: "' . htmlentities($trust_root, ENT_QUOTES) . '"');
+
+    }
+</code></pre>
+
+<p>CVE-2014-2890:</p>
+
+<pre><code>@@ -568,7 +568,7 @@ function checkid_setup_mode () {
+   */
+  function error_mode () {
+    isset($_REQUEST['openid_error']) 
+ -      ? wrap_html($_REQUEST['openid_error'])
+ +      ? wrap_html(htmlentities($_REQUEST['openid_error'], ENT_QUOTES))
+        : error_500();
+  }
+</code></pre>
+
+<p>I&#8217;ve only given the code a quick once-over, so there may be other issues - if I find time for a more thorough review I may commit additional fixes.</p>
+
+<p><strong>Status of phpMyID</strong></p>
+
+<p>I&#8217;m not taking over the maintenance of the project, I simply don&#8217;t have time to do the cleanup needed to bring it up to reasonable standards. I&#8217;d love to see somebody with a little time to invest cleanup the code and add more defensive measures. It needs some help, that&#8217;s clear.</p>
+
+<p>One of the things I&#8217;d love to see fixed is the way the user&#8217;s password is stored - it&#8217;s currently stored in the <code>MyID.config.php</code> file as a MD5 hash - making brute-forcing entirely too easy. Hopefully <a href="http://tools.ietf.org/html/draft-ietf-httpauth-digest-06">this</a> Internet Draft will be adopted soon, obsoleting <a href="http://tools.ietf.org/html/rfc2617">RFC 2617</a>, which will be an easy win to improve the security of the password when in transit. There are many places where the code can be improved by somebody with a little time.</p>
+
+<p>If you are using phpMyID today, replace the <code>MyID.php</code> file with the one <a href="https://raw.githubusercontent.com/adamcaudill/phpMyID/master/MyID.php">here</a> (it also fixes compatibility with PHP 5.4).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/">Security by Buzzword - Why I Don&#8217;t Support Ensafer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T12:28:00-04:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update</strong>: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I&#8217;ll post further updates.</p>
+
+<p><a href="http://www.ensafer.com/">Ensafer</a> is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user&#8217;s files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product (<a href="https://www.boxcryptor.com/">Boxcryptor</a>), so I support the concept, but what about Ensafer&#8217;s implementation - does it provide the level of security desired?</p>
+
+<p><strong>Where are the details?</strong></p>
+
+<p>If you look at Ensafer&#8217;s site, you&#8217;ll find precious few details on what they are doing - plenty of security buzzwords, but no specifics. Let&#8217;s take a look at the <a href="https://ensafer.zendesk.com/hc/en-us/articles/200797297-Industry-standard-RSA-and-AES-cryptography">one page with details</a>:</p>
+
+<blockquote><p>Ensafer believes in standards and we don&#8217;t use any custom encryption algorithms. Our encryption platform is built on:</p><p>2048-bit RSA keys<br/>256-bit AES encryption<br/>2048-bit SSL<br/>PKCS#12 key containers<br/>X.509 certificates</p></blockquote>
+
+
+<p>We see some algorithm names - but what about key derivation, or symmetric encryption modes? How about hashing algorithms? How and where is your password stored? There are so many implementation details that are critical for security, yet aren&#8217;t talked about at all.</p>
+
+<p>In December of 2012 I started asking about details, they pointed me back to the web site - when I pushed for more, I was told that they were working on a whitepaper to explain their implementation:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> We have not published all technical details, but we&#39;re working on a whitepaper which will be published later. ^LS</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/275616564085149698">December 3, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>More than a year later, I&#8217;m still waiting to see those details.</p>
+
+<p><strong>So have they conducted an audit?</strong></p>
+
+<p>Since they haven&#8217;t released details publicly, if they conducted an external audit, that would bring some trust. So, recently I asked, and this is what they had to say:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> Thanks for your important question. There hasn’t been an audit yet due to work in progress, but will be done this year.</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/447156694041509889">March 21, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>After the delay in getting useful details published, I&#8217;m not hopeful that we&#8217;ll see the results of an audit in the near future.</p>
+
+<p><strong>TLS &amp; Safe Downloads</strong></p>
+
+<p>I really wish that the lack of details was the only concern - but it&#8217;s not. The first thing I noticed is that their web site doesn&#8217;t force TLS, so I manually switched to HTTPS, unfortunately the result wasn&#8217;t what I was hoping for:</p>
+
+<p><img class="center" src="/files/Ensafer_SSL_Error.png"></p>
+
+<p>Well, that&#8217;s not encouraging. Let&#8217;s take a look at the download link:</p>
+
+<pre><code>http://get.ensafer.com/mac/prod/Ensafer-1.0.8.dmg
+</code></pre>
+
+<p>When you try the same link over HTTPS, it&#8217;s even worse:</p>
+
+<p><img class="center" src="/files/ensafer_dl_no_tls.png"></p>
+
+<p>For a security product, I&#8217;d expect the download to be over HTTPS to prevent an attacker from redirecting a victim to a malicious version. This isn&#8217;t the kind of mistake I&#8217;d expect from people building advanced security tools. When you see issues like this, it&#8217;s common to see more problems, so this may just be the tip of the iceberg.</p>
+
+<p><strong>Is it trustworthy?</strong></p>
+
+<p>I would like to say that it&#8217;s safe to use, and that it lives up to the promises made - but they haven&#8217;t made enough information available for people to make an informed decision. If you add the lack of information with such basic mistakes as not making the download available over HTTPS, it doesn&#8217;t instill much confidence. Companies focused on security should know better.</p>
+
+<p>When you make decisions about what tools you use, you have to look at the full picture - and Ensafer is a great example of that. They&#8217;ve focused first on a pretty website, adding features - but not assuring trust. At this point, the only evidence of their security is the use of buzzwords.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/15/http-considered-harmful-the-need-for-negative-feedback/">HTTP Considered Harmful - the Need for Negative Feedback</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-15T17:53:00-04:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We all know, and well understand what this means when we see it in a browser:</p>
+
+<p><img class="center" src="/files/GitHub_EV_Cert.png"></p>
+
+<p>It means that the connection is encrypted, and that some degree of validation has occurred to verify that the server is who it claims to be. Through the years, users have been taught to trust sites when they see that, or the all too familiar &#8216;lock&#8217; icon - when users see it, they assume their data is safe.</p>
+
+<p>But what about this?</p>
+
+<p><img class="center" src="/files/reddit_no_ssl-2.png"></p>
+
+<p>There&#8217;s no lock to tell them they are safe, but there&#8217;s also no warning to indicate that the connection isn&#8217;t secure. There&#8217;s no encryption, no validation, - no protection at all. With HTTP, users are afforded nothing at all to protect them - but we all know that, right? Does the average user understand that though? Do they understand how easily they could be <a href="http://arstechnica.com/tech-policy/2014/02/new-snowden-docs-show-nsa-gchq-spied-on-wikileaks-pirate-bay-users/">monitored</a>, or how easily traffic can be <a href="https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html">altered</a>?</p>
+
+<p><strong>The Need For Negative Feedback</strong></p>
+
+<p>Strong negative feedback has long been used in browsers to warn against invalid or expired certificates - but there&#8217;s no feedback to warn users of just how dangerous HTTP can be. After a discussion on Twitter, a friend of mine, <a href="https://twitter.com/defusesec">Taylor Hornby</a>, created a <a href="https://defuse.ca/web-browser-negative-feedback.htm">mockup</a> of what could be done in Firefox to warn users:</p>
+
+<p><img class="center" src="/files/ff_no_ssl_xmockup-1.png"></p>
+
+<p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
+
+<p>We, the security community, owe it to users to provide them with useful feedback so that they can protect themselves - providing negative feedback in the browser showing the weakness of HTTP would be a large step in that direction - and to urge site owners to adopt HTTPS as soon as possible.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/02/25/on-opportunistic-encryption/">On Opportunistic Encryption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-25T14:51:00-05:00" pubdate data-updated="true">Feb 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Opportunistic encryption has become quite a hot topic recently, and blew up in a big way thanks to an <a href="https://en.wikipedia.org/wiki/Internet_Draft">Internet Draft</a> that was published on February 14th for what amounts to sanctioned man-in-the-middle. Privacy advocates were quickly up in arms - but it&#8217;s not that simple (<a href="http://tools.ietf.org/html/draft-loreto-httpbis-trusted-proxy20-01">see here</a>). As <a href="http://hillbrad.typepad.com/blog/2014/02/trusted-proxies-and-privacy-wolves.html">pointed out</a> by <a href="https://twitter.com/hillbrad">Brad Hill</a>, this isn&#8217;t about HTTP<strong>S</strong> traffic, but HTTP traffic using unauthenticated TLS; thanks to poor wording in the document, it&#8217;s easy to miss that fact if you just skim it.</p>
+
+<p>It&#8217;s routine practice for ISPs to MITM unencrypted traffic today; it&#8217;s well known that <a href="https://blog.ryankearney.com/2013/01/comcast-caught-intercepting-and-altering-your-web-traffic/">Comcast does it</a>. This practice won&#8217;t change once we move to HTTP2, regardless of unauthenticated TLS - the only question is will users know about it.</p>
+
+<p>But this isn&#8217;t about that single internet draft, it&#8217;s about what this tells us about opportunistic encryption.</p>
+
+<p>We&#8217;ve seen many smart people get very upset (myself included) over a misunderstanding about how opportunistic encryption fits into the new HTTP2 paradigm. What does that tell us about how it&#8217;ll be perceived in the future?</p>
+
+<p><strong>What does opportunistic encryption buy us?</strong></p>
+
+<p>We can break attackers down into two classes:</p>
+
+<ul>
+<li>Active - Will intercept and re-route traffic, at small or large scale.</li>
+<li>Passive - Will watch what goes over the wire, but is unable or unwilling to interfere with it.</li>
+</ul>
+
+
+<p>Opportunistic encryption prevents passive attackers from being able to collect data, they will either fail or be forced into an active role (if they are positioned and financed to do so). While many talk about increasing the cost of surveillance for groups like the NSA, I doubt that will create a substantial impact - we know that they are both active and passive today. So they are positioned for active attacks when they so desire, though there may be some reduction of monitoring lower value targets due to increased complexity / resource demands.</p>
+
+<p><strong>What opportunistic encryption doesn&#8217;t do</strong></p>
+
+<p>Unauthenticated TLS skips the most vital step in the process - it doesn&#8217;t verify that the server is actually the one you intend to talk to, meaning anyone that can control network traffic between you and the end server, can pretend to be the end server, monitoring all traffic. Which is, exactly what we have today with HTTP traffic.</p>
+
+<p>So, you know your traffic is encrypted, what you don&#8217;t know is who has the keys, or how many people have seen the traffic. You&#8217;re safe from passive threats, but it provides no protection against active threats - but it&#8217;s also not intended to.</p>
+
+<p><strong>Should we pursue it?</strong></p>
+
+<p>If people weren&#8217;t involved - it eliminates a class of attacks without substantial costs, and forces passive attackers to become active. Overall, that sounds like a win, but there&#8217;s a problem: people.</p>
+
+<p>Opportunistic encryption isn&#8217;t real security, it doesn&#8217;t stand up to active attackers - it provides protection against only a specific type of attack. Real TLS provides protection against both active and passive threats. If people understood this, opportunistic encryption would be fine - but people don&#8217;t understand that, that&#8217;s clear.</p>
+
+<p>If people see it as a &#8220;just works&#8221; alternative to real TLS, then the harm it does greatly outweighs the value it provides. It will give a false sense of security, when in reality there is none.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/4/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

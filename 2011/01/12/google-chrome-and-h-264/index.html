@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Google Chrome and H.264 - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="In a somewhat (but not entirely) surprising announcement, Google is removing support for H.264 video from Chrome. This change to their implementation &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2011/01/12/google-chrome-and-h-264">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Google Chrome and H.264</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-12T02:00:42-05:00" pubdate data-updated="true">Jan 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In a somewhat (but not entirely) surprising <a href="http://blog.chromium.org/2011/01/html-video-codec-support-in-chrome.html">announcement</a>, Google is removing support for <a href="http://en.wikipedia.org/wiki/H.264/MPEG-4_AVC">H.264</a> video from Chrome. This change to their implementation of the often controversial HTML5 <code>&lt;video&gt;</code> tag is both a major step by Google and a furtherance of the already complicated world of video online.</p>
+
+<p><em>&#8230; To that end, we are changing Chrome’s HTML5  support to make it consistent with the codecs already supported by the open Chromium project. Specifically, we are supporting the WebM (VP8) and Theora video codecs, and will consider adding support for other high-quality open codecs in the future. Though H.264 plays an important role in video, as our goal is to enable open innovation, <strong>support for the codec will be removed</strong> and our resources directed towards completely open codec technologies.</em></p>
+
+<p>When Google <a href="http://techcrunch.com/2010/05/19/webm-google-h-264/">released</a> <a href="http://www.webmproject.org/">WebM</a> (a royalty-free codec which Google <a href="http://techcrunch.com/2009/08/05/google-acquires-video-compression-technology-company-on2-for-106-million/">acquired</a> as part of On2), it was clear that the intention was to take on H.264 and with this move there seems little doubt that the gauntlet has been thrown down. Although, now that H.264 has such a <a href="http://techcrunch.com/2010/05/01/h-264-66-percent-web-video/">strong base</a> (it&#8217;s included in <a href="http://www.adobe.com/aboutadobe/pressroom/pressreleases/200712/120407adobemoviestar.html">Flash</a>, <a href="http://blogs.msdn.com/b/ie/archive/2010/04/29/html5-video.aspx">IE9</a>, Safari, Mobile Safari, and Android), it really makes one wonder if Google has picked a fight that has long since been lost.</p>
+
+<p><strong>So why would Google do this?</strong></p>
+
+<p>Here&#8217;s my best guess: Money (specifically, patent licensing).</p>
+
+<p>H.264 is heavily encumbered by numerous patents owned by companies like Microsoft, Apple, and Cisco, and controlled by <a href="http://www.mpegla.com/main/default.aspx">MPEG LA</a>, the consortium charged with turning these patents into profit (<a href="http://www.mpegla.com/main/programs/avc/Documents/avc-att1.pdf">here&#8217;s</a> the 70 page list of patents for those interested). While I&#8217;m sure many people recall that MPEG LA made a very public pledge that H.264 would be <a href="http://gigaom.com/video/mpeg-la-h-264-streaming-will-be-free-forever/">free forever</a>, as is often the case, things aren&#8217;t quite that simple.</p>
+
+<p><a href="http://www.blogger.com/profile/06696465857424753507">Peter Csathy</a> wrote a fairly <a href="http://digitalmediaupdate.blogspot.com/2010/09/think-h264-is-now-royalty-free-think.html">detailed post</a> on the matter, pointing out some key details that many in the media skipped. Here&#8217;s the core of what wasn&#8217;t discussed after the MPEG LA announcement (but should have been):</p>
+
+<p><em>But, you say, MPEG LA recently announced that it will no longer charge royalties for the use of H.264. Yes, it’s true – MPEG LA recently bowed to mounting pressure from, and press surrounding, WebM and announced something that kind of sounds that way. But, I caution you to read the not-too-fine print. H.264 is royalty-free only in one limited case – for Internet video that is delivered free to end users. Read again: <strong><strong>for (1) Internet delivery that is (2) delivered free to end users</strong></strong>. In the words of MPEG LA’s own press release, “Products and services other than [those] continue to be royalty-bearing.”</em></p>
+
+<p><a href="http://shaver.off.net/diary/">Mike Shaver</a>, Mozilla&#8217;s VP of Engineering offer&#8217;s a somewhat similar take in &#8221;<a href="http://shaver.off.net/diary/2010/08/27/free-as-in-smokescreen/">Free as in Smokescreen</a>:&#8221;</p>
+
+<p><em>What MPEG-LA announced is that their current moratorium on charging fees for the <strong>transmission of H.264 content</strong>, previously extended through 2015 for uses that don’t charge users, is now permanent. You still have to pay for a license for H.264 if you want to make things that create it, consume it, or your business model for distributing it is direct rather than indirect.</em></p>
+
+<p><em>What they’ve made permanently free is distribution of content that people have already licensed to encode, and will need a license to decode. This is similar to Nikon announcing that they will not charge you if you put your pictures up on Flickr, or HP promising that they will never charge you additionally if you photocopy something that you printed on a LaserJet.</em></p>
+
+<p>I&#8217;m just waiting for one of the licensors to reinterpret the license and claim that ads constitute a form of payment or some similar excuse to exclude them from the exception they granted. I&#8217;ve yet to get my hands on the latest licensing agreement to see exactly what it says about this, but I wouldn&#8217;t be surprised at all to see this card played at some point to wring extra revenue from these patents.</p>
+
+<p>Given that Google owns the massive video sharing site YouTube, which <a href="http://youtube-global.blogspot.com/2010/01/introducing-youtube-html5-supported.html">uses H.264</a>, plus whatever unknown projects relating to <a href="http://www.google.com/tv/">Google TV</a> - it stands to reason that Google would certainly save some money by moving away from such an encumbered technology; not to mention avoid future risk should rules change. Though personally, I also have to wonder if it could be fears of a repeat of the <a href="http://burnallgifs.org/archives/">GIF patent</a> debacle.</p>
+
+<p><strong>Now where does this leave us?</strong></p>
+
+<p>Right now HTML5 <code>&lt;video&gt;</code> is a mess, at best. There is a war for which codec becomes the de facto standard, and there is a <em>lot</em> of money at stake depending on who wins. At this point there is no single codec that works across all major browsers; to get full coverage the best option now looks to be a combination of H.264, WebM, and Flash. Doesn&#8217;t really sound like the progress that was promised with HTML5 does it?</p>
+
+<p>It&#8217;s worth noting though that Google isn&#8217;t the first browser developer to reject H.264; both <a href="http://shaver.off.net/diary/2010/01/23/html5-video-and-codecs/">Firefox</a> and <a href="http://my.opera.com/core/blog/2009/12/31/re-introducing-video">Opera</a> have decided against including it in their browsers as well. As painful as the fragmentation is now in regard to who supports what, this move by Google actually does little to change the landscape. Support has been fragmented from the beginning, and all this really does it push H.264 a step away from being the de facto standard; a title that it has been very close to seizing.</p>
+
+<p>Had Firefox added support for H.264, I think the fight would be over and would have made today&#8217;s announcement almost suicidal for the project. Though with such a major player holding out against it, Google&#8217;s move becomes a minor tactical shift in the short-term (though the long-term impact could be significant).</p>
+
+<p>I could go on for pages about what works are where we are now, but <a href="http://diveintomark.org/">Mark Pilgrim</a> (an infinitely better writer than I) sums it all up here: &#8221;<a href="http://diveintohtml5.org/video.html#what-works">Dive into HTML5: Video on the Web</a>&#8221; - well worth reading if you want to really understand what&#8217;s going on.</p>
+
+<p>So in summary - video needs to be encoded to multiple formats, which today&#8217;s announcement does little to alter due to the fragmentation that was already in place. In the long run, WebM may be better for the community due to its license, though many of the internet&#8217;s biggest players have a vested interest in H.264. So when you factor in politics and propaganda between competing companies, distrust, and possible patent claims that haven&#8217;t been addressed yet; this all leads me to an even simpler summary:</p>
+
+<p>Yesterday, HTML5 <code>&lt;video&gt;</code> was a mess; tomorrow it will still be a mess.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-12T02:00:42-05:00" pubdate data-updated="true">Jan 12<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/news-038-events/'>News &#038; Events</a>, <a class='category' href='/categories/technology/'>Technology</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/" title="Previous Post: Thoughts on the iPad, from an Apple hater">&laquo; Thoughts on the iPad, from an Apple hater</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/01/28/rails-3-dreamhost-ps/" title="Next Post: Rails 3 & Dreamhost PS">Rails 3 & Dreamhost PS &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

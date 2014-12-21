@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>On NSA-Proof Security - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="@KimZetter We need to distinguish between &quot;proof against NSA dragnet&quot;, &quot;proof against NSA PRISM&quot;, and &quot;proof against NSA TAO &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/10/19/on-nsa-proof-security">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">On NSA-Proof Security</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-19T18:51:00-04:00" pubdate data-updated="true">Oct 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/KimZetter">@KimZetter</a> We need to distinguish between &quot;proof against NSA dragnet&quot;, &quot;proof against NSA PRISM&quot;, and &quot;proof against NSA TAO&quot;. <a href="https://twitter.com/runasand">@runasand</a></p>&mdash; zooko (@zooko) <a href="https://twitter.com/zooko/status/512264453228744704">September 17, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>For a long time, “military grade encryption” has been a red flag for snake oil, over-hyped, under-performing garbage, so much so that it’s become a punchline. Anytime that phrase is seen, it’s assumed that the product is a joke - quite possibly doing more harm than good.</p>
+
+<p>Since Snowden dropped his document cache, opening the world’s eyes to what’s been going on behind the scenes at what is likely the world’s most sophisticated attacker, NSA-Proof has become the new “military grade encryption” - marketing hype leading to instant ridicule by industry insiders. This phrase isn’t as simple though - the NSA isn’t a single dimensioned threat. So when talking about defenses, you have to think about not just avoiding the NSA, but avoiding the various attack classes they leverage.</p>
+
+<h3>Fighting NSA Programs</h3>
+
+<p>When people talk about resisting the NSA, what exactly does that mean? As the NSA runs many programs, we have to look at the programs to see what could (or couldn’t) be real resistance.</p>
+
+<p><strong><a href="https://en.wikipedia.org/wiki/Tempora">Tempora</a></strong> (and similar projects) that tap backbone links, siphoning data en mass for later processing. Projects like this gather as much as possible, with no concern for who’s data they are looking at.</p>
+
+<p>These efforts are passive, they see what’s going over the fiber, but without changing it. So encryption, even opportunistic (which I’m <a href="https://adamcaudill.com/2014/02/25/on-opportunistic-encryption/">really not a fan</a> of), prevents them from getting useful data. So TLS is NSA-Proof, from this very specific angle - it prevents them from <strong>passively</strong> collecting this data.</p>
+
+<p><strong><a href="https://en.wikipedia.org/wiki/PRISM">PRISM</a></strong>, the infamous project whose exact role and function is still being debated. Metadata is king, <a href="http://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata/">metadata kills</a>. Metadata is easier to understand in bulk, and far easier to process than actual content for most (if not all) types of communication. Once you have enough of it, it’s far more valuable than the content it went with.</p>
+
+<p>Want to protect against PRISM? Easy, kill all of the metadata. For a service provider, the less they know, the less they can be forced to hand-over. Email for example, is loaded with useful metadata, data that’s easily mined and correlated. Services and protocols that are being developed to be PRISM resistant are doing so by encrypting as much as possible, and minimizing the exposed metadata.</p>
+
+<p>So, NSA-Proof is possible here as well, in a very specific angle. It’s harder to protect against than something like Tempora, but still doable with the right design.</p>
+
+<p><strong><a href="https://en.wikipedia.org/wiki/Tailored_Access_Operations">TAO</a></strong> What about TAO, the NSA’s version of the special forces? Guarding against wide-scale NSA data collection is one thing, targeted activities are a different story.</p>
+
+<p>I once suggested a <a href="https://adamcaudill.com/2013/09/06/making-android-nsa-proof/">method for making Android NSA-Proof</a> (it involves thermite, so it’s fun too!), and if you are targeted by TAO, that’s probably the best bet. There are ways you can make their job harder, but as long as they can figure out where you are, there’s always the <a href="http://arstechnica.com/information-technology/2013/12/inside-the-nsas-leaked-catalog-of-surveillance-magic/">implant</a> option.</p>
+
+<p>So can you be NSA-Proof from TAO? Probably not. You can make your odds better, but if they are willing to put the effort in, sooner or later they’ll win unless you are very well funded, and willing to take extreme measures.</p>
+
+<h3>Marketing Hype</h3>
+
+<p>Many journalists use similar terms, ‘NSA proof’, ‘NSA resistant’, ‘thwarting the NSA’, and a hundred others. While there’s a good chance it’s just more snake oil, it’s possible that there may be <em>some</em> truth to it.</p>
+
+<p>When dealing with an adversary like the NSA - you have to consider which part of the NSA. They are after everyone with mass data collection, which is something that can be fought - with a high likelihood of success. Though as the the targeting becomes more focused, the odds start dropping. Once TAO is involved, only the best funded have any hope of resisting.</p>
+
+<p>If a service claims to be ‘NSA-Proof’ - it could be true, to a limited extent. Such claims really need to be qualified; if a service makes this kind of claim, they should provide information of which programs (or program types) they are trying to resist.</p>
+
+<h3>So, what does NSA resistance actually require?</h3>
+
+<p>This, obviously, isn’t an easy question and depends very much on the nature of the service. Though there are a few high-level things to look for:</p>
+
+<ul>
+<li>Strong, non-NSA backed crypto primitives. I’m a big fan of <a href="http://nacl.cr.yp.to/">NaCl</a> because it’s fast, constant-time, secure crypto that doesn’t rely on anything backed by the NSA. To make it easier to use, it’s made portable (and extended) in <a href="https://github.com/jedisct1/libsodium">libsodium</a>. I won’t promote anti-NIST FUD, but some things should be questioned, such as the NIST ECC curves.</li>
+<li>Minimal metadata. The amount of information that can be extracted from messages should be at a minimum. Anything that’s exposed (username, user ID, public keys, etc.) can be used when collected en mass to begin mapping relationships and undoing the veil of anonymity.</li>
+<li>Encrypt everything in transit. As with metadata, anything in the clear going over the network can be captured, stored, analyzed - and in targeted cases, altered in various ways. Using TLS is a great start to this, as it removes the option for simple passive monitoring, though it shouldn’t be assumed to be enough. Active attackers can man-in-the-middle the server, passing a forged/stolen certificate. Certificate pinning, and additional layers of encryption help protect against these attacks.</li>
+<li>Server knows as little as possible. The more the server knows, the more the provider(s) can divulge - either by court order, or by more clandestine means. Even the simplest HTTP server logs can provide valuable information to such an attacker, especially when combined with other data sources.</li>
+<li>Encrypt everything in storage. When at rest, everything should be encrypted - if a device is compromised, it should reveal as little as possible. By encrypting everything based on the user’s password, only the user is able to access the data (though may be by force).</li>
+<li>Hide everything. The CIA at least once used a weather application to <a href="http://www.theguardian.com/world/2014/jul/09/germany-arrest-second-spy-accused-us-cia">hide a communication system</a>; it was only available when looking up weather for a certain city. Such techniques make it harder to spot the use of secure communication tools. This may seem a bit extreme, but there are good reasons to do it.</li>
+</ul>
+
+
+<p>There’s more of course, these are just a few high points. Defending against an adversary that has a huge budget, doesn’t respect international law, has a rubber stamp court, and some of the best technical talent in the world requires - special - measures. Of course, the NSA isn’t the only player; it goes beyond <a href="https://en.wikipedia.org/wiki/Five_Eyes">Five Eyes</a>, every major power engages in such activity to some extent.</p>
+
+<p>If you can provide a reasonable degree of protection against PRISM &amp; <a href="https://en.wikipedia.org/wiki/United_States_Foreign_Intelligence_Surveillance_Court">FISC</a>, then you can expect to have equal odds with other players using the same attacks. Will it actually work? Who knows; there’s a lot that can go wrong, a lot of mistakes that can be made, so many ways a good intentioned developer can turn a secure system into a thin facade that offers no protection. The list above is a starting point, not the final requirements.</p>
+
+<h3>Can it really be achieved?</h3>
+
+<p>Achieving real resistance to illegal surveillance is a huge challenge, but at least some degree of success can be had by taking simple measures. Ensuring that everything possible is encrypted, that all network traffic is encrypted, and the like will make it far more of a challenge for an attacker.</p>
+
+<p>TAO-level resistance probably isn’t realistic, but lower levels are a real option, and should be pursued whenever possible. While calling anything ‘NSA proof’ should be seen as a red flag, there are real techniques to resist the NSA and other agencies that seek to invade the privacy of the world.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-19T18:51:00-04:00" pubdate data-updated="true">Oct 19<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/10/17/a-backdoor-by-any-other-name/" title="Previous Post: A backdoor by any other name...">&laquo; A backdoor by any other name...</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/11/23/speaking-at-sc-magazine-congress/" title="Next Post: Speaking at SC Magazine Congress">Speaking at SC Magazine Congress &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

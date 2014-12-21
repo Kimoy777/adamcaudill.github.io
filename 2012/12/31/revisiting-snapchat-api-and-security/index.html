@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Revisiting Snapchat API & Security - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="As Shapchat has increased in popularity, I&#8217;ve been asked several times to revisit my Snapchat API &amp; Security post, to address the changes &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2012/12/31/revisiting-snapchat-api-and-security">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Revisiting Snapchat API & Security</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-31T17:41:00-05:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As <a href="http://www.snapchat.com">Shapchat</a> has increased in popularity, I&#8217;ve been asked several times to revisit my <a href="http://adamcaudill.com/2012/06/16/snapchat-api-and-security/">Snapchat API &amp; Security</a> post, to address the changes that they made in response to my complaints. So, here is it - sorta.</p>
+
+<p>I started making detailed notes and looking at the changes they made - but yesterday <a href="https://twitter.com/tlack">@tlack</a> made that mostly irrelevant with his release of <a href="https://github.com/tlack/snaphax">Snaphax</a>, a PHP library to interact with the undocumented Shapchat API. So for now, if you want to know more about their API or if you just want to save images or video - I&#8217;d suggest taking a good look at the Snaphax code. What I will do though, is talk about some of their changes and what they did right and what they did wrong.</p>
+
+<p><strong>Retrieving images is now destructive&#8230;</strong></p>
+
+<p>In the previous API version, you could request the same image from the <code>blob</code> API any number of times, until <code>ss_pa</code> was called to delete the image from the Snapchat servers (which occurred only after the image was viewed, opening a window to save the image before viewing it in the application) - the new <code>ph/blob</code> API removes the image once it&#8217;s been delivered to the client. Without the ability to pull the image multiple times, &#8216;downloader&#8217; tools are far less attractive - instead, to consistently download the media, users will need full replacement clients. This extra bit of inconvenience is probably one of the most effective deterrents against lazy attackers (likely the most common scenario).</p>
+
+<p><strong>ECB mode, really?!?!</strong></p>
+
+<p>Media is encrypted when it&#8217;s sent to the client - this makes it harder to capture data via a MiTM attack, and makes it slightly more complicated to build alternate clients. But, there are a few issues:</p>
+
+<ul>
+<li>The media is encrypted with AES, in <a href="http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Electronic_codebook_.28ECB.29">ECB mode</a> - I can&#8217;t imagine how they made such a mistake.</li>
+<li>Media is decrypted before going into the cache, instead of when it needs to be displayed - allowing it to be accesses on rooted devices.</li>
+<li>A single, hard-coded key (<code>M02cnQ51Ji97vwT4</code>) is used to encrypt the data.</li>
+</ul>
+
+
+<p>Pretty much everything here could have been done better; some of the problems are just simple mistakes, others a result of ignorance.</p>
+
+<p><strong>Security by obscurity&#8230;</strong></p>
+
+<p>When looking at the traffic that the application generates, one of the first things you notice is the new <code>req_token</code> field - at first glance it looks like a SHA-256 hash (and has been mistaken for one more than once), but it&#8217;s not - it&#8217;s two SHA-256 hashes that have been merged in a specific pattern. All of the data to generate this token is already included in most requests (path, timestamp, auth token), but the secret to generating it is the algorithm used to merge them into one.</p>
+
+<p>Prior to @tlack&#8217;s work, this token has been a stumbling block to those attempting to unravel the API - only because of the obscurity of their custom merger algorithm. Now that there is code that demonstrates how this works - the security benefit of the <code>req_token</code> has been completely eliminated. When you rely on the secrecy of an algorithm, it will bite you.</p>
+
+<p><strong>Doing it right&#8230;</strong></p>
+
+<p>Making a product like this work is quite easy - making it work right is extremely hard. Snapchat has entered a business where at least some of their users place an extreme amount of trust in them - a failure of their security could have a profound impact on their users lives. Any company that is in the business of handling very private communications is held to a higher standard - and Snapchat is no exception. Security should be the top priority when working on a product like this - and when you see such blatant mistakes as using ECB mode encryption, it&#8217;s obvious that they don&#8217;t take it seriously enough.</p>
+
+<p>Snapchat needs to hire an outside security consultant to review their systems to identify the flaws such as those I&#8217;ve pointed out and provide real solutions - and they have the <a href="http://www.businessinsider.com/snapchat-raising-8-million-from-instagram-backers-2012-12">money</a> to do it. Until they do, there will continue to be these cat and mouse games - and they&#8217;ll lose every time.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-31T17:41:00-05:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/10/07/upek-windows-password-decryption/" title="Previous Post: UPEK Windows Password Decryption">&laquo; UPEK Windows Password Decryption</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/03/02/evernote-doing-it-mostly-right/" title="Next Post: Evernote: Doing it (mostly) right">Evernote: Doing it (mostly) right &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

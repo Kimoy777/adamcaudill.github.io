@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/13">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/07/06/pen-testing-silverlightria-with-soapui/">Pen-Testing Silverlight+RIA With SoapUI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-06T17:39:37-04:00" pubdate data-updated="true">Jul 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a public web site. So I started searching for automated pen-testing tools that could work against Microsoft&#8217;s Binary SOAP protocol (<code>msbin1</code>, a.k.a <code>application/soap+msbin1</code>) and found only disappointment. For various reasons, it&#8217;s significantly more complex to pen-test a application using <code>msbin1</code> than traditional <code>SOAP</code> + <code>WSDL</code>.</p>
+
+<p>To properly test the services, I had to make a compromise: temporarily modify the application to expose a <code>SOAP</code> endpoint. While this changes the state of the application and thus reduces the validity of the tests, it does provide a reasonable way of testing the web services to ensure that they are behaving as intended.</p>
+
+<p>The recently released <a href="http://www.soapui.org/About-SoapUI/go-pro.html">SoapUI Pro 4</a> adds new <a href="http://www.soapui.org/Security/getting-started.html">security testing tools</a> that makes this a viable (and attractive option). To get this working, there are a few small changes that need to be made to the solution:</p>
+
+<p>First, you&#8217;ll need to add a reference to <code>Microsoft.ServiceModel.DomainServices.Hosting.EndPoints</code> which is part of the RIA Services Toolkit; this allows you to expose different End Points for the service such as <code>SOAP</code> and <code>OData</code>.</p>
+
+<p>Next, you&#8217;ll want to add the following <code>configSections</code> entry to your <code>Web.config</code>:</p>
+
+<pre><code>&lt;configuration&gt;
+ &lt;configSections&gt;
+   &lt;sectionGroup name="system.serviceModel"&gt;
+     &lt;section name="domainServices"
+      type="System.ServiceModel.DomainServices.Hosting.DomainServicesSection,
+      System.ServiceModel.DomainServices.Hosting,
+      Version=4.0.0.0,
+      Culture=neutral,
+      PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/sectionGroup&gt;
+ &lt;/configSections&gt;
+ ...
+</code></pre>
+
+<p>Finally, to expose the <code>SOAP</code> end point:</p>
+
+<pre><code>&lt;configuration&gt;
+ ...
+ &lt;system.serviceModel&gt;
+  ...
+  &lt;domainServices&gt;
+   &lt;endpoints&gt;
+    &lt;add name="Soap"
+     type="Microsoft.ServiceModel.DomainServices.Hosting.SoapXmlEndpointFactory,
+     Microsoft.ServiceModel.DomainServices.Hosting,
+     Version=4.0.0.0,
+     Culture=neutral, PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/endpoints&gt;
+  &lt;/domainServices&gt;
+  ...
+</code></pre>
+
+<p>Finally, just follow the <a href="http://www.soapui.org/Security/security-scans-overview.html">instructions</a> for SoapUI to setup your tests, and you can feel (just a little) more confident in your application. Passing with flying colors obviously doesn&#8217;t mean your application is bulletproof, but it helps to confirm that web service code is solid.</p>
+
+<p>Now, while this does provide some insight into your application and should help find common issues, it&#8217;s not a replacement for a professional assessment by a qualified auditor. If you are handling credit cards or other highly targeted information, <em>please</em> consult a security specialist before a public deployment.</p>
+
+<p><strong>Update:</strong> Another option is a <a href="http://portswigger.net/burp/">Burp</a> plug-in offered by Gotham Digital Science, and can be found <a href="http://blog.gdssecurity.com/labs/2009/11/19/wcf-binary-soap-plug-in-for-burp.html">here</a>. It&#8217;s a more complex workflow, but allows testing without an exposed SOAP end-point - which is great if you don&#8217;t have source code access.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/06/16/a-brief-look-at-the-latest-lulzsec-release/">A Brief Look at the Latest @LulzSec Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T20:01:41-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier today, the hacker collective <a href="http://lulzsecurity.com/">Lulz Security</a> released a batch of 62,156 email/password combinations from unknown sites; I decided to take a look at the data and see if there was anything to be learned from it.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>And as always, LulzSec delivers: <a href="http://t.co/yQlcu5x" title="http://www.mediafire.com/?9em5xp7r0rd2yod">mediafire.com/?9em5xp7r0rd2y…</a> 62,000+ emails/passwords just for you. Enjoy.</p>&mdash; The Lulz Boat (@LulzSec) <a href="https://twitter.com/LulzSec/status/81327464156119040">June 16, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>So, let&#8217;s take a look at a few stats:</p>
+
+<p>Total Domains: ~5,230</p>
+
+<p>Top 15 Domains:</p>
+
+<p><img src="http://adamcaudill.com/files/2011-06-16_1922.png" alt="Top 15 Domains" /></p>
+
+<p>There are over 50,000 unique passwords, but even with this many passwords, there&#8217;s still a few quite common - and very bad passwords in use:</p>
+
+<p><img src="http://adamcaudill.com/files/2011-06-16_1936.png" alt="Top Passwords" /></p>
+
+<p>While this is a fairly small release, the <a href="http://twitter.com/#!/LulzSec/">LulzSec</a> twitter stream has a number of entries like these:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>There is some very angry level 85 WoW player cutting his wrists right now, thanks to @<a href="https://twitter.com/miraclejoe">miraclejoe</a> and LulzSec. Let it flow&#8230;</p>&mdash; The Lulz Boat (@LulzSec) <a href="https://twitter.com/LulzSec/status/81334551686815745">June 16, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>There are several tweets about people accessing Facebook, Twitter, and even Amazon accounts - what&#8217;s so unfortunate here is that service providers could easily restrict accounts on lists like this to protect the users and greatly reduce the impact of these breaches.</p>
+
+<p>Until people learn that password reuse is dangerous, this will keep happening.</p>
+
+<p><em>Update:</em> I&#8217;ve removed a link to a tweet, as the account has since been removed. The tweet said: &#8220;@LulzSec Cheers for the paypal account with £250 in it! ;)&#8221;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/05/21/bbpress-2-0-beta-1-released/">bbPress 2.0 (Beta-1) Released!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-21T14:25:18-04:00" pubdate data-updated="true">May 21<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This morning, the latest version of my favorite forum software, bbPress, was <a href="http://bbpress.org/blog/2011/05/bbpress-2-0-beta-1/">released</a>. While this is a beta and not a final release, it&#8217;s still a major event for the project: this release is in the form of a WordPress plugin, instead of a stand-alone application as it&#8217;s been in the past. In December 2009 <a href="http://adamcaudill.com/2009/12/16/bbpress-is-the-end-near/">I wrote about this decision</a> - and at the time I was rather disappointed with the change in direction; but now my views have changed. I&#8217;m also excited to see that <a href="http://ma.tt/">Matt</a> and his company, <a href="http://automattic.com/">Automattic</a> have decided to invest the time and money needed to make this happen; there for a while it looked like bbPress really was dying.</p>
+
+<p>Thanks to services like <a href="http://stackexchange.com/">StackExchange</a> and its numerous clones, it seems the days of standalone forums are numbered; when combined with the increasing strength of WordPress as a full-blown CMS, this move actually makes a lot of sense.</p>
+
+<p>I&#8217;m excited both as a user and developer - this opens many new doors from both perspectives, and will certainly increase adoption of the software, as integration with the current version is <a href="http://adamcaudill.com/2011/03/06/bbpress-wordpress-3-1-registration-issues/">a bit tricky</a>.</p>
+
+<p>Congratulations to the entire team on this release; it really is a major milestone for the project!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/05/21/happy-20th-birthday-visual-basic/">Happy 20th Birthday Visual Basic!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-21T01:50:19-04:00" pubdate data-updated="true">May 21<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I saw a post on Facebook by a friend of mine, <a href="http://inotifythoughtschanging.net/blog/">Anthony Green</a>, about writing his first blog post as a Microsoft employee (he has a personal blog as well, unfortunately he&#8217;s not written anything since 2008) - when I saw the title, I couldn&#8217;t believe it was 20 years already - seems just yesterday that I wrote about its <a href="http://adamcaudill.com/2006/05/27/happy-belated-birthday-vb/">15th birthday</a>:</p>
+
+<p><a href="http://blogs.msdn.com/b/vbteam/archive/2011/05/20/happy-20th-birthday-visual-basic.aspx">Happy 20th Birthday Visual Basic!</a></p>
+
+<p>My, what a journey it&#8217;s been. Almost fifteen years ago I randomly bought a copy of &#8220;Visual Basic 5: Deluxe Learning Edition&#8221; - I was just 15 at the time and wanted a new hobby, and writing software seemed like it would be fun. In those early days, I had no idea what career I would choose, and really didn&#8217;t intend for software development to become the dominant force in my life - I just wanted a better, more productive way to spend my time during the summer.</p>
+
+<p>In the years that have went by, I became passionate about the field, and all it encompasses (possible obsessed, if you believe my wife) - it&#8217;s been the driving force in my life. Today, I manage a team of 6 developers, and have a fun start-up with some friends (that someday won&#8217;t cost me money every month) - and all because I bought that book. Overall, I have a lot to thank VB for, it really did get me started in this field.</p>
+
+<p>Today though, my language of choice has moved on to newer options - I prefer bleeding technologies when I can use them - but VB will always have a place in my heart, and I&#8217;ll always follow its progress as it continues to transform and adapt to an ever-changing world. As the most popular .NET language (contrary to what many of the C# developers think), it plays a vital role in the development of the framework and the ecosystem.</p>
+
+<p>In the conversations I&#8217;ve had with Anthony about the future of the language, I greatly look forward to writing about its 25th birthday; I expect those will be exciting times for the language and the entire .NET ecosystem.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/05/20/vb6-not-so-open-source/">VB6: Not So Open Source</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-20T02:33:23-04:00" pubdate data-updated="true">May 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Microsoft announces to mvps at <a href="https://twitter.com/search/%23msteched">#msteched</a> that VB6 will be released as open source on codeplex end of june! w00t</p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71287262842859520">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Needless to say, that&#8217;s not an announcement that anybody was expecting, but given the talk going on at the time - and the high-profile people talking about it, there wasn&#8217;t much reason to doubt. Announcing a product that has been dead for years is going open source would certainly be a strategy shift for Microsoft, but does it make any sense? <a href="http://twitter.com/#!/kevindente">Kevin Dente</a> of <a href="http://herdingcode.com/">Herding Code</a> fame certainly thought that Microsoft had better things to release:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Instead of VB6 I&#8217;d rather see MS open source IE6. Then at least we could build a standalone version of it.</p>&mdash; Kevin Dente (@kevindente) <a href="https://twitter.com/kevindente/status/71292995185553408">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Shortly after the initial tweet, <a href="http://www.dougseven.com/">Doug Seven</a>, the Director of Product Management, Visual Studio Tools &amp; Languages, <a href="http://twitter.com/#!/dseven/status/71316722854002688">replied</a> asking Roy Osherove (the original poster) to email him. Hmm, it&#8217;s starting to smell like something odd is going on. A couple of hours later, Doug set the story straight:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>The rumors of VB6 going open source are simply not true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; dseven (@dseven) <a href="https://twitter.com/dseven/status/71352709785198592">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>To which, Roy then tried to unset:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>RT @<a href="https://twitter.com/dseven">dseven</a>: The rumors of VB6 going open source are true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71355603611680769">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>It&#8217;s worth pointing out that Roy Osherove currently has a full ten-times the followers that Doug Seven has, meaning his altered retweet was seen by more people (at least initially). For several hours word was going around, and accepted by a number of people who thought Microsoft was actually going to open the code to VB6 (including journalists who were too busy writing articles to do any fact checking) - all based on one person who made it all up.</p>
+
+<p>Lesson here: be careful about what you re-tweet, it&#8217;s easy to endorse a lie as several people unwittingly did today (<a href="http://twitter.com/#!/blowdart">@blowdart</a> summed it <a href="http://twitter.com/#!/blowdart/status/71370740934524928">rather well</a>).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/14/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/12/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

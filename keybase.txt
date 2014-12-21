@@ -1,0 +1,70 @@
+==================================================================
+https://keybase.io/adamcaudill
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://adamcaudill.com
+  * I am adamcaudill (https://keybase.io/adamcaudill) on keybase.
+  * I have a public key with fingerprint E88A A5A5 EB11 62B8 CAE0  A524 22CA D57A 659C A2BC
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "e88aa5a5eb1162b8cae0a52422cad57a659ca2bc",
+            "host": "keybase.io",
+            "key_id": "22CAD57A659CA2BC",
+            "uid": "1c2dc3f00338cebc5c31a92094760100",
+            "username": "adamcaudill"
+        },
+        "service": {
+            "hostname": "adamcaudill.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1397942425,
+    "expire_in": 157680000,
+    "prev": "33c6fca4ebd49ad2196c6a2c04d7a404493a4ee303209fd6fc73c5a7012fc73e",
+    "seqno": 22,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+
+owGbwMvMwMV42XhFxr0ZeT6Mpw/8TGIIDnoxs1opKT+lUsmqWik7FUylZealpxYV
+FGXmlShZKaVaWCQmmiaapiYZGpoZJVkkJ6YaJJoamRgZJSemmJonmplaJicaJSUr
+6Shl5BeDdACNSUosTtXLzAeKATnxmSlAUSMjZ0cXU3NHoHpnRyMnZ6BcKVjCMNko
+Jdk4zcDA2NgiOTUp2TTZ2DDR0sjA0sTczMDQwACksDi1KC8xNxWoOjElMTc5sTQl
+MydHqVZHCShRlpmcCnI2yHZMRXrJ+blAEwqK8kvyk/NzgJIZJSUFxVYgzSWVBSDV
+5alJ8VBz4pMy81KA3gfqKEstKs7Mz1OyMgSqTC7JBBlsaGxpbmkC9LupjlJqRUFm
+UWp8JkiFqbmZhQEQgOxJLQMaaWycbJaWnGiSmpRiYpmYYmRoaZZslmiUbGCSYp5o
+YmBiYmkMlEw1NjAG+jMtBajW3DjZNNHcwNAIxExVAvmsMC9fycrICOjOxHSgmcWZ
+6XmJJaVFqUq1nUwyLAyMXAxsrEygGGTg4hSAxeu8Fv5/JisXbMt4EStYZ+4lrHN1
+5xt2q5UJzN/vZJp7T9ewc1761ltlsc2GwNncjW3ZvpfdV+z5v8d1qlb+wQvdW2am
+3G2qWFNuMaGPZb1z+8UP1XEPr4fekTZJ0GUxzVWuZMpz1dTZIX1oyrF5gpyZXwv3
+VK4RFAxV3zWbwyjQdZL3ZQZjtwunaw7dl/q4S2xPXOuLeJ6ILs49Tc+XPGFbrinS
+e+iG7XbL5xnLzm+d/lJrl8MGqemT588zMZvItrR33cFFK9Okny2cGdAUaSowv13B
+Y1Iql3k5d/Lsiv8te60ltNOfJ91wVK41COMNMi99IK1icv8Ip/NXb7FLHaUC2413
+MQRWnn38+HzRhjP23266f3cMOSS4tKBOzdlka/9k7YBP16vtOHYs+98zw/mqHTN7
+L08dl/chh5AlaU+6c6ab/hZb6xr5sLZO4c7Uk9+fJR3wdg8NEn7omzj/sb3MhqXP
+59fmcm455p5eydl1Z6PbST72EBfNdfoZKZyes2/Pu3ntTzbXvxWeP9gFk0Nvhf+u
+vr1ysyPffobw28fuHWzdKlBprXjp/42VkX/ndu1wOPUkRykjMlPl8NYrj5q2HPgh
+Hv85NPGG92bDQBe3fQuu/J84c/n+zpA972dzOzRXPam22u+h43nldIYQX+v/Gq7P
+UzhuqC9Z3GJucMp52T7F9atWBcb5BQsx2fzervgtc8IP9aObr244a8LDu1obAA==
+=Bwme
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/adamcaudill
+
+==================================================================
+

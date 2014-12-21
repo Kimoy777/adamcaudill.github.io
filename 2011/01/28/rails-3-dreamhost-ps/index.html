@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rails 3 & Dreamhost PS - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="I recently had an idea for a small web application, and seeing as I&#8217;ve not spent as much time as I&#8217;ve wanted to using Rails - I opted to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2011/01/28/rails-3-dreamhost-ps">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails 3 & Dreamhost PS</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-28T02:47:01-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I recently had an idea for a small web application, and seeing as I&#8217;ve not spent as much time as I&#8217;ve wanted to using <a href="http://rubyonrails.org/">Rails</a> - I opted to build it the latest version of Rails. A decision that caused far more grief than I expected.</p>
+
+<p>If you are using <a href="http://www.dreamhost.com/r.cgi?485850">Dreamhost&#8217;s</a> PS offering (a managed VPS for those that don&#8217;t know), the seemingly simple task of getting a Rails 3 application up and running is actually quite complex. The root cause of this is that Dreamhost&#8217;s OS image is based on Debian <a href="http://www.debian.org/releases/etch/">etch</a>, which was released in April 2009 and has since been replaced; which means etch has become fairly outdated.</p>
+
+<p>Here&#8217;s the process I used, and so far it seems to be working quite well:</p>
+
+<p><strong>Domain Setup:</strong></p>
+
+<p>When adding your domain to the Dreamhost panel, you&#8217;ll want to enable <a href="http://wiki.dreamhost.com/Passenger">Passenger</a>.</p>
+
+<p><img src="http://adamcaudill.com/files/2011-01-28_0048.png" alt="" /></p>
+
+<p>Once your application is uploaded to the server, you&#8217;ll be greeted with a particularly unhelpful error message (something like <code>uninitialized constant Bundler</code>) from Passenger (or perhaps just a 500 error page).</p>
+
+<p><strong>Server Updates:</strong></p>
+
+<p>This is where the work starts, and gets somewhat ugly. As a warning, it&#8217;s quite possible that you could damage your configuration doing this; though thankfully you can <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.reboot&amp;">restore</a> your server to a working state within a few minutes from the Dreamhost panel should something go wrong. You&#8217;ll also need to have an <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.adminusers&amp;">admin user</a> for this task, as much of what needs to be done has to be done as root.</p>
+
+<p>First step: Get your PS up to date; even after performing a restore on my server, there were a number of updates that are available to be installed. So let&#8217;s start off by getting those out of the way.</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get -f install
+</code></pre>
+
+<p>Once you get past those three commands, the next step is to update SQLite to the latest version, as the version Dreamhost uses is quite old and won&#8217;t work with Rails 3.0 (well, to be accurate it won&#8217;t work with the latest version of sqlite3-ruby, which is the default database provider for Rails 3).</p>
+
+<pre><code>wget http://www.sqlite.org/sqlite-autoconf-3070400.tar.gz
+tar zxvf sqlite-autoconf-3070400.tar.gz
+cd sqlite-autoconf-3070400
+sudo ./configure --bindir=/usr/bin --libdir=/usr/lib
+sudo make
+sudo make install
+</code></pre>
+
+<p>If you don&#8217;t update SQLite you&#8217;ll get an error like this:</p>
+
+<pre><code>sudo gem install sqlite3
+Building native extensions.  This could take a while...
+ERROR:  Error installing sqlite3:
+    ERROR: Failed to build gem native extension.
+
+/usr/bin/ruby1.8 extconf.rb
+checking for sqlite3.h... yes
+checking for sqlite3_libversion_number() in -lsqlite3... yes
+checking for rb_proc_arity()... no
+checking for sqlite3_initialize()... no
+sqlite3-ruby only supports sqlite3 versions 3.6.16+, please upgrade!
+*** extconf.rb failed ***
+</code></pre>
+
+<p>or if you install the updated version, but don&#8217;t force it to <code>/usr/lib</code> you&#8217;ll get an error like this:</p>
+
+<pre><code>sudo gem install sqlite3
+Building native extensions.  This could take a while...
+ERROR:  Error installing sqlite3:
+    ERROR: Failed to build gem native extension.
+
+/usr/bin/ruby1.8 extconf.rb
+checking for sqlite3.h... yes
+checking for sqlite3_libversion_number() in -lsqlite3... no
+sqlite3 is missing. Try 'port install sqlite3 +universal' or 'yum
+install sqlite3-devel'
+*** extconf.rb failed ***
+</code></pre>
+
+<p>Once that is taken care of SQLite, the rest is easy.</p>
+
+<pre><code>sudo gem update
+</code></pre>
+
+<p>At this point if you visit your new Rails site, it <em>should</em> be working!</p>
+
+<p>Notes:</p>
+
+<ol>
+<li><p>I&#8217;ve not tested this extensively, and I&#8217;ve no idea if this breaks anything. All I can say for certain, if that all of <em>my</em> sites still work, but your mileage may vary. <Disclaimer /></p></li>
+<li><p>I was a fairly early Dreamhost PS adopter, and part way through this process I reset my server to get it back to a clean state. After resetting, I noticed some differences with the behavior of <code>apt-get</code> (404s on <code>update</code> and <code>upgrade</code> are gone), so for other early adopters it may be necessary to perform a reset to get your servers configuration in-sync with the latest official setup.</p></li>
+<li><p>I can&#8217;t say for a fact that this is completely necessary, though you&#8217;ll likely need to selectively update a few packages if you skip this step. Also, for me, <code>gem</code> was broken until I ran <code>sudo apt-get -f install</code>.</p></li>
+<li><p>Special thanks to <a href="http://matthewjlittle.com/">Matt</a> for helping me get this working; troubleshooting the SQLite install was more than a little time consuming.</p></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-28T02:47:01-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/development/'>Development</a>, <a class='category' href='/categories/software/'>Software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/01/12/google-chrome-and-h-264/" title="Previous Post: Google Chrome and H.264">&laquo; Google Chrome and H.264</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone/" title="Next Post: Need a cheap phone charger quick? Buy a Tracfone.">Need a cheap phone charger quick? Buy a Tracfone. &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Making BadUSB Work For You - DerbyCon - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Last week Brandon Wilson and I were honored to speak at DerbyCon, on the work we’ve been doing on the Phison controller found in many USB thumb &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2014/10/02/making-badusb-work-for-you-derbycon">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Making BadUSB Work for You - DerbyCon</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-02T22:15:00-04:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last week <a href="http://www.brandonw.net/">Brandon Wilson</a> and I were honored to speak at <a href="https://www.derbycon.com/">DerbyCon</a>, on the work we’ve been doing on the Phison controller found in many USB thumb drives. This was my first time speaking at DerbyCon - it’s a great event, with a fantastic team making the magic happen.</p>
+
+<p>Slides:</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/39583508" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p>Video (which I’ve haven’t been able to bring myself to watch):</p>
+
+<iframe width="854" height="510" src="//www.youtube.com/embed/xcsxeJz3blI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Now that the dust has settled, I would like to provide some updates, thoughts, and extra information - and <em>maybe</em> correct an error I made during the presentation.</p>
+
+<h3>The Demos</h3>
+
+<p>We did three demos - they were simple enough that I didn’t think there was any risk of having issues. Well, lesson learned.</p>
+
+<p>The machine we used was a fresh Windows install just for the talk - though in the rush, there were a couple differences between it and the machine we had been testing with. In the panic of trying to get the talk done in the short 25-minute slot, I mistook these differences for a failing of one of the demos.</p>
+
+<p><strong>Custom HID Firmware</strong></p>
+
+<p>The first of the three demos was a completely custom firmware, that presents itself as a HID device (and as a mass storage device, though without media present - this is to make firmware updates easier) - the demo went without a hitch.</p>
+
+<p>I would have liked to show the tools and the update process, though there just wasn’t time. Brandon is working on videos that will be posted to YouTube that walks through each demo step by step.</p>
+
+<p>The team behind the <a href="https://hakshop.myshopify.com/products/usb-rubber-ducky-deluxe">Rubber Ducky</a> saved us a lot of time, thanks to the tools they had built - as we were able to support the same encoded format they used.</p>
+
+<p><strong>Hidden Partition</strong></p>
+
+<p>The hidden partition is a great patch, as there’s no way to tell that it’s there - everything works as expected, no reason to suspect that anything has been altered.</p>
+
+<p>It divides the NAND space into two partitions, and the firmware lies about the size, to indicate that only half of the space is there. The “public” section is the first that’s mounted, and only a specific action will cause the second, hidden partition to become visible.</p>
+
+<p>It’s a simple change, but it sends a clear message that there can be more than meets the eye with these devices. From a forensics perspective, the only way to ensure that what you are getting is accurate and complete, is to dump the NAND directly - without allowing the controller to access it.</p>
+
+<p><strong>Password Protection Bypass</strong></p>
+
+<p>This demo <em>seemed</em> to go wrong, but it actually performed perfectly - I was just in too much of a rush to think though what was happening, and why I didn’t see what I expected.</p>
+
+<p>When I plugged the device in, I was expecting to see two drives from it - one “public”, the other unmounted. I only saw one. Two things went wrong here:</p>
+
+<ul>
+<li>“Show Empty Drives In Explorer” - By default Windows doesn’t show unmounted removable drives in “My Computer”; this is a setting I always change, and expected to see the unmounted drive. As this was a fresh install, the default setting was still set - the drive was there, I just couldn’t see it. This threw me off.</li>
+<li>Wrong Password - During the demo I typed in some random junk to the password field of the “Lock” tool, and instead of it unlocking the drive as expected, it gave me the wrong password dialog. The issue here is a bug in the Phison code, when supplying a password more than 16 characters long it treats it as a bad password. So it was working, but the password I supplied was too long, triggering that bug.</li>
+</ul>
+
+
+<p>We later tested that drive again, and sure enough - it worked flawlessly, as long as the random password wasn’t longer than 16 characters.</p>
+
+<p>The patch works by altering the buffer that stores the data once received over USB; it forces it to 16 “A”s, so that any password will work. Because of how it works, the patch must be applied before the user sets their password - otherwise it’ll just make the data inaccessible.</p>
+
+<p>That was painful.</p>
+
+<h3>The (maybe) error…</h3>
+
+<p>During the talk I referred to modes 7 and 8 as being encrypted - this is <em>probably</em> wrong, at least on the devices we demoed. The two modes are password protected, and according to some documentation are encrypted, and according to other documentation they aren’t.</p>
+
+<p>The question came up in a conversation after the talk - we’ve not had the time to dig into this feature more since then, but it’s looking like it’s just a password check with no encryption.</p>
+
+<p>The password changing patch was added at the last minute, to replace another demo that we didn’t like - we identified the USB command being sent, and patched it. Due to time constraints we didn’t dig into the feature to verify the document (from a device manufacturer) was correct; after the question was raised we dug into a little more and looked for other documentation and code to support the claim - it looks like the document we were referencing was incorrect.</p>
+
+<p>So, it looks like I misspoke - the patch still works as expected, though the feature itself seems to provide less protection than we initially though. Sorry!</p>
+
+<h3>The Code &amp; Docs</h3>
+
+<p>We have everything on the <a href="https://github.com/adamcaudill/Psychson">repo</a> now, and we’ve added some additional documentation to the <a href="https://github.com/adamcaudill/Psychson/wiki">wiki</a>.</p>
+
+<p>This isn’t simple to do - the code is complicated to write, and the effort to use the patches and custom firmware is a bit more than I’d like. We’ve tried to document things as well as we can, hopefully it’s easy enough to understand.</p>
+
+<h3>Next Steps</h3>
+
+<p>We really hope that releasing this will push device manufactures to insist on signed firmware updates, and that Phison will add support for signed updates to all of the controllers it sells.</p>
+
+<p>Phison isn’t the only player here, though they are the most common - I’d love to see them take the lead in improving security for these devices. They have an opportunity to stand up and protect users - as the most common provider of these controllers, I’d truly love to see them take this as an opportunity to lead the industry.</p>
+
+<p>What we’ve released just scratches the surface of what can be done here - until signed updates are enforced, there’s no telling what games these devices could be playing.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-02T22:15:00-04:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/08/25/ietf-action-on-secure-email/" title="Previous Post: IETF Action on Secure Email">&laquo; IETF Action on Secure Email</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/10/03/on-the-ethics-of-badusb/" title="Next Post: On The Ethics of BadUSB">On The Ethics of BadUSB &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

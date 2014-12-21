@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="(Update: See here for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.) So &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/7">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/02/evernote-doing-it-mostly-right/">Evernote: Doing It (Mostly) Right</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-02T18:29:00-05:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>(Update: See <a href="http://arstechnica.com/security/2013/03/critics-substandard-crypto-needlessly-puts-evernote-accounts-at-risk/">here</a> for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.)</em></p>
+
+<p>So the big news today is <a href="http://evernote.com/corp/news/password_reset.php">Evernote being popped</a>; with 50m users and user base that often stores sensitive material - it certainly is a tempting target for many reasons.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Important: Evernote just implemented a service-wide password reset. Please read our post for details and instructions <a href="http://t.co/4LQABJBYnJ" title="http://ow.ly/icT02">ow.ly/icT02</a></p>&mdash; evernote (@evernote) <a href="https://twitter.com/evernote/status/307882426129055744">March 2, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>CNET was able to <a href="http://news.cnet.com/8301-1009_3-57572212-83/online-note-service-evernote-latest-firm-to-get-hacked/">get a quote</a> from Evernote on the issue, providing some extra insight compared to what&#8217;s in their announcement:</p>
+
+<blockquote><p>Our operations and security team caught this at what we believe to be the beginning stages of a sophisticated attack. They are continuing to investigate the details. We believe this activity follows a similar pattern of the many high profile attacks on other Internet-based companies that have taken place over the last several weeks.</p><footer><strong>Evernote Representative</strong> <cite>CNET</cite></footer></blockquote>
+
+
+<p>But there&#8217;s plenty being written about the hack - what I&#8217;m more interested in is the response. Let&#8217;s take a look at what&#8217;s happened (publicly, at least):</p>
+
+<p><em>Feb 28th:</em> Evernote&#8217;s Operations &amp; Security team notices potentially malicious activity.</p>
+
+<p><em>This Morning:</em> User&#8217;s started noticing that the client stopped syncing, complaining of a password issue. If a user logs into the web interface, they are prompted to set a new password.</p>
+
+<p><em>10:57AM EST:</em> Evernote posted a blog post and linked to it on Twitter (see above); within a few minutes their blog was returning a database connection error. Later visiting the blog returned a maintenance page, a database error, or a 503 error.</p>
+
+<p><em>11:57AM EST:</em> Evernote posted a new link and redirected the original blog post.</p>
+
+<p><em>1:45PM EST:</em> Received email notifying of incident and password reset. As this email was sent to ~50m users, it&#8217;s to be expected that there&#8217;s a large window during which users received it.</p>
+
+<p><em>What&#8217;s not happened yet:</em> Despite several requests from different people, they have yet to release any technical information on how the passwords were stored, beyond that they were hashed &amp; salted.</p>
+
+<p><strong>What&#8217;s Right &amp; What&#8217;s Wrong</strong></p>
+
+<p><em>Two days from finding issue to notifying users</em> - I&#8217;ve seen some people complain about this delay, but given that the priority is stopping the attack first, and the need to capture evidence as quickly as possible to give the best chance of understanding just what happened - I&#8217;d call this quite reasonable. Compared to some other companies that waited weeks or even months, I&#8217;d say they got this one right.</p>
+
+<p><em>User notification</em> - This is a hard one, on one hand you have the need to secure accounts as soon as possible while on the other, is letting users know why they are being required to change their password. I wish they had been able to get the email notification out sooner, but it was more important that they secure the accounts.</p>
+
+<p>Because of the delay in notifying users, it&#8217;s possible for some users to change their password and go on with their day without knowing why they needed to change the password - or that if they use that same password elsewhere it needs to be changed there as well. They should have made what happened clear when changing the password.</p>
+
+<p>Now, the email itself deserves to be called out - it&#8217;s known that the email addresses where in the stolen data, so emails claiming to be from Evernote require an extra look to make sure they aren&#8217;t phishing. Evernote, to add to the confusion, made a huge mistake: the links in the email don&#8217;t go to <code>evernote.com</code> - they go to <code>links.evernote.mkt5371.com/ctt?...</code>. That raises a few red flags&#8230;</p>
+
+<p><em>The blog post</em> - I love WordPress, but it&#8217;s not always the best choice when you are expecting <em>lots</em> of traffic. They really should have hosted the notice from a static page from the beginning instead of trying to keep WordPress up under that much pressure.</p>
+
+<p><em>The password reset process</em> - To reset the password, all you had to do was login with the existing password to the web site - the same password that was just stolen. No proof of identity at all. If the attackers were able to crack the hashed passwords, they could easily change the password themselves and access the account.</p>
+
+<p>This really should have been done better.</p>
+
+<p><em>Disclosing technical details of password storage</em> - As I stated above, this hasn&#8217;t happened despite numerous requests. While researchers need to know this to understand the risks of the passwords being cracked, unfortunately it&#8217;s possible that this information could help the attackers if they weren&#8217;t able to acquire source code that reveals the inner workings of their password handling.</p>
+
+<p>For example, if the attack vector was SQL injection, it&#8217;s possible to exfiltrate the data without being able to get to code.</p>
+
+<p><strong>Overall</strong></p>
+
+<p>It seems that they have handled this responsibly as possible; this isn&#8217;t the kind of event anybody is truly prepared for. Could it have been done better? Yes, in a few ways - but they could have done so much worse.</p>
+
+<p>It could be argued that in the grand scheme, <a href="http://markpercival.us/post/44391805072/evernote-doesnt-really-care-about-security">they don&#8217;t care about security</a> - from my experience, that&#8217;s the impression I&#8217;ve gotten.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/12/31/revisiting-snapchat-api-and-security/">Revisiting Snapchat API & Security</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-31T17:41:00-05:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As <a href="http://www.snapchat.com">Shapchat</a> has increased in popularity, I&#8217;ve been asked several times to revisit my <a href="http://adamcaudill.com/2012/06/16/snapchat-api-and-security/">Snapchat API &amp; Security</a> post, to address the changes that they made in response to my complaints. So, here is it - sorta.</p>
+
+<p>I started making detailed notes and looking at the changes they made - but yesterday <a href="https://twitter.com/tlack">@tlack</a> made that mostly irrelevant with his release of <a href="https://github.com/tlack/snaphax">Snaphax</a>, a PHP library to interact with the undocumented Shapchat API. So for now, if you want to know more about their API or if you just want to save images or video - I&#8217;d suggest taking a good look at the Snaphax code. What I will do though, is talk about some of their changes and what they did right and what they did wrong.</p>
+
+<p><strong>Retrieving images is now destructive&#8230;</strong></p>
+
+<p>In the previous API version, you could request the same image from the <code>blob</code> API any number of times, until <code>ss_pa</code> was called to delete the image from the Snapchat servers (which occurred only after the image was viewed, opening a window to save the image before viewing it in the application) - the new <code>ph/blob</code> API removes the image once it&#8217;s been delivered to the client. Without the ability to pull the image multiple times, &#8216;downloader&#8217; tools are far less attractive - instead, to consistently download the media, users will need full replacement clients. This extra bit of inconvenience is probably one of the most effective deterrents against lazy attackers (likely the most common scenario).</p>
+
+<p><strong>ECB mode, really?!?!</strong></p>
+
+<p>Media is encrypted when it&#8217;s sent to the client - this makes it harder to capture data via a MiTM attack, and makes it slightly more complicated to build alternate clients. But, there are a few issues:</p>
+
+<ul>
+<li>The media is encrypted with AES, in <a href="http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Electronic_codebook_.28ECB.29">ECB mode</a> - I can&#8217;t imagine how they made such a mistake.</li>
+<li>Media is decrypted before going into the cache, instead of when it needs to be displayed - allowing it to be accesses on rooted devices.</li>
+<li>A single, hard-coded key (<code>M02cnQ51Ji97vwT4</code>) is used to encrypt the data.</li>
+</ul>
+
+
+<p>Pretty much everything here could have been done better; some of the problems are just simple mistakes, others a result of ignorance.</p>
+
+<p><strong>Security by obscurity&#8230;</strong></p>
+
+<p>When looking at the traffic that the application generates, one of the first things you notice is the new <code>req_token</code> field - at first glance it looks like a SHA-256 hash (and has been mistaken for one more than once), but it&#8217;s not - it&#8217;s two SHA-256 hashes that have been merged in a specific pattern. All of the data to generate this token is already included in most requests (path, timestamp, auth token), but the secret to generating it is the algorithm used to merge them into one.</p>
+
+<p>Prior to @tlack&#8217;s work, this token has been a stumbling block to those attempting to unravel the API - only because of the obscurity of their custom merger algorithm. Now that there is code that demonstrates how this works - the security benefit of the <code>req_token</code> has been completely eliminated. When you rely on the secrecy of an algorithm, it will bite you.</p>
+
+<p><strong>Doing it right&#8230;</strong></p>
+
+<p>Making a product like this work is quite easy - making it work right is extremely hard. Snapchat has entered a business where at least some of their users place an extreme amount of trust in them - a failure of their security could have a profound impact on their users lives. Any company that is in the business of handling very private communications is held to a higher standard - and Snapchat is no exception. Security should be the top priority when working on a product like this - and when you see such blatant mistakes as using ECB mode encryption, it&#8217;s obvious that they don&#8217;t take it seriously enough.</p>
+
+<p>Snapchat needs to hire an outside security consultant to review their systems to identify the flaws such as those I&#8217;ve pointed out and provide real solutions - and they have the <a href="http://www.businessinsider.com/snapchat-raising-8-million-from-instagram-backers-2012-12">money</a> to do it. Until they do, there will continue to be these cat and mouse games - and they&#8217;ll lose every time.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/07/upek-windows-password-decryption/">UPEK Windows Password Decryption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-07T14:49:00-04:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On August 28th ElcomSoft <a href="http://blog.crackpassword.com/2012/08/upek-fingerprint-readers-a-huge-security-hole/">announced</a> that they had determined a method to extract Windows passwords from the registry for users of UPEK&#8217;s fingerprint readers and Protector Suite software (UPEK is now owned by AuthenTec, which is now owned by Apple). What they didn&#8217;t announce was the technical details of how they did it. Myself and <a href="http://brandonw.net/">Brandon Wilson</a> have been working to recreate their research - and we have.</p>
+
+<p>We have not been in contact with ElcomSoft, so this is an independent re-discovery of this vulnerability. ElcomSoft has committed to not release details, which I understand - but given how likely it is that others will determine this technique, I believe that this information should be available to pen-testers and auditors so that these insecure credentials can be identified.</p>
+
+<h3>The Details</h3>
+
+<p>ElcomSoft blasted the security of UPEK&#8217;s product, saying:</p>
+
+<blockquote><p>we found that your Windows account passwords are stored in Windows registry almost in plain text, barely scrambled but not encrypted</p></blockquote>
+
+
+<p></p>
+
+<p>This isn&#8217;t quite accurate - but certainly close enough. The data is stored in the following location (varies by version):</p>
+
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Virtual Token\Passport\4.0\Passport\&lt;user&gt;\ExData</code></p>
+
+<p>The first 24 bytes are header and size information, after the encrypted data there is a 4 byte number that indicates the number of bytes in the next section, the following bytes are used in the IV. The encryption key is &#8216;generated&#8217; using a PBKDF2-like function that uses MD5 hashing, but unfortunately when storing data in the registry they aren&#8217;t using a password - so the outcome is based purely on an MD5 hash that they are using as a &#8216;seed&#8217; value. This means that the key used is always the same.</p>
+
+<p>Better: the key is only 56 bits.</p>
+
+<h3>AES-56</h3>
+
+<p>On the AuthenTec&#8217;s website they mention using 56-bit AES (due to the old export restrictions) - this confused me for quite some time, not only does AES not support 56-bit (or anything else less than 128 bits), from looking at the algorithm trying to make it support a key size that isn&#8217;t a multiple of 32 bits would be quite challenging. So how did they do it? They cheated.</p>
+
+<p>They are actually using AES-256, and padding both the 56-bit key and IV with nulls. In other words, they are taking a very strong crypto and stripping it of its value.</p>
+
+<h3>The Data</h3>
+
+<p>Besides the Windows password, the data also includes the domain and login (all in Unicode), along with other various bits that&#8217;s less interesting from a pen-testing perspective. Looking at the raw data, you can identify the password from the <code>P1</code> header, <code>0x11</code> denotes the login, and <code>0x12</code> indicates the domain.</p>
+
+<p>The biometric data may be of some interest, but not to me.</p>
+
+<h3>Code</h3>
+
+<p>We&#8217;ve <a href="https://github.com/brandonlw/upek-ps-pass-decrypt">posted</a> a proof-of-concept tool to Github, it&#8217;s written in C#, and thus requires the .NET 4.0 framework be installed (<a href="http://adamcaudill.com/files/FingerprintEncryption.2012.10.16.1847.zip">download here</a>). I also plan to write a Metasploit post module, but it&#8217;s not ready yet.</p>
+
+<h3>UPDATE</h3>
+
+<p>So it turns out that AuthenTec <a href="http://support.authentec.com/Downloads/Windows/ProtectorSuite.aspx">released</a> a patch for this on 9/18 - and we missed it (as did pretty much everybody else). We were alerted to the patch late on 10/10, and last night (10/11), we completed work on breaking it. We&#8217;ve updated the Github repository with the new code, it supports both the old versions and the new version they released on 9/18. They are now using DPAPI (among other things), so if you have the new version, you&#8217;ll need to run it in the context of LocalSystem so that you can access the correct encryption keys. This can be done quite easily with <code>psexec</code> - see the <a href="https://github.com/brandonlw/upek-ps-pass-decrypt#readme">README</a> for details.</p>
+
+<p>From a security perspective, the new version is somewhat more secure - but obviously, still easily attacked. They are now using a &#8216;seed&#8217; of 16 random bytes (which is stored in <code>ExData</code> and protected via DPAPI), which is then hashed with SHA1, the hash is then passed into their key derivation method to produce the 56 bit key that is used to encrypt the main data block. Within the main data block there is another DPAPI block where the password was previously stored - this was something of a surprise to us at first, as they had obfuscated the code to hide this part. This second DPAPI block contains the user&#8217;s password, and can be easily decrypted with the same method used to decrypt the block containing the &#8216;seed&#8217; data.</p>
+
+<p>Both of the DPAPI calls use the same entropy data - a block of 0x86 bytes, at the beginning is the word &#8216;Software&#8217; and a 0x01 at offset 0x2B and a 0x05 at 0x43 - and as said above, the DPAPI calls are made in the context of the LocalSystem user, and thus needs to be decrypted within that same context.</p>
+
+<p>The new <code>homepass.dll</code> file contains new anti-debugging code, as well as obfuscated code to complicate reverse engineering - fortunately, or unfortunately depending on your point of view - these new &#8216;protection&#8217; mechanisms are trivial to bypass. To avoid this becoming a cat &amp; mouse game, we won&#8217;t be releasing further updates to this code - but I think it&#8217;s safe to say that it&#8217;s fundamentally broken, and any fixes they release can be bypassed without excessive effort.</p>
+
+<p>I would not trust this software in a corporate environment.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/06/wordpress-dont-trust-that-update/">WordPress: Don&#8217;t Trust That Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T01:42:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Want to know the easiest way to hack most of the WordPress installs on a host? It&#8217;s as easy as attacking the host&#8217;s internal DNS server, then just sitting back and waiting on users to install your backdoor. If you can manage to change the IP address that &#8220;api.wordpress.org&#8221; resolves to, you&#8217;ve won the battle.</p>
+
+<p>I can&#8217;t take credit for finding this, it was pointed out on Twitter:</p>
+
+<div class='embed tweet'>Tweet could not be processed</div>
+
+
+<p>So this is nothing new - though I don&#8217;t think most users realize that this hole exists, or how hard it would be to find out that they&#8217;ve been attacked.</p>
+
+<p>Internal networks rarely receive the same degree of scrutiny as public facing systems when it comes to updates and hardening, making an attack against an internal DNS server not just possible - but quite likely. Since HTTPS isn&#8217;t used to protect against MITM attacks, and the packages aren&#8217;t signed, so there&#8217;s no verification that what you downloaded matches what was released. So going after the DNS server is just one attack option.</p>
+
+<p>Here&#8217;s a quick overview of just how it could happen:</p>
+
+<ul>
+<li>Hacker signs up for an account with a large host</li>
+<li>The attacker targets the internal DNS server and manages to redirect the API domain</li>
+<li>The API domain now points to an altered update check that serves an infected update package</li>
+<li>Users install updates with no idea that they aren&#8217;t original</li>
+</ul>
+
+
+<p>It would be trivial to modify the WordPress update package to add a backdoor and modify the update check (<code>wp-includes/update.php</code>) to point to the attacker&#8217;s site - that way if the attack against the DNS server is fixed, compromised sites will remain compromised. This does assume that the host&#8217;s internal DNS server has some vulnerability - but in my experience that wouldn&#8217;t be surprising.</p>
+
+<p>If the WordPress team started signing their updates, these issues would be gone; though it doesn&#8217;t look like that will happen:</p>
+
+<div class='embed tweet'>Tweet could not be processed</div>
+
+
+<p>What makes this worse? Both the API and download domains already support HTTPS, but this doesn&#8217;t do any good if the application is hardcoded to use HTTP.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/12/neoinvoice-blind-sql-injection-cve-2012-3477/">NeoInvoice Blind SQL Injection (CVE-2012-3477)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T16:15:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/tlhunter/neoinvoice">NeoInvoice</a> is a multi-tenant open source invoicing system, that currently contains an unauthenticated blind SQL injection condition in <code>signup_check.php</code>. The input for the <code>value</code> field isn&#8217;t being properly sanitized, and is used in string concatenation to create the SQL query:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="s2">&quot;config.php&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;username&#39;</span> <span class="o">||</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;email&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coupon&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;coupon&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Field&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$value</span> <span class="o">=</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9_.\-\*\/\+\, @]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$value</span> <span class="o">!=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$connect</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nx">MYSQL_HOSTNAME</span><span class="p">,</span> <span class="nx">MYSQL_USERNAME</span><span class="p">,</span> <span class="nx">MYSQL_PASSWORD</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$connect</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">.</span> <span class="nb">mysql_error</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="s2">&quot;SELECT </span><span class="si">$field</span><span class="s2"> FROM </span><span class="si">$table</span><span class="s2"> WHERE </span><span class="si">$field</span><span class="s2"> = &#39;</span><span class="si">$value</span><span class="s2">&#39; LIMIT 1&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">mysql_select_db</span><span class="p">(</span><span class="nx">MYSQL_DATABASE</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="nv">$query</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">mysql_num_rows</span><span class="p">(</span><span class="nv">$result</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$taken</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$not_taken</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Line #29 there is the key, by concatenating untrusted data into the SQL query, it has made SQL injection trivial. This vulnerability can be demonstrated with the following request:</p>
+
+<p><code>signup_check.php?field=username&amp;value='+OR+SLEEP(5)+OR+'</code></p>
+
+<p>This results in the following query being executed:</p>
+
+<p><code>SELECT username FROM user WHERE username = '' OR SLEEP(5) OR '' LIMIT 1</code></p>
+
+<p>The author has been notified, but has yet to respond. Based on the one open <a href="https://github.com/tlhunter/neoinvoice/issues/2">ticket</a> for the project, there&#8217;s likely other possible attack vectors.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/8/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/6/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Last week Brandon Wilson and I were honored to speak at DerbyCon, on the work we’ve been doing on the Phison controller found in many USB thumb &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/2">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/10/02/making-badusb-work-for-you-derbycon/">Making BadUSB Work for You - DerbyCon</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-02T22:15:00-04:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week <a href="http://www.brandonw.net/">Brandon Wilson</a> and I were honored to speak at <a href="https://www.derbycon.com/">DerbyCon</a>, on the work we’ve been doing on the Phison controller found in many USB thumb drives. This was my first time speaking at DerbyCon - it’s a great event, with a fantastic team making the magic happen.</p>
+
+<p>Slides:</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/39583508" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p>Video (which I’ve haven’t been able to bring myself to watch):</p>
+
+<iframe width="854" height="510" src="//www.youtube.com/embed/xcsxeJz3blI" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Now that the dust has settled, I would like to provide some updates, thoughts, and extra information - and <em>maybe</em> correct an error I made during the presentation.</p>
+
+<h3>The Demos</h3>
+
+<p>We did three demos - they were simple enough that I didn’t think there was any risk of having issues. Well, lesson learned.</p>
+
+<p>The machine we used was a fresh Windows install just for the talk - though in the rush, there were a couple differences between it and the machine we had been testing with. In the panic of trying to get the talk done in the short 25-minute slot, I mistook these differences for a failing of one of the demos.</p>
+
+<p><strong>Custom HID Firmware</strong></p>
+
+<p>The first of the three demos was a completely custom firmware, that presents itself as a HID device (and as a mass storage device, though without media present - this is to make firmware updates easier) - the demo went without a hitch.</p>
+
+<p>I would have liked to show the tools and the update process, though there just wasn’t time. Brandon is working on videos that will be posted to YouTube that walks through each demo step by step.</p>
+
+<p>The team behind the <a href="https://hakshop.myshopify.com/products/usb-rubber-ducky-deluxe">Rubber Ducky</a> saved us a lot of time, thanks to the tools they had built - as we were able to support the same encoded format they used.</p>
+
+<p><strong>Hidden Partition</strong></p>
+
+<p>The hidden partition is a great patch, as there’s no way to tell that it’s there - everything works as expected, no reason to suspect that anything has been altered.</p>
+
+<p>It divides the NAND space into two partitions, and the firmware lies about the size, to indicate that only half of the space is there. The “public” section is the first that’s mounted, and only a specific action will cause the second, hidden partition to become visible.</p>
+
+<p>It’s a simple change, but it sends a clear message that there can be more than meets the eye with these devices. From a forensics perspective, the only way to ensure that what you are getting is accurate and complete, is to dump the NAND directly - without allowing the controller to access it.</p>
+
+<p><strong>Password Protection Bypass</strong></p>
+
+<p>This demo <em>seemed</em> to go wrong, but it actually performed perfectly - I was just in too much of a rush to think though what was happening, and why I didn’t see what I expected.</p>
+
+<p>When I plugged the device in, I was expecting to see two drives from it - one “public”, the other unmounted. I only saw one. Two things went wrong here:</p>
+
+<ul>
+<li>“Show Empty Drives In Explorer” - By default Windows doesn’t show unmounted removable drives in “My Computer”; this is a setting I always change, and expected to see the unmounted drive. As this was a fresh install, the default setting was still set - the drive was there, I just couldn’t see it. This threw me off.</li>
+<li>Wrong Password - During the demo I typed in some random junk to the password field of the “Lock” tool, and instead of it unlocking the drive as expected, it gave me the wrong password dialog. The issue here is a bug in the Phison code, when supplying a password more than 16 characters long it treats it as a bad password. So it was working, but the password I supplied was too long, triggering that bug.</li>
+</ul>
+
+
+<p>We later tested that drive again, and sure enough - it worked flawlessly, as long as the random password wasn’t longer than 16 characters.</p>
+
+<p>The patch works by altering the buffer that stores the data once received over USB; it forces it to 16 “A”s, so that any password will work. Because of how it works, the patch must be applied before the user sets their password - otherwise it’ll just make the data inaccessible.</p>
+
+<p>That was painful.</p>
+
+<h3>The (maybe) error…</h3>
+
+<p>During the talk I referred to modes 7 and 8 as being encrypted - this is <em>probably</em> wrong, at least on the devices we demoed. The two modes are password protected, and according to some documentation are encrypted, and according to other documentation they aren’t.</p>
+
+<p>The question came up in a conversation after the talk - we’ve not had the time to dig into this feature more since then, but it’s looking like it’s just a password check with no encryption.</p>
+
+<p>The password changing patch was added at the last minute, to replace another demo that we didn’t like - we identified the USB command being sent, and patched it. Due to time constraints we didn’t dig into the feature to verify the document (from a device manufacturer) was correct; after the question was raised we dug into a little more and looked for other documentation and code to support the claim - it looks like the document we were referencing was incorrect.</p>
+
+<p>So, it looks like I misspoke - the patch still works as expected, though the feature itself seems to provide less protection than we initially though. Sorry!</p>
+
+<h3>The Code &amp; Docs</h3>
+
+<p>We have everything on the <a href="https://github.com/adamcaudill/Psychson">repo</a> now, and we’ve added some additional documentation to the <a href="https://github.com/adamcaudill/Psychson/wiki">wiki</a>.</p>
+
+<p>This isn’t simple to do - the code is complicated to write, and the effort to use the patches and custom firmware is a bit more than I’d like. We’ve tried to document things as well as we can, hopefully it’s easy enough to understand.</p>
+
+<h3>Next Steps</h3>
+
+<p>We really hope that releasing this will push device manufactures to insist on signed firmware updates, and that Phison will add support for signed updates to all of the controllers it sells.</p>
+
+<p>Phison isn’t the only player here, though they are the most common - I’d love to see them take the lead in improving security for these devices. They have an opportunity to stand up and protect users - as the most common provider of these controllers, I’d truly love to see them take this as an opportunity to lead the industry.</p>
+
+<p>What we’ve released just scratches the surface of what can be done here - until signed updates are enforced, there’s no telling what games these devices could be playing.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/08/25/ietf-action-on-secure-email/">IETF Action on Secure Email</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T11:02:00-04:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Early last week I emailed a group of IETF Area Directors, for the Security and Applications areas, asking them to start the process of creating a new Working Group to address the issues around email security. (Thanks Adrian Farrel for the prodding!)</p>
+
+<p>Today, the first result of the effort has been completed - the new <a href="https://www.ietf.org/mailman/listinfo/endymail">endymail</a> mailing list. An IETF venue to discuss how these issues can be addressed, hopefully laying the ground work updated standards to improve email as we know it today, and eventually standardizing a replacement to SMTP and related protocols. Here&#8217;s the description that the group came up with for the new list:</p>
+
+<blockquote><p>There is significant interest in improving the<br/>privacy-related properties of Internet mail. One focus of<br/>current efforts is on the per-hop (connection-based)<br/>protections provided by TLS. However a wide range of other<br/>work has a focus on end-to-end protection, at the Internet<br/>scale of billions of end users and perhaps millions of<br/>operators.  Such work typically involves new forms of mail<br/>header or body protection, new public key management<br/>(compared to S/MIME or PGP), and security mechanisms more<br/>appropriate for mobile/web user-agents.  Other<br/>security-relevant approaches may be discussed if needed.<br/>Various proposals and development efforts on this topic are<br/>underway outside the IETF. This mailing list provides an<br/>IETF venue for discussion of elements that might be commonly<br/>needed by such efforts and to identify work that the IETF<br/>could do to aid in achieving better end-to-end security<br/>deployed for Internet email.</p></blockquote>
+
+
+<p>While the creation of another mailing list is far from ground breaking, it&#8217;s the necessary first step in standardizing a solution to a decades old problem.</p>
+
+<p>I encourage everyone interested in email security and privacy to join the list, and participate in the discussions that will lead to new standards. (Though please wait a bit for people to subscribe before starting discussions.)</p>
+
+<p>A big thanks to Stephen Farrell, Joe Hildebrand, and Pete Resnick for their enthusiastic support for this effort.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/08/16/smimp-at-the-defcon-cryptovillage/">SMIMP at the DEFCON Crypto Village</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-16T00:00:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week I gave a lighting talk at the DEFCON CryptoVillage on <a href="http://smimp.org/">SMIMP</a>. The talk went over the basics of why the project is needed, and how the specification works.</p>
+
+<p>Here are the slides:</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38040741?rel=0&startSlide=2" width="512" height="421" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p>Here is a rough transcript of the talk:</p>
+
+<p><em>Slide 1:</em> I&#8217;m Adam Caudill, I’m a developer and security researcher; I work on a number of different things, but my recent work has been around privacy and secure messaging.</p>
+
+<p>We all know that email security is a real problem, and thanks to a certain whistleblower we know those weaknesses are actively being exploited on a massive scale. I&#8217;m here to talk about some of the issues, and a project I&#8217;ve been working on called SMIMP. It&#8217;s a secure messaging protocol that aims to address the use cases of email, and to be a viable option to replace email as we know it.</p>
+
+<p><em>Slide 2:</em> This image illustrates the issues with email better than anything I&#8217;ve seen.</p>
+
+<p>It&#8217;s decades old, wasn&#8217;t designed for the threats that exist today, and as a result - this is what we&#8217;ve done to it. We&#8217;ve glued on various bits to make it look and feel like something it isn&#8217;t. STARTTLS helps protect from passive monitoring, but that&#8217;s only one attack vector out of so many - and even then, it&#8217;s often opportunistic, so it fails open and is subject to Man In The Middle attacks.</p>
+
+<p>GPG helps protect message content, but it&#8217;s hard for the average user to understand and doesn&#8217;t do anything for metadata.</p>
+
+<p>No matter what we try to glue on to email, it&#8217;s still a protocol that fails on many fronts.</p>
+
+<p><em>Slide 3:</em> Not only is email as it exists today not designed to provide any protection from state-level attackers, it doesn&#8217;t even provide any protection from a rogue sysadmin. Thanks to the various bits that have been glued on over the years, it&#8217;s a bit better when circumstances are ideal - but it still fails on so many fronts.</p>
+
+<p>For a messaging protocol to have any chance of being secure, privacy and security need to be evaluated and included in every design decision, from the very first day - attempting to glue them on after the fact leads to the kind of failure we&#8217;ve seen with email.</p>
+
+<p>I know I&#8217;m preaching to the choir here. We all know it&#8217;s a mess, we all know it&#8217;s a problem that needs to be addressed.</p>
+
+<p><em>Slide 4:</em> There are many people looking to make the situation better, and on many fronts, and these efforts  do help a little bit at a time - but often only for people that know how to leverage the tools, or can get others to implement solutions. For the vast majority of users, the current state of email security is pretty dismal.</p>
+
+<p>The question is, does it make sense, in the long term, to keep trying to find ways to improve email with security focused clients (such as Mailpile), better self-hosting setups, fighting companies to implement STARTTLS, and so on. Or, should we be pushing for a new protocol that&#8217;s built for security and privacy from the ground up? Avoiding the mistakes of the past, shedding the dead weight of obsolete protocols and techniques.</p>
+
+<p>There are huge compatibility and interoperability issues that have to be addressed for any protocol to be successful of course - when you are trying to replace a system used by billions, dealing with legacy systems is something of a big deal.</p>
+
+<p>The fact is, it <em>needs</em> to be replaced with something better, but even calling such an effort a massive undertaking is an understatement. But, if it is to be replaced, it needs to start with groups like this, so that what&#8217;s built will live up to the demands that will be placed on it.</p>
+
+<p><em>Slide 5:</em> Towards the goal of finding a better option for email, I began writing a specification. If I&#8217;m going to complain about a problem I should offer a solution, right?</p>
+
+<p>SMIMP is a general purpose messaging system designed with a few key goals in mind:</p>
+
+<ul>
+<li>Minimal metadata</li>
+<li>Encrypt as much as possible</li>
+<li>Covers existing email use cases</li>
+<li>Simple to use; normal users need to be able to use it</li>
+<li>Useable in corporate environments that have special handling requirements - such as HIPAA, SarbOx, etc. - This is a big advantage against options like bitmessage; there has to be a balance between security, and meeting the varying demands of the different environments this could be used in.</li>
+</ul>
+
+
+<p>Another goal is ease of implementation - on both the client and server ends; so it&#8217;s a REST-like web service, and the data is passed as JSON. This way developers can leverage well-tested code instead of writing everything from scratch. This also means that it&#8217;s easy for people to host their own server with a minimal time / effort investment.</p>
+
+<p><em>Slide 6:</em> SMIMP is made up of two major components, identity management and messaging. I believe it&#8217;s critical that these are combined into a single protocol to allow for key pain points in traditional email to be addressed - the largest being public key discovery. For GPG, this can be a real challenge for users, especially when trying to find the key for certain high-profile people; has anyone looked for Jacob Applebaum&#8217;s key? It&#8217;s Bad.</p>
+
+<p>Every user has one public signing key in their profile information - the key is tied to the user&#8217;s address, so to find a user&#8217;s key, all you need is their address. This provides a clean, simple way to identify the appropriate key for a user. Of course, ideally users should verify public signing keys via a trusted channel such as a phone call.</p>
+
+<p>To protect the integrity of the profile information, all changes are signed with the user&#8217;s signing key, and includes the hash of the prior change - creating a hash chain from the first, to the most recent change, allowing for simple validation that the records haven&#8217;t been altered.</p>
+
+<p>To protect against a malicious server, there are a couple checks that clients can perform:</p>
+
+<ul>
+<li>Pin the most recent signing key, if it disappears from the user&#8217;s profile, then the information is being truncated, possibly to force the use of a compromised key.</li>
+<li>Pin the original signing key from when the account was created; if that ever changes, that is a clear indication that the entire history for a user has been replaced.</li>
+</ul>
+
+
+<p>On the messaging side, all messages and most metadata is encrypted; the only data exposed is the data needed for the server to function. There are multiple message types, so not only does it support email like messages, it supports custom, application specific messages; this allows other message-centric applications to use SMIMP as a transport, making it easier to build secure messaging applications.</p>
+
+<p>There are a few anti-spam protections in place - seeing as the server won&#8217;t be able to scan content anymore.</p>
+
+<ul>
+<li>Dynamic hashcash-like proof of work</li>
+<li>Blacklists to reject everything from an address or domain</li>
+<li>Whitelists to allow addresses or domains to bypass the proof of work check.</li>
+</ul>
+
+
+<p>The envelope is JSON, for email, the message is JSON, the formats are extensible, making it easy to add new functionality.</p>
+
+<p>Everything is designed around a simple set of principles:</p>
+
+<ul>
+<li>Secure</li>
+<li>Private</li>
+<li>Easy to implement</li>
+<li>Hard to screw-up</li>
+</ul>
+
+
+<p><em>Slide 7:</em> So, what&#8217;s the status today&#8230;</p>
+
+<p>The specification is still a work in progress and is available from smimp.org, along with more background of what it is, and why it&#8217;s designed the way it is.</p>
+
+<p>I wouldn&#8217;t try building against it just yet, it&#8217;s still too immature, but if anybody wants to put their 2 cents in, the specification is on github and pull requests are welcome. The goal here is to get feedback, address issues, and try to build a community driven specification - my goal isn&#8217;t to write a specification myself and then push it on the world assuming it&#8217;s perfect.</p>
+
+<p>I&#8217;ve invested a fair bit of time into SMIMP, but it&#8217;s certainly not perfect, and the final solution to the email problem may not be anything like SMIMP - and I&#8217;m fine with that.</p>
+
+<p>What&#8217;s needed is more people looking not at how to we glue more things on email, but looking at how could we replace it. We need to get more people talking about possible solutions, for more people to contribute to specifications, or write new ones, to get more people focused on the one goal that will actually fix email security - replacing it.</p>
+
+<p><em>Slide 8:</em> I encourage you to look at the specification, to think about how replacing email could be achieved, and find people to work with to achieve this.</p>
+
+<p>If you have any questions, suggestions, or complaints - I&#8217;ll be in the area for a bit.</p>
+
+<p>Thanks!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/26/on-strong-identity-management/">On Strong Identity Management</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T22:16:00-04:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG, Alice would look up his address on a key server, the issue is of course that anyone can upload a key associated with Bob&#8217;s address.</p>
+
+<p>Using the &#8220;web of trust&#8221; model, Alice would look at the different keys and see which ones are signed, and if any of them are signed by people she knows. The problem is that Alice doesn&#8217;t normally use GPG, and she hasn&#8217;t marked the keys of the people she knows as trusted (I expect this is true for most casual GPG users), thus, she can&#8217;t tell what key is signed by keys she should trust, versus the ones signed by keys she shouldn&#8217;t.</p>
+
+<p>In years of effort, this is still an issue.</p>
+
+<p>There are many issues with this model, especially when it comes to casual users that don&#8217;t understand the details of the &#8220;web of trust&#8221; - while GPG use is certainly going up thanks largely to the Snowden revelations, many of these users fit into the casual users group. Thanks to the complexities of the model, these users may not be getting the level of protection they think they are.</p>
+
+<p>Here are just a few of these issues:</p>
+
+<ul>
+<li>Lack of strong linking - there isn&#8217;t a strong, verifiable connection between a user&#8217;s address, and their public key.</li>
+<li>Complex user interaction - to be useful, the user has to understand the web of trust model, and how to leverage it. Based on the discussions I&#8217;ve had with people that recently started using it, most don&#8217;t get it.</li>
+<li>Key discovery - finding the right key can be a nightmare, especially for some people. When there are multiple &#8220;valid&#8221; keys published, each with signatures, it can be hard for novice users to figure out which one is right.</li>
+</ul>
+
+
+<p>I could go on, but I think the point is clear - the web of trust works well for some users, but only the users that take the time to really understand it.</p>
+
+<p><strong>The <em>IM</em> in SMIMP</strong></p>
+
+<p>I&#8217;ve been drafting a <a href="https://github.com/smimp/smimp_spec">specification</a> for a secure messaging protocol called <a href="http://smimp.org/">SMIMP</a>, as far as I&#8217;m concerned the Identity Management component is the most important part. It&#8217;s what allows the rest to work - secure messaging isn&#8217;t that hard, key handling and validation is where end user system start to fail.</p>
+
+<p>To provide a strong identity management system, a few goals need to be met:</p>
+
+<ul>
+<li>Strong link between address and public key.</li>
+<li>Updates to identity information signed by the user to prevent unauthorized changes.</li>
+<li>Provide a full history, including all changes from the time the account was created.</li>
+<li>Use of a hash-chain to show that no changes have been removed.</li>
+</ul>
+
+
+<p>The IM in SMIMP meets all of these. The suggested way of using the system is trust on first use, pinning on both the first and the most recent public key. It would also be wise for the user to validate the recipient&#8217;s current public key via a trusted channel on first use, but that&#8217;s something that rarely happens in practice.</p>
+
+<p>To detect a malicious server, or modified traffic, the user&#8217;s client should first check to see if the original public key has changed - if it has, it indicates that the user&#8217;s information has been replaced in its entirety. Second, it should see if the most recent key is no longer listed in the user&#8217;s history - if its been removed, it indicates that the user&#8217;s history has been truncated, possibly in an attempt to encourage the use of a compromised key. These checks provide an easy way for client software to validate that keys can be trusted.</p>
+
+<p>To make the system more useful, the SMIMP identity information includes more than just the public key (all of which are optional):</p>
+
+<ul>
+<li>Name</li>
+<li>Web site</li>
+<li>List of social media profiles</li>
+<li>Additional data (comments, or other data the user wishes to assert)</li>
+</ul>
+
+
+<p>This provides a simple way to strongly tie addresses to public keys; thus making secure messaging easier and more understandable for casual / non-technical users. For a solution to be widely useable, it needs to be effective for everyone.</p>
+
+<p><strong>The best solution?</strong></p>
+
+<p>SMIMP may not be the best solution, and there are some things about it that I don&#8217;t care for myself - such as exposure of more metadata than I&#8217;d like. But, it is a solution to the issues surrounding email, and identity management.</p>
+
+<p>The <a href="https://adamcaudill.com/2014/06/27/the-sinking-ship-of-email-security/">issues</a> of email security can be fixed, and identity management is part of that problem. There has to be a way to tie a user to their public key in a more reliable manor than what we have today (and without resorting to the mandatory government ID idea that won&#8217;t die).</p>
+
+<p>I encourage everyone to look at these issues, and think about possible solutions. Contribute to SMIMP or one of the other efforts to fix the issues around email; we can no longer ignore these issues. The community needs to find and implement solutions that assure the security and privacy of the global community.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/23/jumping-through-hoops-dot-dot-dot/">Jumping Through Hoops&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T18:11:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are two ways to implement security:</p>
+
+<ul>
+<li>Real security, based on empirical evidense and analysis.</li>
+<li>Checklist security, based on the latest checklist somebody says is important.</li>
+</ul>
+
+
+<p>When security is based on real evidence and analysis, policies are enacted based on real gain and measured against the business impact. Risks are considered, and the costs versus benefits are well understood so that policy choices are based on real, useful information.</p>
+
+<p>On the other hand there&#8217;s security by checklist. Costs aren&#8217;t calculated, risks aren&#8217;t understood, business impacts are ignored. All that matters is that somebody gets to check a box on a form; there&#8217;s no understanding, no logic, and likely no real benefits involved.</p>
+
+<p>The point of security policies isn&#8217;t to show off how many hoops you&#8217;ve built that people have to jump through when doing their jobs. Yet, when a company accepts a security by checklist mentality, this is exactly what they are doing. They spend their time building hoops that they can show off later while ignoring the threats they are supposed to be addressing.</p>
+
+<p>Recently, my laptop died, the new laptop was setup with DLP, or digital loss prevention software. The main purpose of the software is to prevent me and anyone in my group from being able to use removable drives - so that we can&#8217;t load them up with private information of course.</p>
+
+<p>This was done to check a box on a form, at no point did anyone actually think about the bigger picture, what the threat was, and how it should be addressed:</p>
+
+<ul>
+<li>I have a laptop and work remotely.</li>
+<li>When I disconnect from the VPN, I have unrestricted access to the internet.</li>
+<li>I routinely work with sensitive data, so it&#8217;s not uncommon for it to be on my computer.</li>
+<li>I could easily encrypt a file full of private data, and upload it to the cloud after disconnecting from the VPN, and nobody would know.</li>
+</ul>
+
+
+<p>So, by blocking the use of removable drives, they made it much harder for me to recover from a failing laptop, and added nothing to security. Blocking thumb drives won&#8217;t stop a person from stealing data when they have other ways they could do the same thing. All it did was waste time and the company&#8217;s money.</p>
+
+<p>They built a new hoop to show off, nothing more.</p>
+
+<p>Such policies don&#8217;t help anyone - they don&#8217;t improve security, they certainly don&#8217;t prevent theft of data, and at the same time, they do have a negative business impact. Lost productivity, increased frustration, and in the end higher turn-over from employees that are fed up from the meaningless work. There&#8217;s no winner here - except the person that wants to show off all of the hoops they have.</p>
+
+<p>Security based on anything other than empirical evidence and legitimate analysis is just theater and nothing more.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/3/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

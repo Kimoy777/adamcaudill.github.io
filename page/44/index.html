@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Visual Basic is at an interesting crossroads, it&#8217;s at a critical juncture between two paths. One path, it has followed since its earliest days &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/page/44">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/04/02/vb-the-dumbing-of-a-great-language/">VB: The Dumbing of a Great Language</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-04-02T17:23:26-04:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Visual Basic is at an interesting crossroads, it&#8217;s at a critical juncture between two paths. One path, it has followed since its earliest days, where simplicity and ease of use ruled over maintainability and solid design. The other, the longer, harder road, is that of design over ease. With the release of Visual Basic .NET, a major shift occurred in the direction the language is taking, though looking back now, nearly 5 years later, I&#8217;m finding myself concerned for the future of the language.</p>
+
+<p>Before I go much further, let me give you some background so that you can have a clearer understanding of my perspective. I&#8217;m a VB developer, I work exclusively in Visual Basic, and quite honestly I do love the language. It&#8217;s productivity at it&#8217;s best. I started using VB5 and at some point, I&#8217;ve used every version since then. So while I will be saying some negative things about VB, this isn&#8217;t bashing the language, this is me trying to open people&#8217;s eyes to the state of a great language.</p>
+
+<p><strong>The Problem</strong></p>
+
+<p>The issues VB as a language is facing is the desire from Microsoft to keep long-time users around, while trying to advance the language. Instead of making a clean break, they are falling into the trap they fell into with Internet Explorer, where they continued to build on broken code, to ensure that thing would work the same way (the IE team is trying to <a href="http://blogs.msdn.com/ie/archive/2005/10/12/480242.aspx">get out of the hole</a>). This has resulted in a language that makes heavy use of crutches to prevent pre-.NET users from having to re-learn their language.</p>
+
+<p>While backwards compatibility is a nice thing to offer, when you are making major changes to a language, sometimes it&#8217;s best to start over and break the mistakes of the past. I understood the forces at play when .NET was originally released, so it&#8217;s understandable that Microsoft would choose to add crutches to make the transition easier. All of 5 years and two versions latter, the picture doesn&#8217;t look any better.</p>
+
+<p>I had hoped that the crutches included in .NET 1.0 &amp; Visual Basic 2002 were temporary and would fade out as new versions are released. Nope. Instead of removing this legacy support, they continue to add more as the marketing forces inside Microsoft push to get the remaining pre-.NET VB developers to migrate. This is the same thing that was being done with Internet Explorer, which when the next version, 7, is released, it will cause many web sites to either display improperly, or not function at all. They are breaking it to fix it, I&#8217;m afraid we&#8217;ll need to get to the same point with VB before it continues down the proper path.</p>
+
+<p>As compatibility is continuously made a priority over good design, VB will continue to slip, and continue to carry the reputation the mistakes of the past gave it.</p>
+
+<p>C# was created with a true, very logical OOP model, VB was developed with a concoction of the C# &amp; VB6 models, which is enforced by both the compiler and the Visual Studio IDE. These are not simply issues with the use of legacy methods, but the very model that the language is based on.</p>
+
+<p><strong>Who&#8217;s To Blame</strong></p>
+
+<p>Microsoft, of course.. right? Wrong.</p>
+
+<p>The problem lies with the developers that use VB, not those that develop it. The primary issue I see is that legacy developers are not investing in the training or education to use VB properly. They continue to use antiquated methods and models they learned from VB6 and its predecessors.  The issue is that they create a hybrid type of code, that doesn&#8217;t follow a logical OOP model, instead following the pseudo-OOP model processed by VB6.</p>
+
+<p>VB.NET has the potential to be a truly great language, the main issue is its habit of thinking for the developer, C# was developed without the mistakes of prior languages, and has so far done very well as it can take full advantage of the .NET Framework. VB on the other hand is somewhat limited in that due to trying to partially emulate the object model and structure of its predecessor, it loses flexibility granted to the other .NET languages.</p>
+
+<p><strong>How to fix it</strong></p>
+
+<p>Great question.</p>
+
+<p>The only answer I see is to stop using legacy functionality, and calls for Microsoft to clean up the model used. When writing code in VB or C#, the IDE &amp; compilers should produce virtually identical code. As it stands now, there is a significant difference in the code the compiler generates, the assumptions it makes (many of which can <em>not</em> be over-ridden).</p>
+
+<p>Until developers stand up, and take responsibility for using the language in the way it should be, I doubt we&#8217;ll see any progress. We can hope things will change, but I&#8217;m not holding my breath. (Though, as a side note, C# is looking more appealing every day.)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/31/look-whos-blogging-now/">Look Who&#8217;s Blogging Now&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-31T01:01:56-05:00" pubdate data-updated="true">Mar 31<span>st</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A good friend of mine (as well as co-worker), <a href="http://www.verbalclay.com/blog/">Laura</a>, has just <a href="http://www.verbalclay.com/blog/?p=3">went live</a>  with her new blog. If her other work is any indication, I&#8217;m sure we&#8217;ll be seeing some real <a href="http://www.verbalclay.com/gallery/thumbnails.php?album=1">gems</a>  from her.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/29/advanced-net-programming/">Advanced .NET Programming</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-29T23:46:23-05:00" pubdate data-updated="true">Mar 29<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://adamcaudill.com/files/1861006292.01._SCLZZZZZZZ_.jpg"><img src="http://adamcaudill.com/files/2006/03/1861006292.01._SCTZZZZZZZ_.jpg" alt="Advanced .NET Programming" /></a> <a href="http://www.amazon.com/exec/obidos/tg/detail/-/1861006292/">Advanced .NET Programming</a>,<br/>
+by Simon Robinson</p>
+
+<p>This is a book I picked on clearance at the local Books-A-Million, being targeted at the 1.0 release of the Framework I was aware it was rather dated, though it was still a decent looking book (and it was cheap). The author doesn&#8217;t jest when he uses the word <em>advanced</em>, this is an in-depth book.</p>
+
+<p>While I tend to be forgiving of small typos in books, this book has an unforgivable number of errors. While much of the content is useful (and seems correct), there are enough editing issues to make me second-guess <em>everything</em>. With as many errors as I saw, I was almost wondering if was a test printing of the manuscript, though after some checking, that doesn&#8217;t seem to be the case. This book had the potential to be one of my favorites due to the way the author explains topics, and the vast amount of hard to find information included.</p>
+
+<p>Yet, it leaves me disappointed.</p>
+
+<p>I&#8217;d like to say that this is a book everyone should read, but due to countless editing errors, all this one is - is a &#8216;could have&#8217;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/28/1tb-file-server-500/">1TB File Server, $500</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-28T23:07:35-05:00" pubdate data-updated="true">Mar 28<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The price of storage has been steadily dropping over the last several years, and this is the latest example: <a href="http://www.informationweek.com/showArticle.jhtml?articleID=183702383">A Complete Terabyte File Server For About $500</a>  - Yep, you read that right, a custom 1TB file server, in the $500 range. While I&#8217;m not sure what I could do with that much storage (I remember saying that when I picked a 1.25GB drive over a 1.5GB, saying I&#8217;d never need it), but it&#8217;d be nice to have. :)</p>
+
+<p>On the topic of cheap storage, I just purchased a <a href="http://www.newegg.com/Product/Product.asp?Item=N82E16822144701">250GB SATA</a>  drive to replace my 80GB data drive that&#8217;s almost full. With SATA drives under $100 for 250GB, I&#8217;m tempted to try my own version of his project.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/25/mcts/">MCTS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-25T13:57:01-05:00" pubdate data-updated="true">Mar 25<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I think I&#8217;ve set myself up for an interesting adventure, I&#8217;ve decided to shoot for the <a href="http://www.microsoft.com/learning/mcp/mcts/winapps/">MCTS</a>, also known as &#8220;Microsoft Certified Technology Specialist&#8221; - and I&#8217;ll be taking the tests without a single guide book. Yep, you heard that right, no test study guide. Now, if I were you, I&#8217;d be asking &#8220;Why?!&#8221; - well, <em>there are none</em>. The tests required for the MCTS are so new, no books have been published on them.</p>
+
+<p>I&#8217;ll be working with one of my co-workers, Laura, on this, our plan is simple: <em>Learn everything there is to know about VB.NET 2005</em>. I think that should about cover anything on the test.</p>
+
+<p>Seriously, we are going to start by studying &#8221;<a href="ttp://www.amazon.com/gp/product/0735621837/">Programming Microsoft Visual Basic 2005: The Language</a>,&#8221; one of the recommend Microsoft references for the test. We may look at another book or two, but right now I think this is the only one we&#8217;ll need. I&#8217;d like to get my hands on a copy of &#8221;<a href="http://www.amazon.com/gp/product/0735622779/">MCTS Self-Paced Training Kit</a>&#8221; - but that won&#8217;t be available till July, and I&#8217;m hoping to have passed the tests by then (<a href="http://www.microsoft.com/learning/mcp/offers/2ndchance/details/">this is why</a>).</p>
+
+<p>Wish me luck, somehow I think I&#8217;ll need it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/45/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/43/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

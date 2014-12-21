@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CCSRCH - Open Source PAN / Credit Card Scanner - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="CCSRCH - Open Source PAN / Credit Card Scanner Jan 18th, 2013 (Downloads, Source Code) CCSRCH CCSRCH is a cross-platform tool for searching &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/ccsrch">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">CCSRCH - Open Source PAN / Credit Card Scanner</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T12:16:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time></p>
+  </header>
+  
+  <p><em>(<a href="#downloads">Downloads</a>, <a href="https://github.com/adamcaudill/ccsrch">Source Code</a>)</em></p>
+
+<h1>CCSRCH</h1>
+
+<p>CCSRCH is a cross-platform tool for searching filesystems for credit card information.</p>
+
+<h3>Copyright</h3>
+
+<p>Copyright (c) 2012 Adam Caudill (adam@adamcaudill.com)
+Copyright (c) 2007 Mike Beekey (zaphod2718@yahoo.com)</p>
+
+<p>This application is licensed under the GNU General Public License (see below &amp; COPYING).</p>
+
+<p>This project is a fork of CCSRCH as maintained by Mike Beekey at: http://sourceforge.net/projects/ccsrch/ - it is based on the last version released (1.0.3) which was released in August 2007.</p>
+
+<h3>Using CCSRCH</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Usage: ./ccsrch &lt;options&gt; &lt;start path&gt;
+</span><span class='line'>  where &lt;options&gt; are:
+</span><span class='line'>    -b             Add the byte offset into the file of the number
+</span><span class='line'>    -e             Include the Modify Access and Create times in terms
+</span><span class='line'>                   of seconds since the epoch
+</span><span class='line'>    -f             Just output the filename with potential PAN data
+</span><span class='line'>    -j             Include the Modify Access and Create times in terms
+</span><span class='line'>                   of normal date/time
+</span><span class='line'>    -o &lt;filename&gt;  Output the data to the file &lt;filename&gt; vs. standard out
+</span><span class='line'>    -t &lt;1 or 2&gt;    Check if the pattern follows either a Track 1
+</span><span class='line'>                   or 2 format
+</span><span class='line'>    -T             Check for both Track 1 and Track 2 patterns
+</span><span class='line'>    -c             Show a count of hits per file (only when using -o)
+</span><span class='line'>    -s             Show live status information (only when using -o)
+</span><span class='line'>    -l N           Limits the number of results from a single file before going
+</span><span class='line'>                   on to the next file.
+</span><span class='line'>    -n &lt;list&gt;      File extensions to exclude (i.e .dll,.exe)
+</span><span class='line'>    -h             Usage information</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Examples:</strong></p>
+
+<p>Generic search for credit card data starting in current directory with output to screen:</p>
+
+<p><code>ccsrch ./</code></p>
+
+<p>Generic search for credit card data starting in c:\storage with output to mycard.log:</p>
+
+<p><code>ccsrch -o mycard.log c:\storage</code></p>
+
+<p>Search for credit card data and check for Track 2 data formats with output to screen:</p>
+
+<p><code>ccsrch -t 2 ./</code></p>
+
+<p>Search for credit card data and check for Track 2 data formats with output to file c.log:</p>
+
+<p><code>ccsrch -t 2 -o c.log ./</code></p>
+
+<h3>Output</h3>
+
+<p>All output is tab delimited with the following order (depending on the parameters):</p>
+
+<ul>
+<li>Source File</li>
+<li>Card Type</li>
+<li>Card Number</li>
+<li>Byte Offset</li>
+<li>Modify Time</li>
+<li>Access Time</li>
+<li>Create Time</li>
+<li>Track Pattern Match</li>
+</ul>
+
+
+<h3>Assumptions</h3>
+
+<p>The following assumptions are made throughout the program searching for the
+card numbers:</p>
+
+<ol>
+<li>Cards can be a minimum of 14 numbers and up to 16 numbers.</li>
+<li>Card numbers must be contiguous. The only characters ignored when processing the files are dashes, carriage returns, new line feeds, and nulls.</li>
+<li>Files are treated as raw binary objects and processed one character at a time.</li>
+<li>Solo and Switch cards are not processed in the prefix search.</li>
+<li>Compressed or encoded files are NOT uncompressed or decoded in this version. These files should be identified separately and the program run on the decompressed or decoded versions.</li>
+</ol>
+
+
+<p><strong>Prefix Logic</strong><br/>
+The following prefixes are used to validate the potential card numbers that have passed the mod 10 (Luhn) algorithm check.</p>
+
+<p>Original Sources for Credit Card Prefixes:<br/>
+http://javascript.internet.com/forms/val-credit-card.html<br/>
+http://www.erikandanna.com/Business/CreditCards/credit_card_authorization.htm</p>
+
+<h3>Logic Checks</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Card Type: MasterCard
+</span><span class='line'>Valid Length: 16
+</span><span class='line'>Valid Prefixes: 51, 52, 53, 54, 55
+</span><span class='line'>
+</span><span class='line'>Card Type: VISA
+</span><span class='line'>Valid Length: 16
+</span><span class='line'>Valid Prefix: 4
+</span><span class='line'>
+</span><span class='line'>Card Type: Discover
+</span><span class='line'>Valid Length: 16
+</span><span class='line'>Valid Prefix: 6011
+</span><span class='line'>
+</span><span class='line'>Card Type: JCB
+</span><span class='line'>Valid Length: 16
+</span><span class='line'>Valid Prefixes: 3088, 3096, 3112, 3158, 3337, 3528, 3529
+</span><span class='line'>
+</span><span class='line'>Card Type: American Express
+</span><span class='line'>Valid Length: 15
+</span><span class='line'>Valid Prefixes: 34, 37
+</span><span class='line'>
+</span><span class='line'>Card Type: EnRoute
+</span><span class='line'>Valid Length: 15
+</span><span class='line'>Valid Prefixes: 2014, 2149
+</span><span class='line'>
+</span><span class='line'>Card Type: JCB
+</span><span class='line'>Valid Length: 15
+</span><span class='line'>Valid Prefixes: 1800, 2131, 3528, 3529
+</span><span class='line'>
+</span><span class='line'>Card Type: Diners Club, Carte Blanche
+</span><span class='line'>Valid Length: 14
+</span><span class='line'>Valid Prefixes: 36, 300, 301, 302, 303, 304, 305, 380, 381, 382, 383, 384, 385, 386, 387, 388</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Known Issues</h3>
+
+<p>One typical observation/complaint is the number of false positives that still come up.  You will need to manually review and remove these. Certain patterns will repeatedly come up which match all of the criteria for valid cards, but are clearly bogus. In addition, there are certain system files which clearly should not have cardholder data in them and can be ignored.  There may be an &#8220;ignore file list&#8221; in a new release to reduce the amount of stuff to go through, however this will impact the speed of the tool.</p>
+
+<p>Note that since this program opens up each file and processes it, obviously the access time (in epoch seconds) will change.  If you are going to do forensics, one assumes that you have already collected an image following standard forensic practices and either have already collected and preserved the MAC times, or are using this tool on a copy of the image.</p>
+
+<p>For the track data search feature, the tool just examines the preceding characters before the valid credit card number and either the delimiter, or the delimiter and the characters (e.g. expiration date) following the credit card number.</p>
+
+<p>We have found that for some POS software log files are generated that not only wrap across multiple lines, but insert hex representations of the ASCII values of the PAN data as well. Furthermore, these log files may contain track data. Remember that the only way that ccsrch will find the PAN data and track data is if it is contiguous. In certain instances you may luck out because the log files will contain an entire contiguous PAN and will get flagged. We would encourage you to visually examine the files identified for confirmation. Introducing logic to capture all of the crazy possible storage representations of PAN and track data we&#8217;ve seen would make this tool a beast.</p>
+
+<p>Please note that ccsrch recurses through the filesystem given a start directory and will attempt to open any file or object read-only one at a time. Given that this could be performance or load intensive depending on the existing load on the system or its configuration, we recommend that you run the tool on a subset or sample of directories first in order to get an idea of the potential impact. We disclaim all liability for any performance impact, outages, or problems ccsrch could cause.</p>
+
+<h3>Porting</h3>
+
+<p>This tool has been successfully compiled and run on the following operating systems: FreeBSD, Linux, SCO 5.0.4-5.0.7, Solaris 8, AIX 4.1.X, Windows 2000, Windows XP, and Windows 7.  If you have any issues getting it to run on any systems, please contact the author.</p>
+
+<h3>Building</h3>
+
+<p>Linux/Unix/Mac OSX(Intel):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget -O ccsrch.tar.gz https://github.com/adamcaudill/ccsrch/tarball/master
+</span><span class='line'>$ tar -xvzf ccsrch.tar.gz 
+</span><span class='line'>$ cd adamcaudill-ccsrch-&lt;rev&gt;/
+</span><span class='line'>$ make all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Windows:<br/>
+Install <a href="http://www.mingw.org/">MinGW</a> (<a href="http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst/">installer</a>)<br/>
+<code>mingw32-make all</code></p>
+
+<h3><a id="downloads"></a>Downloads</h3>
+
+<ul>
+<li><a href="https://adamcaudill.com/files/ccsrch-1.0.8-win32.zip">v1.0.8 - Win32</a></li>
+<li><a href="https://adamcaudill.com/files/ccsrch-1.0.8-osx_intel.zip">v1.0.8 - OSX-Intel-64</a></li>
+<li><a href="https://adamcaudill.com/files/ccsrch-1.0.8beta1.zip">v1.0.8b1 - Win32</a></li>
+<li><a href="https://adamcaudill.com/files/ccsrch-1.0.7.zip">v1.0.7 - Win32</a></li>
+<li><a href="https://adamcaudill.com/files/ccsrch-1.0.6.zip">v1.0.6 - Win32</a></li>
+</ul>
+
+
+<h3>Revisions</h3>
+
+<p>1.0.9 (In Progress)</p>
+
+<ul>
+<li>Better support for building on OSX.</li>
+</ul>
+
+
+<p>1.0.8 (May 15, 2012)</p>
+
+<ul>
+<li>Add a new status display, provides a live view of what&#8217;s happening.</li>
+</ul>
+
+
+<p>1.0.7 (Feb. 29, 2012)</p>
+
+<ul>
+<li>Fix compiling on *nix systems.</li>
+<li>Change to ignore any match that has 7 repeating digits.</li>
+<li>Ignore results that are made up of the same two repeating digits.</li>
+</ul>
+
+
+<p>1.0.6 (Jan. 17, 2012):</p>
+
+<ul>
+<li>Fix for ignoring NULL, CR &amp; LF.</li>
+<li>Ignore dash when scanning (ASCII #45).</li>
+<li>Exclude results with the last 8 digits repeating (very unlikely to be a real PAN).</li>
+</ul>
+
+
+<p>1.0.5 (Jan. 13, 2012):</p>
+
+<ul>
+<li>Bug fixes.</li>
+</ul>
+
+
+<p>1.0.4 (Jan. 13, 2012):</p>
+
+<ul>
+<li>Added option to output the file name, and how many hits were found to the console when using -o (see -c in usage).</li>
+<li>Added option to limit the number of results from a single file before going on to the next file (see -l in usage).</li>
+<li>Added option to exclude certain file types from the scan (see -n in usage).</li>
+</ul>
+
+
+<p>1.0.3 (Aug. 28, 2007):</p>
+
+<ul>
+<li>Added the ability to just output filenames of potential PAN data.</li>
+<li>Removed the 13 digit VISA  number check.</li>
+<li>Cleaned up some error and signal handling that varied across operating systems.</li>
+</ul>
+
+
+<p>1.0.2 (Dec. 12, 2005):</p>
+
+<ul>
+<li>Added some additional track data format assumptions for track 1.</li>
+</ul>
+
+
+<p>1.0.1 (Sep. 27, 2005):</p>
+
+<ul>
+<li>Added options for searching files for track data patterns.</li>
+<li>Added the ability to select certain output options on the command line.</li>
+</ul>
+
+
+<p>0.9.3 (Jul. 28, 2005):</p>
+
+<ul>
+<li>Removed extraneous calls.</li>
+<li>Simplified parameter passing.</li>
+<li>Fixed non-portable type issues.</li>
+<li>Removed debugging info.</li>
+</ul>
+
+
+<p>0.9.1 (Jul. 15, 2005):</p>
+
+<ul>
+<li>Initial release.</li>
+</ul>
+
+
+<h3>Contributors</h3>
+
+<p>John A, Kyley S, Anand S, Chris L, Mitch A, Bill L, Phoram M</p>
+
+<h3>License</h3>
+
+<p>This program is free software; you can redistribute it and/or modify it under  the terms of the GNU General Public License as published by the Free  Software Foundation; either version 2 of the License, or (at your option)  any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T12:16:00-05:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

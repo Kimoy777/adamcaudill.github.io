@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Making Android NSA-Proof - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/09/06/making-android-nsa-proof">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Making Android NSA-Proof</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-06T23:34:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
+
+<p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
+
+<p>Too extreme?</p>
+
+<p>Let&#8217;s shoot for something a little more attainable - spy resistant. We can&#8217;t stop every attack, but we can reduce the attack surface a bit. Here are a few tools that I&#8217;ve been using recently to do just that.</p>
+
+<p><strong><a href="https://www.boxcryptor.com/en/boxcryptor-classic">Boxcryptor Classic</a></strong> - Like many people, I use DropBox for certain, low sensitivity files. But what about things that require a little more care? Boxcryptor Classic encrypts files and then stores the encrypted copy in DropBox. It&#8217;s simple, security seems sound, and the free edition is quite adequate. May not be perfect, but suits my needs nicely.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms">TextSecure</a></strong> - It&#8217;s <a href="https://github.com/WhisperSystems/TextSecure/">open-source</a>, it&#8217;s free, and it&#8217;s from <a href="https://twitter.com/moxie">Moxie</a> - what&#8217;s not to love? It stores all of your SMS &amp; MMS data encrypted, and can encrypt the data over the air when texting another TextSecure user.</p>
+
+<p>Currently it uses the SMS/MMS service for messaging, and is Android only; both of those things are changing soon. It&#8217;ll be using the <a href="https://whispersystems.org/blog/asynchronous-security/">data channel</a> and supporting <a href="https://whispersystems.org/blog/iphone-rsn/">iOS</a> in the near future.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.kaitenmail&amp;hl=en">Kaiten Mail</a> &amp; <a href="https://play.google.com/store/apps/details?id=org.thialfihar.android.apg&amp;hl=en">AGP</a></strong> - Kaiten is a low cost ($4.99) mail client; though if you want to go cheaper, it&#8217;s open-source cousin <a href="https://play.google.com/store/apps/details?id=com.fsck.k9&amp;hl=en">K-9 Mail</a> is free. They are developed by the same core team, though Kaiten seems to get the new features first, then they are ported into K-9. I like supporting OSS developers, so I happily went with the paid version. It works great with my Google Apps email account, though does take some getting used to.</p>
+
+<p>Where it really comes in handy though, is when you use it with AGP, the Android Privacy Guard. It&#8217;s a simple, minimalistic OpenPGP tool that integrates nicely with Kaiten and K-9. It makes it simple to support encrypted or signed mail on your phone.</p>
+
+<p>This does though require that your private key be on the device, so keep that risk in mind.</p>
+
+<p>AGP is a bit dated, and hasn&#8217;t been updated since 2010. So, it&#8217;s  clearly been abandoned. Thankfully though, <a href="http://sufficientlysecure.org/">Dominik Schürmann</a> has <a href="https://github.com/dschuermann/openpgp-keychain">forked the project</a> and is working on a major update (new GUI, new API, etc.) that should be ready early next year.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.gmail.mjm4456.vpncilla&amp;hl=en">VpnCilla</a></strong> - Next up is a highly configurable VPN client ($4.99). WIFI is great - except that evil part of your traffic being so simple to monitor, and with recent work on <a href="http://www.theregister.co.uk/2013/07/15/femtocell_flaw_leaves_verizon_customers_wifi_and_mobile_wide_open/">femtocell systems</a>, even 3G/4G connections can&#8217;t be fully trusted. Having a VPN handy is a must.</p>
+
+<p>You&#8217;ll also need a good VPN service; my current pick is <a href="http://www.atenlabs.com/zipline/">zipline</a>; it&#8217;s fast, cheap, and from a trusted professional (<a href="https://twitter.com/viss">Dan Tentler</a>).</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.redphone&amp;hl=en">RedPhone</a></strong> - Another tool from Moxie, RedPhone secures your voice communications via encrypted VoIP. Or at least so I&#8217;ve read - I never actually make voice calls on my personal phone anymore.</p>
+
+<p><strong>Others</strong> - There are various other useful things - Google Authenticator (2FA all the things, right?), ConnectBot to SSH into your server to do anything you don&#8217;t want to do from your phone, use wifitrack &amp; Wifi Analyzer to better understand what&#8217;s in your area.</p>
+
+<p><strong>Configuration</strong></p>
+
+<p>There is, of course, obvious configuration to make things a bit safer. Make sure you have a good password, or at least a long PIN set - don&#8217;t trust patterns, and don&#8217;t bother with a 4 digit PIN.</p>
+
+<p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
+
+<p><strong>Weak Spots</strong></p>
+
+<p>It&#8217;s not all great though, there are still weaknesses - plenty in fact. Thanks to USB MUXing there is probably a debug interface - and maybe even a full shell on your phone, and you have no way of turning it off. There may be flaws in the baseband or other software that could allow an attacker to gain control.</p>
+
+<p>The list goes on and on. And that&#8217;s without the fact that your phone company hands over all of your call records, or the various apps you need, but don&#8217;t have a secure replacement.</p>
+
+<p>There is no such thing as an NSA proof phone - unless you literally melt it. What we can do though is make it harder to be spied on; make the attackers work for every bit of data. Give nothing away for free.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-06T23:34:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/08/27/is-moving-offshore-really-crazy/" title="Previous Post: Is moving offshore really crazy?">&laquo; Is moving offshore really crazy?</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/09/07/crypto-the-nsa-and-broken-trust/" title="Next Post: Crypto, the NSA, and Broken Trust">Crypto, the NSA, and Broken Trust &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

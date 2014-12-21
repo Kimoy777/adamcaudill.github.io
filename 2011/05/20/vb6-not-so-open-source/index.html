@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>VB6: Not so open source - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2011/05/20/vb6-not-so-open-source">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">VB6: Not So Open Source</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-20T02:33:23-04:00" pubdate data-updated="true">May 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Earlier today, a rather surprising tweet hit, being retweeted at least 80 times, including by a few rather influential people in the .NET world:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Microsoft announces to mvps at <a href="https://twitter.com/search/%23msteched">#msteched</a> that VB6 will be released as open source on codeplex end of june! w00t</p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71287262842859520">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Needless to say, that&#8217;s not an announcement that anybody was expecting, but given the talk going on at the time - and the high-profile people talking about it, there wasn&#8217;t much reason to doubt. Announcing a product that has been dead for years is going open source would certainly be a strategy shift for Microsoft, but does it make any sense? <a href="http://twitter.com/#!/kevindente">Kevin Dente</a> of <a href="http://herdingcode.com/">Herding Code</a> fame certainly thought that Microsoft had better things to release:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Instead of VB6 I&#8217;d rather see MS open source IE6. Then at least we could build a standalone version of it.</p>&mdash; Kevin Dente (@kevindente) <a href="https://twitter.com/kevindente/status/71292995185553408">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Shortly after the initial tweet, <a href="http://www.dougseven.com/">Doug Seven</a>, the Director of Product Management, Visual Studio Tools &amp; Languages, <a href="http://twitter.com/#!/dseven/status/71316722854002688">replied</a> asking Roy Osherove (the original poster) to email him. Hmm, it&#8217;s starting to smell like something odd is going on. A couple of hours later, Doug set the story straight:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>The rumors of VB6 going open source are simply not true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; dseven (@dseven) <a href="https://twitter.com/dseven/status/71352709785198592">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>To which, Roy then tried to unset:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>RT @<a href="https://twitter.com/dseven">dseven</a>: The rumors of VB6 going open source are true. <a href="https://twitter.com/search/%23msteched">#msteched</a> <a href="https://twitter.com/search/%23vb6rumor">#vb6rumor</a> <a href="https://twitter.com/search/%23vb6">#vb6</a></p>&mdash; Roy Osherove (@RoyOsherove) <a href="https://twitter.com/RoyOsherove/status/71355603611680769">May 19, 2011</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>It&#8217;s worth pointing out that Roy Osherove currently has a full ten-times the followers that Doug Seven has, meaning his altered retweet was seen by more people (at least initially). For several hours word was going around, and accepted by a number of people who thought Microsoft was actually going to open the code to VB6 (including journalists who were too busy writing articles to do any fact checking) - all based on one person who made it all up.</p>
+
+<p>Lesson here: be careful about what you re-tweet, it&#8217;s easy to endorse a lie as several people unwittingly did today (<a href="http://twitter.com/#!/blowdart">@blowdart</a> summed it <a href="http://twitter.com/#!/blowdart/status/71370740934524928">rather well</a>).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-20T02:33:23-04:00" pubdate data-updated="true">May 20<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/development/'>Development</a>, <a class='category' href='/categories/software/'>Software</a>, <a class='category' href='/categories/technology/'>Technology</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/05/16/errors-on-gem-install-mysql2/" title="Previous Post: Errors on 'gem install mysql2'">&laquo; Errors on 'gem install mysql2'</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/05/21/happy-20th-birthday-visual-basic/" title="Next Post: Happy 20th birthday Visual Basic!">Happy 20th birthday Visual Basic! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

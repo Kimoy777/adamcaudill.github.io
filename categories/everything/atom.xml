@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Everything | Adam Caudill]]></title>
+  <link href="http://adamcaudill.github.com/categories/everything/atom.xml" rel="self"/>
+  <link href="http://adamcaudill.github.com/"/>
+  <updated>2014-12-20T20:59:27-05:00</updated>
+  <id>http://adamcaudill.github.com/</id>
+  <author>
+    <name><![CDATA[Adam Caudill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook Scams]]></title>
+    <link href="http://adamcaudill.github.com/2011/05/14/facebook-scams/"/>
+    <updated>2011-05-14T20:43:12-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/05/14/facebook-scams</id>
+    <content type="html"><![CDATA[<p>As a tip for all my Facebook friends, despite the promises you see spreading wildly across Facebook, you can't see who's looking at your profile. If you ever see anything like this, it's a scam - pure and simple:</p>
+
+<p><img src="http://adamcaudill.com/files/2011-05-14_2015.png" alt="" /></p>
+
+<p>If you ever see a page like this, or one that asks you to paste a script into your address bar as this one does, <em>please</em> immediately report the page. If you see any of your friends 'like' a page like this or send messages linking to something like this, please warn them - they have likely handed their account over to a scammer or other bottom-dwelling script-kiddy.</p>
+
+<p>If you were unfortunate enough to get a message from a friend and believe what it said; your account is in somebody else's hands and is being used to spam your friends with a message recommending the same scam to them. Odds are, your account will later be sold to others for spamming - <strong>Facebook accounts are sold</strong> thousands at a time, and last I saw they go for about $3 each, sometimes more if a person has enough friends.</p>
+
+<p>The best thing you can do if this happens to you is <strong>change your password</strong>, check the email address and other information listed on your account, then check all of your permissions, including what applications have access to your account. These people move fast, and they can sell accounts several times over, so don't assume once you change your password all will be good - they've probably changed your email address or opened some other means to take your account back so they can keep making money from it.</p>
+
+<p>Be careful and be paranoid, there really are people out to get you.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hosting Change]]></title>
+    <link href="http://adamcaudill.github.com/2011/04/11/hosting-change/"/>
+    <updated>2011-04-11T19:36:27-04:00</updated>
+    <id>http://adamcaudill.github.com/2011/04/11/hosting-change</id>
+    <content type="html"><![CDATA[<p>I'm in the process of migrating my sites from  a <a href="http://www.dreamhost.com/hosting-vps.html">Dreamhost VPS</a>, to fully managed hosting by <a href="http://www.grayhills.com/">Gray Hills Software</a>. In my tests so far, the loading time has been cut in half with this switch. Pages load faster, the server is better configured (new software, and more options), and seeing as they have both Windows and Linux servers, I can use one provider with whatever technology suits me and my projects.</p>
+
+<p>There may be a few bumps as I move things, but all should stable soon.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Need a cheap phone charger quick? Buy a Tracfone.]]></title>
+    <link href="http://adamcaudill.github.com/2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone/"/>
+    <updated>2011-02-11T15:15:15-05:00</updated>
+    <id>http://adamcaudill.github.com/2011/02/11/need-a-cheap-phone-charger-quick-buy-a-tracfone</id>
+    <content type="html"><![CDATA[<p>I recently discovered that I had left the changer for my BlackBerry Tour behind (I'm in the process of moving, and left my changer at the old house), and needed a new one that night. So being late in the evening, my only option was a trip to the local Wal-Mart were I found the typical cheap off-brand charger for a somewhat pricey $15.</p>
+
+<p>Had the quality been better, I wouldn't have given it a second thought - but I've purchased a number of those changers in the past and they are poorly made and it never fails that they break within a few months.</p>
+
+<p><img src="http://adamcaudill.com/files/2011/02/lg420g-114x150.jpg" alt="" /></p>
+
+<p>Looking around I noticed a Tracfone package on the shelf that included a LG420G phone, a micro-USB wall charger (LG branded), a micro-USB car charger, and some other things (phone case, etc.), and all for <strong><em>$15</em></strong>. So for the same price as the cheap off-brand charger, I could get both a car and wall charger (both of better quality than the off-brand that Wal-Mart sells).</p>
+
+<p>So it's a better deal to by a cheap pre-paid phone and toss the phone than it is to just buy the charger. Kinda crazy, but true.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Thoughts on the iPad, from an Apple hater]]></title>
+    <link href="http://adamcaudill.github.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/"/>
+    <updated>2011-01-02T17:34:07-05:00</updated>
+    <id>http://adamcaudill.github.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater</id>
+    <content type="html"><![CDATA[<p>Before I get started, let me make a couple of things clear:</p>
+
+<ol>
+<li><p>Apple is evil; pure and simple. I'm fully convinced that Steve Jobs has weekly planning meetings with <a href="http://en.wikipedia.org/wiki/Lucifer">Lucifer</a> himself1.</p></li>
+<li><p>Apple's policies are anti-everybody. From bloggers to developers2, Apple seems to make life as hard as possible for those that use their products for profit.</p></li>
+</ol>
+
+
+<p>With these facts in mind, I tend to shy away from their products when I have a choice (which isn't always <a href="http://shadowofthebat.com/2010/12/05/buying-a-macbook-from-cowboom-com/">the case</a>); though a while back I decided to buy an iPad for some reason. I've wanted a tablet for quite some time, and despite my hopes of there being a Microsoft-based solution that would do what I needed, there wasn't anything announced that had the features I wanted in a price range that I could justify.</p>
+
+<p>When I first powered it up and was met by that familiar instruction to connect to iTunes, I was really questioning the wisdom of buying an Apple product. But, I took a deep breath, installed iTunes and took the plunge.</p>
+
+<p>That was about 3 months ago, and I no longer question the wisdom – it was a great purchase, and has become a key part of how I work. Between my favorite applications (<a href="http://itunes.apple.com/us/app/evernote/id281796108?mt=8">Evernote</a>, <a href="http://itunes.apple.com/us/app/penultimate/id354098826?mt=8">Penultimate</a>, <a href="http://itunes.apple.com/us/app/ia-writer/id392502056?mt=8">iA Writer</a>, and <a href="http://itunes.apple.com/us/app/dropbox/id327630330?mt=8">Dropbox</a>), I've been able to streamline my workflow, keep better notes, and keep the information that I need available – no matter when or where I need it.</p>
+
+<p>The device itself is <a href="http://en.wikipedia.org/wiki/Genius_(mythology">ingeniously</a>) designed, with Apple's typical focus on simplicity first and foremost. It has a ~10-hour battery life ensures that you'll make it through the work day (and probably with enough left to do some reading after work); though your PC probably won't be able to <a href="http://support.apple.com/kb/HT4060">charge it</a>. The only thing missing from a hardware perspective is a 'back' button, as I would quite likely use that more than the 'home' button.</p>
+
+<p>I was quite concerned initially that it would be like so many other devices and gadgets that I've acquired other the years, interesting for a couple of weeks then doomed to spend the rest of its life buried in one of my 'junk' boxes. Within the first few hours I was sure that wouldn't be its fate; far from it. At this point I rarely leave home without it, even if only going shopping. While I do still rely on my Moto DROID for a number of things, I've found that the iPad does a much better job at serving most of the roles my phone was once responsible for.</p>
+
+<p>For example, I'm a huge fan of <a href="http://www.evernote.com/">Evernote</a> – it's by far my favorite service and I access it from every device I have. Prior to the iPad I often took notes on the DROID to avoid having to use hand-written notes that would need to be transcribed later; thanks to its small screen and tiny keyboard my notes were as terse as I could get them, often missing details I later wished I had. With the large screen and large, better designed keyboard of the iPad, I've found my notes are now clearer and more detailed – exactly what I need them to be.</p>
+
+<p>A friend of mine who bought one shortly after they came out referred to it as a media consumption device, not suited for work or anything serious. While this is what I expected, it's not what I found; it's a great media player (despite the lack of a 16:9 screen) and thanks to the <a href="http://itunes.apple.com/us/app/kindle/id302584613?mt=8">Kindle</a> application, it's also a very good e-reader, but with the right applications it has a strong business side as well.</p>
+
+<p>What I feared would be a toy relegated to the abyss of abandoned gadgets has turned into a key tool helping me keep my chaotic life in order.</p>
+
+<p>1Before anybody says anything, yes, this is just a joke.
+2While Apple has made a lot of <a href="http://www.mobilecrunch.com/2010/09/09/apple-opens-app-store-to-other-development-platforms-publishes-review-guidelines/">progress</a> in opening up and making rules more clear, though they could still do better.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rosen Shingle Creek]]></title>
+    <link href="http://adamcaudill.github.com/2010/12/19/rosen-shingle-creek/"/>
+    <updated>2010-12-19T13:22:30-05:00</updated>
+    <id>http://adamcaudill.github.com/2010/12/19/rosen-shingle-creek</id>
+    <content type="html"><![CDATA[<p>I recently had a great idea; a trip down to Florida to visit family and celebrate our second anniversary - the idea turned out to be a bit less great than I had hoped. Of the seven days we were there, on three the wind-chill was less than 40F. On the upside, I had booked a room at a newer (opened in 2006) 4-star hotel; if we're going to be stuck inside, no reason not to be in a great room.</p>
+
+<p>The hotel was <a href="http://www.rosenshinglecreek.com/">Rosen Shingle Creek</a>, a rather large (1,500 rooms plus a 450,000 sq. ft. conference area) and quite impressive facility. The view as you drive up to the main entrance is most impressive; 14-stories tall and inspired by <a href="http://en.wikipedia.org/wiki/Spanish_Colonial_Revival_architecture">Spanish Colonial Revival</a> architecture that was so popular in Florida during the early 1900s. As you approach the hotel, you'll notice that the driveway is offset to the left to enhance the initial impression.</p>
+
+<p><a href="http://www.flickr.com/photos/26686573@N00/4693535920/"><img src="http://farm5.static.flickr.com/4016/4693535920_4e031719ea.jpg" alt="" /></a></p>
+
+<p>The rooms are well-appointed, and well designed. The use of art by a local photographer (which is featured throughout the hotel) seems, to me at least, far better than the random paintings and abstract art I've seen at most other hotels I've been to recently. As would be expected from a 4-star hotel, the beds are comfortable; though personally I believe that the beds at the nearby <a href="http://www.renaissanceseaworldorlando.com/">Renaissance Orlando at SeaWorld</a> are far superior.</p>
+
+<p>The hotel's public spaces are nearly as impressive as its exterior appearance, with abundant marble and stonework, and large open spaces. It is certainly an upscale hotel, and you are reminded of that fact each and every step of the way.</p>
+
+<p>Though with this praise, there are a few things I really didn't care for:</p>
+
+<ul>
+<li><p>Parking: Valet parking is a steep $20/day; there is the option to self-park for $12/day, but in the evening the parking lot fills quickly. If the thought of walking close to a half-mile at the end of a long day walking around theme parks seems like a bad idea, then I would avoid the self-parking.</p></li>
+<li><p>Internet: The lack of in-room Wi-Fi is (in my opinion) inexcusable for such a new hotel. Between my wife and me, there were three laptops and two iPads; so a single wired internet connection just doesn't cut it. I don't mind paying the $13/day they change for internet access (well, I do mind, but there's little choice but to live with it), but I need to be able to use it the way I want to use it. In a world where more and more devices come with Wi-Fi built-in, there's no reason for any hotel to not provide in-room Wi-Fi access.</p></li>
+<li><p>Cleaning: The room was nearly spotless when we arrived (and what little was missed was quite excusable), and the daily cleaning was always courteous and thorough. Some other areas though, didn't receive the same level of attention. For example, the in the hallway leading to our room there were scraps of paper and other debris on the floor for almost the entire time we were there. Not a huge deal, but if they only vacuum the hallway once a week – what else are they not doing right?</p></li>
+<li><p>Tips: I don't mind tipping for good service (and I tend to be more generous than most), but I can't stand people who demand tips. I've not seen people push for tips like that in a long time.</p></li>
+</ul>
+
+
+<p>Overall, it's a nice hotel and I wouldn't suggest avoiding it; though there are better hotels in the area.</p>
+]]></content>
+  </entry>
+  
+</feed>

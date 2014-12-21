@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>OPSEC, The NSA, and You - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="It&#8217;s been two weeks since news broke about the NSA collecting massive amounts of data from Verizon; and likely everybody else. There&#8217;s &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adamcaudill.github.com/2013/06/19/opsec-the-nsa-and-you">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="openid.server" href="https://adamcaudill.com/MyID.config.php">
+<link rel="openid.delegate" href="https://adamcaudill.com/MyID.config.php">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">OPSEC, the NSA, and You</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-19T19:39:00-04:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>It&#8217;s been two weeks since news broke about the NSA <a href="http://www.guardian.co.uk/world/2013/jun/06/nsa-phone-records-verizon-court-order">collecting massive amounts of data</a> from Verizon; and likely everybody else. There&#8217;s also <a href="http://www.guardian.co.uk/world/2013/jun/06/us-tech-giants-nsa-data">PRISM</a> - whatever the hell that is - it seems there&#8217;s no agreement on that, and I doubt there will be anytime soon. What really matters here though, is we have proof that people are watching - and if it&#8217;s happening in the US, it&#8217;s probably happening everywhere else.</p>
+
+<p>If you have any understanding of the intelligence community, all of this should come as absolutely no surprise whatsoever.</p>
+
+<p>For me, it has served as a reminder of the importance of OPSEC in anything you&#8217;re doing. The NSA is collecting metadata, and lots of it - they repeatedly assure people that it&#8217;s harmless. And it is - if you&#8217;re a technophobic OPSEC master living in a cave. Where metadata is so valuable, is in cases where you are looking at people that leak little bits of personal data everywhere they go, then you use the metadata to connect the dots. Very soon, you have a great picture of what they are doing and who is involved - without needing access to voice recordings or other, more protected information.</p>
+
+<p><strong>Knowing Where Your Weakness Is</strong></p>
+
+<p>Many people are talking about tools and technologies now to defeat this kind of data collection - from Tor to Cryptocat, yet, there are issues; it sounds so simple, but it&#8217;s not. Tor for example, how easy would it be for someone with a large budget to put the network at risk? The approximate answer, is <a href="http://grugq.github.io/blog/2013/06/10/good-luck-with-that/">easy</a>. How about Cryptocat or other encrypted communication tools? Last year was <a href="https://blog.crypto.cat/2012/11/security-update-our-first-full-audit/">painful</a> for Cryptocat - the last audit may have been clean, but who knows what else may be found.</p>
+
+<p>Encryption is hard, and it&#8217;s very easy to write something that looks secure but falls apart when placed in the right hands - accidentally or otherwise.</p>
+
+<p>The question is, is it effective against an actor with a massive budget? I would say it is, but not for the reason you might be thinking. Encryption is hard, both for those that implement and those that attack. But why spend the time and money on breaking encryption when you can take advantage of bad OPSEC to achieve the same goal?</p>
+
+<p>People leak data constantly - how, when, and where they use their phone, who they email, how they use social networks - all of these things provide useful information for an attacker. Individually, they may seem to have no value, but it&#8217;s the connections they add to the overall picture that makes them so damaging.</p>
+
+<p>Photo EXIF data, time of day trends in social media (or IRC), comments about the weather - all seem so innocent, but when combined can help to narrow down the list of candidates, and start building a picture of a person and their habits. Simple, innocuous, meaningless - until assembled.</p>
+
+<p>No tool can fix this; using Tor doesn&#8217;t eliminate habits, encrypting email doesn&#8217;t hide social connections. Everything you do leaks data.</p>
+
+<p><strong>Your Software Isn&#8217;t The Big Risk</strong></p>
+
+<p>You are. Your friends are.</p>
+
+<p>All the encryption software in the world won&#8217;t protect you from posting a picture with GPS data embedded in it; no 0day will put you at more risk than you are from your own mouth. No major actor needs to crack encryption, when they can collect massive amounts of metadata, and play connect the dots with the data you give them for free.</p>
+
+<p>It&#8217;s even worse when you start talking to friends, what they know, they&#8217;ll leak. When you speak to anyone, assume that a link between you and them has been documented by somebody, somewhere - now that person is a target to see what little bits of data they leak about you. Or you are now a target because of them.</p>
+
+<p>Trust no one, not even yourself.</p>
+
+<p><strong>Know Your Enemy</strong></p>
+
+<p>As Sun Tzu <a href="https://en.wikipedia.org/wiki/The_Art_of_War">pointed out</a>, if you know your enemy - war is easy. The problem is, you don&#8217;t. Nobody knows just how much data groups like the NSA have - if you believe them, not even the NSA knows. Nor does anyone know what they are capable of collecting should the need arise. Large groups of <em>very</em> intelligent people with a secret budget and access to a secret court that grants almost everything they ask for - my guess is that they&#8217;re capable of a lot.</p>
+
+<p>You know what tools are available - but how can you protect yourself, if you don&#8217;t know what works and what doesn&#8217;t? What networks are monitored? What agencies or companies are sharing data?</p>
+
+<p>Having good tools is a start, but that must be part of a larger plan to control what you expose publicly. You must be very cautious about every bit of data that could be collected - no matter how insignificant it seems. Who you associate with and how needs to be carefully controlled to avoid both unwanted leaks and attention. Every action feeds data in a picture, how useful that picture is, is completely up to you.</p>
+
+<p>Want to learn more, start with <a href="http://www.youtube.com/watch?v=9XaYdCdwiWU">grugq&#8217;s HITB OPSEC talk</a> if you&#8217;ve not seen it yet. If you&#8217;d like the short version, I&#8217;ll sum it up: STFU.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-19T19:39:00-04:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/05/07/password-hashing-no-silver-bullets/" title="Previous Post: Password Hashing: No Silver Bullets">&laquo; Password Hashing: No Silver Bullets</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/07/04/do-one-thing-right/" title="Next Post: Do one thing right...">Do one thing right... &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/10/03/on-the-ethics-of-badusb/">On The Ethics of BadUSB</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2014 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
