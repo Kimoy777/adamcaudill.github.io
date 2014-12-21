@@ -1,4 +1,4 @@
-require "rubygems"
+                                            require "rubygems"
 require "bundler/setup"
 require "stringex"
 
@@ -8,7 +8,7 @@ ssh_user       = "root@adamcaudill.com"
 ssh_port       = "22"
 document_root  = "/var/www/adamcaudill.com/"
 rsync_delete   = false
-deploy_default = "rsync"
+deploy_default = "push"
 
 # This will be configured for you when you run config_deploy
 deploy_branch  = "gh-pages"
