@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="While checking on the latest updates in the start-up world from TechCrunch, I came across their article on Mykonos; the important part of their &hellip;">
+  <meta name="description" content="An Issuer Identification Number (IIN, more commonly called a BIN) is the first 6 digits of a credit or debit card, and it identifies the bank that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/26/iin-bin-database/">IIN (BIN) Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-26T12:58:28-05:00" pubdate data-updated="true">Jan 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>An <a href="http://en.wikipedia.org/wiki/ISO/IEC_7812">Issuer Identification Number</a> (IIN, more commonly called a BIN) is the first 6 digits of a credit or debit card, and it identifies the bank that issued it - and if you want to know if a number is a real credit card or just a bunch or random digits, it&#8217;s a huge help. While credit card numbers do use the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> (mod 10 check) to see if the number is valid, it still produces a huge false-positive rate.</p>
+
+<p>For an application like <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a>, having this data available would be very handy to reduce false positives when scanning a large file system (scanning a large server produces a huge number of possible hits), but for what I would call fairly misguided reasons, the official registrar of these numbers (the <a href="http://www.aba.com/default.htm">ABA</a>) doesn&#8217;t make this data publicly available. As a result many people have pulled together what data they could find and made it freely available.</p>
+
+<p>So I&#8217;ll add my name to that list.</p>
+
+<p>I&#8217;ve pulled data from many public sources (sorry, I didn&#8217;t keep very good notes as to the sources) and cleaned it up to a reasonable point. All told, I&#8217;ve probably spent 40 hours or more cleaning this data up and getting it to a usable state. It contains over 60,000 entries, including major credit cards (Visa, MasterCard, Amex, Discover) as well as a few merchant entries.</p>
+
+<p>Each record contains the following:</p>
+
+<ul>
+<li><p>IIN</p></li>
+<li><p>Type (Mastercard, Visa, Visa Credit, etc.)</p></li>
+<li><p>Name (Issuer name)</p></li>
+<li><p>Length</p></li>
+</ul>
+
+
+<p><strong>Data Quality</strong></p>
+
+<p>It&#8217;s not perfect. It&#8217;s from public sources so there may be errors, and there are some duplicates from cases where I wasn&#8217;t able to determine who the IIN actually belongs to. I&#8217;ve also updated for name changes and mergers where possible, but I&#8217;m sure I&#8217;ve missed a few and there are some where the assets where split, so I don&#8217;t know who the correct owner actually is (Washing Mutual being the leading example of this).</p>
+
+<p>In general, I leaned to the side of caution - so if I didn&#8217;t know for sure, I left the duplicate in.</p>
+
+<p>If you need absolutely correct data - contact the ABA, they are the only source that can give you the completely accurate listing. If you need to have a decent idea if a number is valid for most cases - I would say that this data is good enough.</p>
+
+<p><strong>Warranty</strong></p>
+
+<p>Just to make it really, really, really clear: There is no guarantee that this data is accurate, that it won&#8217;t cause to lose your job, cause your house to burn down, or cause Rebecca Black&#8217;s <a href="http://www.youtube.com/watch?v=kfVsfOSbJY0">Friday</a> to get stuck in your head (yup, you&#8217;re welcome ;)).</p>
+
+<p><strong>Copyright</strong></p>
+
+<p>Based on my understanding of US copyright law, it is my understanding that this data is not subject to copyright as it is a compilation of facts and doesn&#8217;t constitute an original expression. Thus, to the best of my knowledge, this data is in the public domain.</p>
+
+<p><strong>Download</strong></p>
+
+<p><a href="http://adamcaudill.com/files/2012/01/IIN.zip">Here</a> (zipped CSV)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -436,83 +508,6 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/10/20/masking-credit-cards-for-pci/">Masking Credit Cards for PCI</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-20T16:14:40-04:00" pubdate data-updated="true">Oct 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>PCI DSS, the security standard for companies that handle credit cards, defines a number of <a href="https://www.pcisecuritystandards.org/pdfs/pci_audit_procedures_v1-1.pdf">rules</a> as to how credit cards are handled. One of those rules, 3.3, is defined as follows:</p>
-
-<p><em>Mask PAN when displayed (the first six and last four digits are the maximum number of digits to be displayed)</em></p>
-
-<p>So based on this requirement I assumed that the code to do this would be common and widely available; much to my surprise there are rather few samples that do this, and of those I found they only showed the last four (which when you are handling a lot of credit cards, searching for an account by the last four isn&#8217;t all that helpful) and were often rather fragile.</p>
-
-<p>So I whipped this up, hopefully it&#8217;ll be useful to others.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">MaskCreditCard</span><span class="p">(</span><span class="kt">string</span> <span class="k">value</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">const</span> <span class="kt">string</span> <span class="n">PATTERN</span> <span class="p">=</span> <span class="s">@&quot;\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|&quot;</span> <span class="p">+</span>
-</span><span class='line'>    <span class="s">@&quot;6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|&quot;</span> <span class="p">+</span>
-</span><span class='line'>    <span class="s">@&quot;[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})\b&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kt">var</span> <span class="n">replace</span> <span class="p">=</span> <span class="n">Regex</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="k">value</span><span class="p">,</span> <span class="n">PATTERN</span><span class="p">,</span> <span class="k">new</span> <span class="n">MatchEvaluator</span><span class="p">(</span><span class="n">match</span> <span class="p">=&gt;</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="kt">var</span> <span class="n">num</span> <span class="p">=</span> <span class="n">match</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">num</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span> <span class="p">+</span> <span class="k">new</span> <span class="kt">string</span><span class="p">(</span><span class="sc">&#39;*&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span>
-</span><span class='line'>      <span class="n">num</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">4</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">replace</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The regex pattern is from <a href="http://www.regular-expressions.info/creditcard.html">Regular-Expressions.info</a> and should detect most major cards.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -545,6 +540,10 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -558,10 +557,6 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -608,7 +603,7 @@ rewriterule ^(.*)$ http://www.mykonossoftware.com/$1 [r=301,nc]
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="For a research project I decided that I needed to monitor the traffic to and from my iPhone - both HTTP and HTTPS. Having had so much luck with &hellip;">
+  <meta name="description" content="Update 2: The Snapchat API has changed to address the issues I pointed out to them - and the new API has issues as well. I&#8217;ve posted an update &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,125 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/16/snapchat-api-and-security/">Snapchat: API &amp; Security</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-16T21:06:00-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update 2:</strong> The Snapchat API has changed to address the issues I pointed out to them - and the new API has issues as well. I&#8217;ve <a href="http://adamcaudill.com/2012/12/31/revisiting-snapchat-api-and-security/">posted an update</a> that covers some of these changes.</p>
+
+<p><strong>Update:</strong> I heard back from one of the co-founders, he said that they&#8217;d be updating the application to address this in the &#8220;very near future.&#8221; I have to applaud them for the great way they handled this.</p>
+
+<p><a href="http://www.snapchat.me/">Snapchat</a> was recently <a href="http://techcrunch.com/2012/06/08/snapchat-110-million/">featured</a> on TechCrunch, pointing out that they are expanding to Android and that they&#8217;ve now handled over 110M pictures. So when I see something about an application that auto-deletes messages after they are viewed - I did the only natural thing: dig in and see if it really is secure.</p>
+
+<p>I <a href="http://adamcaudill.com/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">monitored</a> the messages being sent back and forth, and mapped out the APIs they use. They have a simple API, which uses both JSON and form-encoding to transfer data. The API itself is fairly clean and easy to understand. Writing a new client against this API is fairly simple - <em>including a client that automatically saves all image received</em>.</p>
+
+<h3>Downloading Images</h3>
+
+<p>The process to download images is pretty simple, it can be as simple as two API calls. The first API needed is <code>ss_auth</code> - the API is used to create sessions. The call to login looks like this:</p>
+
+<pre><code>POST https://feelinsonice.appspot.com/ss_auth HTTP/1.1
+Host: feelinsonice.appspot.com
+User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
+Content-Length: 32
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Accept-Encoding: gzip
+Connection: close
+Proxy-Connection: close
+
+u=&lt;user&gt;&amp;t=&lt;password&gt;&amp;a=login
+</code></pre>
+
+<p>This will return JSON containing couple useful things:</p>
+
+<ol>
+<li>The session token, which is required for all other calls.</li>
+<li>A list of images that haven&#8217;t been viewed yet (the &#8220;id&#8221; field being the most important).</li>
+</ol>
+
+
+<p>Once the returned JSON is parsed, the rest is just making calls to the <code>blob</code> API - this is the API that actually returns the image data (as a JPG), and can then be saved to disk. The URLs to retrieve an image look like this:</p>
+
+<pre><code>https://feelinsonice.appspot.com/blob?u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;i=&lt;image-id&gt;
+</code></pre>
+
+<p>This allows images to be easily downloaded, without them being removed.</p>
+
+<h3>How it normally works&#8230;</h3>
+
+<p>In the mobile application, a call to the <code>ss_pa</code> API is made when an image is viewed, this removes the image - and once this is called, there doesn&#8217;t seem to be a way to get the image back.</p>
+
+<pre><code>POST https://feelinsonice.appspot.com/ss_pa HTTP/1.1
+Host: feelinsonice.appspot.com
+User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
+Content-Length: 102
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Accept-Encoding: gzip
+Connection: close
+Proxy-Connection: close
+
+u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3A%22&lt;unix-timestamp&gt;%22%7D
+</code></pre>
+
+<p>This API call is the key to keeping the image from being accessed again. If a client didn&#8217;t implement this API, it would allow users to access the images any time they like - completely bypassing the entire point of the application.</p>
+
+<h3>Other APIs</h3>
+
+<p>Here are some of the other APIs used:</p>
+
+<ul>
+<li><code>ss_refresh</code> - pull the list of images (this API returns a subset of what&#8217;s returned by <code>ss_auth</code>)</li>
+<li><code>nsp</code> - uploads an image</li>
+<li><code>clear</code> - clears the user&#8217;s history</li>
+<li><code>auth</code> - used to destroy the session, not to be confused with <code>ss_auth</code></li>
+</ul>
+
+
+<p>All of these are easily understood and implemented. There are other APIs, for things like registration that I didn&#8217;t look into, as they are beyond the scope of this research.</p>
+
+<h3>Unofficial clients</h3>
+
+<p>With such a simple API I&#8217;d be amazed if other, unofficial, clients didn&#8217;t start turning up - with saving images being their primary feature. A crappy but functional Android client that supports saving could be built in a couple hours.</p>
+
+<p>For now I&#8217;m not making any proof-of-concept code available, as I believe that this article makes it sufficiently clear how easy it is to write an unofficial client for this service that allows images to be saved. The goal here isn&#8217;t to exploit this hole, but to point out the risk of untrusted clients.</p>
+
+<h3>Overall</h3>
+
+<p>Session management is fairly well done - and would certainly make unofficial clients that aren&#8217;t full-featured less attractive due to needing to login so often; but this certainly doesn&#8217;t provide any protection. The API itself seems to have no protection against untrusted clients, making it trivial to save images or perform other unintended actions.</p>
+
+<p>I did contact the authors to suggest that they encrypt the image data when it&#8217;s sent to the client, making it harder to get the data without reverse engineering the application. It wouldn&#8217;t stop everyone, but it would make the task less trivial.</p>
+
+<p>Given the nature of the application, I suspect unofficial clients are unavoidable though - especially as the service grows in popularity (as I expect it will once the official Android client is released).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -315,90 +434,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/13/minipwner/">MiniPwner</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-13T16:24:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently finished building my first <a href="http://minipwner.com/">MiniPwner</a> - a tiny <a href="https://openwrt.org/">OpenWrt</a>-based system for pen-testing. At only 2.25 x 2.25 inches, the device plus battery is still extremely small - it easily fits in a pocket, and could be hidden anywhere.</p>
-
-<p>The device is based on the <a href="http://wiki.openwrt.org/toh/tp-link/tl-wr703n">TP-LINK TL-WR703N</a>, which uses a 400Mhz Atheros AR7240 CPU - not exactly a power-house, but enough power for standard pen-testing (or even just as a super-portable linux box). In cases where the 400Mhz CPU and 32MB RAM aren&#8217;t enough, you can easily use OpenVPN as a tunnel to run your tests remotely.</p>
-
-<p>The total investment for the build was only $38 - though next time I&#8217;ll pay a little extra and get the <a href="http://www.amazon.com/gp/product/B005FYNSZA/ref=as_li_ss_tl?ie=UTF8&amp;tag=adamcaucom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005FYNSZA">16GB drive</a> - mostly for extra room when working with logs. The 4GB drive used in the standard build has plenty of room for the software - but I&#8217;d rather have the extra room to work with.</p>
-
-<p>The build process was process was simple - thankfully the <a href="http://minipwner.com/index.php/minipwner-build">instructions</a> are quite good, though I did have to change a few things to make it all work.</p>
-
-<p>Step 1): To save looking, <a href="http://downloads.openwrt.org/snapshots/trunk/ar71xx/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin">here&#8217;s</a> a direct link to the OpenWrt image.</p>
-
-<p>Step 4): I formated the thumb drive by mounting it in a Ubuntu VM, and used <a href="http://gparted.sourceforge.net/">GParted</a> to delete the existing partition, and created a 512MB swap partition, then the rest is ext4.</p>
-
-<p>Step 16): Read step 17 first so you don&#8217;t feel so stupid for wasting time trying to figure out why step 16 doesn&#8217;t seem to do anything.</p>
-
-<p>Step 21): I use WPA2 on my network, so I had to edit the <code>/etc/config/wireless</code> a little differently:</p>
-
-<pre><code>config wifi-iface
-        option device   wlan0
-        option network  wan
-        option mode     sta
-        option ssid     &lt;ssid&gt;
-        option encryption psk2+tkip
-        option key &lt;password&gt;
-</code></pre>
-
-<p>More information about the wireless setup can be found <a href="http://wiki.openwrt.org/doc/uci/wireless">here</a>.</p>
-
-<p>Step 24): My local wireless network is in the 192.168.1.x range, so this wasn&#8217;t working for me. Seeing as changing the wireless doesn&#8217;t make sense for me (way too many static devices), I had to change the IP address of <code>eth0</code> to deal with the issue. I updated my <code>/etc/config/network</code> to look something like this:</p>
-
-<pre><code>config 'interface' 'lan'
-        option 'ifname' 'eth0'
-        option 'type' 'bridge'
-        option 'proto' 'static'
-        option 'ipaddr' '192.168.2.1'
-        option 'netmask' '255.255.255.0'
-</code></pre>
-
-<p>Once the change is made, you&#8217;ll need to execute <code>/etc/init.d/network restart</code> - then update your PC&#8217;s static IP address to &#8220;192.168.2.111&#8221; and reconnect your telnet session.</p>
-
-<p>Step 27): When executing the installs I was receiving this error:</p>
-
-<pre><code>opkg_install_cmd: Cannot install package &lt;package-name&gt;
-</code></pre>
-
-<p>To correct this error, I had to run <code>opkg update</code> - after this the installs started working fine.</p>
-
-<p>Step 27b): The install for <code>samba2-client</code> was failing, as there isn&#8217;t a package by that name - though <code>samba36-client</code> installed fine.</p>
-
-<p>Overall, it&#8217;s a great little setup - I&#8217;m quite pleased.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -431,6 +466,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -444,10 +483,6 @@
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -494,7 +529,7 @@
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

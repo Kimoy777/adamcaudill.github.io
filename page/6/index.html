@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="In the dark days of the web, if a service hashed your password instead of storing it in plain text, they were doing good. As sites were hacked, and &hellip;">
+  <meta name="description" content="It&#8217;s been two weeks since news broke about the NSA collecting massive amounts of data from Verizon; and likely everybody else. There&#8217;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/19/opsec-the-nsa-and-you/">OPSEC, the NSA, and You</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-19T19:39:00-04:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It&#8217;s been two weeks since news broke about the NSA <a href="http://www.guardian.co.uk/world/2013/jun/06/nsa-phone-records-verizon-court-order">collecting massive amounts of data</a> from Verizon; and likely everybody else. There&#8217;s also <a href="http://www.guardian.co.uk/world/2013/jun/06/us-tech-giants-nsa-data">PRISM</a> - whatever the hell that is - it seems there&#8217;s no agreement on that, and I doubt there will be anytime soon. What really matters here though, is we have proof that people are watching - and if it&#8217;s happening in the US, it&#8217;s probably happening everywhere else.</p>
+
+<p>If you have any understanding of the intelligence community, all of this should come as absolutely no surprise whatsoever.</p>
+
+<p>For me, it has served as a reminder of the importance of OPSEC in anything you&#8217;re doing. The NSA is collecting metadata, and lots of it - they repeatedly assure people that it&#8217;s harmless. And it is - if you&#8217;re a technophobic OPSEC master living in a cave. Where metadata is so valuable, is in cases where you are looking at people that leak little bits of personal data everywhere they go, then you use the metadata to connect the dots. Very soon, you have a great picture of what they are doing and who is involved - without needing access to voice recordings or other, more protected information.</p>
+
+<p><strong>Knowing Where Your Weakness Is</strong></p>
+
+<p>Many people are talking about tools and technologies now to defeat this kind of data collection - from Tor to Cryptocat, yet, there are issues; it sounds so simple, but it&#8217;s not. Tor for example, how easy would it be for someone with a large budget to put the network at risk? The approximate answer, is <a href="http://grugq.github.io/blog/2013/06/10/good-luck-with-that/">easy</a>. How about Cryptocat or other encrypted communication tools? Last year was <a href="https://blog.crypto.cat/2012/11/security-update-our-first-full-audit/">painful</a> for Cryptocat - the last audit may have been clean, but who knows what else may be found.</p>
+
+<p>Encryption is hard, and it&#8217;s very easy to write something that looks secure but falls apart when placed in the right hands - accidentally or otherwise.</p>
+
+<p>The question is, is it effective against an actor with a massive budget? I would say it is, but not for the reason you might be thinking. Encryption is hard, both for those that implement and those that attack. But why spend the time and money on breaking encryption when you can take advantage of bad OPSEC to achieve the same goal?</p>
+
+<p>People leak data constantly - how, when, and where they use their phone, who they email, how they use social networks - all of these things provide useful information for an attacker. Individually, they may seem to have no value, but it&#8217;s the connections they add to the overall picture that makes them so damaging.</p>
+
+<p>Photo EXIF data, time of day trends in social media (or IRC), comments about the weather - all seem so innocent, but when combined can help to narrow down the list of candidates, and start building a picture of a person and their habits. Simple, innocuous, meaningless - until assembled.</p>
+
+<p>No tool can fix this; using Tor doesn&#8217;t eliminate habits, encrypting email doesn&#8217;t hide social connections. Everything you do leaks data.</p>
+
+<p><strong>Your Software Isn&#8217;t The Big Risk</strong></p>
+
+<p>You are. Your friends are.</p>
+
+<p>All the encryption software in the world won&#8217;t protect you from posting a picture with GPS data embedded in it; no 0day will put you at more risk than you are from your own mouth. No major actor needs to crack encryption, when they can collect massive amounts of metadata, and play connect the dots with the data you give them for free.</p>
+
+<p>It&#8217;s even worse when you start talking to friends, what they know, they&#8217;ll leak. When you speak to anyone, assume that a link between you and them has been documented by somebody, somewhere - now that person is a target to see what little bits of data they leak about you. Or you are now a target because of them.</p>
+
+<p>Trust no one, not even yourself.</p>
+
+<p><strong>Know Your Enemy</strong></p>
+
+<p>As Sun Tzu <a href="https://en.wikipedia.org/wiki/The_Art_of_War">pointed out</a>, if you know your enemy - war is easy. The problem is, you don&#8217;t. Nobody knows just how much data groups like the NSA have - if you believe them, not even the NSA knows. Nor does anyone know what they are capable of collecting should the need arise. Large groups of <em>very</em> intelligent people with a secret budget and access to a secret court that grants almost everything they ask for - my guess is that they&#8217;re capable of a lot.</p>
+
+<p>You know what tools are available - but how can you protect yourself, if you don&#8217;t know what works and what doesn&#8217;t? What networks are monitored? What agencies or companies are sharing data?</p>
+
+<p>Having good tools is a start, but that must be part of a larger plan to control what you expose publicly. You must be very cautious about every bit of data that could be collected - no matter how insignificant it seems. Who you associate with and how needs to be carefully controlled to avoid both unwanted leaks and attention. Every action feeds data in a picture, how useful that picture is, is completely up to you.</p>
+
+<p>Want to learn more, start with <a href="http://www.youtube.com/watch?v=9XaYdCdwiWU">grugq&#8217;s HITB OPSEC talk</a> if you&#8217;ve not seen it yet. If you&#8217;d like the short version, I&#8217;ll sum it up: STFU.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -378,79 +452,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/04/security-done-wrong-leaky-ftp-server/">Security Done Wrong: Leaky FTP Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-04T22:10:00-04:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Update:</strong> I&#8217;ve just spoken to AMI, and received some very important information; so here are the key points and clarifications:</p>
-
-<ul>
-<li>To clarify, the &#8216;vendor&#8217; I refer to is a customer of AMI; it is this customer&#8217;s public FTP server that exposed this information.</li>
-<li>Per AMI, the signing key included in the &#8216;Ivy Bridge&#8217; archive is a <em>default</em> test key; AMI instructs customers to change the key before building for a production environment. It&#8217;s not currently known if the customer was following recommended practices.</li>
-<li>The &#8216;Ivy Bridge&#8217; code was unmodified, meaning that the customer had not made any alterations to this specific copy.</li>
-</ul>
-
-
-<p>AMI is preparing a press release. The &#8216;vendor&#8217; still hasn&#8217;t responded (to me or AMI).</p>
-
-<p>Assuming the vendor was following AMI&#8217;s instructions, the private key found on the vendor&#8217;s public FTP server <em>should</em> have little practical value; though how this vendor was handling keys isn&#8217;t known, so the usefulness of the key is also unknown. There is also the possibility of other AMI customers violating AMI&#8217;s instructions. <em>We know we have a key; we don&#8217;t know how it&#8217;s been used.</em></p>
-
-<p>Publicly revealing the source code still has some potentially interesting implications, even with the assumption that the vendor was following AMI&#8217;s instructions on key handling. As this code may be under additional scrutiny from researchers, it&#8217;s likely that new flaws will be found that would have been missed otherwise.</p>
-
-<p>&#8211;</p>
-
-<p>A few hours ago I received a call from my frequent research partner, <a href="http://brandonw.net/">Brandon Wilson</a>, about an open FTP server hosted in Taiwan serving up some rather interesting data. Internal emails, various system images (and even the Ghost software!), numerous photos - some personal, some high resolution PCB images, private specification sheets, Excel documents loaded with private information - but that wasn&#8217;t the worst.</p>
-
-<p>In a folder called <code>code</code> was quite a treasure. The source code for different versions of <a href="http://en.wikipedia.org/wiki/American_Megatrends">American Megatrends</a> (AMI) firmware - but there was even a bonus on top of that! They included their private signing key with the code in the &#8216;Ivy Bridge&#8217; archive.</p>
-
-<p><code>308204A30201000282010100ED71D63F21FF0B4563A43D871D22448FC9...</code></p>
-
-<p>If you aren&#8217;t familiar with how AMI does UEFI firmware upgrades, they were nice enough to produce <a href="http://www.uefi.org/learning_center/UEFI_Plugfest_2012Q1_v3_AMI.pdf">some documentation</a> (PDF).</p>
-
-<p>By leaking this key and the firmware source, it is possible (and simple) for others to create malicious UEFI updates that will be validated &amp; installed for the vendor&#8217;s products that use this &#8216;Ivy Bridge&#8217; firmware. If the vendor used this same key for other products - the impact could be even worse. Even with a quick reaction, odds are users will be unprotected for some time. As users often don&#8217;t install firmware updates unless they are having issues - I expect this one to be around for a while.</p>
-
-<p>This kind of leak is a dream come true for advanced corporate espionage or intelligence operations. The ability to create a nearly undetectable, permanent hole in a system&#8217;s security is an ideal scenario for covert information collection.</p>
-
-<p>This vendor&#8217;s lax (non-existent?) security could have much broader repercussions though. For AMI, they now have a major piece of intellectual property freely available for download by competitors. For users, this code could now be subject to new scrutiny - if a security issue is found in the firmware, it could potentially impact all users whose firmware is based on the leaked code.</p>
-
-<p>If the code was old, as it&#8217;s been when products like <a href="http://www.zdnet.com/symantec-source-code-leaked-on-pirate-bay-7000004765/">Symantec&#8217;s were leaked</a>, this might not be so bad - but it&#8217;s not.</p>
-
-<p><img class="center" src="/files/Screenshot_4_4_13_10_04_PM.png"></p>
-
-<p>References in the files indicate that the code is from sometime in February 2012 - so this is fairly current code. For AMI, I hope they perform a security audit of their code to make sure that this leak doesn&#8217;t put users at excessive risk.</p>
-
-<p>A foolish oversight now has the potential to impact many.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -483,6 +484,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -496,10 +501,6 @@
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -546,7 +547,7 @@
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

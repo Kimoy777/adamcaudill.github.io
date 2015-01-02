@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="NeoInvoice is a multi-tenant open source invoicing system, that currently contains an unauthenticated blind SQL injection condition in signup_check. &hellip;">
+  <meta name="description" content="Want to know the easiest way to hack most of the WordPress installs on a host? It&#8217;s as easy as attacking the host&#8217;s internal DNS server, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/06/wordpress-dont-trust-that-update/">WordPress: Don&#8217;t Trust That Update</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T01:42:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Want to know the easiest way to hack most of the WordPress installs on a host? It&#8217;s as easy as attacking the host&#8217;s internal DNS server, then just sitting back and waiting on users to install your backdoor. If you can manage to change the IP address that &#8220;api.wordpress.org&#8221; resolves to, you&#8217;ve won the battle.</p>
+
+<p>I can&#8217;t take credit for finding this, it was pointed out on Twitter:</p>
+
+<div class='embed tweet'>Tweet could not be processed</div>
+
+
+<p>So this is nothing new - though I don&#8217;t think most users realize that this hole exists, or how hard it would be to find out that they&#8217;ve been attacked.</p>
+
+<p>Internal networks rarely receive the same degree of scrutiny as public facing systems when it comes to updates and hardening, making an attack against an internal DNS server not just possible - but quite likely. Since HTTPS isn&#8217;t used to protect against MITM attacks, and the packages aren&#8217;t signed, so there&#8217;s no verification that what you downloaded matches what was released. So going after the DNS server is just one attack option.</p>
+
+<p>Here&#8217;s a quick overview of just how it could happen:</p>
+
+<ul>
+<li>Hacker signs up for an account with a large host</li>
+<li>The attacker targets the internal DNS server and manages to redirect the API domain</li>
+<li>The API domain now points to an altered update check that serves an infected update package</li>
+<li>Users install updates with no idea that they aren&#8217;t original</li>
+</ul>
+
+
+<p>It would be trivial to modify the WordPress update package to add a backdoor and modify the update check (<code>wp-includes/update.php</code>) to point to the attacker&#8217;s site - that way if the attack against the DNS server is fixed, compromised sites will remain compromised. This does assume that the host&#8217;s internal DNS server has some vulnerability - but in my experience that wouldn&#8217;t be surprising.</p>
+
+<p>If the WordPress team started signing their updates, these issues would be gone; though it doesn&#8217;t look like that will happen:</p>
+
+<div class='embed tweet'>Tweet could not be processed</div>
+
+
+<p>What makes this worse? Both the API and download domains already support HTTPS, but this doesn&#8217;t do any good if the application is hardcoded to use HTTP.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -744,125 +808,6 @@ allspecial: 16 (0.0%)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/16/snapchat-api-and-security/">Snapchat: API &amp; Security</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-16T21:06:00-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Update 2:</strong> The Snapchat API has changed to address the issues I pointed out to them - and the new API has issues as well. I&#8217;ve <a href="http://adamcaudill.com/2012/12/31/revisiting-snapchat-api-and-security/">posted an update</a> that covers some of these changes.</p>
-
-<p><strong>Update:</strong> I heard back from one of the co-founders, he said that they&#8217;d be updating the application to address this in the &#8220;very near future.&#8221; I have to applaud them for the great way they handled this.</p>
-
-<p><a href="http://www.snapchat.me/">Snapchat</a> was recently <a href="http://techcrunch.com/2012/06/08/snapchat-110-million/">featured</a> on TechCrunch, pointing out that they are expanding to Android and that they&#8217;ve now handled over 110M pictures. So when I see something about an application that auto-deletes messages after they are viewed - I did the only natural thing: dig in and see if it really is secure.</p>
-
-<p>I <a href="http://adamcaudill.com/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">monitored</a> the messages being sent back and forth, and mapped out the APIs they use. They have a simple API, which uses both JSON and form-encoding to transfer data. The API itself is fairly clean and easy to understand. Writing a new client against this API is fairly simple - <em>including a client that automatically saves all image received</em>.</p>
-
-<h3>Downloading Images</h3>
-
-<p>The process to download images is pretty simple, it can be as simple as two API calls. The first API needed is <code>ss_auth</code> - the API is used to create sessions. The call to login looks like this:</p>
-
-<pre><code>POST https://feelinsonice.appspot.com/ss_auth HTTP/1.1
-Host: feelinsonice.appspot.com
-User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
-Content-Length: 32
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-Accept-Encoding: gzip
-Connection: close
-Proxy-Connection: close
-
-u=&lt;user&gt;&amp;t=&lt;password&gt;&amp;a=login
-</code></pre>
-
-<p>This will return JSON containing couple useful things:</p>
-
-<ol>
-<li>The session token, which is required for all other calls.</li>
-<li>A list of images that haven&#8217;t been viewed yet (the &#8220;id&#8221; field being the most important).</li>
-</ol>
-
-
-<p>Once the returned JSON is parsed, the rest is just making calls to the <code>blob</code> API - this is the API that actually returns the image data (as a JPG), and can then be saved to disk. The URLs to retrieve an image look like this:</p>
-
-<pre><code>https://feelinsonice.appspot.com/blob?u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;i=&lt;image-id&gt;
-</code></pre>
-
-<p>This allows images to be easily downloaded, without them being removed.</p>
-
-<h3>How it normally works&#8230;</h3>
-
-<p>In the mobile application, a call to the <code>ss_pa</code> API is made when an image is viewed, this removes the image - and once this is called, there doesn&#8217;t seem to be a way to get the image back.</p>
-
-<pre><code>POST https://feelinsonice.appspot.com/ss_pa HTTP/1.1
-Host: feelinsonice.appspot.com
-User-Agent: Snapchat 3.0 rv:3.0.0 (iPhone; iPhone OS 5.1.1; en_US)
-Content-Length: 102
-Content-Type: application/x-www-form-urlencoded; charset=utf-8
-Accept-Encoding: gzip
-Connection: close
-Proxy-Connection: close
-
-u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3A%22&lt;unix-timestamp&gt;%22%7D
-</code></pre>
-
-<p>This API call is the key to keeping the image from being accessed again. If a client didn&#8217;t implement this API, it would allow users to access the images any time they like - completely bypassing the entire point of the application.</p>
-
-<h3>Other APIs</h3>
-
-<p>Here are some of the other APIs used:</p>
-
-<ul>
-<li><code>ss_refresh</code> - pull the list of images (this API returns a subset of what&#8217;s returned by <code>ss_auth</code>)</li>
-<li><code>nsp</code> - uploads an image</li>
-<li><code>clear</code> - clears the user&#8217;s history</li>
-<li><code>auth</code> - used to destroy the session, not to be confused with <code>ss_auth</code></li>
-</ul>
-
-
-<p>All of these are easily understood and implemented. There are other APIs, for things like registration that I didn&#8217;t look into, as they are beyond the scope of this research.</p>
-
-<h3>Unofficial clients</h3>
-
-<p>With such a simple API I&#8217;d be amazed if other, unofficial, clients didn&#8217;t start turning up - with saving images being their primary feature. A crappy but functional Android client that supports saving could be built in a couple hours.</p>
-
-<p>For now I&#8217;m not making any proof-of-concept code available, as I believe that this article makes it sufficiently clear how easy it is to write an unofficial client for this service that allows images to be saved. The goal here isn&#8217;t to exploit this hole, but to point out the risk of untrusted clients.</p>
-
-<h3>Overall</h3>
-
-<p>Session management is fairly well done - and would certainly make unofficial clients that aren&#8217;t full-featured less attractive due to needing to login so often; but this certainly doesn&#8217;t provide any protection. The API itself seems to have no protection against untrusted clients, making it trivial to save images or perform other unintended actions.</p>
-
-<p>I did contact the authors to suggest that they encrypt the image data when it&#8217;s sent to the client, making it harder to get the data without reverse engineering the application. It wouldn&#8217;t stop everyone, but it would make the task less trivial.</p>
-
-<p>Given the nature of the application, I suspect unofficial clients are unavoidable though - especially as the service grows in popularity (as I expect it will once the official Android client is released).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -895,6 +840,10 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -908,10 +857,6 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -958,7 +903,7 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

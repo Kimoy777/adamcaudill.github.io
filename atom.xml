@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2014-12-21T01:18:50-05:00</updated>
+  <updated>2015-01-02T01:51:56-05:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2014: Year In Review]]></title>
+    <link href="https://adamcaudill.com//2015/01/01/2014-a-year-in-review/"/>
+    <updated>2015-01-01T23:44:00-05:00</updated>
+    <id>https://adamcaudill.com//2015/01/01/2014-a-year-in-review</id>
+    <content type="html"><![CDATA[<p>Inspired by a post from <a href="https://scott.arciszewski.me/blog/2014/12/year-2014-reflection">Scott Arciszewski</a>, I&#8217;ve decided to go ahead and publish a year in review post. This is something that I&#8217;ve generally avoided in the past, as the tone of these posts is more often than not, just cynicism and negativity. After seeing Scott’s post, it made me think about how such a review can be used to send a positive message — something desperately needed.</p>
+
+<p>Year after year, we see predictions, projections, and sales pitches — and the cynical responses that they always generate. It&#8217;s so easy to spend time rolling our eyes at vendors and media, instead of looking forward to ways to improve the situation and make the world a better place — even if only in a tiny way. We may not be able to fix the stupid, but we can at least reduce the damage that it does.</p>
+
+<h2>2014 In Review</h2>
+
+<p>So, without further ado, a personal look back at 2014.</p>
+
+<h3>Security Research &amp; Related</h3>
+
+<p>Overall this has been a very busy year, and I’ve not been able to publish as much as I’d like. In total, I requested only a single CVE for the entire year - <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2890">CVE-2014-2890</a> (I don’t keep a count of how many security related tickets I open, so no idea how many issues I actually reported).</p>
+
+<p>Most of my time was instead spent on a couple projects - <a href="https://github.com/smimp/smimp_spec">SMIMP</a> and <a href="https://github.com/adamcaudill/Psychson">Psychson</a> (BadUSB firmware). I’ll talk more about these later.</p>
+
+<p>I wasn’t able to spend as much time on public application security work as I had intended, but I did get some reports in, some advice given, some progress made.</p>
+
+<h3>Speaking</h3>
+
+<p>In 2014 I was fortunate to be asked to speak on a few occasions. When preparing for a talk, I always have mixed emotions — on one hand, it&#8217;s always been a great experience, a chance to meet new people, share knowledge, and hopefully contribute to the community. On the other hand, it&#8217;s a significant amount of time that is lost — and time is without a doubt my most limited resource.</p>
+
+<p>Whether it makes sense or not, I generally don&#8217;t give he same talk twice — especially if the event is recorded. So for each talk, it&#8217;s a real time &amp; energy commitment. I very much hope that those that have seen my talks appreciated them, and got something out of them.</p>
+
+<p>Here is some information from selected talks:</p>
+
+<ul>
+<li><a href="https://adamcaudill.com/2014/08/16/smimp-at-the-defcon-cryptovillage/">SMIMP at the DEFCON Crypto Village</a></li>
+<li><a href="https://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">Making BadUSB Work For You - DerbyCon</a> (YouTube video now over 100,000 views!)</li>
+<li><a href="https://adamcaudill.com/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a></li>
+</ul>
+
+
+<h3>Personal</h3>
+
+<p>Personally, this has been a particularly trying year for me, for various reasons. I have, as I always do, made a real effort to not show what&#8217;s going on when things go wrong. So, for all my friends, and everyone else for that matter — if there were times I was distant or difficult, or evasive — I am truly sorry.</p>
+
+<p>With that said, the year could have been far worse, and I&#8217;m incredibly grateful for all the friends I have — old and new. It was a busy year, with much going on and never enough time to make everything that needed to happen, actually happen.</p>
+
+<h3>Projects</h3>
+
+<p>During the year, much of my time was taken up by a couple projects — here is where they stand today:</p>
+
+<p><strong><a href="https://github.com/smimp/smimp_spec">SMIMP</a></strong> - Without a doubt the most ambitious project I&#8217;ve worked on, with a goal no less than replacing email itself. The first public draft was released in late July — and unfortunately remains basically untouched since then.</p>
+
+<p>Shortly before I released the first public draft, a start-up tried to acquire the rights, so they could develop it, and build there own applications around it. By the time that I told them that I was more interested in making the specification public, they had offered me a position as co-founder in exchange for it.</p>
+
+<p>This project took a substantial amount of time to get to a first draft — and really, it isn&#8217;t complete yet. Given the original goal of the project, leaving it with open issues really doesn’t bother me — that many more points to talk about.</p>
+
+<p>The original plan for the effort was to spur discussion, to get people talking about how email could be replaced. To be secure, a system must be designed with certain goals and threats in mind - something that didn&#8217;t happen with email as we know it today. So to fix email, we need to replace it. SMIMP may not be the answer, but we need to do something.</p>
+
+<p>Overall, though there was some positive feedback, I consider the project to be a failure. I&#8217;m proud of the work I did on it, but it didn&#8217;t have the desired effect.</p>
+
+<p><strong><a href="https://github.com/adamcaudill/Psychson">Psychson (BadUSB Firmware)</a></strong> - Without a doubt the work that had the most people talking. It was a fun project, we managed to get some code in the hands of those that wanted to extend it.</p>
+
+<p>It’s over, and I’m glad it’s over.</p>
+
+<p><strong>Blog</strong> - This blog has also been a bit less active than I hoped — 16 posts with a total of 18,040 words. I’m pretty sure last year I said I’d blog more. Oops.</p>
+
+<p><strong>My First Novel</strong> - A couple years ago I started occasionally working on an idea for a novel, this year, I set aside what I had been doing, and started fresh (but still based on the same material). My goal was to finish it this year, by there simply wasn&#8217;t enough time.</p>
+
+<p>Writing is something that I have yet to determine if I&#8217;m actually good at - or if I just limp along enough for others to tolerate. While I could write a technical book with confidence, writing fiction is something that, quite intentionally, pushes what I&#8217;m comfortable with.</p>
+
+<p>Making the time and finding the focus for something like this is certainly more difficult than I had imagined. I&#8217;ve come to understand why so many writers drink.</p>
+
+<h3>Overall</h3>
+
+<p>I have to say, I love the communities that I work with. I love that I get to deal with challenging problems. I love that I get to find solutions and make them work. But most of all, I’m thankfully for so many friends and great people that make this work truly enjoyable.</p>
+
+<h2>Looking forward to 2015</h2>
+
+<p>I have a number of goals for 2015, a number of projects that need my attention, and ideas to make the world just a little bit better.</p>
+
+<ul>
+<li>SMIMP - While I feel that the project generally failed, there doesn’t seem to be much movement in the let’s-kill-email space, so I don’t think it’s dead quite yet. There just might be another chance to get people talking about a real solution.</li>
+<li><a href="https://github.com/adamcaudill/CurveLock">CurveLock</a> - An open source, secure, modern encryption application. This is mainly an experiment - but the goal is to provide high security, in a simple, easy to use application. Hopefully will get a beta out before too long.</li>
+<li><a href="https://github.com/EncryptingCamera/encryptingcamera-spec">EncryptingCamera</a> - Prompted by a conversation on Twitter, a few people got together to make a new application that will hopefully protect a few reporters — and others that need to take photos, and secure them from inspection.</li>
+<li>Blog - Last time that I promised to blog more often, I didn’t post again for months, so I’m hoping that I don’t repeat that this time. But I promise to write more, and do my best to keep the content interesting.</li>
+<li>Personal Transparency - I’ve always been very concerned with my professional image, and as such tend to keep many details of my life to myself. One personal goal for this year is to be <em>just a bit</em> more open and transparent.</li>
+<li>Novel - I intend to have either a deal signed with a publisher, or to publish as an ebook on Amazon before the end of 2015. One way or the other, I’ll be done with it by the end of the year.</li>
+<li>Research - I plan on spending more time evaluation open source applications for security issues. In just a few hours a week, can have a real impact on making applications and users more secure.</li>
+<li>Open Source Security Tools - I hope to dedicate a reasonable amount of time on new and existing tools to make users more secure, especially when it comes to secure communication. PGP/GPG hasn’t aged well - tools like <a href="https://github.com/tedu/reop">reop</a> have a lot of technical potential, but usability still needs to be improved.</li>
+<li>More time outside of the echo chamber - It’s easy to stay inside of the echo chamber, agreeing with ourselves (or disagreeing), but what good does it really do? To have a real impact, we need to spend more time influencing the people that need our help the most.</li>
+<li>Consume less, create more - In general, consume less and create more — time is a precious and limited resource, should be used to do as much good as possible.</li>
+</ul>
+
+
+<p>Oh, and one final note for next year - my wife and I are expecting again. Should be an exciting year.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Irrational Attribution: APT3.14159]]></title>
@@ -1520,63 +1614,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 <p>There is no real answer here - this is simply how it is. If you use cryptography (and you aren&#8217;t a true cryptographer), then you&#8217;re taking a leap of faith. If you didn&#8217;t compile all of the tools you use - it&#8217;s an even bigger leap.</p>
 
 <p><em>[N.B. This article was planned before the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">Bullrun</a> story broke; but in light of these recent events, I&#8217;ve updated and published this ahead of schedule.]</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making Android NSA-Proof]]></title>
-    <link href="https://adamcaudill.com//2013/09/06/making-android-nsa-proof/"/>
-    <updated>2013-09-06T23:34:00-04:00</updated>
-    <id>https://adamcaudill.com//2013/09/06/making-android-nsa-proof</id>
-    <content type="html"><![CDATA[<p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
-
-<p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
-
-<p>Too extreme?</p>
-
-<p>Let&#8217;s shoot for something a little more attainable - spy resistant. We can&#8217;t stop every attack, but we can reduce the attack surface a bit. Here are a few tools that I&#8217;ve been using recently to do just that.</p>
-
-<p><strong><a href="https://www.boxcryptor.com/en/boxcryptor-classic">Boxcryptor Classic</a></strong> - Like many people, I use DropBox for certain, low sensitivity files. But what about things that require a little more care? Boxcryptor Classic encrypts files and then stores the encrypted copy in DropBox. It&#8217;s simple, security seems sound, and the free edition is quite adequate. May not be perfect, but suits my needs nicely.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms">TextSecure</a></strong> - It&#8217;s <a href="https://github.com/WhisperSystems/TextSecure/">open-source</a>, it&#8217;s free, and it&#8217;s from <a href="https://twitter.com/moxie">Moxie</a> - what&#8217;s not to love? It stores all of your SMS &amp; MMS data encrypted, and can encrypt the data over the air when texting another TextSecure user.</p>
-
-<p>Currently it uses the SMS/MMS service for messaging, and is Android only; both of those things are changing soon. It&#8217;ll be using the <a href="https://whispersystems.org/blog/asynchronous-security/">data channel</a> and supporting <a href="https://whispersystems.org/blog/iphone-rsn/">iOS</a> in the near future.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=com.kaitenmail&amp;hl=en">Kaiten Mail</a> &amp; <a href="https://play.google.com/store/apps/details?id=org.thialfihar.android.apg&amp;hl=en">AGP</a></strong> - Kaiten is a low cost ($4.99) mail client; though if you want to go cheaper, it&#8217;s open-source cousin <a href="https://play.google.com/store/apps/details?id=com.fsck.k9&amp;hl=en">K-9 Mail</a> is free. They are developed by the same core team, though Kaiten seems to get the new features first, then they are ported into K-9. I like supporting OSS developers, so I happily went with the paid version. It works great with my Google Apps email account, though does take some getting used to.</p>
-
-<p>Where it really comes in handy though, is when you use it with AGP, the Android Privacy Guard. It&#8217;s a simple, minimalistic OpenPGP tool that integrates nicely with Kaiten and K-9. It makes it simple to support encrypted or signed mail on your phone.</p>
-
-<p>This does though require that your private key be on the device, so keep that risk in mind.</p>
-
-<p>AGP is a bit dated, and hasn&#8217;t been updated since 2010. So, it&#8217;s  clearly been abandoned. Thankfully though, <a href="http://sufficientlysecure.org/">Dominik Schürmann</a> has <a href="https://github.com/dschuermann/openpgp-keychain">forked the project</a> and is working on a major update (new GUI, new API, etc.) that should be ready early next year.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=com.gmail.mjm4456.vpncilla&amp;hl=en">VpnCilla</a></strong> - Next up is a highly configurable VPN client ($4.99). WIFI is great - except that evil part of your traffic being so simple to monitor, and with recent work on <a href="http://www.theregister.co.uk/2013/07/15/femtocell_flaw_leaves_verizon_customers_wifi_and_mobile_wide_open/">femtocell systems</a>, even 3G/4G connections can&#8217;t be fully trusted. Having a VPN handy is a must.</p>
-
-<p>You&#8217;ll also need a good VPN service; my current pick is <a href="http://www.atenlabs.com/zipline/">zipline</a>; it&#8217;s fast, cheap, and from a trusted professional (<a href="https://twitter.com/viss">Dan Tentler</a>).</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.redphone&amp;hl=en">RedPhone</a></strong> - Another tool from Moxie, RedPhone secures your voice communications via encrypted VoIP. Or at least so I&#8217;ve read - I never actually make voice calls on my personal phone anymore.</p>
-
-<p><strong>Others</strong> - There are various other useful things - Google Authenticator (2FA all the things, right?), ConnectBot to SSH into your server to do anything you don&#8217;t want to do from your phone, use wifitrack &amp; Wifi Analyzer to better understand what&#8217;s in your area.</p>
-
-<p><strong>Configuration</strong></p>
-
-<p>There is, of course, obvious configuration to make things a bit safer. Make sure you have a good password, or at least a long PIN set - don&#8217;t trust patterns, and don&#8217;t bother with a 4 digit PIN.</p>
-
-<p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
-<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
-
-<p><strong>Weak Spots</strong></p>
-
-<p>It&#8217;s not all great though, there are still weaknesses - plenty in fact. Thanks to USB MUXing there is probably a debug interface - and maybe even a full shell on your phone, and you have no way of turning it off. There may be flaws in the baseband or other software that could allow an attacker to gain control.</p>
-
-<p>The list goes on and on. And that&#8217;s without the fact that your phone company hands over all of your call records, or the various apps you need, but don&#8217;t have a secure replacement.</p>
-
-<p>There is no such thing as an NSA proof phone - unless you literally melt it. What we can do though is make it harder to be spied on; make the attackers work for every bit of data. Give nothing away for free.</p>
 ]]></content>
   </entry>
   

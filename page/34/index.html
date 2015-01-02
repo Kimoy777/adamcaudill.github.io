@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="After 2 years, my favorite forum software has been officially released. I&#8217;ve been a big fan of bbPress since it&#8217;s early days, I even had &hellip;">
+  <meta name="description" content="For those looking to get into the startup/ISV scene, Paul Graham&#8217;s latest work is a great read. The 18 Mistakes that Kill Startups takes an &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/10/16/startup-mistakes/">Startup Mistakes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-10-16T23:11:31-04:00" pubdate data-updated="true">Oct 16<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For those looking to get into the startup/ISV scene, Paul Graham&#8217;s latest work is a great read. <a href="http://paulgraham.com/startupmistakes.html">The 18 Mistakes that Kill Startups</a> takes an interesting look at some of the larger issues to avoid while forming a new company. Personally, I&#8217;d call this one a must read.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -244,66 +280,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/09/24/eventargs-no-need-to-pass-a-new-instance/">EventArgs: No Need to Pass a New Instance</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-09-24T23:15:01-04:00" pubdate data-updated="true">Sep 24<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you look at the code I write, seeing a line similar to the following would be fairly common:</p>
-
-<p><code>RaiseEvent LoadComplete(Me, New EventArgs)</code></p>
-
-<p>Yesterday, I wouldn&#8217;t have given this a second thought, but today, the story is a bit different. A friend of mine pointed me to an <a href="http://msdnwiki.microsoft.com/en-us/mtpswiki/118wxtk3(vs.80">interesting comment</a>.aspx#CommunityContentAnchor)  by <a href="http://davidkean.net/">David Kean</a>  (from Microsoft) on the <a href="http://msdnwiki.microsoft.com/en-us/mtpswiki/default.aspx">MSDN Wiki</a>  indicating that the line above is actually <em>wrong</em>!</p>
-
-<p>So, based on his comment, I should be using <a href="http://msdn2.microsoft.com/en-us/library/system.eventargs.empty.aspx">EventArgs.Empty</a>  instead of creating a new instance, something like this:</p>
-
-<p><code>RaiseEvent LoadComplete(Me, EventArgs.Empty)</code></p>
-
-<p>So using <code>EventArgs.Empty</code> must be better somehow, so I decided to take a look and see if I could figure out just what the difference would be. The MSDN states that &#8221;<em>The value of Empty is a read-only instance of EventArgs equivalent to the result of calling the EventArgs constructor</em>&#8221; - so what&#8217;s the difference? Time for a trip into the <a href="http://www.aisto.com/roeder/DotNet/">Reflector</a>.</p>
-
-<p>The Reflector shows two constructors:</p>
-
-<p><code>Public Sub New()  
-End Sub</code></p>
-
-<p><code>Shared Sub New()  
-EventArgs.Empty = New EventArgs  
-End Sub  
-</code></p>
-
-<p>So, <code>EventArgs.Empty</code> just calls <code>New EventArgs</code> and returns that. <em>Right</em>.</p>
-
-<p>Anybody see something there that I&#8217;m missing? Seems to me that the somewhat more verbose, but more clear (as to what is actually happening) syntax would be better, and no less efficient. If anybody has an opinion about why you would do one instead of the other, I&#8217;d like to hear it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/35/">&larr; Older</a>
@@ -336,6 +312,10 @@ End Sub
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -349,10 +329,6 @@ End Sub
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -399,7 +375,7 @@ End Sub
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

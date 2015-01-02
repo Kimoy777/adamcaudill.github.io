@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="When you move on to your next challenge how will those that inherit your code think of you? Noble or notorious, innovator or insane? This is a &hellip;">
+  <meta name="description" content="Do you use MD5 or SHA1 to store passwords? Think they are secure? Think again. While generic hashing algorithms are certainly better than storing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/01/secure-password-storage/">Secure Password Storage</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-01T02:08:35-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Do you use MD5 or SHA1 to store passwords? Think they are secure? Think again.</p>
+
+<p>While generic hashing algorithms are certainly better than storing passwords in <a href="http://www.techcrunch.com/2009/12/14/rockyou-hacked/">plain text</a>, it&#8217;s still not as secure as it should be. Users place great trust in us to ensure that their credentials will be secure and treated with the utmost respect; it&#8217;s our responsibility to live up to these expectations.</p>
+
+<p>With the simplicity and speed of these general purpose algorithms, it&#8217;s possible to generate hashes looking for <a href="http://en.wikipedia.org/wiki/Collision_(computer_science">collisions</a>) (or even the original value) extremely quickly. It&#8217;s this speed that introduces the fatal flaw; with a database dump containing MD5 hashed passwords, with a fairly small investment most could be recovered within a very small amount of time (mere days for a large database).</p>
+
+<p>Many people are moving to bcrypt as a solution. In Coda Hale&#8217;s &#8221;<a href="http://codahale.com/how-to-safely-store-a-password/">How To Safely Store A Password</a>&#8221; he covers this topic in more detail, complete with useful stats and links to implementations in languages from <a href="http://derekslager.com/blog/posts/2007/10/bcrypt-dotnet-strong-password-hashing-for-dotnet-and-mono.ashx">C#</a> to <a href="http://github.com/codahale/bcrypt-ruby">Ruby</a> (even <a href="http://github.com/skarab/erlang-bcrypt">Erlang</a> is represented).</p>
+
+<p>If you are looking for ways to better protect your user&#8217;s data, take a closer look at your password storage.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -283,56 +327,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/07/19/getsatisfaction-is-it-worth-it/">GetSatisfaction: Is It Worth It?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-19T01:09:35-04:00" pubdate data-updated="true">Jul 19<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While working on the list of tools and services to write about as part of my <a href="http://adamcaudill.com/2009/06/18/start-up-tools-services/">Start-up Tools</a> series, <a href="http://getsatisfaction.com/">Get Satisfaction</a> has been the hardest to decide on. After a lot of reading, I decided against recommending it, though I had to write about it because so many companies have opted to use it.</p>
-
-<p>Get Satisfaction is a great concept for the most part - what it boils down to is a specialized forum service for your customers to discuss issues and ideas about your products. But it&#8217;s not quite that simple, as your customer can create a site with them in your company&#8217;s name, without your knowledge as 37signals <a href="http://www.37signals.com/svn/posts/1650-get-satisfaction-or-else">found out</a> - (and they weren&#8217;t happy about it). The article by 37signals goes into length about the issues surrounding the service, so I won&#8217;t repeat them all here - it&#8217;s well worth the time to read if you are thinking about using the service.</p>
-
-<p>While they do offer a rather anemic free version, if you want anything useful you&#8217;ll have to shell out for one of the <a href="http://getsatisfaction.com/features">paid versions</a> which start at $99/month. That&#8217;s $1,188 per year, which for most start-ups would be among their top expenses.</p>
-
-<p>While they have made some <a href="http://blog.getsatisfaction.com/2009/03/31/kissing-and-making-up-with-37signals/">changes</a> to reduce the mafioso feel that many complained about, however the feeling that you have to participate if you care about customers still lingers. With prices ranging from $99 to $899 a month for what amounts to little more than a forum service - it&#8217;s simply too expensive for many start-ups.</p>
-
-<p>While I understand that they are in business to make money just as I am, my budget is still very tight and there are many other needs fighting over that same money. Supporting customers has to be the top priority, but is this really the best way to achieve that?</p>
-
-<p>To me it seems that money may be better spent on hardware upgrades to make our servers faster or some <a href="http://crazyegg.com/">real analytics</a> to make sure our web sites are as easy to use as possible. While the service has some nice benefits, spending over $1,100 a year for access to a locked-down forum just doesn&#8217;t make business sense.</p>
-
-<p>Oh, and do you want it to match the look and feel of your web site? We&#8217;ll for that you have to upgrade to their top plan at a whopping $899 a month. Yet themes are a basic feature of virtually all forum systems.</p>
-
-<p>For me, I think I&#8217;ll give <a href="http://bbpress.org/">bbPress</a> a shot - it&#8217;s free, open source, and easy to use - then I&#8217;ll take that $99/month and find better ways for it to serve my customers.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/20/">&larr; Older</a>
@@ -365,6 +359,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -378,10 +376,6 @@
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -428,7 +422,7 @@
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

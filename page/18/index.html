@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="(Disclaimer: This is something of a rant, and was written at 3AM. My apologies if it doesn&#8217;t make sense. Feel free to ignore.) It&#8217;s 3AM, &hellip;">
+  <meta name="description" content="Imagine my surprise when one of my developers mentions he has a virus and I see this on his screen: No, the items listed aren&#8217;t the issue, it&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/07/30/state-of-the-virus-art/">State of the (Virus) Art&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-30T04:27:00-04:00" pubdate data-updated="true">Jul 30<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Imagine my surprise when one of my developers mentions he has a virus and I see this on his screen:</p>
+
+<p><img src="http://adamcaudill.com/files/2010/07/IMG_20100726_163201.jpg.scaled1000-300x224.jpg" alt="" />
+No, the items listed aren&#8217;t the issue, it&#8217;s <a href="http://en.wikipedia.org/wiki/Security_Tool">Security Tool</a> that&#8217;s the virus. It&#8217;s vicious, plain and simple. It prevents almost all software from running (either by presenting a &#8220;virus warning&#8221; or simply killing the process), presents fake BSODs, and who knows what else that we didn&#8217;t notice. Only Explorer and Internet Explorer were operational, all other software was disabled.</p>
+
+<p>As soon as the issue was found, the workstation was removed from the network while we attempted a clean-up via <a href="http://www.malwarebytes.org/">Malwarebytes</a> and a couple other similar tools. After running a scan from each tool in safe-mode it looked like we had it beat. We were wrong. The next reboot, and it was back - I&#8217;m not surprised but somewhat disappointed that none of the tools actually performed the cleanup correctly. There are several routes it could have taken to ensure that it would re-infect on boot, seems at least one of those was missed.</p>
+
+<p>The one saving grace is that for some reason, it doesn&#8217;t attack while in safe-mode. Had this not been the case, data recovery would have been far more time consuming than it was (about four hours). Once the data was secured and logs and various backups for later analysis were captured, the workstation was re-imaged. In total, probably 30 hours were lost among development, technicians, and networking - not to mention the time spent by the security team members. A rather costly exercise, all things considered.</p>
+
+<p>There&#8217;s still one question floating around - how did this happen? The workstation in question was running a fully patched Windows XP install, Symantec Corporate anti-virus with the latest updates, behind a firewall and content filters, yet it still happened. How did our pricey anti-virus solution not detect this? Why didn&#8217;t it detect anything at all?</p>
+
+<p>It amazes me that here in 2010 we still have to worry about computer viruses (or virii, if you prefer); but I find it utterly unacceptable that that a top-tier, fully managed and updated anti-virus product allows such a debilitating pile of code to execute. Computer science has made amazing strides and modern PC hardware has more than enough resources to perform more intense analysis and monitoring - yet it still happened.</p>
+
+<p>Have we actually lost this battle?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -333,50 +382,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/01/secure-password-storage/">Secure Password Storage</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-01T02:08:35-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Do you use MD5 or SHA1 to store passwords? Think they are secure? Think again.</p>
-
-<p>While generic hashing algorithms are certainly better than storing passwords in <a href="http://www.techcrunch.com/2009/12/14/rockyou-hacked/">plain text</a>, it&#8217;s still not as secure as it should be. Users place great trust in us to ensure that their credentials will be secure and treated with the utmost respect; it&#8217;s our responsibility to live up to these expectations.</p>
-
-<p>With the simplicity and speed of these general purpose algorithms, it&#8217;s possible to generate hashes looking for <a href="http://en.wikipedia.org/wiki/Collision_(computer_science">collisions</a>) (or even the original value) extremely quickly. It&#8217;s this speed that introduces the fatal flaw; with a database dump containing MD5 hashed passwords, with a fairly small investment most could be recovered within a very small amount of time (mere days for a large database).</p>
-
-<p>Many people are moving to bcrypt as a solution. In Coda Hale&#8217;s &#8221;<a href="http://codahale.com/how-to-safely-store-a-password/">How To Safely Store A Password</a>&#8221; he covers this topic in more detail, complete with useful stats and links to implementations in languages from <a href="http://derekslager.com/blog/posts/2007/10/bcrypt-dotnet-strong-password-hashing-for-dotnet-and-mono.ashx">C#</a> to <a href="http://github.com/codahale/bcrypt-ruby">Ruby</a> (even <a href="http://github.com/skarab/erlang-bcrypt">Erlang</a> is represented).</p>
-
-<p>If you are looking for ways to better protect your user&#8217;s data, take a closer look at your password storage.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/19/">&larr; Older</a>
@@ -409,6 +414,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
@@ -422,10 +431,6 @@
     
       <li class="post">
         <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/17/a-backdoor-by-any-other-name/">A backdoor by any other name&#8230;</a>
       </li>
     
   </ul>
@@ -472,7 +477,7 @@
   </div>
   <footer role="contentinfo"><p>
   Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
-  Copyright &copy; 2014 - Adam Caudill -
+  Copyright &copy; 2015 - Adam Caudill -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
