@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Want to know the easiest way to hack most of the WordPress installs on a host? It&#8217;s as easy as attacking the host&#8217;s internal DNS server, &hellip;">
+  <meta name="description" content="On August 28th ElcomSoft announced that they had determined a method to extract Windows passwords from the registry for users of UPEK&#8217;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/07/upek-windows-password-decryption/">UPEK Windows Password Decryption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-07T14:49:00-04:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On August 28th ElcomSoft <a href="http://blog.crackpassword.com/2012/08/upek-fingerprint-readers-a-huge-security-hole/">announced</a> that they had determined a method to extract Windows passwords from the registry for users of UPEK&#8217;s fingerprint readers and Protector Suite software (UPEK is now owned by AuthenTec, which is now owned by Apple). What they didn&#8217;t announce was the technical details of how they did it. Myself and <a href="http://brandonw.net/">Brandon Wilson</a> have been working to recreate their research - and we have.</p>
+
+<p>We have not been in contact with ElcomSoft, so this is an independent re-discovery of this vulnerability. ElcomSoft has committed to not release details, which I understand - but given how likely it is that others will determine this technique, I believe that this information should be available to pen-testers and auditors so that these insecure credentials can be identified.</p>
+
+<h3>The Details</h3>
+
+<p>ElcomSoft blasted the security of UPEK&#8217;s product, saying:</p>
+
+<blockquote><p>we found that your Windows account passwords are stored in Windows registry almost in plain text, barely scrambled but not encrypted</p></blockquote>
+
+
+<p></p>
+
+<p>This isn&#8217;t quite accurate - but certainly close enough. The data is stored in the following location (varies by version):</p>
+
+<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Virtual Token\Passport\4.0\Passport\&lt;user&gt;\ExData</code></p>
+
+<p>The first 24 bytes are header and size information, after the encrypted data there is a 4 byte number that indicates the number of bytes in the next section, the following bytes are used in the IV. The encryption key is &#8216;generated&#8217; using a PBKDF2-like function that uses MD5 hashing, but unfortunately when storing data in the registry they aren&#8217;t using a password - so the outcome is based purely on an MD5 hash that they are using as a &#8216;seed&#8217; value. This means that the key used is always the same.</p>
+
+<p>Better: the key is only 56 bits.</p>
+
+<h3>AES-56</h3>
+
+<p>On the AuthenTec&#8217;s website they mention using 56-bit AES (due to the old export restrictions) - this confused me for quite some time, not only does AES not support 56-bit (or anything else less than 128 bits), from looking at the algorithm trying to make it support a key size that isn&#8217;t a multiple of 32 bits would be quite challenging. So how did they do it? They cheated.</p>
+
+<p>They are actually using AES-256, and padding both the 56-bit key and IV with nulls. In other words, they are taking a very strong crypto and stripping it of its value.</p>
+
+<h3>The Data</h3>
+
+<p>Besides the Windows password, the data also includes the domain and login (all in Unicode), along with other various bits that&#8217;s less interesting from a pen-testing perspective. Looking at the raw data, you can identify the password from the <code>P1</code> header, <code>0x11</code> denotes the login, and <code>0x12</code> indicates the domain.</p>
+
+<p>The biometric data may be of some interest, but not to me.</p>
+
+<h3>Code</h3>
+
+<p>We&#8217;ve <a href="https://github.com/brandonlw/upek-ps-pass-decrypt">posted</a> a proof-of-concept tool to Github, it&#8217;s written in C#, and thus requires the .NET 4.0 framework be installed (<a href="http://adamcaudill.com/files/FingerprintEncryption.2012.10.16.1847.zip">download here</a>). I also plan to write a Metasploit post module, but it&#8217;s not ready yet.</p>
+
+<h3>UPDATE</h3>
+
+<p>So it turns out that AuthenTec <a href="http://support.authentec.com/Downloads/Windows/ProtectorSuite.aspx">released</a> a patch for this on 9/18 - and we missed it (as did pretty much everybody else). We were alerted to the patch late on 10/10, and last night (10/11), we completed work on breaking it. We&#8217;ve updated the Github repository with the new code, it supports both the old versions and the new version they released on 9/18. They are now using DPAPI (among other things), so if you have the new version, you&#8217;ll need to run it in the context of LocalSystem so that you can access the correct encryption keys. This can be done quite easily with <code>psexec</code> - see the <a href="https://github.com/brandonlw/upek-ps-pass-decrypt#readme">README</a> for details.</p>
+
+<p>From a security perspective, the new version is somewhat more secure - but obviously, still easily attacked. They are now using a &#8216;seed&#8217; of 16 random bytes (which is stored in <code>ExData</code> and protected via DPAPI), which is then hashed with SHA1, the hash is then passed into their key derivation method to produce the 56 bit key that is used to encrypt the main data block. Within the main data block there is another DPAPI block where the password was previously stored - this was something of a surprise to us at first, as they had obfuscated the code to hide this part. This second DPAPI block contains the user&#8217;s password, and can be easily decrypted with the same method used to decrypt the block containing the &#8216;seed&#8217; data.</p>
+
+<p>Both of the DPAPI calls use the same entropy data - a block of 0x86 bytes, at the beginning is the word &#8216;Software&#8217; and a 0x01 at offset 0x2B and a 0x05 at 0x43 - and as said above, the DPAPI calls are made in the context of the LocalSystem user, and thus needs to be decrypted within that same context.</p>
+
+<p>The new <code>homepass.dll</code> file contains new anti-debugging code, as well as obfuscated code to complicate reverse engineering - fortunately, or unfortunately depending on your point of view - these new &#8216;protection&#8217; mechanisms are trivial to bypass. To avoid this becoming a cat &amp; mouse game, we won&#8217;t be releasing further updates to this code - but I think it&#8217;s safe to say that it&#8217;s fundamentally broken, and any fixes they release can be bypassed without excessive effort.</p>
+
+<p>I would not trust this software in a corporate environment.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -746,68 +829,6 @@ allspecial: 16 (0.0%)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/20/assange-ecuador-and-the-cyberarmy/">Assange, Ecuador, and the Cyberarmy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-20T03:15:00-04:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>ALERT: Julian Assange has requested political asylum and is under the protection of the Ecuadorian embassy in London<a href="http://t.co/bz4O9bjF" title="http://justice4assange.com/donate.html">justice4assange.com/donate.html</a></p>&mdash; WikiLeaks (@wikileaks) <a href="https://twitter.com/wikileaks/status/215152161502412801">June 19, 2012</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>The news that Julian Assange has <a href="http://www.cnn.com/2012/06/19/world/europe/ecuador-assange-asylum/index.html">asked Ecuador</a> for political asylum is flooding twitter as his supporters do their best to attract attention to his cause, and rally everyone they can to contact Ecuador&#8217;s embassy in London to urge them to grant Assange&#8217;s request. While I&#8217;ve watched the Assange case since before the first allegations came out of Sweden - that&#8217;s not my interest here, my interest is in what Ecuador <em>could</em> do if they wanted to.</p>
-
-<h3>Building a cyber-army</h3>
-
-<p>Ecuador has an interesting problem right now, they can offer to help Assange - which will certainly draw the ire of the US and its closest allies, or they can do nothing - and possibly lose a chance at building a new army. Let me explain&#8230;</p>
-
-<p>The governments of the US and other large powers are spending a lot of money to recruit and train what the press has dubbed &#8216;cyber-warriors&#8217; (i.e. hackers) to perform offensive operations. For smaller countries - throwing a huge budget at something like this just isn&#8217;t possible, but they do have another option. If a country was to offer safe harbor to those at risk of being prosecuted for hacking and related crimes in exchange for assisting their military - they could define a new form of super-power.</p>
-
-<p>The US and UK  both make a habit of throwing their best hackers in prison - if Ecuador helps Assange, it could set the stage for them to help others accused of similar crimes in the future. If they are smart about who they help - they could easily build an army of hackers, an army that could set a new standard for power and control of the technology that we are so dependant on.</p>
-
-<p>(Yes, I realize that Assange isn&#8217;t a hacker himself, but he has a loyal following of those that are - and the action would set the precedent making this possible.)</p>
-
-<p>Wether it will be Ecuador today, or some other small state later I don&#8217;t know - but I&#8217;m willing to bet money that it will happen.</p>
-
-<h3>The future of war</h3>
-
-<p>War has evolved in interesting ways - from arrows, to guns, then to bombs - but the next step is clear: the electron. War (and the power to make war, which I would argue is what&#8217;s really important) will be more about espionage and sabotage than it&#8217;s ever been before. Power grids, banks, communications, and industrial systems will all be targets - and the ability to manipulate these systems will define who the real super powers are.</p>
-
-<p>Imagine the impact to the economy should one of the stock exchanges be attacked, and fake trades generated to drive the price of stocks down. Would we see the <a href="https://en.wikipedia.org/wiki/Wall_Street_Crash_of_1929">crash of 1929</a> again?</p>
-
-<p>There are also far more subtle attacks that could be perpetrated against a countries ability to make war. Changing technical drawings for example, that could cause a breakdown in a supply chain rendering supplies and equipment useless (e.g. guns bored wrong, missiles wired improperly). Something as simple as changing the quantity or product code on a military order could prevent operations due to a lack of necessary supplies. It&#8217;s attacks like these that would likely target less secure, lower priority systems, that would cause the most chaos.</p>
-
-<p>It&#8217;ll be interesting to see what happens next, whatever it is - it&#8217;s sure to have repercussions for years to come.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -840,6 +861,10 @@ allspecial: 16 (0.0%)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -853,10 +878,6 @@ allspecial: 16 (0.0%)
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>

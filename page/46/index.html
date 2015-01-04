@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I like free stuff, I really like free stuff from Microsoft, as they normally have good free stuff, and this time, it&#8217;s a free copy of Visual &hellip;">
+  <meta name="description" content="Certifications are good things, or so I&#8217;ve always thought. Though the more work I do to help achieve ISO 17799 compliance, I&#8217;m beginning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/19/iso-17799/">ISO 17799</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-19T12:08:37-05:00" pubdate data-updated="true">Mar 19<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Certifications are good things, or so I&#8217;ve always thought. Though the more work I do to help achieve <a href="http://en.wikipedia.org/wiki/ISO_17799">ISO 17799</a>  compliance, I&#8217;m beginning to dislike them. This has been steadily adding work since I started this job in December, but now that we are only a couple weeks away from what should be our final audit, the work is coming a lot faster. We&#8217;re working to ensure everything we have in production meets the requirements of the standard, which has proved to be rather difficult.</p>
+
+<p>The primary issue has been in data access, eliminating all direct SQL queries, and replacing them with stored procedures. While this isn&#8217;t that difficult, when there are dozens of systems that need updates, it adds up surprisingly quick.</p>
+
+<p>Security is always a good thing, and when dealing with sensitive personal information of thousands of people, it&#8217;s very important. So I&#8217;m not complaining about the security required, but when you are trying to cleanup from years of more relaxed practices, it takes a surprising amount of work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -275,46 +315,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/03/11/wordpress-update/">WordPress Update</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-03-11T14:04:39-05:00" pubdate data-updated="true">Mar 11<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday the WordPress team <a href="http://wordpress.org/development/2006/03/security-202/">announced</a> a new version of WordPress, the blogging software that powers this site, that resolves a couple security issues. So me, being the security conscious  person that I am, decided I had to upgrade, that was a <em>two hour</em> adventure.</p>
-
-<p>Due to some of the unique aspects of my theme, I&#8217;ve had to modify some of the core WordPress files, that turned out to be a bad idea. I had to convert all of the PHP &amp; JS files to DOS format (after finding a Windows version of unix2dos) and then convert the diff file to DOS format, then the patching began. Getting the patch to apply to my modified files turned out to be an interesting experience, to say the least. Though after about 30 minutes of tweaking, the patch finally applied cleanly.</p>
-
-<p>All in all, it took a little more than two hours, but now I&#8217;m secure again. :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/47/">&larr; Older</a>
@@ -347,6 +347,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -360,10 +364,6 @@
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>

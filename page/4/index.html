@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="We all know, and well understand what this means when we see it in a browser: It means that the connection is encrypted, and that some degree of &hellip;">
+  <meta name="description" content="Update: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/">Security by Buzzword - Why I Don&#8217;t Support Ensafer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T12:28:00-04:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update</strong>: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I&#8217;ll post further updates.</p>
+
+<p><a href="http://www.ensafer.com/">Ensafer</a> is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user&#8217;s files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product (<a href="https://www.boxcryptor.com/">Boxcryptor</a>), so I support the concept, but what about Ensafer&#8217;s implementation - does it provide the level of security desired?</p>
+
+<p><strong>Where are the details?</strong></p>
+
+<p>If you look at Ensafer&#8217;s site, you&#8217;ll find precious few details on what they are doing - plenty of security buzzwords, but no specifics. Let&#8217;s take a look at the <a href="https://ensafer.zendesk.com/hc/en-us/articles/200797297-Industry-standard-RSA-and-AES-cryptography">one page with details</a>:</p>
+
+<blockquote><p>Ensafer believes in standards and we don&#8217;t use any custom encryption algorithms. Our encryption platform is built on:</p><p>2048-bit RSA keys<br/>256-bit AES encryption<br/>2048-bit SSL<br/>PKCS#12 key containers<br/>X.509 certificates</p></blockquote>
+
+
+<p>We see some algorithm names - but what about key derivation, or symmetric encryption modes? How about hashing algorithms? How and where is your password stored? There are so many implementation details that are critical for security, yet aren&#8217;t talked about at all.</p>
+
+<p>In December of 2012 I started asking about details, they pointed me back to the web site - when I pushed for more, I was told that they were working on a whitepaper to explain their implementation:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> We have not published all technical details, but we&#39;re working on a whitepaper which will be published later. ^LS</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/275616564085149698">December 3, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>More than a year later, I&#8217;m still waiting to see those details.</p>
+
+<p><strong>So have they conducted an audit?</strong></p>
+
+<p>Since they haven&#8217;t released details publicly, if they conducted an external audit, that would bring some trust. So, recently I asked, and this is what they had to say:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> Thanks for your important question. There hasn’t been an audit yet due to work in progress, but will be done this year.</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/447156694041509889">March 21, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>After the delay in getting useful details published, I&#8217;m not hopeful that we&#8217;ll see the results of an audit in the near future.</p>
+
+<p><strong>TLS &amp; Safe Downloads</strong></p>
+
+<p>I really wish that the lack of details was the only concern - but it&#8217;s not. The first thing I noticed is that their web site doesn&#8217;t force TLS, so I manually switched to HTTPS, unfortunately the result wasn&#8217;t what I was hoping for:</p>
+
+<p><img class="center" src="/files/Ensafer_SSL_Error.png"></p>
+
+<p>Well, that&#8217;s not encouraging. Let&#8217;s take a look at the download link:</p>
+
+<pre><code>http://get.ensafer.com/mac/prod/Ensafer-1.0.8.dmg
+</code></pre>
+
+<p>When you try the same link over HTTPS, it&#8217;s even worse:</p>
+
+<p><img class="center" src="/files/ensafer_dl_no_tls.png"></p>
+
+<p>For a security product, I&#8217;d expect the download to be over HTTPS to prevent an attacker from redirecting a victim to a malicious version. This isn&#8217;t the kind of mistake I&#8217;d expect from people building advanced security tools. When you see issues like this, it&#8217;s common to see more problems, so this may just be the tip of the iceberg.</p>
+
+<p><strong>Is it trustworthy?</strong></p>
+
+<p>I would like to say that it&#8217;s safe to use, and that it lives up to the promises made - but they haven&#8217;t made enough information available for people to make an informed decision. If you add the lack of information with such basic mistakes as not making the download available over HTTPS, it doesn&#8217;t instill much confidence. Companies focused on security should know better.</p>
+
+<p>When you make decisions about what tools you use, you have to look at the full picture - and Ensafer is a great example of that. They&#8217;ve focused first on a pretty website, adding features - but not assuring trust. At this point, the only evidence of their security is the use of buzzwords.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -558,97 +646,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/09/07/crypto-the-nsa-and-broken-trust/">Crypto, the NSA, and Broken Trust</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-07T13:04:00-04:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&#8217;s so elegantly simple, and yet massively complex. There is one very unusual property of crypto though - it&#8217;s not about math or modes, it&#8217;s about trust.</p>
-
-<p>Cryptography, especially as used today, has the most wonderful dichotomy of trust; on one hand crypto, by it&#8217;s very nature, is used in situations lacking trust. On the other hand, to use crypto - you have to trust <em>it</em>.</p>
-
-<p><strong>But what is <em>it</em>?</strong></p>
-
-<p>This is where it gets interesting - let&#8217;s say you download <a href="https://gpgtools.org/">GPGTools</a>, what is the chain of trust?</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Has anyone verified that the GPGtools binaries match the source code in the git repo? Im suspicious of any binary distro encryption software</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376323020945514497">September 7, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>Here are some of the assumptions you make:</p>
-
-<ul>
-<li>The installer hasn&#8217;t been tampered with by your ISP, their upstream providers, GPGTools&#8217; hosting company - all of this is before you even get to the people that publish the software! (And <a href="http://projects.wsj.com/surveillance-catalog/documents/267850-merged-finfly-isp/">we know</a> this is being done.)</li>
-<li>The computer that built the binaries was free of malware, or other backdoors.</li>
-<li>The source code hadn&#8217;t been modified, without the knowledge of the developers.</li>
-<li>The developers haven&#8217;t modified the code to add backdoors or otherwise weaken it.</li>
-<li>The compiler, and other libraries are free of backdoors or other modifications that would alter the resulting binaries.</li>
-</ul>
-
-
-<p>I could keep going, there&#8217;s more - but this gives an idea of how many things you have to trust, not just for every application - but every update of every application.</p>
-
-<p>You could compile everything yourself of course (if its&#8217; open source that is) - but that only eliminates some of these issues. You still have to trust the code, you still have to trust the developers.</p>
-
-<p>Well, you could audit the code. If you know what you&#8217;re doing - in a few weeks you might actually get to the point of installing it. Which of course there will be a new update by then.</p>
-
-<p><strong>Can&#8217;t we fix this?</strong></p>
-
-<p>Some of it, yes - maybe. The Tor project is working on <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">deterministic builds</a>, which would allow others to verify that the released binary was built from a specific revision of the source code. This is really quite impressive, and something I truly applaud them for.</p>
-
-<p>But, that doesn&#8217;t lessen the trust you place in the developers and the code - is it actually secure? Are the even competent to be doing this work? Are there bugs in the PRNG or key negotiation that could render the system pointless? There&#8217;s still a level of trust required.</p>
-
-<p><strong>What about the standards?</strong></p>
-
-<p>We know that the government has sought to backdoor or weaken systems in the past - from things like the <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a>; enforcing illogical <a href="https://en.wikipedia.org/wiki/Export_of_cryptography_in_the_United_States">export restrictions</a>, and trying to enact laws that <a href="https://www.eff.org/deeplinks/2013/05/caleatwo">mandate backdoors</a> (CALEA II). Now, we know that after losing the Crypto Wars of the past, they have been clandestinely doing the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">same things</a>.</p>
-
-<p>The single biggest things that you have to trust are the protocols and algorithms - they are the most complicated, and only a very small number of people are qualified to audit them. If the protocol has deliberate flaws, or there is a backdoor in the algorithm - then your efforts to encrypt may be for nothing.</p>
-
-<p><strong>It&#8217;s all about trust</strong></p>
-
-<p>I&#8217;m a big fan of taking the &#8220;trust no one&#8221; position (and myself least of all), but in the world of cryptography - it&#8217;s not that easy. Every step of the way you have to trust something.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/gentmatt">@gentmatt</a> way to miss the point. &quot;Trust, but verify&quot;. The time for verification has come.</p>&mdash; the grugq  (@thegrugq) <a href="https://twitter.com/thegrugq/statuses/376328406419243008">September 7, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>Some say, &#8220;trust but verify&#8221; - and I agree, but full verification is a dream that will never come true. There aren&#8217;t enough qualified eyes, and there is far too much code involved.</p>
-
-<p>With so many dependencies, so many places something malicious could be injected - it&#8217;s almost overwhelming to think about. In my eyes though, the first, and most important step, is helping people to understand the chain of trust. If you understand what you are trusting, you can ask better questions.</p>
-
-<p>There is no real answer here - this is simply how it is. If you use cryptography (and you aren&#8217;t a true cryptographer), then you&#8217;re taking a leap of faith. If you didn&#8217;t compile all of the tools you use - it&#8217;s an even bigger leap.</p>
-
-<p><em>[N.B. This article was planned before the <a href="http://www.theguardian.com/world/2013/sep/05/nsa-gchq-encryption-codes-security">Bullrun</a> story broke; but in light of these recent events, I&#8217;ve updated and published this ahead of schedule.]</em></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -681,6 +678,10 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -694,10 +695,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>

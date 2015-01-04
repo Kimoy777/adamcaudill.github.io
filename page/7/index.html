@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Update: I&#8217;ve just spoken to AMI, and received some very important information; so here are the key points and clarifications: To clarify, the &hellip;">
+  <meta name="description" content="Last night I received an email from Linode about a possible breach and mandatory password reset that reminded me of another recent email, in some &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/13/linode-another-breach-notification-gone-wrong/">Linode: Another Breach Notification Gone Wrong</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-13T10:04:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last night I received an email from Linode about a possible breach and mandatory password reset that reminded me of another recent email, in some disturbing ways.</p>
+
+<blockquote><p>Dear Linode customer,</p><p>Linode administrators have discovered and blocked suspicious activity on the Linode network.</p></blockquote>
+
+
+<p>Not too long ago, I received a similar email from Evernote - not just in it&#8217;s text, but in the errors made.</p>
+
+<blockquote><p>Dear Evernote user, </p><p>Evernote&#8217;s Operations & Security team has discovered and blocked suspicious activity on the Evernote network that appears to have been a coordinated attempt to access secure areas of the Evernote Service.</p></blockquote>
+
+
+<p>When I received the email from Evernote, I quickly noticed that the links were to a different site - was it a thinly veiled phishing attempt? With all the links going to <code>links.evernote.mkt5371.com</code> it took a few minutes to work out that the email was actually legitimate. Instead of being able to quickly reset passwords, users were forced to try to figure out if the email was real or not.</p>
+
+<p>When you are sending out a breach notification, it&#8217;s <em>critical</em> that users are able to verify, as quickly as possible, that an email is legitimate, and the the call to action really is necessary. Linode, unfortunately, made a similar mistake.</p>
+
+<p><img class="center" src="/files/Screenshot_4_13_13_10_21_AM.png"></p>
+
+<p>The first thing that jumps out is that it&#8217;s from <code>e2ma.net</code> - not Linode directly, next is that the first link in the email points to <code>e2.ma/message/...</code>. These are immediate red flags, the focus instantly switches from taking necessary action to secure a user&#8217;s account to trying to figure out if they are being attacked. From comments on their <a href="http://blog.linode.com/2013/04/12/security-notice-linode-manager-password-reset/">blog post</a>, I&#8217;m not the only one that was disturbed by how the email was sent.</p>
+
+<p>Thankfully, they didn&#8217;t include a link to the password reset page, and they even told users not to click reset links in unsolicited emails - so it&#8217;s not all bad. Users shouldn&#8217;t be spending time trying to figure out if a notice is real instead of taking steps to secure their accounts. In situations where there may be a significant security issue, service providers should take every effort to minimize confusion - provide clear information, and make the source as clear as possible.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -391,89 +445,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/10/07/upek-windows-password-decryption/">UPEK Windows Password Decryption</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-07T14:49:00-04:00" pubdate data-updated="true">Oct 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On August 28th ElcomSoft <a href="http://blog.crackpassword.com/2012/08/upek-fingerprint-readers-a-huge-security-hole/">announced</a> that they had determined a method to extract Windows passwords from the registry for users of UPEK&#8217;s fingerprint readers and Protector Suite software (UPEK is now owned by AuthenTec, which is now owned by Apple). What they didn&#8217;t announce was the technical details of how they did it. Myself and <a href="http://brandonw.net/">Brandon Wilson</a> have been working to recreate their research - and we have.</p>
-
-<p>We have not been in contact with ElcomSoft, so this is an independent re-discovery of this vulnerability. ElcomSoft has committed to not release details, which I understand - but given how likely it is that others will determine this technique, I believe that this information should be available to pen-testers and auditors so that these insecure credentials can be identified.</p>
-
-<h3>The Details</h3>
-
-<p>ElcomSoft blasted the security of UPEK&#8217;s product, saying:</p>
-
-<blockquote><p>we found that your Windows account passwords are stored in Windows registry almost in plain text, barely scrambled but not encrypted</p></blockquote>
-
-
-<p></p>
-
-<p>This isn&#8217;t quite accurate - but certainly close enough. The data is stored in the following location (varies by version):</p>
-
-<p><code>HKEY_LOCAL_MACHINE\SOFTWARE\Virtual Token\Passport\4.0\Passport\&lt;user&gt;\ExData</code></p>
-
-<p>The first 24 bytes are header and size information, after the encrypted data there is a 4 byte number that indicates the number of bytes in the next section, the following bytes are used in the IV. The encryption key is &#8216;generated&#8217; using a PBKDF2-like function that uses MD5 hashing, but unfortunately when storing data in the registry they aren&#8217;t using a password - so the outcome is based purely on an MD5 hash that they are using as a &#8216;seed&#8217; value. This means that the key used is always the same.</p>
-
-<p>Better: the key is only 56 bits.</p>
-
-<h3>AES-56</h3>
-
-<p>On the AuthenTec&#8217;s website they mention using 56-bit AES (due to the old export restrictions) - this confused me for quite some time, not only does AES not support 56-bit (or anything else less than 128 bits), from looking at the algorithm trying to make it support a key size that isn&#8217;t a multiple of 32 bits would be quite challenging. So how did they do it? They cheated.</p>
-
-<p>They are actually using AES-256, and padding both the 56-bit key and IV with nulls. In other words, they are taking a very strong crypto and stripping it of its value.</p>
-
-<h3>The Data</h3>
-
-<p>Besides the Windows password, the data also includes the domain and login (all in Unicode), along with other various bits that&#8217;s less interesting from a pen-testing perspective. Looking at the raw data, you can identify the password from the <code>P1</code> header, <code>0x11</code> denotes the login, and <code>0x12</code> indicates the domain.</p>
-
-<p>The biometric data may be of some interest, but not to me.</p>
-
-<h3>Code</h3>
-
-<p>We&#8217;ve <a href="https://github.com/brandonlw/upek-ps-pass-decrypt">posted</a> a proof-of-concept tool to Github, it&#8217;s written in C#, and thus requires the .NET 4.0 framework be installed (<a href="http://adamcaudill.com/files/FingerprintEncryption.2012.10.16.1847.zip">download here</a>). I also plan to write a Metasploit post module, but it&#8217;s not ready yet.</p>
-
-<h3>UPDATE</h3>
-
-<p>So it turns out that AuthenTec <a href="http://support.authentec.com/Downloads/Windows/ProtectorSuite.aspx">released</a> a patch for this on 9/18 - and we missed it (as did pretty much everybody else). We were alerted to the patch late on 10/10, and last night (10/11), we completed work on breaking it. We&#8217;ve updated the Github repository with the new code, it supports both the old versions and the new version they released on 9/18. They are now using DPAPI (among other things), so if you have the new version, you&#8217;ll need to run it in the context of LocalSystem so that you can access the correct encryption keys. This can be done quite easily with <code>psexec</code> - see the <a href="https://github.com/brandonlw/upek-ps-pass-decrypt#readme">README</a> for details.</p>
-
-<p>From a security perspective, the new version is somewhat more secure - but obviously, still easily attacked. They are now using a &#8216;seed&#8217; of 16 random bytes (which is stored in <code>ExData</code> and protected via DPAPI), which is then hashed with SHA1, the hash is then passed into their key derivation method to produce the 56 bit key that is used to encrypt the main data block. Within the main data block there is another DPAPI block where the password was previously stored - this was something of a surprise to us at first, as they had obfuscated the code to hide this part. This second DPAPI block contains the user&#8217;s password, and can be easily decrypted with the same method used to decrypt the block containing the &#8216;seed&#8217; data.</p>
-
-<p>Both of the DPAPI calls use the same entropy data - a block of 0x86 bytes, at the beginning is the word &#8216;Software&#8217; and a 0x01 at offset 0x2B and a 0x05 at 0x43 - and as said above, the DPAPI calls are made in the context of the LocalSystem user, and thus needs to be decrypted within that same context.</p>
-
-<p>The new <code>homepass.dll</code> file contains new anti-debugging code, as well as obfuscated code to complicate reverse engineering - fortunately, or unfortunately depending on your point of view - these new &#8216;protection&#8217; mechanisms are trivial to bypass. To avoid this becoming a cat &amp; mouse game, we won&#8217;t be releasing further updates to this code - but I think it&#8217;s safe to say that it&#8217;s fundamentally broken, and any fixes they release can be bypassed without excessive effort.</p>
-
-<p>I would not trust this software in a corporate environment.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -506,6 +477,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -519,10 +494,6 @@
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>

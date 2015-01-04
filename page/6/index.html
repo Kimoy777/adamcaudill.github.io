@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="It&#8217;s been two weeks since news broke about the NSA collecting massive amounts of data from Verizon; and likely everybody else. There&#8217;s &hellip;">
+  <meta name="description" content="Everybody&#8217;s favorite whipping boy, Cryptocat is back in the news today - and it&#8217;s bad. Really bad. Steve Thomas has found a major flaw in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/07/04/do-one-thing-right/">Do One Thing Right&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-04T10:45:00-04:00" pubdate data-updated="true">Jul 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Everybody&#8217;s favorite whipping boy, <a href="https://crypto.cat/">Cryptocat</a> is back in the news today - and it&#8217;s <em>bad</em>. Really bad. Steve Thomas has <a href="http://tobtu.com/decryptocat.php">found</a> a major flaw in the way Cryptocat generated ECC keys. Due to this flaw, the keyspace was only <code>2^54.15</code>, well below a secure level. Add a <a href="http://en.wikipedia.org/wiki/Meet-in-the-middle_attack">meet in the middle</a> attack, and this is further reduced to <code>2^27.08</code> - which based on my rough estimates, is just slightly more secure than a paper bag.</p>
+
+<p>The end result is of course, that anyone can crack the keys in a frighteningly short amount of time.</p>
+
+<p>This flaw basically means that any group messages sent for nearly a year (a figure <a href="https://blog.crypto.cat/2013/07/new-critical-vulnerability-in-cryptocat-details/">disputed</a> by the project) are wide open to attack. Personally, I would operate under the assumption that any message sent during that time has been read (or will be) - hopefully by somebody not interested in you. Probably hasn&#8217;t, but there&#8217;s no way to know.</p>
+
+<p><strong>If you&#8217;re going to do one thing, do it right.</strong></p>
+
+<p>Cryptocat has one mission, to provide secure communication - which is to say, to encrypt data. The most vital step in any crypto system is the key generation; if you get it wrong, nothing else matters. That code should be well reviewed and understood by multiple people. Cryptocat got this wrong.</p>
+
+<p>Steve does a great job explaining the issue here; but the short version is that the person that wrote the code - and anyone that&#8217;s reviewed it since then, didn&#8217;t understand what they were doing. That simple.</p>
+
+<p>When you release code like this to the public, and encourage people to use it - especially those that are at higher risk (i.e. activists), you take on a certain responsibility for ensuring that at least the core functionality is doing what&#8217;s expected. In this case, the team behind Cryptocat failed. For a year, the entire user base was at risk.</p>
+
+<p>I recently mentioned Cryptocat in my <a href="http://adamcaudill.com/2013/06/19/opsec-the-nsa-and-you/">OPSEC</a> article:</p>
+
+<blockquote><p>Last year was painful for Cryptocat - the last audit may have been clean, but who knows what else may be found.</p></blockquote>
+
+
+<p>When I wrote that, I wasn&#8217;t expecting it to be a bug that rendered the group chat encryption nearly pointless. While in <a href="https://blog.crypto.cat/2013/07/new-critical-vulnerability-in-cryptocat-details/">their</a> blog post they seem to downplay the issue, I won&#8217;t - for a year, group chat was <em>completely broken</em>.</p>
+
+<p><strong>Crypto Is Hard</strong></p>
+
+<p>There&#8217;s no doubt that crypto is hard, everybody agrees on that. Or said more accurately, doing it right is hard.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Having spent the past month doing it, let me tell you: implementing cryptography is *hard*. Even for &#39;experts&#39;.</p>&mdash; Matthew Green (@matthew_d_green) <a href="https://twitter.com/matthew_d_green/statuses/352815917924757505">July 4, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Writing key generation code scares me, I&#8217;m paranoid that I&#8217;ll get it wrong. So I take extra time to review it in detail. Then have other people review it in detail. I don&#8217;t release it to a &#8216;production&#8217; environment until I&#8217;m sure as I can be that it&#8217;s right. Can mistakes still make it in that way? Sure - but the odds are a lot lower.</p>
+
+<p>This kind of code needs to be reviewed by those competent in crypto systems, and built to a specification that was designed by a real cryptographer. It can be expensive and time consuming, but that&#8217;s what it takes to keep the promises an application like Cryptocat makes.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>The problem: cryptographers aren&#39;t developers &amp; developers aren&#39;t cryptographers. The right solution is probably some Avengers-style mashup.</p>&mdash; Matthew Green (@matthew_d_green) <a href="https://twitter.com/matthew_d_green/statuses/352816626170728450">July 4, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p><strong>Just how bad could it be?</strong></p>
+
+<p>Based on recent disclosures, we know that the NSA has decided to store encrypted communication for later analysis, and I think it&#8217;s safe to say that other countries follow suit. So it&#8217;s likely there are stored Cryptocat communications floating around in various spy agency archives. These agencies may have already found this issue and used it to view messages, or now that it&#8217;s public - they can do so easily.</p>
+
+<p>This is where an issue like this can be so devastating, if those encrypted messages have been saved anywhere - any users engaged in activity that their local government doesn&#8217;t care for are now at risk.</p>
+
+<p>Personally, I wouldn&#8217;t trust Cryptocat until it&#8217;s had a true code audit (the pen-test they had last year clearly doesn&#8217;t count), and the crypto systems reviewed by a true cryptographer. If a mistake like this was allowed in, and overlooked for so long, I&#8217;ve no doubt that other weaknesses exist.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -398,60 +477,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/13/linode-another-breach-notification-gone-wrong/">Linode: Another Breach Notification Gone Wrong</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-13T10:04:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last night I received an email from Linode about a possible breach and mandatory password reset that reminded me of another recent email, in some disturbing ways.</p>
-
-<blockquote><p>Dear Linode customer,</p><p>Linode administrators have discovered and blocked suspicious activity on the Linode network.</p></blockquote>
-
-
-<p>Not too long ago, I received a similar email from Evernote - not just in it&#8217;s text, but in the errors made.</p>
-
-<blockquote><p>Dear Evernote user, </p><p>Evernote&#8217;s Operations & Security team has discovered and blocked suspicious activity on the Evernote network that appears to have been a coordinated attempt to access secure areas of the Evernote Service.</p></blockquote>
-
-
-<p>When I received the email from Evernote, I quickly noticed that the links were to a different site - was it a thinly veiled phishing attempt? With all the links going to <code>links.evernote.mkt5371.com</code> it took a few minutes to work out that the email was actually legitimate. Instead of being able to quickly reset passwords, users were forced to try to figure out if the email was real or not.</p>
-
-<p>When you are sending out a breach notification, it&#8217;s <em>critical</em> that users are able to verify, as quickly as possible, that an email is legitimate, and the the call to action really is necessary. Linode, unfortunately, made a similar mistake.</p>
-
-<p><img class="center" src="/files/Screenshot_4_13_13_10_21_AM.png"></p>
-
-<p>The first thing that jumps out is that it&#8217;s from <code>e2ma.net</code> - not Linode directly, next is that the first link in the email points to <code>e2.ma/message/...</code>. These are immediate red flags, the focus instantly switches from taking necessary action to secure a user&#8217;s account to trying to figure out if they are being attacked. From comments on their <a href="http://blog.linode.com/2013/04/12/security-notice-linode-manager-password-reset/">blog post</a>, I&#8217;m not the only one that was disturbed by how the email was sent.</p>
-
-<p>Thankfully, they didn&#8217;t include a link to the password reset page, and they even told users not to click reset links in unsolicited emails - so it&#8217;s not all bad. Users shouldn&#8217;t be spending time trying to figure out if a notice is real instead of taking steps to secure their accounts. In situations where there may be a significant security issue, service providers should take every effort to minimize confusion - provide clear information, and make the source as clear as possible.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -484,6 +509,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -497,10 +526,6 @@
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>

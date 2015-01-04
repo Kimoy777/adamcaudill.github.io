@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="When Intel and various industry partners started talking about &#8220;ultra-books&#8221; as competition against Apple and tablets, I was more than a &hellip;">
+  <meta name="description" content="ZeroBin (code) is a new and interesting piece of software to compete with services such PasteBin - largely in response to PasteBin&#8217;s new &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/04/29/absolute-deniability/">Absolute Deniability</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-29T17:38:00-04:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://sebsauvage.net/wiki/doku.php?id=php:zerobin">ZeroBin</a> (<a href="https://github.com/sebsauvage/ZeroBin">code</a>) is a new and interesting piece of software to compete with services such PasteBin - largely in response to PasteBin&#8217;s new aggressiveness in <a href="http://www.bbc.co.uk/news/technology-17544311">removing objectionable posts</a>. For PasteBin, it&#8217;s easy to see why their policy changed - currently they can&#8217;t deny knowledge of what they are hosting, it&#8217;s plain-text and easily scanned (look <a href="http://www.leakedin.com/">at this</a> if you don&#8217;t believe me). ZeroBin on the other hand has taken a very different approach - to not just have <a href="https://en.wikipedia.org/wiki/Plausible_deniability">plausible deniability</a>, but absolute deniability.</p>
+
+<p>The key to this is that ZeroBin stores pastes and discussions encrypted - and the encryption is performed in the browser, with a browser generated key. This means that the people running the ZeroBin software have no knowledge of what they are storing.</p>
+
+<p>So, if they are asked to remove content, all they can do is remove specific named items - it would be impossible to remove all items that contain specific material (where if PasteBin was to be ordered to remove all items containing credit card numbers, it&#8217;s a realistic possibility). As long as knowledge of the key remains limited - the paste will likely live on, no matter the content.</p>
+
+<p>To make it even better, there are no accounts - so there&#8217;s no way to see what a specific user is posting. With a properly configured server, this could be completely anonymous. With no knowledge of the content, no knowledge of users - it&#8217;s the ultimate in deniability.</p>
+
+<p>I really expect that this technique will become far more common in the future. It allows a much higher level of deniability for hosts and service provider, and greatly restricts the ability of investigators to research the activities of a user or group.</p>
+
+<p>Take a closer look at this, I expect you&#8217;ll see more of this.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -452,64 +498,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/02/29/ccsrch-v1-0-7/">CCSRCH v1.0.7</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-29T23:47:17-05:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve released a new version of <a href="https://github.com/adamcaudill/ccsrch">CCSRCH</a>, the open-source PAN (a.k.a credit card number) search tool to help companies maintain PCI compliance. This is a fairly minor release, primarily focusing on reducing false positives. The scanner has been updated to exclude the following:</p>
-
-<ul>
-<li><p>Results made up of the same two digits repeating (i.e. 5454545454545454).</p></li>
-<li><p>Results that have seven or more of the same digits repeating (i.e. 5555555555554444).</p></li>
-</ul>
-
-
-<p>I also fixed a bug that I introduced in v1.0.6 that prevented it from compiling on certain *nix systems; while I was in there I also fixed several instances of this building warning on newer Linux distros:</p>
-
-<pre><code>warning: call to __builtin___strncat_chk might overflow destination buffer
- [enabled by default]
-</code></pre>
-
-<p>I also took the time to write-up really simple build instructions for *nix users:</p>
-
-<pre><code>$ wget -O ccsrch.tar.gz https://github.com/adamcaudill/ccsrch/tarball/master
-$ tar -xvzf ccsrch.tar.gz
-$ cd adamcaudill-ccsrch-&lt;rev&gt;/
-$ make all
-</code></pre>
-
-<p>This will probably be the last release for now unless a bug turns up; to improve results further I&#8217;m working on a new project (<a href="https://github.com/adamcaudill/ccsrch-score">ccsrch-score</a>), hopefully it&#8217;ll be released soon.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -542,6 +530,10 @@ $ make all
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
@@ -555,10 +547,6 @@ $ make all
     
       <li class="post">
         <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/10/19/on-nsa-proof-security/">On NSA-Proof Security</a>
       </li>
     
   </ul>
