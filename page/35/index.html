@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Ever wondered how they do things inside of Microsoft? As a developer that makes extensive uses of Microsoft technologies and tools, I&#8217;m always &hellip;">
+  <meta name="description" content="I&#8217;ve been both a subscriber and fan of Valleyschwag since it was launched, that is, until yesterday. And not by my choice mind you, they &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/10/05/not-not-a-good-idea/">Not a Good Idea&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-10-05T20:51:48-04:00" pubdate data-updated="true">Oct 5<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been both a subscriber and fan of <a href="http://valleyschwag.com/">Valleyschwag</a> since it was launched, that is, until yesterday. And not by my choice mind you, they <a href="http://valleyschwag.com/chronicles/2006/10/03/changes-are-afoot-at-valleyschwag/">canceled</a> <em>everybodies</em> subscription. When the second issue was <a href="http://adamcaudill.com/2006/05/26/the-schwag-has-shipped/">shipped</a> in late May, they reported having over 1,500 members each paying $15 a month for the service. I can only guess what the subscriber count would look like now, after having a few months to grow.</p>
+
+<p>They&#8217;ve thrown that all away now, sending the following notice to all the subscribers:</p>
+
+<blockquote><p>_&#8221;We&#8217;d like you to be one of the first to know that we will soon unveil the Valleyschwag General Store, where you will be able to purchase future issues of our famous schwag bags. And by popular demand, we will be offering some of our most requested schwag items for sale. _</p></blockquote>
+
+<p>_This store replaces our subscription service, giving you more control over the issues and items you&#8217;d like to receive. We will notify you by email when a new issue of Valleyschwag is available, giving you the first opportunity to place an order at the General Store. _</p>
+
+<p><em>Since a subscription is no longer required <strong>we will automatically cancel your Paypal subscription</strong> if you haven&#8217;t already done so. To accomodate our members around the globe, the store will continue to accept Paypal as well as credit cards for all purchases.&#8221;</em></p>
+
+<p>That&#8217;s right, they are now hoping that by sending out reminders and canceling the automatic payments, they will be able to stay afloat. They had guaranteed money in the bank every month, now, they&#8217;ll have to hope that people will remember to take time out of their busy day to buy the next issue. I don&#8217;t think they&#8217;ll see near the numbers they could with the subscription model.</p>
+
+<p>One of the things I like about any subscription is that you don&#8217;t have to think about it, it <em>just works</em>. Once a month or so I get a package, no forms to fill out, no remembering to check and see if the next issue is ready, it&#8217;s <em>just there</em>. I think a lot of people feel this way, and I think this will be rather painful for the ValleySchwag team, and endanger the future of the business itself.</p>
+
+<p>Valleyschwag was a really interesting concept, but I have to believe it grew too large, too quickly for the model to work. I wish the guys at <a href="http://rubyredlabs.com/">RubyRed</a> the best, but I believe the end is coming for the schwag express.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -261,65 +311,6 @@ End Sub
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/09/17/running-regedit-as-system/">Running RegEdit as SYSTEM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-09-17T19:59:49-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While facing an interesting research challenge, digging into the inner working of Windows, I realized that I needed to change a registry value. That&#8217;s simple enough, I fire up RegEdit, make the change, then politely as RegEdit knows how, it told me that I <em>couldn&#8217;t change the value</em>! Being one that hates when <em>my</em> computer tells <em>me</em> I can&#8217;t do something, I had to find another option.</p>
-
-<p>So after some research, I found my answer: <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/sc.mspx?mfr=true">sc</a>. This is a great little utility (included with Windows), and made the task of running an application as SYSTEM*  much easier. At this point some of you may be wondering why I didn&#8217;t just use <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/runas.mspx?mfr=true">RunAs</a> instead, as it&#8217;s designed to allow execution as another user. Well, from all that I&#8217;ve found, there is no way to get RunAs to spawn a process as SYSTEM, one of the downsides of SYSTEM not being a true user.</p>
-
-<p>Another option that I found (somewhat) attractive initially is <a href="http://www.codeproject.com/system/RunUser.asp">RunAsEx</a>, an open source, GUI based version of RunAs. This could be useful, but I found it to be more hassle than it was worth. Still might be useful for somethings, but with all the bugs I found in it, I knew there was a better way.</p>
-
-<p>Now, back to the solution I chose: Using sc to create a service that will execute the application I&#8217;m after. This works because by default all services execute under the SYSTEM user context, so all we have to do is create a service to call the application we need. Surprisingly simple, and it works quite well.</p>
-
-<p>Creating the service looks something like this:</p>
-
-<p><code>SC CREATE AcDebugSvc binPath= "regedit.exe" type= own type= interact</code> <em>**</em></p>
-
-<p>This creates the service, so that now all you have to do is start the service (<code>SC START AcDebugSvc</code> ***) and you&#8217;ll see your copy of RegEdit. If you check in Task Manager, you&#8217;ll be able to confirm that it is actually running as SYSTEM. This is an extremely powerful debugging tool, as it allows you to instantly execute any application as the most powerful user that Windows offers.</p>
-
-<p>Once you are done with your work, just delete the service (<code>SC DELETE AcDebugSvc</code>) and call it a day, that simple. This can also easily be scripted if you tire of typing the commands so often, and it can also be used with most applications. Using this for the Command Prompt (<code>binPath= "cmd.exe /K start"</code>) and for Task Manager (<code>binPath= "taskmgr.exe"</code>) both strike me as being quite useful.</p>
-
-<ul>
-<li><strong>WARNING</strong>: As I hope most of you know, System is a very powerful account, it&#8217;s almost limitless in what it can do. If you aren&#8217;t careful while working under this user context; you may end up with a rather expensive paperweight instead of a computer. You have been warned.</li>
-</ul>
-
-
-<p>** Note: As odd as it is, the spaces after the equals and before the value of the parameters is quite important, the call will fail if you omit them.</p>
-
-<p>*** Note: You&#8217;ll get an error message (&#8221;<code>The service did not respond to the start or control request in a timely fashion.</code>&#8221;) when you call this, it&#8217;s nothing to worry about. The reason that it occurs is that to respond to the message it receives the target application must be designed to operate as a service. Since we are using this for other purposes we, we don&#8217;t really care.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/36/">&larr; Older</a>
@@ -352,6 +343,10 @@ End Sub
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -365,10 +360,6 @@ End Sub
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>

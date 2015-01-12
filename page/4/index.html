@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Update: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they &hellip;">
+  <meta name="description" content="phpMyID is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/19/phpmyid-fixing-abandoned-oss-software/">phpMyID: Fixing Abandoned OSS Software</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-19T12:43:00-04:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://siege.org/phpmyid">phpMyID</a> is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in 2008. Despite this, there&#8217;s still quite a few people that use it, because it&#8217;s the easiest single-user OpenID option available.</p>
+
+<p>Unfortunately, the author didn&#8217;t follow best practices when building the software, and as a result multiple security flaws were introduced. In 2008, a XSS was identified and never fixed (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2008-4730">CVE-2008-4730</a>), in the years since then it seems the software has been below the radar. While conducting a pentest I discovered a previously undocumented XSS (CVE-2014-2890) - which left me with a dilemma - what to do about it?</p>
+
+<p>Looking at the code, I found a couple more potential XSS vulnerabilities - so the application clearly needed help, and if the author won&#8217;t do it, somebody should. Ethically, it seemed wrong to disclose the issue but leave users to fend for themselves; full disclosure is normally used to push a vendor into acting - but in this case it&#8217;s assured that there won&#8217;t be a vendor response.</p>
+
+<p><strong>Fixing The Code</strong></p>
+
+<p>One good thing is if a OSS project is abandoned, anyone can prepare patches to fix the issues. So, <a href="https://github.com/adamcaudill/phpMyID">that&#8217;s what I did</a>. I&#8217;ve committed fixes for both CVE-2008-4730 and CVE-2014-2890, as well as a couple potential issues. In both cases, the fix was easy:</p>
+
+<p>CVE-2008-4730:</p>
+
+<pre><code>@@ -439,7 +439,7 @@ function checkid ( $wait ) {
+    if ($trust_root != $return_to) {
+        // the urls are not the same, be sure return decends from trust
+        if (! url_descends($return_to, $trust_root))
+ -          error_500('Invalid trust_root: "' . $trust_root . '"');
+ +          error_500('Invalid trust_root: "' . htmlentities($trust_root, ENT_QUOTES) . '"');
+
+    }
+</code></pre>
+
+<p>CVE-2014-2890:</p>
+
+<pre><code>@@ -568,7 +568,7 @@ function checkid_setup_mode () {
+   */
+  function error_mode () {
+    isset($_REQUEST['openid_error']) 
+ -      ? wrap_html($_REQUEST['openid_error'])
+ +      ? wrap_html(htmlentities($_REQUEST['openid_error'], ENT_QUOTES))
+        : error_500();
+  }
+</code></pre>
+
+<p>I&#8217;ve only given the code a quick once-over, so there may be other issues - if I find time for a more thorough review I may commit additional fixes.</p>
+
+<p><strong>Status of phpMyID</strong></p>
+
+<p>I&#8217;m not taking over the maintenance of the project, I simply don&#8217;t have time to do the cleanup needed to bring it up to reasonable standards. I&#8217;d love to see somebody with a little time to invest cleanup the code and add more defensive measures. It needs some help, that&#8217;s clear.</p>
+
+<p>One of the things I&#8217;d love to see fixed is the way the user&#8217;s password is stored - it&#8217;s currently stored in the <code>MyID.config.php</code> file as a MD5 hash - making brute-forcing entirely too easy. Hopefully <a href="http://tools.ietf.org/html/draft-ietf-httpauth-digest-06">this</a> Internet Draft will be adopted soon, obsoleting <a href="http://tools.ietf.org/html/rfc2617">RFC 2617</a>, which will be an easy win to improve the security of the password when in transit. There are many places where the code can be improved by somebody with a little time.</p>
+
+<p>If you are using phpMyID today, replace the <code>MyID.php</code> file with the one <a href="https://raw.githubusercontent.com/adamcaudill/phpMyID/master/MyID.php">here</a> (it also fixes compatibility with PHP 5.4).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -510,140 +588,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/09/08/worried-about-the-nsa-try-aes-512/">Worried About the NSA? Try AES-512!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T13:07:00-04:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>[…or, The Cost of Wild Speculation]</em></p>
-
-<p>&#8220;We need to boost our security - I think the NSA has broken everything we use. AES-256 is too weak, I don&#8217;t trust it. Find a way to implement AES-512.&#8221;</p>
-
-<p>Double-AES-256! It&#8217;d be easy, and double encrypting has <a href="https://en.wikipedia.org/wiki/Meet-in-the-middle_attack">never bitten us</a> before. So, let&#8217;s write some code!</p>
-
-<figure class='code'><figcaption><span>AES-512 / Double-AES-256 - aes512.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">e</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">))</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">))</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;AES-256-CBC&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">encrypt</span>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;AES-256-CBC&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">decrypt</span>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
-</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cipher</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This (somewhat) hypothetical conversation is becoming more common in the face of uncertainty and wild speculation. We have seen a glimpse into the greatest adversary that cryptography has. And we&#8217;ve learned almost nothing.</p>
-
-<p>We know they have attacks, but we don&#8217;t know against what. Is Diffie-Hellman broken? Is ECC backdoored? Has the <a href="https://en.wikipedia.org/wiki/RSA_problem">RSA problem</a> been solved? Or maybe they&#8217;ve only found a somewhat more efficient way to factor  RSA keys? I&#8217;ve also heard speculation that they&#8217;ve broken RC4. They might have backdoors in OpenSSL or Microsoft&#8217;s CAPI.</p>
-
-<p>We have no idea.</p>
-
-<p>Here&#8217;s what we do know, in the past, uncertainty and speculation drove adoption of snake-oil solutions. Flawed, nonsensical technologies that just did more harm than good. Speculation today risks driving people from something that&#8217;s safe, to tools that leave them fully exposed.</p>
-
-<p>It&#8217;s hard to give pragmatic advice in the face such uncertainty; but we must be cautious, we must not panic. I won&#8217;t accuse anyone of over-reacting, as what we have seen is startling to say the least - but there are bigger risks to consider.</p>
-
-<p>For example, let&#8217;s assume for just a moment that the NSA has, in fact, influenced the ECC specification to include curves with weaknesses known to itself. What are the risks?</p>
-
-<ol>
-<li>The NSA is able to decrypt messages at will.</li>
-<li>A well equipped adversary (say, another state funded group) could discover the flaw, and exploit it.</li>
-</ol>
-
-
-<p>Neither of those give me warm-fuzzies, but there are worse things: in the panic over &#8220;OMG - ECC is broken&#8221; people hastily switch to magic solutions that rely on obscurity and have no proven security, or to hastily implemented, poorly configured solutions that make them vulnerable to not only nation-state level adversaries, but much smaller ones as well.</p>
-
-<p>If in the panic over ECC one was to move to an RSA based system with weak keys - they are likely to be far more vulnerable than they would have been, had they done nothing at all.</p>
-
-<p>This of course applies to many scenarios, not just ECC - and personally, I trust ECC over RSA, at lease when using <a href="http://cr.yp.to/ecdh.html">curve25519</a> or other non-NSA supplied curves.</p>
-
-<p>There are no good answers to be found right now; all we can do is exercise caution and try to keep people from over-reacting and making their problems worse.</p>
-
-<p><em>[N.B. I realize that meet-in-the-middle isn&#8217;t practical against AES-256 with technology as we know it, but it had to be pointed out. Also, please, <strong>please</strong> don&#8217;t use the double AES-256 / AES-512 code. Really. Just don&#8217;t.]</em></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -676,6 +620,10 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -689,10 +637,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>

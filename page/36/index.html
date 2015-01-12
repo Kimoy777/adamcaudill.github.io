@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="While my favorite browser will always be Opera, I&#8217;m a big fan of Firefox; its amazing selection of add-ons (a feature that Opera sadly lacks) &hellip;">
+  <meta name="description" content="While facing an interesting research challenge, digging into the inner working of Windows, I realized that I needed to change a registry value. That &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/09/17/running-regedit-as-system/">Running RegEdit as SYSTEM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-09-17T19:59:49-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While facing an interesting research challenge, digging into the inner working of Windows, I realized that I needed to change a registry value. That&#8217;s simple enough, I fire up RegEdit, make the change, then politely as RegEdit knows how, it told me that I <em>couldn&#8217;t change the value</em>! Being one that hates when <em>my</em> computer tells <em>me</em> I can&#8217;t do something, I had to find another option.</p>
+
+<p>So after some research, I found my answer: <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/sc.mspx?mfr=true">sc</a>. This is a great little utility (included with Windows), and made the task of running an application as SYSTEM*  much easier. At this point some of you may be wondering why I didn&#8217;t just use <a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/runas.mspx?mfr=true">RunAs</a> instead, as it&#8217;s designed to allow execution as another user. Well, from all that I&#8217;ve found, there is no way to get RunAs to spawn a process as SYSTEM, one of the downsides of SYSTEM not being a true user.</p>
+
+<p>Another option that I found (somewhat) attractive initially is <a href="http://www.codeproject.com/system/RunUser.asp">RunAsEx</a>, an open source, GUI based version of RunAs. This could be useful, but I found it to be more hassle than it was worth. Still might be useful for somethings, but with all the bugs I found in it, I knew there was a better way.</p>
+
+<p>Now, back to the solution I chose: Using sc to create a service that will execute the application I&#8217;m after. This works because by default all services execute under the SYSTEM user context, so all we have to do is create a service to call the application we need. Surprisingly simple, and it works quite well.</p>
+
+<p>Creating the service looks something like this:</p>
+
+<p><code>SC CREATE AcDebugSvc binPath= "regedit.exe" type= own type= interact</code> <em>**</em></p>
+
+<p>This creates the service, so that now all you have to do is start the service (<code>SC START AcDebugSvc</code> ***) and you&#8217;ll see your copy of RegEdit. If you check in Task Manager, you&#8217;ll be able to confirm that it is actually running as SYSTEM. This is an extremely powerful debugging tool, as it allows you to instantly execute any application as the most powerful user that Windows offers.</p>
+
+<p>Once you are done with your work, just delete the service (<code>SC DELETE AcDebugSvc</code>) and call it a day, that simple. This can also easily be scripted if you tire of typing the commands so often, and it can also be used with most applications. Using this for the Command Prompt (<code>binPath= "cmd.exe /K start"</code>) and for Task Manager (<code>binPath= "taskmgr.exe"</code>) both strike me as being quite useful.</p>
+
+<ul>
+<li><strong>WARNING</strong>: As I hope most of you know, System is a very powerful account, it&#8217;s almost limitless in what it can do. If you aren&#8217;t careful while working under this user context; you may end up with a rather expensive paperweight instead of a computer. You have been warned.</li>
+</ul>
+
+
+<p>** Note: As odd as it is, the spaces after the equals and before the value of the parameters is quite important, the call will fail if you omit them.</p>
+
+<p>*** Note: You&#8217;ll get an error message (&#8221;<code>The service did not respond to the start or control request in a timely fashion.</code>&#8221;) when you call this, it&#8217;s nothing to worry about. The reason that it occurs is that to respond to the message it receives the target application must be designed to operate as a service. Since we are using this for other purposes we, we don&#8217;t really care.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -271,52 +330,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/08/09/hosting-woes-and-down-time/">Hosting Woes and Down Time</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-08-09T00:04:21-04:00" pubdate data-updated="true">Aug 9<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Over the last couple days my various web sites have seen far more downtime than normal. My hosting provide, <a href="http://radicalv.com/">Radical Vision</a> has apparently been having issues with the MySQL server that powers not only this blog, but even their <em>support system</em>.</p>
-
-<p>Yep, you heard me right, the support system that you have to use to contact them about any issues relies on MySQL, the very same instance that everybody else uses. The same one that was down for several hours today. What&#8217;s the point of a support system if you can&#8217;t report issues?</p>
-
-<p>Yesterday&#8217;s outage was blamed on a bad script being ran by another user, as for today, I&#8217;ve yet to hear a word.</p>
-
-<p>When I opened my account with RadicalV almost three years ago, you could simply email a support address and expect a response within a couple minutes. Then, &#8220;to provide better support&#8221; they disabled this simple support system and replaced it with a web page. Now, this is easy to use, and I&#8217;m sure that it makes their lives easier, but what about the life of the customers on days like today?</p>
-
-<p>Now, I still firmly believe that RadicalV is the best hosting service I&#8217;ve used, and I&#8217;m still impressed with the support. Where many hosting services respond to support questions within a day, RadicalV typically responds within an hour or two. I guess like all good companies, they grow up and change focus. The days of the 5 minute support response are over.</p>
-
-<p>It&#8217;s too bad, and if the downtime continues as it for the last month or two, perhaps my $35 a month will go to someone else.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/37/">&larr; Older</a>
@@ -349,6 +362,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -362,10 +379,6 @@
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>

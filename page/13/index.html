@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="SOPA, while it&#8217;s not likely to be passed as-is, I would be willing to bet money that something SOPA-like will be passed. It may be watered down &hellip;">
+  <meta name="description" content="During my employers annual PCI audit, our auditor requested that we perform a search of all of our servers for credit card data. He recommended a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/14/ccsrch-v1-0-5/">CCSRCH v1.0.5</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-14T08:08:39-05:00" pubdate data-updated="true">Jan 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>During my employers annual <a href="https://www.pcisecuritystandards.org/">PCI</a> audit, our auditor requested that we perform a search of all of our servers for credit card data. He recommended a tool called &#8220;ccsrch&#8221; - which like many open source projects had a couple of issues, and hadn&#8217;t been updated in years. So, I fixed it.</p>
+
+<p>CCSRCH is a cross-platform, command-line application that reads every file from the starting point passed in, and scans them for what looks like credit card numbers (and using the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> to check each possible result). It&#8217;s fairly brute-force, but it gets the scans required for PCI - though I would be careful about using it during production hours, it can have a pretty significant impact on a server&#8217;s I/O performance.</p>
+
+<p>I&#8217;ve forked the application and setup a new <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a> project over at github (the original is on <a href="http://sourceforge.net/projects/ccsrch/">SourceForge</a>), and made a few modifications to better suit my needs (from the <a href="https://github.com/adamcaudill/ccsrch#readme">change log</a>):</p>
+
+<ul>
+<li><p>Added option to output the file name, and how many hits were found to the console when using -o (see -c in usage).</p></li>
+<li><p>Added option to limit the number of results from a single file before going on to the next file (see -l in usage).</p></li>
+<li><p>Added option to exclude certain file types from the scan (see -n in usage).</p></li>
+<li><p>Fix for ignoring NULL, CR &amp; LF.</p></li>
+<li><p>Ignore dash when scanning.</p></li>
+<li><p>Exclude results with the last 8 digits repeating (very unlikely to be a real PAN).</p></li>
+</ul>
+
+
+<p>I&#8217;ve <a href="https://github.com/adamcaudill/ccsrch/downloads">uploaded</a> a Windows build of the new 1.0.5 release to github, and for *nix systems, you can just download the latest <a href="https://github.com/adamcaudill/ccsrch/tags">tag</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -338,70 +390,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/06/16/a-brief-look-at-the-latest-lulzsec-release/">A Brief Look at the Latest @LulzSec Release</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-16T20:01:41-04:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier today, the hacker collective <a href="http://lulzsecurity.com/">Lulz Security</a> released a batch of 62,156 email/password combinations from unknown sites; I decided to take a look at the data and see if there was anything to be learned from it.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>And as always, LulzSec delivers: <a href="http://t.co/yQlcu5x" title="http://www.mediafire.com/?9em5xp7r0rd2yod">mediafire.com/?9em5xp7r0rd2y…</a> 62,000+ emails/passwords just for you. Enjoy.</p>&mdash; The Lulz Boat (@LulzSec) <a href="https://twitter.com/LulzSec/status/81327464156119040">June 16, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>So, let&#8217;s take a look at a few stats:</p>
-
-<p>Total Domains: ~5,230</p>
-
-<p>Top 15 Domains:</p>
-
-<p><img src="http://adamcaudill.com/files/2011-06-16_1922.png" alt="Top 15 Domains" /></p>
-
-<p>There are over 50,000 unique passwords, but even with this many passwords, there&#8217;s still a few quite common - and very bad passwords in use:</p>
-
-<p><img src="http://adamcaudill.com/files/2011-06-16_1936.png" alt="Top Passwords" /></p>
-
-<p>While this is a fairly small release, the <a href="http://twitter.com/#!/LulzSec/">LulzSec</a> twitter stream has a number of entries like these:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>There is some very angry level 85 WoW player cutting his wrists right now, thanks to @<a href="https://twitter.com/miraclejoe">miraclejoe</a> and LulzSec. Let it flow&#8230;</p>&mdash; The Lulz Boat (@LulzSec) <a href="https://twitter.com/LulzSec/status/81334551686815745">June 16, 2011</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>There are several tweets about people accessing Facebook, Twitter, and even Amazon accounts - what&#8217;s so unfortunate here is that service providers could easily restrict accounts on lists like this to protect the users and greatly reduce the impact of these breaches.</p>
-
-<p>Until people learn that password reuse is dangerous, this will keep happening.</p>
-
-<p><em>Update:</em> I&#8217;ve removed a link to a tweet, as the account has since been removed. The tweet said: &#8220;@LulzSec Cheers for the paypal account with £250 in it! ;)&#8221;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/14/">&larr; Older</a>
@@ -434,6 +422,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -447,10 +439,6 @@
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>

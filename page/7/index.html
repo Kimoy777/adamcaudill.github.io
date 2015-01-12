@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Last night I received an email from Linode about a possible breach and mandatory password reset that reminded me of another recent email, in some &hellip;">
+  <meta name="description" content="&#8230;or &#8220;Crypto Is Hard, Vol. 479&#8221; Earlier today a tweet about a new feature for oclHashcat-plus started a truly interesting debate on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/16/1password-pbkdf2-and-implementation-flaws/">1Password, PBKDF2, &amp; Implementation Flaws</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T19:09:00-04:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&#8230;or &#8220;Crypto Is Hard, Vol. 479&#8221;</p>
+
+<p>Earlier today a tweet about a new feature for <a href="http://hashcat.net/oclhashcat-plus/">oclHashcat-plus</a> started a truly interesting debate on Twitter over the implications. The new feature is the ability to crack <a href="https://agilebits.com/onepassword">1Password</a> keychain files - at an impressive <strong>3 million</strong> passwords per second.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Support added to crack 1Password to oclHashcat-plus, 100% computed on GPU! Plus I found an exploitable design flaw <a href="http://t.co/53ZtWggsDz" title="http://hashcat.net/forum/thread-2238.html">hashcat.net/forum/thread-2…</a></p>&mdash; hashcat (@hashcat) <a href="https://twitter.com/hashcat/status/324172122039652355">April 16, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>To achieve this speed, two optimizations were used - the first is in precomputing <code>ipad</code> and <code>opad</code> for SHA1-HMAC, this effectively cuts the number of SHA1 calls in half. This is clever, but not the part I&#8217;m interested in, it&#8217;s the second optimization that I find interesting.</p>
+
+<p>1Password uses AES128, in <a href="https://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Cipher-block_chaining_.28CBC.29">CBC mode</a> to encrypt data - and it&#8217;s the design of CBC that enables the next optimization. If you have the wrong IV when you decrypt in CBC mode it corrupts the first block - but only the first block, the rest will be fine. It&#8217;s this fact that seems to have been overlooked when 1Password was designed.</p>
+
+<p>The final encryption key is derived from the user&#8217;s password via PBKDF2. They generate a 320bit key (so two blocks or four calls to SHA1 after the precompute optimization); of those 320 bits, 128 bits go into the encryption key, another 128 bits go to the IV. For 1Password to work, it needs both the key and the IV - but <em>attackers don&#8217;t</em>.</p>
+
+<p>An attacker can look at later blocks to see if they are valid and ignore the first block, by ignoring the IV generation and the first encrypted block, the number of calls to SHA1 is again cut in half.</p>
+
+<p>To their credit, <a href="https://twitter.com/jpgoldberg">Jeffrey Goldberg</a> of <a href="https://agilebits.com/">AgileBits</a> (the maker of 1Password) responded very quickly and provided details about what they are doing to address it, and joined in a very open discussion about the impact of how this was implemented. Depending on who you ask, this &#8216;flaw&#8217; costs either 1 or 2 bits of entropy.</p>
+
+<p>For the end user, it means that an attacker only needs to perform 50% of the SHA1 calls that the 1Password software needs (maybe only 25%, depending on how optimized the 1Password code is). When it comes to password cracking, that certainly seems less secure than what was intended. As flaws go it could be far worse, but it&#8217;s likely less secure than intended.</p>
+
+<p>And finally, after all of this, we come to the point:</p>
+
+<p><strong>Crypto is hard, even for smart people.</strong></p>
+
+<p>It&#8217;s so easy to accidentally introduce weaknesses like this - everything looks right, but because of how they used PBKDF2 in combination with AES128-CBC, the end result is weaker than was intended. It&#8217;s specific, fairly obscure (to many at least), details of how these two algorithms work, and how they were used together that led to this flaw.</p>
+
+<p>AgileBits has made a lot of good decisions, and in general at least, seems to know what they are doing. I certainly don&#8217;t mean to beat up on them, they&#8217;ve handled this very well and the issue is fairly small. I applaud them for discussing this so openly, it&#8217;s hard to do - I know that from personal experience.</p>
+
+<p>This should serve as a great example of why any new crypto implementation needs to be expert reviewed to make sure that it&#8217;s right. Nobody gets it right every time, every code base needs to be reviewed, this could (but doesn&#8217;t have to) happen to you.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -376,73 +440,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/31/revisiting-snapchat-api-and-security/">Revisiting Snapchat API & Security</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-31T17:41:00-05:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As <a href="http://www.snapchat.com">Shapchat</a> has increased in popularity, I&#8217;ve been asked several times to revisit my <a href="http://adamcaudill.com/2012/06/16/snapchat-api-and-security/">Snapchat API &amp; Security</a> post, to address the changes that they made in response to my complaints. So, here is it - sorta.</p>
-
-<p>I started making detailed notes and looking at the changes they made - but yesterday <a href="https://twitter.com/tlack">@tlack</a> made that mostly irrelevant with his release of <a href="https://github.com/tlack/snaphax">Snaphax</a>, a PHP library to interact with the undocumented Shapchat API. So for now, if you want to know more about their API or if you just want to save images or video - I&#8217;d suggest taking a good look at the Snaphax code. What I will do though, is talk about some of their changes and what they did right and what they did wrong.</p>
-
-<p><strong>Retrieving images is now destructive&#8230;</strong></p>
-
-<p>In the previous API version, you could request the same image from the <code>blob</code> API any number of times, until <code>ss_pa</code> was called to delete the image from the Snapchat servers (which occurred only after the image was viewed, opening a window to save the image before viewing it in the application) - the new <code>ph/blob</code> API removes the image once it&#8217;s been delivered to the client. Without the ability to pull the image multiple times, &#8216;downloader&#8217; tools are far less attractive - instead, to consistently download the media, users will need full replacement clients. This extra bit of inconvenience is probably one of the most effective deterrents against lazy attackers (likely the most common scenario).</p>
-
-<p><strong>ECB mode, really?!?!</strong></p>
-
-<p>Media is encrypted when it&#8217;s sent to the client - this makes it harder to capture data via a MiTM attack, and makes it slightly more complicated to build alternate clients. But, there are a few issues:</p>
-
-<ul>
-<li>The media is encrypted with AES, in <a href="http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Electronic_codebook_.28ECB.29">ECB mode</a> - I can&#8217;t imagine how they made such a mistake.</li>
-<li>Media is decrypted before going into the cache, instead of when it needs to be displayed - allowing it to be accesses on rooted devices.</li>
-<li>A single, hard-coded key (<code>M02cnQ51Ji97vwT4</code>) is used to encrypt the data.</li>
-</ul>
-
-
-<p>Pretty much everything here could have been done better; some of the problems are just simple mistakes, others a result of ignorance.</p>
-
-<p><strong>Security by obscurity&#8230;</strong></p>
-
-<p>When looking at the traffic that the application generates, one of the first things you notice is the new <code>req_token</code> field - at first glance it looks like a SHA-256 hash (and has been mistaken for one more than once), but it&#8217;s not - it&#8217;s two SHA-256 hashes that have been merged in a specific pattern. All of the data to generate this token is already included in most requests (path, timestamp, auth token), but the secret to generating it is the algorithm used to merge them into one.</p>
-
-<p>Prior to @tlack&#8217;s work, this token has been a stumbling block to those attempting to unravel the API - only because of the obscurity of their custom merger algorithm. Now that there is code that demonstrates how this works - the security benefit of the <code>req_token</code> has been completely eliminated. When you rely on the secrecy of an algorithm, it will bite you.</p>
-
-<p><strong>Doing it right&#8230;</strong></p>
-
-<p>Making a product like this work is quite easy - making it work right is extremely hard. Snapchat has entered a business where at least some of their users place an extreme amount of trust in them - a failure of their security could have a profound impact on their users lives. Any company that is in the business of handling very private communications is held to a higher standard - and Snapchat is no exception. Security should be the top priority when working on a product like this - and when you see such blatant mistakes as using ECB mode encryption, it&#8217;s obvious that they don&#8217;t take it seriously enough.</p>
-
-<p>Snapchat needs to hire an outside security consultant to review their systems to identify the flaws such as those I&#8217;ve pointed out and provide real solutions - and they have the <a href="http://www.businessinsider.com/snapchat-raising-8-million-from-instagram-backers-2012-12">money</a> to do it. Until they do, there will continue to be these cat and mouse games - and they&#8217;ll lose every time.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -475,6 +472,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -488,10 +489,6 @@
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>

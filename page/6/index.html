@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Everybody&#8217;s favorite whipping boy, Cryptocat is back in the news today - and it&#8217;s bad. Really bad. Steve Thomas has found a major flaw in &hellip;">
+  <meta name="description" content="What is the measure of a man; what makes one great, and another lesser? What separates success from failure? We all recognize light from dark, but at &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,101 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/07/16/cryptocat-what-is-the-measure/">Cryptocat: What Is the Measure&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-16T19:05:00-04:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>What is the measure of a man; what makes one great, and another lesser? What separates success from failure? We all recognize light from dark, but at which point does it go from one to another? If we ask if a person (or company, or product) is successful - do we measure them against their closest competitor, their nearest neighbor, or perhaps the most successful person we know? Where, and how, do you set that bar to measure against?</p>
+
+<p>Yesterday I talked to <a href="http://nadim.cc/">Nadim Kobeissi</a> for about an hour about Cryptocat, its policies, practices, successes, failures, and goals. The topic of goals led to an interesting discussion - to what standard is Cryptocat being held? Perhaps, just perhaps - the unforgivable security failures of Cryptocat are only so unforgivable because of the bar it&#8217;s being measured against.</p>
+
+<blockquote><p>[this] is a crucible; in it we burn away irrelevancies until we are left with a pure product: the truth, for all time.</p></blockquote>
+
+
+<p>So, what it the true goal? Here is a snippet of their <a href="https://github.com/cryptocat/cryptocat/blob/master/README.md">readme</a>, which (kinda) lays out the goal:</p>
+
+<pre><code>Cryptocat is an experimental browser-based chat client for easy to use, encrypted conversations. 
+It aims to make encrypted, private chat easy to use and accessible. We want to break down the 
+barrier that prevents the general public from having an accessible privacy alternative that 
+they already know how to use. Cryptocat is currently available for Chrome, Firefox and Safari.
+</code></pre>
+
+<p>The second sentence is the one that I find interesting, in light of the conversation I had yesterday; primarily this part: <em>an accessible privacy alternative that they already know how to use</em>. I asked Nadim at one point what his goal was, he responded without hesitation: to provide a safer alternative to Facebook Chat, Google Talk, etc..</p>
+
+<p>When I asked about Cryptocat&#8217;s reputation as a tool for activists, he was clearly agitated and made his position on the matter very clear. That isn&#8217;t the intention, and he acknowledged that it&#8217;s not safe for that use. He then pointed me to a <a href="https://blog.crypto.cat/2012/11/security-update-a-follow-up/">quote on their blog</a>:</p>
+
+<blockquote><p>We have realized that due to some (perhaps well-meaning) media coverage of the Cryptocat Project, our work has been labeled by the media as something that can aid activists in overthrowing governments or help save someone’s life. This is not what Cryptocat is, it is wrong for the media to say that, and we have never said anything to that effect ourselves.</p></blockquote>
+
+
+<p>Though I will note, the initial feeling seemed to be a bit different:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Cryptocat featured in Wired! <a href="http://t.co/Aj45zedr">http://t.co/Aj45zedr</a></p>&mdash; Cryptocat (@cryptocatapp) <a href="https://twitter.com/cryptocatapp/statuses/228921660324061184">July 27, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p><strong>So, where does this leave us?</strong></p>
+
+<p>The <a href="http://tobtu.com/decryptocat.php">most recent flaw</a> was bad, very, very bad. <em>If</em> you understand encryption, the protection afforded was far less than expected. Let&#8217;s look at it from another perspective though: Compared to Facebook Chat. While the bug was bad, how does it compare to other consumer chat systems, even with that flaw in mind? From what I&#8217;ve seen, it&#8217;s still a better option than Facebook.</p>
+
+<p>First, let&#8217;s ignore encryption and just look at what we get from SSL/TLS:</p>
+
+<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=facebook.com&amp;s=173.252.110.27">Facebook</a>:</p>
+
+<p><img class="center" src="/files/Qualys_SSL_Labs_-_Projects___SSL_Server_Test___facebook.com.png"></p>
+
+<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=crypto.cat">Cryptocat</a>:</p>
+
+<p><img class="center" src="/files/Qualys_SSL_Labs_-_Projects___SSL_Server_Test___crypto.cat.png"></p>
+
+<p>First thing that I can point out is the use of <a href="https://community.qualys.com/blogs/securitylabs/2013/06/25/ssl-labs-deploying-forward-secrecy">forward secrecy</a> - something Facebook isn&#8217;t using (<a href="http://news.cnet.com/8301-13578_3-57591179-38/data-meet-spies-the-unfinished-state-of-web-crypto/">yet</a>). So, if you just look at SSL/TLS, Cryptocat is better - assuming nobody else has access to the ciphertext, which <a href="https://blog.crypto.cat/2012/11/security-update-our-first-full-audit/">happened</a> (at least) when they used Cloudflare.</p>
+
+<p>How about data retention? While in the past Facebook has said messages are <a href="http://news.cnet.com/8301-13577_3-9896860-36.html">cleared after 90 days</a>, it&#8217;s not clear how long they retain the information today, or how much could be produced under subpoena - it&#8217;s clearly more than what <a href="https://blog.crypto.cat/2013/05/responding-to-law-enforcement-requests/">Cryptocat can</a> produce (as Facebook <a href="http://info.publicintelligence.net/Facebook2010.pdf">produces a lot</a>). Just looking at what Facebook can provide, versus what Cryptocat can says a lot from a privacy perspective.</p>
+
+<p>I could go through more details, or compare it in more detail to other services, but the basic point should remain.</p>
+
+<p>From that perspective, I think Cryptocat has accomplished something - it may not be ideal, and has clearly been far from it; it&#8217;s still a better choice for casual communication than most (all?) of the major IM/chat players.</p>
+
+<p><strong>&#8216;I thought you said don&#8217;t use it?&#8217;</strong></p>
+
+<p>In an <a href="http://arstechnica.com/security/2013/07/bad-kitty-rooky-mistake-in-cryptocat-chat-app-makes-cracking-a-snap/">article</a> I was quoted as saying something like this:</p>
+
+<blockquote><p>He went on to recommend people not rely on Cryptocat to keep their conversations private until the code and the cryptography in it are thoroughly audited by professional penetration testers and cryptographers.</p></blockquote>
+
+
+<p>I stand by that statement. If you <em>need</em> security, Cryptocat isn&#8217;t what you should be using, period. If you <em>want</em> privacy, it&#8217;s not a bad option. In a discussion on Twitter, the agreement was that there are no real competitors that provide secure multi-party chat - for those that want that feature, Cryptocat seems to be the only option.</p>
+
+<p>It&#8217;s worth pointing out though, if you&#8217;re reading this, you probably know how to use PGP - and can use that to get around Cryptocat&#8217;s use-case. I&#8217;m not an apologist, and I&#8217;m not trying to excuse serious mistakes - I&#8217;m trying to present the issue, and the system itself in a fair light for the intended use-case, as Nadim explained it. In that light, the system still achieves its basic goal.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -411,70 +506,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/16/1password-pbkdf2-and-implementation-flaws/">1Password, PBKDF2, &amp; Implementation Flaws</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-16T19:09:00-04:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&#8230;or &#8220;Crypto Is Hard, Vol. 479&#8221;</p>
-
-<p>Earlier today a tweet about a new feature for <a href="http://hashcat.net/oclhashcat-plus/">oclHashcat-plus</a> started a truly interesting debate on Twitter over the implications. The new feature is the ability to crack <a href="https://agilebits.com/onepassword">1Password</a> keychain files - at an impressive <strong>3 million</strong> passwords per second.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>Support added to crack 1Password to oclHashcat-plus, 100% computed on GPU! Plus I found an exploitable design flaw <a href="http://t.co/53ZtWggsDz" title="http://hashcat.net/forum/thread-2238.html">hashcat.net/forum/thread-2…</a></p>&mdash; hashcat (@hashcat) <a href="https://twitter.com/hashcat/status/324172122039652355">April 16, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>To achieve this speed, two optimizations were used - the first is in precomputing <code>ipad</code> and <code>opad</code> for SHA1-HMAC, this effectively cuts the number of SHA1 calls in half. This is clever, but not the part I&#8217;m interested in, it&#8217;s the second optimization that I find interesting.</p>
-
-<p>1Password uses AES128, in <a href="https://en.wikipedia.org/wiki/Block_cipher_modes_of_operation#Cipher-block_chaining_.28CBC.29">CBC mode</a> to encrypt data - and it&#8217;s the design of CBC that enables the next optimization. If you have the wrong IV when you decrypt in CBC mode it corrupts the first block - but only the first block, the rest will be fine. It&#8217;s this fact that seems to have been overlooked when 1Password was designed.</p>
-
-<p>The final encryption key is derived from the user&#8217;s password via PBKDF2. They generate a 320bit key (so two blocks or four calls to SHA1 after the precompute optimization); of those 320 bits, 128 bits go into the encryption key, another 128 bits go to the IV. For 1Password to work, it needs both the key and the IV - but <em>attackers don&#8217;t</em>.</p>
-
-<p>An attacker can look at later blocks to see if they are valid and ignore the first block, by ignoring the IV generation and the first encrypted block, the number of calls to SHA1 is again cut in half.</p>
-
-<p>To their credit, <a href="https://twitter.com/jpgoldberg">Jeffrey Goldberg</a> of <a href="https://agilebits.com/">AgileBits</a> (the maker of 1Password) responded very quickly and provided details about what they are doing to address it, and joined in a very open discussion about the impact of how this was implemented. Depending on who you ask, this &#8216;flaw&#8217; costs either 1 or 2 bits of entropy.</p>
-
-<p>For the end user, it means that an attacker only needs to perform 50% of the SHA1 calls that the 1Password software needs (maybe only 25%, depending on how optimized the 1Password code is). When it comes to password cracking, that certainly seems less secure than what was intended. As flaws go it could be far worse, but it&#8217;s likely less secure than intended.</p>
-
-<p>And finally, after all of this, we come to the point:</p>
-
-<p><strong>Crypto is hard, even for smart people.</strong></p>
-
-<p>It&#8217;s so easy to accidentally introduce weaknesses like this - everything looks right, but because of how they used PBKDF2 in combination with AES128-CBC, the end result is weaker than was intended. It&#8217;s specific, fairly obscure (to many at least), details of how these two algorithms work, and how they were used together that led to this flaw.</p>
-
-<p>AgileBits has made a lot of good decisions, and in general at least, seems to know what they are doing. I certainly don&#8217;t mean to beat up on them, they&#8217;ve handled this very well and the issue is fairly small. I applaud them for discussing this so openly, it&#8217;s hard to do - I know that from personal experience.</p>
-
-<p>This should serve as a great example of why any new crypto implementation needs to be expert reviewed to make sure that it&#8217;s right. Nobody gets it right every time, every code base needs to be reviewed, this could (but doesn&#8217;t have to) happen to you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -507,6 +538,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
@@ -520,10 +555,6 @@
     
       <li class="post">
         <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a>
       </li>
     
   </ul>
