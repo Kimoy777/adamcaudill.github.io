@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="When I was a teenager I worked as a photojournalist and through that experience I learned just how important it is that the public, and the press in &hellip;">
+  <meta name="description" content="That researchers from Kaspersky Lab uncovered malware that uses hard-drive firmware has now been throughly discussed — perhaps too much for some &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-17T22:11:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>That researchers from Kaspersky Lab uncovered malware that uses <a href="https://blog.kaspersky.com/equation-hdd-malware/">hard-drive firmware</a> has now been throughly discussed — perhaps too much for some people. It’s not exactly Earth-shattering news either, the idea has been discussed for years, and has been <a href="http://spritesmods.com/?art=hddhack">publicly demonstrated</a>. <a href="http://brandonw.net/">Brandon Wilson</a> and I where even working proof of concept for SSD controllers to demonstrate this based on our <a href="http://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">BadUSB</a> work.</p>
+
+<p>This isn’t about that story, exactly. This is about paranoia, and how it has changed over the last few years — and even the last few months.</p>
+
+<p>I was talking to Brandon Wilson about the implications of Kaspersky’s discovery, and how, or even if, you could ever trust your platform. When you could have malicious firmware in key system components — hard drive, USB devices (keyboard, mouse, etc.), USB hub — and possibly others, how about the GPU or the webcam that’s in virtually all laptops, how could you ever feel secure? How would you ever even know about it? Every device that has updatable firmware is a possible target, and far too few of them use any form of effective security to prevent malicious changes.</p>
+
+<p>I pointed out that I buy all of my computers and key hardware from stores, I don’t have any of it delivered. Why? <a href="http://www.forbes.com/sites/erikkain/2013/12/29/report-nsa-intercepting-laptops-ordered-online-installing-spyware/">Interdiction</a>.</p>
+
+<p>If it has my name associated with it prior to being in my hands, how do I know that it’s not been tampered with? Prior to Edward Snowden, I would have said that it was paranoid, that taking such precautions was at best a waste of time and at worst a sign of delusion. Today? If you are working in a field where you could have useful information, it seems quite reasonable. Paranoia has evolved, it has changed, what was once unreasonable is now prudent.</p>
+
+<p>It was of course known that such things were possible before Snowden, but the scale was unknown — and of course NSA and the FBI aren’t the only threats, if they are doing something, you can bet they are far from alone. When that Lenovo laptop was shipped from China, do you really think that the Chinese Government wouldn’t take that chance to step in to gather some extra information? Launch-day iPhones have been shipped directly from China, and so many other examples. If NSA can tamper with a shipment, so can any country that has even temporary access to a package; if it’s on their land, they can attack it.</p>
+
+<p>The focus has been on what NSA does, but the information should be used not as a way to attack NSA, but to get an insight to the  global threats that everybody that could be of interest faces. It’s important to remember that they don’t just <a href="http://www.theregister.co.uk/2014/02/03/nsa_gchq_accused_of_hacking_belgian_smartcard_crypto_guru/">target</a> <a href="http://arstechnica.com/tech-policy/2013/11/uk-spies-continue-quantum-insert-attack-via-linkedin-slashdot-pages/">terrorists</a>.</p>
+
+<p>I recently had a person contact me, concerned that a device she had was compromised — while I could tell her that unless she was attracting attention from a major player she was likely safe, I couldn’t tell her that she actually was safe, or anything she could do to ensure that nothing was infected. As these techniques spread to more common attackers, the risks that average people will be targeted grows dramatically. Attacks not only get better over time, they become more widespread. From repressive regimes that outsource their attacks, to poorly supervised local law enforcement, to common malware — it’s only a matter of time.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Today&#39;s NSA malware is tomorrow&#39;s everywhere malware. Defenders are so screwed.</p>&mdash; Matthew Green (@matthew_d_green) <a href="https://twitter.com/matthew_d_green/status/567869974246596609">February 18, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Defending against these attacks, without major changes from device manufacturers, is at best a nightmare; at worst, impossible. I have repeatedly called out USB controller manufacturers to secure their devices, as that’s the only way that BadUSB can be truly fixed. The same needs to be said for so many other device types — it’s up to device manufacturers to secure their products.</p>
+
+<h2>The Chain of Trust</h2>
+
+<p>For any system to be secure, there must be trust at some point, which can then ensure that later layers are correct and untampered. By attacking firmware, the chain is defeated at its first link — attack the hardware at the lowest level, and nothing that comes later, including the operating system, can truly be trusted.</p>
+
+<p>The more important impact though is not technical, but psychological. If a person doesn’t know what they can or can’t trust, they start to fear everything. For NSA, GCHQ, and countless other agencies in the same business, this is good news — if people can’t trust their computers or their phones, they will turn to less secure means of communication. This is also extremely bad for consumers, business, and investors — as these tools can be used not just to go after government selected targets (legitimate or otherwise), but for profit, for blackmail, for revenge, or just for a thrill.</p>
+
+<h2>Targets</h2>
+
+<p>While the public focus of NSA is to combat terrorists, it’s been well documented that their targets go far beyond that — researchers, IT staff, business executives, you name it. Yet, I’m a citizen of the United States, and as such, I <em>shouldn’t</em> be a potential target for them (give or take being caught up because of people I know in other countries). Is that the end of the risk for me? No, not by a long shot.</p>
+
+<p>While the <a href="https://en.wikipedia.org/wiki/Five_Eyes">Five Eyes</a> countries share intelligence, they don’t share restrictions on who they can spy on. For GCHQ, whether I’m a citizen of the United States or of Afghanistan makes no difference, I’m a valid target under their laws. Canada, Germany, Russia, China, Taiwan — I’m not protected under their laws, if they think I could have interesting information, or access to interesting information, on any topic, I could be a target. So could you. What information do you have access to, who do you know, and what information could they have access to?</p>
+
+<p>If you work in security, development, IT, telecom — that could mean that you have access to some information that some country would like to have. Is that paranoia? A few years ago, some would say yes — now that we have a better insight into the scope and scale of intelligence activities, we know it’s simply reality.</p>
+
+<h2>Personal Threat Models</h2>
+
+<p>I have long encouraged people to have a personal threat model — what are your realistic threats? When talking to others, keep in mind that their threat model may be different than yours, and things you see as being paranoid could be quite prudent for them, due to the different risks they face.</p>
+
+<p>For me, to be honest, I’m not that interesting to a foreign power — if anything, trading emails with Glenn Greenwald and trading tweets with people like <a href="https://twitter.com/thegrugq">the grugq</a> has done more to make me a target than any professional activity. The information I can access because of my job is somewhat interesting, and is certainly of value — but more to the Russian Mob than to a foreign government. I pay attention to who I talk to, to what I make public, to what my accounts have access to, so I know what my risks are.</p>
+
+<p>If you work for a more interesting company, or are engaged in research that could be useful, or even just know people that could be more interesting than you, your threats could be completely different. Of course, also have to factor in locations — if you are outside of the US and work for a company that could have interesting information, then your threats may be far more complex.</p>
+
+<p>Defining the line between reasonable and paranoid is harder than ever, and may vary from person to person.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -485,93 +565,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-03T16:18:00-05:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A few hours ago, a Grand Jury in New York decided that the video-taped murder of an unarmed man didn’t justify a trial to determine if those, clearly seen and identified, who killed him had broken any laws. The man I speak of is <a href="https://en.wikipedia.org/wiki/Death_of_Eric_Garner">Eric Garner</a>. What struck me immediately, was the Orwellian undertones that this event has.</p>
-
-<h3>Grand Juries &amp; Time Control</h3>
-
-<blockquote><p>He who controls the past controls the future. He who controls the present controls the past.</p><footer><strong>George Orwell</strong> <cite>1984</cite></footer></blockquote>
-
-
-<p>In criminal cases brought before a Grand Jury to determine if there’s enough evidence that a person is guilty of a crime to justify being charged, the person that controls the past, is the prosecutor. Their responsibility is to present the evidence to the jury - documentation, photos, videos, testimony, etc. - to get them to bring charges, if there is enough to show guilt.</p>
-
-<p>The show isn’t ran by the courts, as is the case with other parts of the justice system, but instead by the prosecutor, who has control over what the jury sees and hears. It is this power, this control over evidence, this control over the past, that allows them to, when they so choose, to take on an alternate role - defender.</p>
-
-<p>In 1985, <a href="https://en.wikipedia.org/wiki/Sol_Wachtler">Sol Wachtler</a>, the Chief Judge of the New York Court of Appeals rather famously mused that a prosecutor could indict a ham sandwich if they wanted to - and based on numbers from the federal grand jury system, that seems very accurate. In 2010, federal grand juries returned indictments in 162,000 cases - and declined to do so in only 11.</p>
-
-<p>For those that are outside of the law enforcement community, it’s clear that the grand jury is just a rubber stamp process. Yet, for those inside the system, its use is more delicate, more finessed - more directed. It’s easy for a prosecutor to get a jury to indict someone - but as recent events have shown, with enough time, they can take undeniable evidence and through careful tactics, sabotage their own case. Preventing the accused from being charged at all.</p>
-
-<p>Suppress useful evidence, call questionable witnesses, present confusing and unclear information, question the integrity of everything presented - there are so many options available to ensure that the jury won’t see clear guilt. With some time, the prosecutor becomes the master of the past, painting the picture that he wants the jury to see - free from disagreement or dissenting views.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Grand juries have enormous independence on paper, but almost impossible to exercise in practice. All evidence seen via prosecutor&#39;s lens.</p>&mdash; matt blaze (@mattblaze) <a href="https://twitter.com/mattblaze/status/540238535274418176">December 3, 2014</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<h3>Just a little doublethink…</h3>
-
-<p>How much time, how many confusing statements, how many character assassinations does it take before a jury can see, with their own eyes, a murder - and by the skill of a great <del>defense attorney</del> prosecutor, accept that while they saw a murder, a murder didn’t occur?</p>
-
-<p>Or, in this case, not only didn’t a murder occur - no crime at all occurred. He was murdered, and he wasn’t.</p>
-
-<p>It’s important to remember, this wasn’t a open trial - this was simply to determine if charges should be brought at all. In this case, the decision was that there will be no charges, no trial to determine if the killing was justified, no attempt at justice for the dead. Never will a real jury, in a court of law, hear the case and be able to make a determination based on the evidence - that determination was already made by the prosecutor.</p>
-
-<p>A process that is a rubber stamp to those on the outside, becomes a free-pass for those on the inside of the system.</p>
-
-<h3>…and justice for all.</h3>
-
-<p>There is no justice in this case, nor illusion of justice. No thinly veiled farce of a trial to appease the masses. Nothing.</p>
-
-<p>I must wonder, how much longer before such cases won’t even see the “light” of a secret grand jury, and just die on a prosecutors desk. When the prosecutor works to defend the accused - only when the accused is part of their system of course - why bother with the show, why even pretend to try. Justice isn’t their goal, protecting those on the inside, those that enforce is the goal.</p>
-
-<p>Control, intimidation, and fierce reprisal to any that dare resist is the hallmark of enforcement today - “justice” is granted to the favored, retribution to the rest. Enforce and control has become the unspoken replacement to “protect and serve” - a statement that meant little, and now serves as an insult to those, that for one reason or another, find themselves outside of the “favored” group.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Crimes committed by LEOs should be prosecuted by a special prosecutor; the risk &amp; impact of them acting as a defense attorney is too great.</p>&mdash; Adam Caudill (@adamcaudill) <a href="https://twitter.com/adamcaudill/status/540249660947181568">December 3, 2014</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>Who enforces against the enforcers? Who can be objective when dealing with a person inside the system that supports them? For any chance at justice, when a member of law enforcement is accused of a crime, it should be an outside prosecutor that brings the case to the grand jury. While there’s still risk of the prosecutor acting more as a defender, by appointing a special prosector from outside the normal system, there’s at least some chance that the grand jury will see the unaltered truth. Then, maybe, there will be a chance for real justice.</p>
-
-<p>Change to the justice system in the United States is needed on many fronts, racism is rampant, intimidation and coercion have become normal, police are more militarized than the military, and the use of excess force is justified by any excuse. Killing a person should be the last, most desperate line of defense - not something excused by the slightest feeling of discomfort. Though as long as the grand jury can so easily act as a free pass, this change will never be achieved.</p>
-
-<p>Things like body cameras, which the federal government is now supporting, are a step in the right direction. They eliminate questions, and allow the public to see, with their own eyes, what happens. But, no matter how many cameras are deployed to monitor law enforcement activity, if grand juries ignore evidence that’s inconvenient to a prosecutor’s goal, no crimes will be averted, no pointless deaths prevented.</p>
-
-<p>The system is broken. Only by a feat of doublethink can anyone see anything else.</p>
-
-<p><em>To my friends in law enforcement:</em> Please don’t take this as an attack against you. You have a hard job, and at times it’s certainly dangerous. But the system is broken, you may think my view is wrong - but your perspective is likely just as tainted. To those on the outside, to those that don’t have the benefit of being protected by the system - too often feel oppressed by the system, punished unfairly and in excess of reason. Please understand that there is a perspective that you, likely, can’t see.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -602,6 +595,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
@@ -615,10 +612,6 @@
     
       <li class="post">
         <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/03/orwellian-justice/">Orwellian Justice</a>
       </li>
     
   </ul>

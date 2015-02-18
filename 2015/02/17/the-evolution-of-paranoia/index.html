@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Evolution of Paranoia - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="That researchers from Kaspersky Lab uncovered malware that uses hard-drive firmware has now been throughly discussed — perhaps too much for some &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://adamcaudill.com//2015/02/17/the-evolution-of-paranoia">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Evolution of Paranoia</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-17T22:11:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>That researchers from Kaspersky Lab uncovered malware that uses <a href="https://blog.kaspersky.com/equation-hdd-malware/">hard-drive firmware</a> has now been throughly discussed — perhaps too much for some people. It’s not exactly Earth-shattering news either, the idea has been discussed for years, and has been <a href="http://spritesmods.com/?art=hddhack">publicly demonstrated</a>. <a href="http://brandonw.net/">Brandon Wilson</a> and I where even working proof of concept for SSD controllers to demonstrate this based on our <a href="http://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">BadUSB</a> work.</p>
+
+<p>This isn’t about that story, exactly. This is about paranoia, and how it has changed over the last few years — and even the last few months.</p>
+
+<p>I was talking to Brandon Wilson about the implications of Kaspersky’s discovery, and how, or even if, you could ever trust your platform. When you could have malicious firmware in key system components — hard drive, USB devices (keyboard, mouse, etc.), USB hub — and possibly others, how about the GPU or the webcam that’s in virtually all laptops, how could you ever feel secure? How would you ever even know about it? Every device that has updatable firmware is a possible target, and far too few of them use any form of effective security to prevent malicious changes.</p>
+
+<p>I pointed out that I buy all of my computers and key hardware from stores, I don’t have any of it delivered. Why? <a href="http://www.forbes.com/sites/erikkain/2013/12/29/report-nsa-intercepting-laptops-ordered-online-installing-spyware/">Interdiction</a>.</p>
+
+<p>If it has my name associated with it prior to being in my hands, how do I know that it’s not been tampered with? Prior to Edward Snowden, I would have said that it was paranoid, that taking such precautions was at best a waste of time and at worst a sign of delusion. Today? If you are working in a field where you could have useful information, it seems quite reasonable. Paranoia has evolved, it has changed, what was once unreasonable is now prudent.</p>
+
+<p>It was of course known that such things were possible before Snowden, but the scale was unknown — and of course NSA and the FBI aren’t the only threats, if they are doing something, you can bet they are far from alone. When that Lenovo laptop was shipped from China, do you really think that the Chinese Government wouldn’t take that chance to step in to gather some extra information? Launch-day iPhones have been shipped directly from China, and so many other examples. If NSA can tamper with a shipment, so can any country that has even temporary access to a package; if it’s on their land, they can attack it.</p>
+
+<p>The focus has been on what NSA does, but the information should be used not as a way to attack NSA, but to get an insight to the  global threats that everybody that could be of interest faces. It’s important to remember that they don’t just <a href="http://www.theregister.co.uk/2014/02/03/nsa_gchq_accused_of_hacking_belgian_smartcard_crypto_guru/">target</a> <a href="http://arstechnica.com/tech-policy/2013/11/uk-spies-continue-quantum-insert-attack-via-linkedin-slashdot-pages/">terrorists</a>.</p>
+
+<p>I recently had a person contact me, concerned that a device she had was compromised — while I could tell her that unless she was attracting attention from a major player she was likely safe, I couldn’t tell her that she actually was safe, or anything she could do to ensure that nothing was infected. As these techniques spread to more common attackers, the risks that average people will be targeted grows dramatically. Attacks not only get better over time, they become more widespread. From repressive regimes that outsource their attacks, to poorly supervised local law enforcement, to common malware — it’s only a matter of time.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Today&#39;s NSA malware is tomorrow&#39;s everywhere malware. Defenders are so screwed.</p>&mdash; Matthew Green (@matthew_d_green) <a href="https://twitter.com/matthew_d_green/status/567869974246596609">February 18, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Defending against these attacks, without major changes from device manufacturers, is at best a nightmare; at worst, impossible. I have repeatedly called out USB controller manufacturers to secure their devices, as that’s the only way that BadUSB can be truly fixed. The same needs to be said for so many other device types — it’s up to device manufacturers to secure their products.</p>
+
+<h2>The Chain of Trust</h2>
+
+<p>For any system to be secure, there must be trust at some point, which can then ensure that later layers are correct and untampered. By attacking firmware, the chain is defeated at its first link — attack the hardware at the lowest level, and nothing that comes later, including the operating system, can truly be trusted.</p>
+
+<p>The more important impact though is not technical, but psychological. If a person doesn’t know what they can or can’t trust, they start to fear everything. For NSA, GCHQ, and countless other agencies in the same business, this is good news — if people can’t trust their computers or their phones, they will turn to less secure means of communication. This is also extremely bad for consumers, business, and investors — as these tools can be used not just to go after government selected targets (legitimate or otherwise), but for profit, for blackmail, for revenge, or just for a thrill.</p>
+
+<h2>Targets</h2>
+
+<p>While the public focus of NSA is to combat terrorists, it’s been well documented that their targets go far beyond that — researchers, IT staff, business executives, you name it. Yet, I’m a citizen of the United States, and as such, I <em>shouldn’t</em> be a potential target for them (give or take being caught up because of people I know in other countries). Is that the end of the risk for me? No, not by a long shot.</p>
+
+<p>While the <a href="https://en.wikipedia.org/wiki/Five_Eyes">Five Eyes</a> countries share intelligence, they don’t share restrictions on who they can spy on. For GCHQ, whether I’m a citizen of the United States or of Afghanistan makes no difference, I’m a valid target under their laws. Canada, Germany, Russia, China, Taiwan — I’m not protected under their laws, if they think I could have interesting information, or access to interesting information, on any topic, I could be a target. So could you. What information do you have access to, who do you know, and what information could they have access to?</p>
+
+<p>If you work in security, development, IT, telecom — that could mean that you have access to some information that some country would like to have. Is that paranoia? A few years ago, some would say yes — now that we have a better insight into the scope and scale of intelligence activities, we know it’s simply reality.</p>
+
+<h2>Personal Threat Models</h2>
+
+<p>I have long encouraged people to have a personal threat model — what are your realistic threats? When talking to others, keep in mind that their threat model may be different than yours, and things you see as being paranoid could be quite prudent for them, due to the different risks they face.</p>
+
+<p>For me, to be honest, I’m not that interesting to a foreign power — if anything, trading emails with Glenn Greenwald and trading tweets with people like <a href="https://twitter.com/thegrugq">the grugq</a> has done more to make me a target than any professional activity. The information I can access because of my job is somewhat interesting, and is certainly of value — but more to the Russian Mob than to a foreign government. I pay attention to who I talk to, to what I make public, to what my accounts have access to, so I know what my risks are.</p>
+
+<p>If you work for a more interesting company, or are engaged in research that could be useful, or even just know people that could be more interesting than you, your threats could be completely different. Of course, also have to factor in locations — if you are outside of the US and work for a company that could have interesting information, then your threats may be far more complex.</p>
+
+<p>Defining the line between reasonable and paranoid is harder than ever, and may vary from person to person.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-17T22:11:00-05:00" pubdate data-updated="true">Feb 17<span>th</span>, 2015</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/01/12/religion-free-speech-freedom-from-offense/" title="Previous Post: Religion, Free Speech & Freedom from Offense">&laquo; Religion, Free Speech & Freedom from Offense</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2015 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
