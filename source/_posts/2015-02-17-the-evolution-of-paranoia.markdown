@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-That researchers from Kaspersky Lab uncovered malware that uses [hard-drive firmware](https://blog.kaspersky.com/equation-hdd-malware/) has now been throughly discussed — perhaps too much for some people. It’s not exactly Earth-shattering news either, the idea has been discussed for years, and has been [publicly demonstrated](http://spritesmods.com/?art=hddhack). [Brandon Wilson](http://brandonw.net/) and I where even working proof of concept for SSD controllers to demonstrate this based on our [BadUSB](http://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/) work.
+That researchers from Kaspersky Lab uncovered malware that uses [hard-drive firmware](https://blog.kaspersky.com/equation-hdd-malware/) has now been throughly discussed — perhaps too much for some people. It’s not exactly Earth-shattering news either, the idea has been discussed for years, and has been [publicly demonstrated](http://spritesmods.com/?art=hddhack). [Brandon Wilson](http://brandonw.net/) and I were even working proof of concept for SSD controllers to demonstrate this based on our [BadUSB](http://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/) work.
 
 This isn’t about that story, exactly. This is about paranoia, and how it has changed over the last few years — and even the last few months. 
 
