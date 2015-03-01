@@ -6,13 +6,13 @@ title: About
 ---
 
 ## Who am I?
-I’m Adam Caudill, a 32 year-old independent security researcher, a software developer, a husband, father, atheist. I’m a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](/bayonet-collection/) and something of a technical elitist.
+I’m Adam Caudill, a 33 year-old independent security researcher, a software developer, a husband, father, atheist. I’m a lover of fine [Japanese Katanas](http://flickr.com/photos/adamcaudill/sets/72157594276549640/), a collector of [bayonets](/bayonet-collection/) and something of a technical elitist.
 
 I started my career in software development, though I’ve always had a passion for security. From the earliest days of my career, it’s been a focus, one that receives far more of my today than it once did.
 
 Much of my time is spent on both writing and breaking software. I live for challenges, so I tend to stay away from the common work (web development, web security, etc.) and focus on things that are a bit more interesting.
 
-In my youth I spent much of my time on [photography](/photo/), even working for a while as a photojournalist - though my schedule leaves little time for this today. While I still love the art and science of photography, it’s a passion that I’ve had to leave behind. While I’ve had to step away from photography, the time working as a photojournalist had a huge impact on me, and journalism has been a topic I care deeply about since then.
+In my youth I spent much of my time on [photography](/photo/), even working for a while as a photojournalist — though my schedule leaves little time for this today. While I still love the art and science of photography, it’s a passion that I’ve had to leave behind. While I’ve had to step away from photography, the time working as a photojournalist had a huge impact on me, and journalism has been a topic I care deeply about since then.
 
 If you want more, take a look at my [resume](/resume/); though it’s a bit dated.
 
