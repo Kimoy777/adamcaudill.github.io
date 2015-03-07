@@ -8,6 +8,8 @@ footer: true
 
 I speak at various events on security, development, and related topics. If you would like me to speak at your event, feel free to [contact me]({{ root_url }}/pgp/).
 
+{% img center /files/CodeMash_2015_1_cr_sm.jpg %}
+
 ## Recent & Upcoming Talks
 
 * [Stir Trek](http://stirtrek.com/) (May 1st, 2015) - What you don’t know about crypto can hurt you!
