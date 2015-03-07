@@ -12,6 +12,7 @@ I speak at various events on security, development, and related topics. If you w
 
 ## Recent & Upcoming Talks
 
+* [BSides Knoxville](https://bsidesknoxville.com/) (May 15th, 2015) - *Event Organizer*
 * [Stir Trek](http://stirtrek.com/) (May 1st, 2015) - What you don’t know about crypto can hurt you!
 * [Code PaLOUsa](http://www.codepalousa.com/) (April 27th - April 30th, 2015) - What you don’t know about crypto can hurt you!
 * [CodeMash](http://www.codemash.org/) (January 6th - 9th, 2015) - What you don’t know about crypto can hurt you!
