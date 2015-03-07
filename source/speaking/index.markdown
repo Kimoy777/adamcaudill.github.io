@@ -14,6 +14,7 @@ I speak at various events on security, development, and related topics. If you w
 * [Code PaLOUsa](http://www.codepalousa.com/) (April 27th - April 30th, 2015) - What you don’t know about crypto can hurt you!
 * [CodeMash](http://www.codemash.org/) (January 6th - 9th, 2015) - What you don’t know about crypto can hurt you!
 * [SC Congress Chicago](http://www.sccongress.com/chicago/) (November 18th, 2014) - BadUSB & Beyond: Threats Hiding Inside The Enterprise
+* [Tri-JS](http://www.meetup.com/Tri-JS/) (October 14th, 2014) - JavaScript, Security and You
 * [DerbyCon](https://www.derbycon.com/) (September 24th - 28th, 2014) - Making BadUSB Work For You
 * [DEF CON Crypto & Privacy Village](https://cryptovillage.org/) (August 8th - 9th, 2014) - SMIMP, Email, Superglue
 
