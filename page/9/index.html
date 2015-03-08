@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="A friend of mine has been evaluating an open source instant messaging client called Spark, which can be linked to Active Directory for authentication &hellip;">
+  <meta name="description" content="NeoInvoice is a multi-tenant open source invoicing system, that currently contains an unauthenticated blind SQL injection condition in signup_check. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,129 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/12/neoinvoice-blind-sql-injection-cve-2012-3477/">NeoInvoice Blind SQL Injection (CVE-2012-3477)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T16:15:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/tlhunter/neoinvoice">NeoInvoice</a> is a multi-tenant open source invoicing system, that currently contains an unauthenticated blind SQL injection condition in <code>signup_check.php</code>. The input for the <code>value</code> field isn&#8217;t being properly sanitized, and is used in string concatenation to create the SQL query:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="s2">&quot;config.php&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;username&#39;</span> <span class="o">||</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;email&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coupon&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;coupon&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Field&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$value</span> <span class="o">=</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9_.\-\*\/\+\, @]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$value</span> <span class="o">!=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$connect</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nx">MYSQL_HOSTNAME</span><span class="p">,</span> <span class="nx">MYSQL_USERNAME</span><span class="p">,</span> <span class="nx">MYSQL_PASSWORD</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$connect</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">.</span> <span class="nb">mysql_error</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="s2">&quot;SELECT </span><span class="si">$field</span><span class="s2"> FROM </span><span class="si">$table</span><span class="s2"> WHERE </span><span class="si">$field</span><span class="s2"> = &#39;</span><span class="si">$value</span><span class="s2">&#39; LIMIT 1&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">mysql_select_db</span><span class="p">(</span><span class="nx">MYSQL_DATABASE</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="nv">$query</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">mysql_num_rows</span><span class="p">(</span><span class="nv">$result</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$taken</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$not_taken</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Line #29 there is the key, by concatenating untrusted data into the SQL query, it has made SQL injection trivial. This vulnerability can be demonstrated with the following request:</p>
+
+<p><code>signup_check.php?field=username&amp;value='+OR+SLEEP(5)+OR+'</code></p>
+
+<p>This results in the following query being executed:</p>
+
+<p><code>SELECT username FROM user WHERE username = '' OR SLEEP(5) OR '' LIMIT 1</code></p>
+
+<p>The author has been notified, but has yet to respond. Based on the one open <a href="https://github.com/tlhunter/neoinvoice/issues/2">ticket</a> for the project, there&#8217;s likely other possible attack vectors.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -739,60 +862,6 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">Monitor iPhone HTTP(S) Traffic With Fiddler</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-10T14:10:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For a research project I decided that I needed to monitor the traffic to and from my iPhone - both HTTP and HTTPS. Having had so much luck with Fiddler in the past, it was the first place I looked. There are a number of posts on this topic, but few that provide a clear and complete picture of what&#8217;s needed. So I wrote one.</p>
-
-<p>First, install the latest version of <a href="http://www.fiddler2.com/fiddler2/version.asp">Fiddler</a>, then install the iOS-compatible <a href="http://www.fiddler2.com/dl/FiddlerCertMaker.exe">certificate generator</a>. Now update the settings to decrypt HTTPS traffic:</p>
-
-<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1430.png"></p>
-
-<p>Next, update the settings to allow remote connections (make sure that restart Fiddler after this):</p>
-
-<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1433.png"></p>
-
-<p>Then export the Fiddler Root Certificate to your desktop from the options dialog:</p>
-
-<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1436.png"></p>
-
-<p>Email the <code>FiddlerRoot.cer</code> file to your iPhone - you&#8217;ll need to import and trust the certificate to make this work. To install certificate, just click on the attachment and click the &#8216;Install&#8217; button.</p>
-
-<p>Now configure your iPhone to use the Fiddler proxy. The setting can be found at Setting -> Wi-Fi -> (your network) -> HTTP Proxy -> Manual. Set the &#8216;Server&#8217; to the IP address of of your PC, then set &#8216;Port&#8217; to 8888, and &#8216;Authentication&#8217; to off.</p>
-
-<p>You should now be able to see all of the HTTP and HTTPS traffic going across your phone. It&#8217;s worth noting though, that some applications won&#8217;t work while using the proxy - Twitter being one, though most work without issue.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -825,6 +894,10 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -838,10 +911,6 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="The fact that LinkedIn was breached has been well covered and confirmed, but in their confirmation they said something that I personally found &hellip;">
+  <meta name="description" content="For a research project I decided that I needed to monitor the traffic to and from my iPhone - both HTTP and HTTPS. Having had so much luck with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/10/monitor-iphone-http-s-traffic-with-fiddler/">Monitor iPhone HTTP(S) Traffic With Fiddler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T14:10:00-04:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For a research project I decided that I needed to monitor the traffic to and from my iPhone - both HTTP and HTTPS. Having had so much luck with Fiddler in the past, it was the first place I looked. There are a number of posts on this topic, but few that provide a clear and complete picture of what&#8217;s needed. So I wrote one.</p>
+
+<p>First, install the latest version of <a href="http://www.fiddler2.com/fiddler2/version.asp">Fiddler</a>, then install the iOS-compatible <a href="http://www.fiddler2.com/dl/FiddlerCertMaker.exe">certificate generator</a>. Now update the settings to decrypt HTTPS traffic:</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1430.png"></p>
+
+<p>Next, update the settings to allow remote connections (make sure that restart Fiddler after this):</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1433.png"></p>
+
+<p>Then export the Fiddler Root Certificate to your desktop from the options dialog:</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/2012-06-10_1436.png"></p>
+
+<p>Email the <code>FiddlerRoot.cer</code> file to your iPhone - you&#8217;ll need to import and trust the certificate to make this work. To install certificate, just click on the attachment and click the &#8216;Install&#8217; button.</p>
+
+<p>Now configure your iPhone to use the Fiddler proxy. The setting can be found at Setting -> Wi-Fi -> (your network) -> HTTP Proxy -> Manual. Set the &#8216;Server&#8217; to the IP address of of your PC, then set &#8216;Port&#8217; to 8888, and &#8216;Authentication&#8217; to off.</p>
+
+<p>You should now be able to see all of the HTTP and HTTPS traffic going across your phone. It&#8217;s worth noting though, that some applications won&#8217;t work while using the proxy - Twitter being one, though most work without issue.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -344,90 +398,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/13/gpg4win-idea/">Gpg4win & IDEA</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-13T03:22:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Huge PGP files, an ancient version of PGP, and errors every time they tried to decrypt a file - that was my completely unexpected challenge on Friday. Dealing with file processing issues really isn&#8217;t part of my job description, but I&#8217;m the closest thing my company has to an expert when it comes to encryption, so the task fell to me.</p>
-
-<p>After looking at the options and issues to get the server upgraded to a non-stone-age version of the PGP software, the easiest answer looked like decrypting the files with GPG - it wasn&#8217;t as easy as expected, but I did get some useful information that may help others.</p>
-
-<h3>IDEA</h3>
-
-<p>If it wasn&#8217;t for <a href="http://en.wikipedia.org/wiki/International_Data_Encryption_Algorithm">IDEA</a> this would have been easy, but the keys used for this transfer were old (thankfully the data isn&#8217;t sensitive) and IDEA it was. GPG <a href="http://www.gnupg.org/faq/why-not-idea.en.html">doesn&#8217;t support IDEA</a> due to various patents (most if not all of which are now expired), so that leaves us to use a rather old plug-in to fill in the gap. Unfortunately for me, the server that hosts up that plug-in is misconfigured, making it impossible to retrieve the file.</p>
-
-<p>Thankfully there are <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/gpg-idea.htm">other sources</a> (<a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, <a href="http://adamcaudill.com/files/ideadll.zip">mirror</a>).</p>
-
-<h3>Gpg4win</h3>
-
-<p>I used <a href="http://www.gpg4win.org/">Gpg4win</a> so I could decrypt the files from Windows - which had unexpected consequences. The current version of Gpg4win uses gpg version 2.0, which isn&#8217;t compatible with the IDEA plug-in - a fact that isn&#8217;t pointed out anywhere.</p>
-
-<p>The key to making this work was to use an older version of Gpg4win - I used <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">v1.1.4</a>, which thankfully is compatible with the plug-in. Though I do wish I found this out a few hours sooner than I did.</p>
-
-<h3>Setup</h3>
-
-<p>The setup for this is pretty simple, it&#8217;s documented in a few places, but here is a quick wrap-up:</p>
-
-<ol>
-<li>Install <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">Gpg4win v1.1.4</a></li>
-<li>Download the <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, and copy to <code>C:\Program Files (x86)\GNU\GnuPG\lib</code></li>
-<li><p>Update (or create if it’s not there) the <code>C:\Users\&lt;user&gt;\AppData\Roaming\gnupg\gpg.conf</code> file to include the following:</p>
-
-<p> <code>load-extension "C:\Program Files (x86)\GNU\GnuPG\lib\idea.dll"</code></p></li>
-</ol>
-
-
-<p>Once this is done, you can run <code>gpg --version</code> which will give you information about what algorithms are supported. It should look like this:</p>
-
-<pre><code>&gt;gpg --version
-gpg (GnuPG) 1.4.9 (Gpg4win 1.1.4)
-Copyright (C) 2008 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-
-Home: C:/Users/Adam/AppData/Roaming/gnupg
-Supported algorithms:
-Pubkey: RSA, RSA-E, RSA-S, ELG-E, DSA
-Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH
-Hash: MD5, SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224
-Compression: Uncompressed, ZIP, ZLIB, BZIP2
-</code></pre>
-
-<p>If you note the first item on the &#8220;Cipher&#8221; line is IDEA, that means it worked. If you don&#8217;t see that - something went wrong, probably a bad path.</p>
-
-<p>This version is able to handle the large files that old versions of PGP can&#8217;t, and it allowed for a quick solution to the problem until we can upgrade the server.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/11/">&larr; Older</a>
@@ -460,6 +430,10 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -473,10 +447,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>

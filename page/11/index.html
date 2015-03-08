@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="While preparing to deploy an internal application I started to wonder if all of the workstations were properly configured - after a quick search I &hellip;">
+  <meta name="description" content="Huge PGP files, an ancient version of PGP, and errors every time they tried to decrypt a file - that was my completely unexpected challenge on Friday &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/13/gpg4win-idea/">Gpg4win & IDEA</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T03:22:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Huge PGP files, an ancient version of PGP, and errors every time they tried to decrypt a file - that was my completely unexpected challenge on Friday. Dealing with file processing issues really isn&#8217;t part of my job description, but I&#8217;m the closest thing my company has to an expert when it comes to encryption, so the task fell to me.</p>
+
+<p>After looking at the options and issues to get the server upgraded to a non-stone-age version of the PGP software, the easiest answer looked like decrypting the files with GPG - it wasn&#8217;t as easy as expected, but I did get some useful information that may help others.</p>
+
+<h3>IDEA</h3>
+
+<p>If it wasn&#8217;t for <a href="http://en.wikipedia.org/wiki/International_Data_Encryption_Algorithm">IDEA</a> this would have been easy, but the keys used for this transfer were old (thankfully the data isn&#8217;t sensitive) and IDEA it was. GPG <a href="http://www.gnupg.org/faq/why-not-idea.en.html">doesn&#8217;t support IDEA</a> due to various patents (most if not all of which are now expired), so that leaves us to use a rather old plug-in to fill in the gap. Unfortunately for me, the server that hosts up that plug-in is misconfigured, making it impossible to retrieve the file.</p>
+
+<p>Thankfully there are <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/gpg-idea.htm">other sources</a> (<a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, <a href="http://adamcaudill.com/files/ideadll.zip">mirror</a>).</p>
+
+<h3>Gpg4win</h3>
+
+<p>I used <a href="http://www.gpg4win.org/">Gpg4win</a> so I could decrypt the files from Windows - which had unexpected consequences. The current version of Gpg4win uses gpg version 2.0, which isn&#8217;t compatible with the IDEA plug-in - a fact that isn&#8217;t pointed out anywhere.</p>
+
+<p>The key to making this work was to use an older version of Gpg4win - I used <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">v1.1.4</a>, which thankfully is compatible with the plug-in. Though I do wish I found this out a few hours sooner than I did.</p>
+
+<h3>Setup</h3>
+
+<p>The setup for this is pretty simple, it&#8217;s documented in a few places, but here is a quick wrap-up:</p>
+
+<ol>
+<li>Install <a href="http://files.gpg4win.org/gpg4win-1.1.4.exe">Gpg4win v1.1.4</a></li>
+<li>Download the <a href="http://www.spywarewarrior.com/uiuc/gpg-idea/ideadll.zip">plug-in</a>, and copy to <code>C:\Program Files (x86)\GNU\GnuPG\lib</code></li>
+<li><p>Update (or create if it’s not there) the <code>C:\Users\&lt;user&gt;\AppData\Roaming\gnupg\gpg.conf</code> file to include the following:</p>
+
+<p> <code>load-extension "C:\Program Files (x86)\GNU\GnuPG\lib\idea.dll"</code></p></li>
+</ol>
+
+
+<p>Once this is done, you can run <code>gpg --version</code> which will give you information about what algorithms are supported. It should look like this:</p>
+
+<pre><code>&gt;gpg --version
+gpg (GnuPG) 1.4.9 (Gpg4win 1.1.4)
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Home: C:/Users/Adam/AppData/Roaming/gnupg
+Supported algorithms:
+Pubkey: RSA, RSA-E, RSA-S, ELG-E, DSA
+Cipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH
+Hash: MD5, SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224
+Compression: Uncompressed, ZIP, ZLIB, BZIP2
+</code></pre>
+
+<p>If you note the first item on the &#8220;Cipher&#8221; line is IDEA, that means it worked. If you don&#8217;t see that - something went wrong, probably a bad path.</p>
+
+<p>This version is able to handle the large files that old versions of PGP can&#8217;t, and it allowed for a quick solution to the problem until we can upgrade the server.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -393,66 +477,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/12/moving-to-octopress/">Moving to Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-12T21:15:00-04:00" pubdate data-updated="true">Apr 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As you might be able to tell from looking, something is different around here.  So what&#8217;s changed?</p>
-
-<p><strong>Octopress</strong></p>
-
-<p>I&#8217;ve switched from WordPress to <a href="http://octopress.org/">Octopress</a>, a <a href="https://github.com/mojombo/jekyll">Jekyll</a>-based blogging platform that generates a completely static site. So there&#8217;s no database, no dynamic code (i.e. PHP), minimal memory footprint (which is great, given my <a href="http://adamcaudill.com/2012/04/05/quickpacket-hosting/">recent hosting change</a>) and best of all - it&#8217;s fast and secure. Using Octopress, it greatly reduces the security surface of the server, which means I spend less time worrying about updates and more time writing.</p>
-
-<p>Thanks to the completely static nature of the platform, it&#8217;s extremely fast - it allows the server software to do what it does best: shove bits down the wire, instead of waiting on a database and parsing and executing dynamic code. In the coming days I&#8217;ll be tweaking the server software to optimize for performance, so it should get even faster.</p>
-
-<p>I&#8217;m still trying to figure out the ideal workflow, but so far I think it&#8217;s the right platform for me. Hopefully, I&#8217;ll be able to keep the friction low and spend more time writing.</p>
-
-<p><strong>WordPress</strong></p>
-
-<p>So what about WordPress? I still love the product - in general. It&#8217;s not perfect, and while it&#8217;s easy to get running, it takes effort to make it fast and secure - something most people don&#8217;t do. If you want a full CMS and you&#8217;re willing to do it right, WordPress is a great option.</p>
-
-<p>Personally, there are some frustrations with WordPress that I&#8217;m happy to be rid of - not the least of which is fighting the WordPress editor to maintain code formatting. It&#8217;s little things like this, that has had me looking for better options.</p>
-
-<p>For your average non-developer, something like Octopress has too much friction - as the tag line says, it&#8217;s for hackers. If you aren&#8217;t comfortable with Ruby development, this probably isn&#8217;t the solution for you. If you are, and you want a lightning fast, flexible, and powerful platform - it&#8217;s a great option.</p>
-
-<p><strong>Comments</strong></p>
-
-<p>You may have noticed that there isn&#8217;t a comment form - I&#8217;ve went back to not having comments.</p>
-
-<p>While I do greatly appreciate those that have taken the time to leave a comment, comments make up the vast minority of feedback I receive. Twitter, and Facebook are more common - so instead of slowing the site down and wasting my time fighting spam, I&#8217;ll just turn off the comments.</p>
-
-<p>If you have feedback - question, suggestions, anything else - <a href="http://twitter.com/adamcaudill">find me on twitter</a> for the quickest response.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -485,6 +509,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -498,10 +526,6 @@
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>

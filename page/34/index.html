@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="This weekend I&#8217;ve made a few upgrades to the site, a software upgrade, a few new plugins as well as some tweaks to clean things up. Hopefully &hellip;">
+  <meta name="description" content="The coding guidelines at my job have a rather interesting requirement: code must be wrapped at 100 characters. If you fail to meet this on any line &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/10/30/vertical-column-indicator-for-visual-studio/">Vertical Column Indicator for Visual Studio</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-10-30T20:55:08-05:00" pubdate data-updated="true">Oct 30<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The coding guidelines at my job have a rather interesting requirement: code must be wrapped at 100 characters. If you fail to meet this on any line of code, you fail the code review. In the year I&#8217;ve worked at this company I&#8217;ve learned to guess how long a line is quite well. As of today, no more guessing.</p>
+
+<p>Here&#8217;s a quick registry hack to add a vertical line in the editor at any column you wish, just double click the <a href="http://adamcaudill.com/files/2006/10/vscolumnline.zip">REG file</a> and you&#8217;re set. The contents of the file look something like this:</p>
+
+<pre><code>Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\8.0\Text Editor]
+"Guides"="RGB(128, 128, 128) 100"
+
+[HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\7.1\Text Editor]
+"Guides"="RGB(128, 128, 128) 100"`
+</code></pre>
+
+<p>The setting works something like this: The <code>RGB()</code> part defines the color of the line, the number at the end defines the column the line is displayed at. If your style defines a limit on the length of a line, this is a great way to see at a glance if you&#8217;re going too long.</p>
+
+<p><em>Note:</em> This adds the key for both Visual Studio 2003 and Visual Studio 2005.</p>
+
+<p><strong>Update:</strong> The original REG file I linked to had a formatting error that caused the data to import improperly. I&#8217;ve replaced the file with a working copy.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -250,44 +303,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/10/15/bbpress-released/">bbPress Released</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-10-15T00:09:15-04:00" pubdate data-updated="true">Oct 15<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After 2 years, my <a href="http://bbpress.org/">favorite forum software</a> has been <a href="http://bbpress.org/blog/2006/10/bbpress-072/">officially released</a>. I&#8217;ve been a big fan of bbPress since it&#8217;s early days, I even had at least one patch accepted. So I guess one could say I was a developer on the project (although, a very minor one).</p>
-
-<p>It&#8217;s great to see this project make it. If you&#8217;re looking for high-quality PHP-based forum solution without the weight of something like <a href="http://www.vbulletin.com/">vB</a>, then bbPress is the answer.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/35/">&larr; Older</a>
@@ -320,6 +335,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -333,10 +352,6 @@
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>

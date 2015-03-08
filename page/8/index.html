@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="(Update: See here for more information about what they did wrong, including a vulnerability I found in the password handling of the Android app.) So &hellip;">
+  <meta name="description" content="Primum non nocere (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/26/first-do-no-harm-developers-and-bad-apis/">First, Do No Harm: Developers &amp; Bad APIs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-26T21:11:00-04:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Primum non nocere</strong> (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more people would think about, developers especially - and primarily when writing new APIs. In general, developers don&#8217;t have an impressive history with security - quite frankly, developers suck. Seeing as I consider myself a developer, that&#8217;s painful to admit.</p>
+
+<p>Chris Andrè Dale posted an interesting article some time ago that got me thinking: <a href="http://www.securesolutions.no/why-its-easy-being-a-hacker/">Why it&#8217;s easy being a hacker: A SQL injection case study</a> - Chris pointed out the problems with educational material that developers are using, and just how bad the examples are. SQL injection is everywhere and very few examples encourage developers to do it the right way - for that matter, very few are telling developers that there is a right way. I&#8217;m sure we&#8217;ve all seen similar issues in other areas, not just for SQL injection.</p>
+
+<p>I had to ask, why? How did we end up in this situation? The industry has come so far in so many ways, it&#8217;s unbelievable that we still have these fundamental issues. It&#8217;s clear that the industry is failing, and these are just a few of the areas:</p>
+
+<ul>
+<li>Educational material is riddled with errors</li>
+<li>Authors rarely understand the security implications of their samples</li>
+<li>Developers aren&#8217;t taking the time to research the right way to do things</li>
+<li>Developers don&#8217;t understand the need to consider security implications</li>
+</ul>
+
+
+<p>&#8230;and I could keep going.</p>
+
+<p><strong>Whose fault is it really?</strong></p>
+
+<p>If you look at the PHP/MySQL examples that are floating around, you&#8217;ll notice something interesting: it&#8217;s really, <em>really</em> easy to write bad code. The first examples anyone sees is a simple, one line, easy to understand statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">mysqli_query($link, &quot;INSERT INTO Persons (FirstName) VALUES (&#39;$_POST[firstname]&#39;)&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this simple command is what people use - with no idea how dangerous it is. The API makes writing bad code easy, but how about good code?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">$stmt = $mysqli-&gt;prepare(&quot;INSERT INTO Persons (FirstName) VALUES (?)&quot;);</span>
+</span><span class='line'><span class="x">$stmt-&gt;bind_param(&quot;s&quot;, $_POST[firstname]);</span>
+</span><span class='line'><span class="x">$stmt-&gt;execute();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first example is simple and clear, the second is a <em>bit</em> less obvious. The API design itself is leading developers down the wrong path - it supports two syntaxes, one simple and easy to comprehend - but extremely dangerous, and one that&#8217;s more complex, less obvious, but safer. Without understanding the security implications, which syntax do you think developers will pick?</p>
+
+<p>While developers should know more than they do (and I&#8217;m not trying to excuse their ignorance) - the years of effort and the daily reports of SQLi breaches should tell us that trying to educate all of the world&#8217;s developers isn&#8217;t working. As long as the <em>easy way</em> to use an API is the insecure way, we&#8217;ll continue to see a steady stream of breaches.</p>
+
+<p>While I agree with Chris that the documentation is a real issue - the APIs are just as much to blame. <em>Bad APIs make for bad developers</em>.</p>
+
+<p><strong>Secure by default</strong></p>
+
+<p>When a developer is working on a new API, they should ask if they are doing harm with the design. The maxim &#8220;first, do no harm&#8221; should be running through their head with each decision. Doing no harm - being secure by default, not leading developers astray - really should be the foremost goal of any API.</p>
+
+<p>I don&#8217;t mean to pick on PHP&#8217;s MySQL API here, it&#8217;s just one of many that are designed this way. Look at any API on any platform, odds are better than not that security was an afterthought - if it was given any thought at all.</p>
+
+<p>As anyone who writes code can attest, writing secure code is hard - but when the APIs that developers are given encourage insecure usage, it&#8217;s that much more likely that holes will be found. While organizations like <a href="https://www.owasp.org/index.php/Main_Page">OWASP</a> are making some progress in education and awareness, it&#8217;s obviously not enough. Platforms need to be updated, APIs need to be fixed - this won&#8217;t be a quick process, but we won&#8217;t see real change until the APIs are improved.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -380,129 +464,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/12/neoinvoice-blind-sql-injection-cve-2012-3477/">NeoInvoice Blind SQL Injection (CVE-2012-3477)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-12T16:15:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/tlhunter/neoinvoice">NeoInvoice</a> is a multi-tenant open source invoicing system, that currently contains an unauthenticated blind SQL injection condition in <code>signup_check.php</code>. The input for the <code>value</code> field isn&#8217;t being properly sanitized, and is used in string concatenation to create the SQL query:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="s2">&quot;config.php&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;username&#39;</span> <span class="o">||</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;email&#39;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coupon&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$field</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;coupon&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$taken</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="nv">$not_taken</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Field&lt;/div&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nv">$value</span> <span class="o">=</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9_.\-\*\/\+\, @]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]);</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$value</span> <span class="o">!=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;Invalid Value&lt;/div&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$connect</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nx">MYSQL_HOSTNAME</span><span class="p">,</span> <span class="nx">MYSQL_USERNAME</span><span class="p">,</span> <span class="nx">MYSQL_PASSWORD</span><span class="p">);</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$connect</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">die</span><span class="p">(</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">error</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">.</span> <span class="nb">mysql_error</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="s2">&quot;SELECT </span><span class="si">$field</span><span class="s2"> FROM </span><span class="si">$table</span><span class="s2"> WHERE </span><span class="si">$field</span><span class="s2"> = &#39;</span><span class="si">$value</span><span class="s2">&#39; LIMIT 1&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">mysql_select_db</span><span class="p">(</span><span class="nx">MYSQL_DATABASE</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="nv">$query</span><span class="p">,</span> <span class="nv">$connect</span><span class="p">);</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">mysql_num_rows</span><span class="p">(</span><span class="nv">$result</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$taken</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$not_taken</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Line #29 there is the key, by concatenating untrusted data into the SQL query, it has made SQL injection trivial. This vulnerability can be demonstrated with the following request:</p>
-
-<p><code>signup_check.php?field=username&amp;value='+OR+SLEEP(5)+OR+'</code></p>
-
-<p>This results in the following query being executed:</p>
-
-<p><code>SELECT username FROM user WHERE username = '' OR SLEEP(5) OR '' LIMIT 1</code></p>
-
-<p>The author has been notified, but has yet to respond. Based on the one open <a href="https://github.com/tlhunter/neoinvoice/issues/2">ticket</a> for the project, there&#8217;s likely other possible attack vectors.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -535,6 +496,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -548,10 +513,6 @@
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>

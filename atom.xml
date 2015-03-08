@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2015-03-07T16:52:39-05:00</updated>
+  <updated>2015-03-08T19:11:25-04:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[On the Underhanded Crypto Contest]]></title>
+    <link href="https://adamcaudill.com//2015/03/08/on-the-underhanded-crypto-contest/"/>
+    <updated>2015-03-08T17:23:00-04:00</updated>
+    <id>https://adamcaudill.com//2015/03/08/on-the-underhanded-crypto-contest</id>
+    <content type="html"><![CDATA[<p>On August 15th of last year I asked if anybody would be interested in a contest for the best, most evil underhanded crypto techniques — the response was clear, and less than a month later I announced the creation of the contest.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Proudly announcing, the <a href="https://twitter.com/hashtag/UnderhandedCrypto?src=hash">#UnderhandedCrypto</a> Contest! See here for details / rules: <a href="https://t.co/mNV0KCVdLu">https://t.co/mNV0KCVdLu</a></p>&mdash; Adam Caudill (@adamcaudill) <a href="https://twitter.com/adamcaudill/status/507316560240066561">September 3, 2014</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Before I go any further, the <a href="https://underhandedcrypto.com/">contest</a> simply wouldn’t have been possible without the huge effort by <a href="https://defuse.ca/">Taylor Hornby</a> to help organize, coordinate and communicate. I couldn’t have asked for a better co-organizer for this event.</p>
+
+<p>Just over six months after the announcement, yesterday we finally announced the winners (only two months later than planned).</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Officially announcing the winners! <a href="https://t.co/5egBEis7xQ">https://t.co/5egBEis7xQ</a> Congrats John Meacham &amp; Gaëtan Leurent</p>&mdash; Underhanded Crypto (@UnderCrypto) <a href="https://twitter.com/UnderCrypto/status/574355268848517120">March 7, 2015</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>The winners, and really all of those that entered, put an amazing amount of effort into it. The entries were fantastic, and quite honestly a few people found them a bit scary - simple, subtle, effective. This is exactly what we wanted though.</p>
+
+<p>The goal of the contest, and the driving reason that we required the submissions be under an open license, was to provide researchers, developers, and reviewers with better insight into how these flaws can be introduced — and hopefully how to detect them.</p>
+
+<p>Based on the comments we’ve received on the winners, I think this will certainly show how subtle these attacks can be. It’s our hope that this turns into a valuable training resource for the community, and will lead to fewer backdoors — intentional or otherwise.</p>
+
+<p>We are discussing plans for the next Underhanded Crypto Contest now, and we’ll be announcing something soon.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Evolution of Paranoia]]></title>
@@ -1386,47 +1415,6 @@
 <p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
 
 <p>We, the security community, owe it to users to provide them with useful feedback so that they can protect themselves - providing negative feedback in the browser showing the weakness of HTTP would be a large step in that direction - and to urge site owners to adopt HTTPS as soon as possible.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[On Opportunistic Encryption]]></title>
-    <link href="https://adamcaudill.com//2014/02/25/on-opportunistic-encryption/"/>
-    <updated>2014-02-25T14:51:00-05:00</updated>
-    <id>https://adamcaudill.com//2014/02/25/on-opportunistic-encryption</id>
-    <content type="html"><![CDATA[<p>Opportunistic encryption has become quite a hot topic recently, and blew up in a big way thanks to an <a href="https://en.wikipedia.org/wiki/Internet_Draft">Internet Draft</a> that was published on February 14th for what amounts to sanctioned man-in-the-middle. Privacy advocates were quickly up in arms - but it&#8217;s not that simple (<a href="http://tools.ietf.org/html/draft-loreto-httpbis-trusted-proxy20-01">see here</a>). As <a href="http://hillbrad.typepad.com/blog/2014/02/trusted-proxies-and-privacy-wolves.html">pointed out</a> by <a href="https://twitter.com/hillbrad">Brad Hill</a>, this isn&#8217;t about HTTP<strong>S</strong> traffic, but HTTP traffic using unauthenticated TLS; thanks to poor wording in the document, it&#8217;s easy to miss that fact if you just skim it.</p>
-
-<p>It&#8217;s routine practice for ISPs to MITM unencrypted traffic today; it&#8217;s well known that <a href="https://blog.ryankearney.com/2013/01/comcast-caught-intercepting-and-altering-your-web-traffic/">Comcast does it</a>. This practice won&#8217;t change once we move to HTTP2, regardless of unauthenticated TLS - the only question is will users know about it.</p>
-
-<p>But this isn&#8217;t about that single internet draft, it&#8217;s about what this tells us about opportunistic encryption.</p>
-
-<p>We&#8217;ve seen many smart people get very upset (myself included) over a misunderstanding about how opportunistic encryption fits into the new HTTP2 paradigm. What does that tell us about how it&#8217;ll be perceived in the future?</p>
-
-<p><strong>What does opportunistic encryption buy us?</strong></p>
-
-<p>We can break attackers down into two classes:</p>
-
-<ul>
-<li>Active - Will intercept and re-route traffic, at small or large scale.</li>
-<li>Passive - Will watch what goes over the wire, but is unable or unwilling to interfere with it.</li>
-</ul>
-
-
-<p>Opportunistic encryption prevents passive attackers from being able to collect data, they will either fail or be forced into an active role (if they are positioned and financed to do so). While many talk about increasing the cost of surveillance for groups like the NSA, I doubt that will create a substantial impact - we know that they are both active and passive today. So they are positioned for active attacks when they so desire, though there may be some reduction of monitoring lower value targets due to increased complexity / resource demands.</p>
-
-<p><strong>What opportunistic encryption doesn&#8217;t do</strong></p>
-
-<p>Unauthenticated TLS skips the most vital step in the process - it doesn&#8217;t verify that the server is actually the one you intend to talk to, meaning anyone that can control network traffic between you and the end server, can pretend to be the end server, monitoring all traffic. Which is, exactly what we have today with HTTP traffic.</p>
-
-<p>So, you know your traffic is encrypted, what you don&#8217;t know is who has the keys, or how many people have seen the traffic. You&#8217;re safe from passive threats, but it provides no protection against active threats - but it&#8217;s also not intended to.</p>
-
-<p><strong>Should we pursue it?</strong></p>
-
-<p>If people weren&#8217;t involved - it eliminates a class of attacks without substantial costs, and forces passive attackers to become active. Overall, that sounds like a win, but there&#8217;s a problem: people.</p>
-
-<p>Opportunistic encryption isn&#8217;t real security, it doesn&#8217;t stand up to active attackers - it provides protection against only a specific type of attack. Real TLS provides protection against both active and passive threats. If people understood this, opportunistic encryption would be fine - but people don&#8217;t understand that, that&#8217;s clear.</p>
-
-<p>If people see it as a &#8220;just works&#8221; alternative to real TLS, then the harm it does greatly outweighs the value it provides. It will give a false sense of security, when in reality there is none.</p>
 ]]></content>
   </entry>
   

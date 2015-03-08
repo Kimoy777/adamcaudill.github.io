@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="In a somewhat (but not entirely) surprising announcement, Google is removing support for H.264 video from Chrome. This change to their implementation &hellip;">
+  <meta name="description" content="I recently had an idea for a small web application, and seeing as I&#8217;ve not spent as much time as I&#8217;ve wanted to using Rails - I opted to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,123 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/28/rails-3-dreamhost-ps/">Rails 3 & Dreamhost PS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-28T02:47:01-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently had an idea for a small web application, and seeing as I&#8217;ve not spent as much time as I&#8217;ve wanted to using <a href="http://rubyonrails.org/">Rails</a> - I opted to build it the latest version of Rails. A decision that caused far more grief than I expected.</p>
+
+<p>If you are using <a href="http://www.dreamhost.com/r.cgi?485850">Dreamhost&#8217;s</a> PS offering (a managed VPS for those that don&#8217;t know), the seemingly simple task of getting a Rails 3 application up and running is actually quite complex. The root cause of this is that Dreamhost&#8217;s OS image is based on Debian <a href="http://www.debian.org/releases/etch/">etch</a>, which was released in April 2009 and has since been replaced; which means etch has become fairly outdated.</p>
+
+<p>Here&#8217;s the process I used, and so far it seems to be working quite well:</p>
+
+<p><strong>Domain Setup:</strong></p>
+
+<p>When adding your domain to the Dreamhost panel, you&#8217;ll want to enable <a href="http://wiki.dreamhost.com/Passenger">Passenger</a>.</p>
+
+<p><img src="http://adamcaudill.com/files/2011-01-28_0048.png" alt="" /></p>
+
+<p>Once your application is uploaded to the server, you&#8217;ll be greeted with a particularly unhelpful error message (something like <code>uninitialized constant Bundler</code>) from Passenger (or perhaps just a 500 error page).</p>
+
+<p><strong>Server Updates:</strong></p>
+
+<p>This is where the work starts, and gets somewhat ugly. As a warning, it&#8217;s quite possible that you could damage your configuration doing this; though thankfully you can <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.reboot&amp;">restore</a> your server to a working state within a few minutes from the Dreamhost panel should something go wrong. You&#8217;ll also need to have an <a href="https://panel.dreamhost.com/index.cgi?tree=vserver.adminusers&amp;">admin user</a> for this task, as much of what needs to be done has to be done as root.</p>
+
+<p>First step: Get your PS up to date; even after performing a restore on my server, there were a number of updates that are available to be installed. So let&#8217;s start off by getting those out of the way.</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get -f install
+</code></pre>
+
+<p>Once you get past those three commands, the next step is to update SQLite to the latest version, as the version Dreamhost uses is quite old and won&#8217;t work with Rails 3.0 (well, to be accurate it won&#8217;t work with the latest version of sqlite3-ruby, which is the default database provider for Rails 3).</p>
+
+<pre><code>wget http://www.sqlite.org/sqlite-autoconf-3070400.tar.gz
+tar zxvf sqlite-autoconf-3070400.tar.gz
+cd sqlite-autoconf-3070400
+sudo ./configure --bindir=/usr/bin --libdir=/usr/lib
+sudo make
+sudo make install
+</code></pre>
+
+<p>If you don&#8217;t update SQLite you&#8217;ll get an error like this:</p>
+
+<pre><code>sudo gem install sqlite3
+Building native extensions.  This could take a while...
+ERROR:  Error installing sqlite3:
+    ERROR: Failed to build gem native extension.
+
+/usr/bin/ruby1.8 extconf.rb
+checking for sqlite3.h... yes
+checking for sqlite3_libversion_number() in -lsqlite3... yes
+checking for rb_proc_arity()... no
+checking for sqlite3_initialize()... no
+sqlite3-ruby only supports sqlite3 versions 3.6.16+, please upgrade!
+*** extconf.rb failed ***
+</code></pre>
+
+<p>or if you install the updated version, but don&#8217;t force it to <code>/usr/lib</code> you&#8217;ll get an error like this:</p>
+
+<pre><code>sudo gem install sqlite3
+Building native extensions.  This could take a while...
+ERROR:  Error installing sqlite3:
+    ERROR: Failed to build gem native extension.
+
+/usr/bin/ruby1.8 extconf.rb
+checking for sqlite3.h... yes
+checking for sqlite3_libversion_number() in -lsqlite3... no
+sqlite3 is missing. Try 'port install sqlite3 +universal' or 'yum
+install sqlite3-devel'
+*** extconf.rb failed ***
+</code></pre>
+
+<p>Once that is taken care of SQLite, the rest is easy.</p>
+
+<pre><code>sudo gem update
+</code></pre>
+
+<p>At this point if you visit your new Rails site, it <em>should</em> be working!</p>
+
+<p>Notes:</p>
+
+<ol>
+<li><p>I&#8217;ve not tested this extensively, and I&#8217;ve no idea if this breaks anything. All I can say for certain, if that all of <em>my</em> sites still work, but your mileage may vary. <Disclaimer /></p></li>
+<li><p>I was a fairly early Dreamhost PS adopter, and part way through this process I reset my server to get it back to a clean state. After resetting, I noticed some differences with the behavior of <code>apt-get</code> (404s on <code>update</code> and <code>upgrade</code> are gone), so for other early adopters it may be necessary to perform a reset to get your servers configuration in-sync with the latest official setup.</p></li>
+<li><p>I can&#8217;t say for a fact that this is completely necessary, though you&#8217;ll likely need to selectively update a few packages if you skip this step. Also, for me, <code>gem</code> was broken until I ran <code>sudo apt-get -f install</code>.</p></li>
+<li><p>Special thanks to <a href="http://matthewjlittle.com/">Matt</a> for helping me get this working; troubleshooting the SQLite install was more than a little time consuming.</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -347,46 +464,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/01/wikileaks-biggest-problem-julian-assange/">WikiLeaks Biggest Problem: Julian Assange</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-01T17:34:41-05:00" pubdate data-updated="true">Dec 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>WikiLeaks has a growing issue that could easily lead to its downfall, and that problem is its leader, <a href="http://en.wikipedia.org/wiki/Julian_Assange">Julian Assange</a>. As time goes on, he is becoming the persona of the organization, and as this happens he becomes more of a target, and more of a threat to the organization&#8217;s stability. There are rumors of death threats and assassination plots, on top on the fact that he is <a href="http://www.guardian.co.uk/media/2010/nov/30/interpol-wanted-notice-julian-assange">wanted</a> in Sweden for what he has claimed to be trumped-up charges. Those that seek to stop WikiLeaks are increasingly attacking Assange directly, and focusing less on those behind the scenes or the organization itself. One outspoken leader doesn&#8217;t make the organization.</p>
-
-<p>Assange has become a threat to WikiLeaks not because of the attacks against him, but because people see him <em>as</em> WikiLeaks. If he was arrested today, how much faith would there be in WikiLeaks? I am sure that they have developed contingency plans should something happen to Assange, but those plans will likely do little to promote faith and trust, or to calm the media firestorm that would surely erupt.</p>
-
-<p>For WikiLeaks to survive the trials that it will soon face, they need to ensure that there is a strong governance body in place controlling the organization. For their mission to continue, they must become more than just Julian Assange to the public. Trust is <em>the</em> key asset for WikiLeaks, and if that trust is lost, then few will accept the authenticity of their releases; they must take steps to preserve that trust.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/18/">&larr; Older</a>
@@ -419,6 +496,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
@@ -432,10 +513,6 @@
     
       <li class="post">
         <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/12/20/irrational-attribution-apt3-dot-14159/">Irrational Attribution: APT3.14159</a>
       </li>
     
   </ul>
