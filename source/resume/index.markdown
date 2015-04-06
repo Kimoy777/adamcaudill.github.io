@@ -67,5 +67,3 @@ I’ve contributed to a number of open source projects, including bbPress, ccsrc
 ##Education
 
 From 2001 to 2003 I attended Florida Metropolitan University in Melbourne Florida working towards a degree in Computer Information Science. I completed all major-related classes with a 4.0 GPA, and I received multiple Dean’s & President’s List awards during my time there. Unfortunately I did not complete the program due to a family illness.
-
-*(A copy of my resume in Word format is available [here](http://adamcaudill.com/files/resume.docx))*
