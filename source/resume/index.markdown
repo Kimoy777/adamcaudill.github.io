@@ -62,7 +62,9 @@ During this time I also performed security audits on client sites, provided soft
 
 I blog on security and development related topics, and stay engaged with the community via various social services. I was a moderator on what was once the largest forum for Visual Basic developers (XtremeVBTalk.com), and received their highest peer-voted award for knowledge.
 
-I’ve contributed to a number of open source projects, including bbPress, ccsrch, and others. I’ve also managed a few open source projects – the most interesting of which was a fault-tolerant load balancing system for an IRC network that provided much better leveling that DNS round-robin could.
+I’ve contributed to a number of open source projects, including bbPress, ccsrch, openssl-net, libsodium-net and others. I’ve also managed a few open source projects – the most interesting of which was a fault-tolerant load balancing system for an IRC network that provided much better leveling that DNS round-robin could.
+
+I founded the BSides Knoxville security conference, and the Underhanded Crypto Contest.
 
 ##Education
 
