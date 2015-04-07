@@ -30,6 +30,8 @@ My work has been cited by many media outlets and publications around the world, 
 
 If you’d like to know more about the research I do, look at the [Archives](/archives/); while not everything I’ve published is there, most things are.
 
+I founded the [BSides Knoxville](http://bsidesknoxville.com/) conference, and the [Underhanded Crypto Contest](https://underhandedcrypto.com/).
+
 ## Software & Open Source
 While I had toyed with writing code (Apple Basic & the like) for years, I hadn’t worked on anything significant until one day when I was 15 I happened on a copy of Visual Basic 5 Deluxe Learning Edition on sale in a book store; being bored and needing something to occupy my time during the summer, I bought it. That single chance event set the course of the rest of my life.
 
