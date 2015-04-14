@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="On August 15th of last year I asked if anybody would be interested in a contest for the best, most evil underhanded crypto techniques — the response &hellip;">
+  <meta name="description" content="For decades, the US Government has fought — sometimes with itself — to prevent the use of secure cryptography. During the first crypto war, they &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,111 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-13T01:10:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="/files/backdoor_frontdoor.png"></p>
+
+<p>For decades, the US Government has fought — sometimes with itself — to prevent the use of secure cryptography. During the first <a href="https://en.wikipedia.org/wiki/Crypto_Wars">crypto war</a>, they allowed strong cryptography within the US, but other countries were limited to small keys — making brute force attacks practical. But what about those pesky US citizens? They didn’t really want them to have strong crypto either — enter key escrow.</p>
+
+<h3>What is key escrow?</h3>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Key_escrow">Wikipedia</a>:</p>
+
+<blockquote><p>Key escrow is an arrangement in which the keys needed to decrypt encrypted data are held in escrow so that, under certain circumstances, an authorized third party may gain access to those keys. These third parties may include businesses, who may want access to employees’ private communications, or governments, who may wish to be able to view the contents of encrypted communications.</p></blockquote>
+
+
+<p>Essentially, it’s a system where someone other than the the owner of the data gets a copy of the key, that can be used to decrypt, without their permission.</p>
+
+<p>If the organization holding the escrow keys can surreptitiously access the data — such as retrieving it from a service provider, or capture the data from a public network, the data can be decrypted in complete secrecy. The owner of the key need not have any idea that it’s happened, or who did it. This property raises many privacy concerns — this takes a technical control and turns it into a policy matter.</p>
+
+<p><span class='pullquote-right' data-pullquote='if there’s noting other than a piece of paper protecting your data, it isn’t protected'>
+In general, if there’s noting other than a piece of paper protecting your data, it isn’t protected at all. In the case of government controlled key escrow, that’s exactly the situation. If an employee violates policy and accesses escrow keys without authorization, they have the potential to secretly access data — and it’s quite possible it would never be known by anyone. In every environment, from the NSA to the Certificate Authority system, where controls are purely policy based instead of being technical, have been bypassed for various purposes.
+</span></p>
+
+<p>The most famous, or perhaps infamous, use of key escrow was the fundamentally flawed <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a> — an attempt by the US Government to allow encrypted calls, while allowing them easy access. Thankfully, this effort died, mostly taking key escrow with it — at least for a few years.</p>
+
+<h3>A rose by any other name…</h3>
+
+<p><img class="center" src="/files/backdoor_this_big.png"></p>
+
+<p>The Director of the NSA, Michael Rogers, has repeatedly called for the introduction of a “frontdoor” — which is a backdoor with a policy that says they have paperwork to do before they can use the keys they hold. The people of America, and the world, are to trust the secret rubber stamp court and the policies of various agencies with our most sensitive information — hoping they follow their own rules (which are probably also secret).</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Michael Rogers:I dont want a back door,I want a front door and I want the front door to have multiple locks,big locks <a href="http://t.co/PT0GzKn4X8">http://t.co/PT0GzKn4X8</a></p>&mdash; ISIK MATER (@isik5) <a href="https://twitter.com/isik5/status/587490182380843008">April 13, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>While Rogers has done his best to convince people that there’s a difference, the fact is no matter what you call a backdoor — it’s still a backdoor. It’s still a way for someone that isn’t the owner of the data, to decrypt it, without their approval and quite possibly without their knowledge.</p>
+
+<p>That looks just like the definition of the word backdoor:</p>
+
+<blockquote><p>a feature or defect of a computer system that allows surreptitious unauthorized access to data.</p></blockquote>
+
+
+<h3>Massively Increased Complexity</h3>
+
+<p>The privacy concerns and potential for abuse aren’t the only cost for key escrow — the complexity of the system is greatly increased, and as with any systems, when complexity goes up, so does the risk of vulnerabilities. The risks are so clear, that even the US Government can’t agree on the plan — NIST has already spoken out against it.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>NIST now the first agency within US gov to say that crypto frontdoors are a bad idea. <a href="http://t.co/FXF7Uwfotg">http://t.co/FXF7Uwfotg</a> <a href="http://t.co/53ziECkcsQ">pic.twitter.com/53ziECkcsQ</a></p>&mdash; Christopher Soghoian (@csoghoian) <a href="https://twitter.com/csoghoian/status/586646988269162496">April 10, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Rogers said: “<em>I want a front door. And I want the front door to have multiple locks.</em>” — what he’s really talking about is key escrow with splitting. In other words, taking a key and splitting it into two or more pieces, and these pieces would be held by separate entities. The data could only be decrypted when one entity shared their half of the key with the other (intentionally or otherwise).</p>
+
+<p>This adds complexity in a few ways:</p>
+
+<ul>
+<li>Key Splitting — The splitting process has to be done properly to ensure that neither entity would be able to recover the full key without the cooperation of the other.</li>
+<li>Key Registration — When the encryption key is generated, it has to be split, and registered with the entities that will hold the parts. There are risks of data being lost in a number of ways here, and this registry would be a natural target for attack.</li>
+<li>Key Part Transport &amp; Storage — Being a natural target for attack, the key parts need to be carefully handled throughout their lifetime.</li>
+<li>Key Recovery — Certain paperwork would be required to access the  key parts, this would be validated by a human — should that human ignore policy, or not verify paperwork, keys could be accessed without the proper authorization.</li>
+<li>Key Destruction — Once authorization expires, or the need for access has ended, the combined key and any copies of the key parts outside of the registry should be destroyed. If not properly handled, it would provide another avenue for unauthorized access.</li>
+</ul>
+
+
+<p>Of course this is just a high level view, and there’s more — all of these additions, unnecessary today, add risks of flaws (accidental or intentional) that could expose data.</p>
+
+<h3>Opening the floodgates…</h3>
+
+<p>One of the most astounding things to me about this proposal is the level of arrogance it demonstrates. The NSA (and similar organizations) has a strong preference for NOBUS (nobody but us) backdoors, and they are making the daring assumption that this will be a NOBUS backdoor.</p>
+
+<p>For example, if the US Government receives a copy of iPhone encryption keys, a device made in China, do they really believe that the Chinese Government won’t take advantage of the situation to get a copy of the key as well? The US Government has set a clear precedent of using secret court orders to retrieve data — what makes them think that China would hesitate to order Foxconn’s facility in Shenzhen to provide it with a copy of all escrow key parts?</p>
+
+<p>For companies with offices  outside of the US, or that deal with manufacturers outside of the US, there is real risk of them being targeted to get the keys before being delivered to the government. This is the same technique that <a href="https://firstlook.org/theintercept/2015/02/19/great-sim-heist/">GCHQ used against Gemalto</a> to get keys for SIM cards.</p>
+
+<p>To assume that the US Government can open Pandora’s box, and yet maintain control is sheer arrogance. This opens the door not only to vulnerabilities, but to other governments that want to get in on the game. Once the requirement is set, it <em>will</em> be widely abused.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -393,127 +498,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2015/01/01/2014-a-year-in-review/">2014: Year in Review</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-01T23:44:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inspired by a post from <a href="https://scott.arciszewski.me/blog/2014/12/year-2014-reflection">Scott Arciszewski</a>, I&#8217;ve decided to go ahead and publish a year in review post. This is something that I&#8217;ve generally avoided in the past, as the tone of these posts is more often than not, just cynicism and negativity. After seeing Scott’s post, it made me think about how such a review can be used to send a positive message — something desperately needed.</p>
-
-<p>Year after year, we see predictions, projections, and sales pitches — and the cynical responses that they always generate. It&#8217;s so easy to spend time rolling our eyes at vendors and media, instead of looking forward to ways to improve the situation and make the world a better place — even if only in a tiny way. We may not be able to fix the stupid, but we can at least reduce the damage that it does.</p>
-
-<h2>2014 In Review</h2>
-
-<p>So, without further ado, a personal look back at 2014.</p>
-
-<h3>Security Research &amp; Related</h3>
-
-<p>Overall this has been a very busy year, and I’ve not been able to publish as much as I’d like. In total, I requested only a single CVE for the entire year - <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2890">CVE-2014-2890</a> (I don’t keep a count of how many security related tickets I open, so no idea how many issues I actually reported).</p>
-
-<p>Most of my time was instead spent on a couple projects - <a href="https://github.com/smimp/smimp_spec">SMIMP</a> and <a href="https://github.com/adamcaudill/Psychson">Psychson</a> (BadUSB firmware). I’ll talk more about these later.</p>
-
-<p>I wasn’t able to spend as much time on public application security work as I had intended, but I did get some reports in, some advice given, some progress made.</p>
-
-<h3>Speaking</h3>
-
-<p>In 2014 I was fortunate to be asked to speak on a few occasions. When preparing for a talk, I always have mixed emotions — on one hand, it&#8217;s always been a great experience, a chance to meet new people, share knowledge, and hopefully contribute to the community. On the other hand, it&#8217;s a significant amount of time that is lost — and time is without a doubt my most limited resource.</p>
-
-<p>Whether it makes sense or not, I generally don&#8217;t give he same talk twice — especially if the event is recorded. So for each talk, it&#8217;s a real time &amp; energy commitment. I very much hope that those that have seen my talks appreciated them, and got something out of them.</p>
-
-<p>Here is some information from selected talks:</p>
-
-<ul>
-<li><a href="https://adamcaudill.com/2014/08/16/smimp-at-the-defcon-cryptovillage/">SMIMP at the DEFCON Crypto Village</a></li>
-<li><a href="https://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">Making BadUSB Work For You - DerbyCon</a> (YouTube video now over 100,000 views!)</li>
-<li><a href="https://adamcaudill.com/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a></li>
-</ul>
-
-
-<h3>Personal</h3>
-
-<p>Personally, this has been a particularly trying year for me, for various reasons. I have, as I always do, made a real effort to not show what&#8217;s going on when things go wrong. So, for all my friends, and everyone else for that matter — if there were times I was distant or difficult, or evasive — I am truly sorry.</p>
-
-<p>With that said, the year could have been far worse, and I&#8217;m incredibly grateful for all the friends I have — old and new. It was a busy year, with much going on and never enough time to make everything that needed to happen, actually happen.</p>
-
-<h3>Projects</h3>
-
-<p>During the year, much of my time was taken up by a couple projects — here is where they stand today:</p>
-
-<p><strong><a href="https://github.com/smimp/smimp_spec">SMIMP</a></strong> - Without a doubt the most ambitious project I&#8217;ve worked on, with a goal no less than replacing email itself. The first public draft was released in late July — and unfortunately remains basically untouched since then.</p>
-
-<p>Shortly before I released the first public draft, a start-up tried to acquire the rights, so they could develop it, and build there own applications around it. By the time that I told them that I was more interested in making the specification public, they had offered me a position as co-founder in exchange for it.</p>
-
-<p>This project took a substantial amount of time to get to a first draft — and really, it isn&#8217;t complete yet. Given the original goal of the project, leaving it with open issues really doesn’t bother me — that many more points to talk about.</p>
-
-<p>The original plan for the effort was to spur discussion, to get people talking about how email could be replaced. To be secure, a system must be designed with certain goals and threats in mind - something that didn&#8217;t happen with email as we know it today. So to fix email, we need to replace it. SMIMP may not be the answer, but we need to do something.</p>
-
-<p>Overall, though there was some positive feedback, I consider the project to be a failure. I&#8217;m proud of the work I did on it, but it didn&#8217;t have the desired effect.</p>
-
-<p><strong><a href="https://github.com/adamcaudill/Psychson">Psychson (BadUSB Firmware)</a></strong> - Without a doubt the work that had the most people talking. It was a fun project, we managed to get some code in the hands of those that wanted to extend it.</p>
-
-<p>It’s over, and I’m glad it’s over.</p>
-
-<p><strong>Blog</strong> - This blog has also been a bit less active than I hoped — 16 posts with a total of 18,040 words. I’m pretty sure last year I said I’d blog more. Oops.</p>
-
-<p><strong>My First Novel</strong> - A couple years ago I started occasionally working on an idea for a novel, this year, I set aside what I had been doing, and started fresh (but still based on the same material). My goal was to finish it this year, by there simply wasn&#8217;t enough time.</p>
-
-<p>Writing is something that I have yet to determine if I&#8217;m actually good at - or if I just limp along enough for others to tolerate. While I could write a technical book with confidence, writing fiction is something that, quite intentionally, pushes what I&#8217;m comfortable with.</p>
-
-<p>Making the time and finding the focus for something like this is certainly more difficult than I had imagined. I&#8217;ve come to understand why so many writers drink.</p>
-
-<h3>Overall</h3>
-
-<p>I have to say, I love the communities that I work with. I love that I get to deal with challenging problems. I love that I get to find solutions and make them work. But most of all, I’m thankfully for so many friends and great people that make this work truly enjoyable.</p>
-
-<h2>Looking forward to 2015</h2>
-
-<p>I have a number of goals for 2015, a number of projects that need my attention, and ideas to make the world just a little bit better.</p>
-
-<ul>
-<li>SMIMP - While I feel that the project generally failed, there doesn’t seem to be much movement in the let’s-kill-email space, so I don’t think it’s dead quite yet. There just might be another chance to get people talking about a real solution.</li>
-<li><a href="https://github.com/adamcaudill/CurveLock">CurveLock</a> - An open source, secure, modern encryption application. This is mainly an experiment - but the goal is to provide high security, in a simple, easy to use application. Hopefully will get a beta out before too long.</li>
-<li><a href="https://github.com/EncryptingCamera/encryptingcamera-spec">EncryptingCamera</a> - Prompted by a conversation on Twitter, a few people got together to make a new application that will hopefully protect a few reporters — and others that need to take photos, and secure them from inspection.</li>
-<li>Blog - Last time that I promised to blog more often, I didn’t post again for months, so I’m hoping that I don’t repeat that this time. But I promise to write more, and do my best to keep the content interesting.</li>
-<li>Personal Transparency - I’ve always been very concerned with my professional image, and as such tend to keep many details of my life to myself. One personal goal for this year is to be <em>just a bit</em> more open and transparent.</li>
-<li>Novel - I intend to have either a deal signed with a publisher, or to publish as an ebook on Amazon before the end of 2015. One way or the other, I’ll be done with it by the end of the year.</li>
-<li>Research - I plan on spending more time evaluation open source applications for security issues. In just a few hours a week, can have a real impact on making applications and users more secure.</li>
-<li>Open Source Security Tools - I hope to dedicate a reasonable amount of time on new and existing tools to make users more secure, especially when it comes to secure communication. PGP/GPG hasn’t aged well - tools like <a href="https://github.com/tedu/reop">reop</a> have a lot of technical potential, but usability still needs to be improved.</li>
-<li>More time outside of the echo chamber - It’s easy to stay inside of the echo chamber, agreeing with ourselves (or disagreeing), but what good does it really do? To have a real impact, we need to spend more time influencing the people that need our help the most.</li>
-<li>Consume less, create more - In general, consume less and create more — time is a precious and limited resource, should be used to do as much good as possible.</li>
-</ul>
-
-
-<p>Oh, and one final note for next year - my wife and I are expecting again. Should be an exciting year.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -544,6 +528,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -557,10 +545,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

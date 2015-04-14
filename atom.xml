@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2015-04-06T20:05:00-04:00</updated>
+  <updated>2015-04-13T23:28:54-04:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Crypto Front Door: Everyone Welcome!]]></title>
+    <link href="https://adamcaudill.com//2015/04/13/crypto-front-door-everyone-welcome/"/>
+    <updated>2015-04-13T01:10:00-04:00</updated>
+    <id>https://adamcaudill.com//2015/04/13/crypto-front-door-everyone-welcome</id>
+    <content type="html"><![CDATA[<p><img class="center" src="https://adamcaudill.com//files/backdoor_frontdoor.png"></p>
+
+<p>For decades, the US Government has fought — sometimes with itself — to prevent the use of secure cryptography. During the first <a href="https://en.wikipedia.org/wiki/Crypto_Wars">crypto war</a>, they allowed strong cryptography within the US, but other countries were limited to small keys — making brute force attacks practical. But what about those pesky US citizens? They didn’t really want them to have strong crypto either — enter key escrow.</p>
+
+<h3>What is key escrow?</h3>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Key_escrow">Wikipedia</a>:</p>
+
+<blockquote><p>Key escrow is an arrangement in which the keys needed to decrypt encrypted data are held in escrow so that, under certain circumstances, an authorized third party may gain access to those keys. These third parties may include businesses, who may want access to employees’ private communications, or governments, who may wish to be able to view the contents of encrypted communications.</p></blockquote>
+
+
+<p>Essentially, it’s a system where someone other than the the owner of the data gets a copy of the key, that can be used to decrypt, without their permission.</p>
+
+<p>If the organization holding the escrow keys can surreptitiously access the data — such as retrieving it from a service provider, or capture the data from a public network, the data can be decrypted in complete secrecy. The owner of the key need not have any idea that it’s happened, or who did it. This property raises many privacy concerns — this takes a technical control and turns it into a policy matter.</p>
+
+<p><span class='pullquote-right' data-pullquote='if there’s noting other than a piece of paper protecting your data, it isn’t protected'>
+In general, if there’s noting other than a piece of paper protecting your data, it isn’t protected at all. In the case of government controlled key escrow, that’s exactly the situation. If an employee violates policy and accesses escrow keys without authorization, they have the potential to secretly access data — and it’s quite possible it would never be known by anyone. In every environment, from the NSA to the Certificate Authority system, where controls are purely policy based instead of being technical, have been bypassed for various purposes.
+</span></p>
+
+<p>The most famous, or perhaps infamous, use of key escrow was the fundamentally flawed <a href="https://en.wikipedia.org/wiki/Clipper_chip">Clipper chip</a> — an attempt by the US Government to allow encrypted calls, while allowing them easy access. Thankfully, this effort died, mostly taking key escrow with it — at least for a few years.</p>
+
+<h3>A rose by any other name…</h3>
+
+<p><img class="center" src="https://adamcaudill.com//files/backdoor_this_big.png"></p>
+
+<p>The Director of the NSA, Michael Rogers, has repeatedly called for the introduction of a “frontdoor” — which is a backdoor with a policy that says they have paperwork to do before they can use the keys they hold. The people of America, and the world, are to trust the secret rubber stamp court and the policies of various agencies with our most sensitive information — hoping they follow their own rules (which are probably also secret).</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Michael Rogers:I dont want a back door,I want a front door and I want the front door to have multiple locks,big locks <a href="http://t.co/PT0GzKn4X8">http://t.co/PT0GzKn4X8</a></p>&mdash; ISIK MATER (@isik5) <a href="https://twitter.com/isik5/status/587490182380843008">April 13, 2015</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>While Rogers has done his best to convince people that there’s a difference, the fact is no matter what you call a backdoor — it’s still a backdoor. It’s still a way for someone that isn’t the owner of the data, to decrypt it, without their approval and quite possibly without their knowledge.</p>
+
+<p>That looks just like the definition of the word backdoor:</p>
+
+<blockquote><p>a feature or defect of a computer system that allows surreptitious unauthorized access to data.</p></blockquote>
+
+
+<h3>Massively Increased Complexity</h3>
+
+<p>The privacy concerns and potential for abuse aren’t the only cost for key escrow — the complexity of the system is greatly increased, and as with any systems, when complexity goes up, so does the risk of vulnerabilities. The risks are so clear, that even the US Government can’t agree on the plan — NIST has already spoken out against it.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>NIST now the first agency within US gov to say that crypto frontdoors are a bad idea. <a href="http://t.co/FXF7Uwfotg">http://t.co/FXF7Uwfotg</a> <a href="http://t.co/53ziECkcsQ">pic.twitter.com/53ziECkcsQ</a></p>&mdash; Christopher Soghoian (@csoghoian) <a href="https://twitter.com/csoghoian/status/586646988269162496">April 10, 2015</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>Rogers said: “<em>I want a front door. And I want the front door to have multiple locks.</em>” — what he’s really talking about is key escrow with splitting. In other words, taking a key and splitting it into two or more pieces, and these pieces would be held by separate entities. The data could only be decrypted when one entity shared their half of the key with the other (intentionally or otherwise).</p>
+
+<p>This adds complexity in a few ways:</p>
+
+<ul>
+<li>Key Splitting — The splitting process has to be done properly to ensure that neither entity would be able to recover the full key without the cooperation of the other.</li>
+<li>Key Registration — When the encryption key is generated, it has to be split, and registered with the entities that will hold the parts. There are risks of data being lost in a number of ways here, and this registry would be a natural target for attack.</li>
+<li>Key Part Transport &amp; Storage — Being a natural target for attack, the key parts need to be carefully handled throughout their lifetime.</li>
+<li>Key Recovery — Certain paperwork would be required to access the  key parts, this would be validated by a human — should that human ignore policy, or not verify paperwork, keys could be accessed without the proper authorization.</li>
+<li>Key Destruction — Once authorization expires, or the need for access has ended, the combined key and any copies of the key parts outside of the registry should be destroyed. If not properly handled, it would provide another avenue for unauthorized access.</li>
+</ul>
+
+
+<p>Of course this is just a high level view, and there’s more — all of these additions, unnecessary today, add risks of flaws (accidental or intentional) that could expose data.</p>
+
+<h3>Opening the floodgates…</h3>
+
+<p>One of the most astounding things to me about this proposal is the level of arrogance it demonstrates. The NSA (and similar organizations) has a strong preference for NOBUS (nobody but us) backdoors, and they are making the daring assumption that this will be a NOBUS backdoor.</p>
+
+<p>For example, if the US Government receives a copy of iPhone encryption keys, a device made in China, do they really believe that the Chinese Government won’t take advantage of the situation to get a copy of the key as well? The US Government has set a clear precedent of using secret court orders to retrieve data — what makes them think that China would hesitate to order Foxconn’s facility in Shenzhen to provide it with a copy of all escrow key parts?</p>
+
+<p>For companies with offices  outside of the US, or that deal with manufacturers outside of the US, there is real risk of them being targeted to get the keys before being delivered to the government. This is the same technique that <a href="https://firstlook.org/theintercept/2015/02/19/great-sim-heist/">GCHQ used against Gemalto</a> to get keys for SIM cards.</p>
+
+<p>To assume that the US Government can open Pandora’s box, and yet maintain control is sheer arrogance. This opens the door not only to vulnerabilities, but to other governments that want to get in on the game. Once the requirement is set, it <em>will</em> be widely abused.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[On the Underhanded Crypto Contest]]></title>
@@ -1386,35 +1464,6 @@
 <p>I would like to say that it&#8217;s safe to use, and that it lives up to the promises made - but they haven&#8217;t made enough information available for people to make an informed decision. If you add the lack of information with such basic mistakes as not making the download available over HTTPS, it doesn&#8217;t instill much confidence. Companies focused on security should know better.</p>
 
 <p>When you make decisions about what tools you use, you have to look at the full picture - and Ensafer is a great example of that. They&#8217;ve focused first on a pretty website, adding features - but not assuring trust. At this point, the only evidence of their security is the use of buzzwords.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTP Considered Harmful - The Need For Negative Feedback]]></title>
-    <link href="https://adamcaudill.com//2014/03/15/http-considered-harmful-the-need-for-negative-feedback/"/>
-    <updated>2014-03-15T17:53:00-04:00</updated>
-    <id>https://adamcaudill.com//2014/03/15/http-considered-harmful-the-need-for-negative-feedback</id>
-    <content type="html"><![CDATA[<p>We all know, and well understand what this means when we see it in a browser:</p>
-
-<p><img class="center" src="https://adamcaudill.com//files/GitHub_EV_Cert.png"></p>
-
-<p>It means that the connection is encrypted, and that some degree of validation has occurred to verify that the server is who it claims to be. Through the years, users have been taught to trust sites when they see that, or the all too familiar &#8216;lock&#8217; icon - when users see it, they assume their data is safe.</p>
-
-<p>But what about this?</p>
-
-<p><img class="center" src="https://adamcaudill.com//files/reddit_no_ssl-2.png"></p>
-
-<p>There&#8217;s no lock to tell them they are safe, but there&#8217;s also no warning to indicate that the connection isn&#8217;t secure. There&#8217;s no encryption, no validation, - no protection at all. With HTTP, users are afforded nothing at all to protect them - but we all know that, right? Does the average user understand that though? Do they understand how easily they could be <a href="http://arstechnica.com/tech-policy/2014/02/new-snowden-docs-show-nsa-gchq-spied-on-wikileaks-pirate-bay-users/">monitored</a>, or how easily traffic can be <a href="https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html">altered</a>?</p>
-
-<p><strong>The Need For Negative Feedback</strong></p>
-
-<p>Strong negative feedback has long been used in browsers to warn against invalid or expired certificates - but there&#8217;s no feedback to warn users of just how dangerous HTTP can be. After a discussion on Twitter, a friend of mine, <a href="https://twitter.com/defusesec">Taylor Hornby</a>, created a <a href="https://defuse.ca/web-browser-negative-feedback.htm">mockup</a> of what could be done in Firefox to warn users:</p>
-
-<p><img class="center" src="https://adamcaudill.com//files/ff_no_ssl_xmockup-1.png"></p>
-
-<p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
-
-<p>We, the security community, owe it to users to provide them with useful feedback so that they can protect themselves - providing negative feedback in the browser showing the weakness of HTTP would be a large step in that direction - and to urge site owners to adopt HTTPS as soon as possible.</p>
 ]]></content>
   </entry>
   

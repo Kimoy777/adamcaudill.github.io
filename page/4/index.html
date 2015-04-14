@@ -9,8 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="There are two ways to implement security: Real security, based on empirical evidense and analysis.
-Checklist security, based on the latest checklist &hellip;">
+  <meta name="description" content="Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,97 @@ Checklist security, based on the latest checklist &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/26/on-strong-identity-management/">On Strong Identity Management</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T22:16:00-04:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Alice wants to send an encrypted message to Bob; she knows his address, but doesn&#8217;t know the public key that goes with that address. Using GPG, Alice would look up his address on a key server, the issue is of course that anyone can upload a key associated with Bob&#8217;s address.</p>
+
+<p>Using the &#8220;web of trust&#8221; model, Alice would look at the different keys and see which ones are signed, and if any of them are signed by people she knows. The problem is that Alice doesn&#8217;t normally use GPG, and she hasn&#8217;t marked the keys of the people she knows as trusted (I expect this is true for most casual GPG users), thus, she can&#8217;t tell what key is signed by keys she should trust, versus the ones signed by keys she shouldn&#8217;t.</p>
+
+<p>In years of effort, this is still an issue.</p>
+
+<p>There are many issues with this model, especially when it comes to casual users that don&#8217;t understand the details of the &#8220;web of trust&#8221; - while GPG use is certainly going up thanks largely to the Snowden revelations, many of these users fit into the casual users group. Thanks to the complexities of the model, these users may not be getting the level of protection they think they are.</p>
+
+<p>Here are just a few of these issues:</p>
+
+<ul>
+<li>Lack of strong linking - there isn&#8217;t a strong, verifiable connection between a user&#8217;s address, and their public key.</li>
+<li>Complex user interaction - to be useful, the user has to understand the web of trust model, and how to leverage it. Based on the discussions I&#8217;ve had with people that recently started using it, most don&#8217;t get it.</li>
+<li>Key discovery - finding the right key can be a nightmare, especially for some people. When there are multiple &#8220;valid&#8221; keys published, each with signatures, it can be hard for novice users to figure out which one is right.</li>
+</ul>
+
+
+<p>I could go on, but I think the point is clear - the web of trust works well for some users, but only the users that take the time to really understand it.</p>
+
+<p><strong>The <em>IM</em> in SMIMP</strong></p>
+
+<p>I&#8217;ve been drafting a <a href="https://github.com/smimp/smimp_spec">specification</a> for a secure messaging protocol called <a href="http://smimp.org/">SMIMP</a>, as far as I&#8217;m concerned the Identity Management component is the most important part. It&#8217;s what allows the rest to work - secure messaging isn&#8217;t that hard, key handling and validation is where end user system start to fail.</p>
+
+<p>To provide a strong identity management system, a few goals need to be met:</p>
+
+<ul>
+<li>Strong link between address and public key.</li>
+<li>Updates to identity information signed by the user to prevent unauthorized changes.</li>
+<li>Provide a full history, including all changes from the time the account was created.</li>
+<li>Use of a hash-chain to show that no changes have been removed.</li>
+</ul>
+
+
+<p>The IM in SMIMP meets all of these. The suggested way of using the system is trust on first use, pinning on both the first and the most recent public key. It would also be wise for the user to validate the recipient&#8217;s current public key via a trusted channel on first use, but that&#8217;s something that rarely happens in practice.</p>
+
+<p>To detect a malicious server, or modified traffic, the user&#8217;s client should first check to see if the original public key has changed - if it has, it indicates that the user&#8217;s information has been replaced in its entirety. Second, it should see if the most recent key is no longer listed in the user&#8217;s history - if its been removed, it indicates that the user&#8217;s history has been truncated, possibly in an attempt to encourage the use of a compromised key. These checks provide an easy way for client software to validate that keys can be trusted.</p>
+
+<p>To make the system more useful, the SMIMP identity information includes more than just the public key (all of which are optional):</p>
+
+<ul>
+<li>Name</li>
+<li>Web site</li>
+<li>List of social media profiles</li>
+<li>Additional data (comments, or other data the user wishes to assert)</li>
+</ul>
+
+
+<p>This provides a simple way to strongly tie addresses to public keys; thus making secure messaging easier and more understandable for casual / non-technical users. For a solution to be widely useable, it needs to be effective for everyone.</p>
+
+<p><strong>The best solution?</strong></p>
+
+<p>SMIMP may not be the best solution, and there are some things about it that I don&#8217;t care for myself - such as exposure of more metadata than I&#8217;d like. But, it is a solution to the issues surrounding email, and identity management.</p>
+
+<p>The <a href="https://adamcaudill.com/2014/06/27/the-sinking-ship-of-email-security/">issues</a> of email security can be fixed, and identity management is part of that problem. There has to be a way to tie a user to their public key in a more reliable manor than what we have today (and without resorting to the mandatory government ID idea that won&#8217;t die).</p>
+
+<p>I encourage everyone to look at these issues, and think about possible solutions. Contribute to SMIMP or one of the other efforts to fix the issues around email; we can no longer ignore these issues. The community needs to find and implement solutions that assure the security and privacy of the global community.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -420,62 +510,6 @@ Checklist security, based on the latest checklist &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/15/http-considered-harmful-the-need-for-negative-feedback/">HTTP Considered Harmful - the Need for Negative Feedback</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-15T17:53:00-04:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We all know, and well understand what this means when we see it in a browser:</p>
-
-<p><img class="center" src="/files/GitHub_EV_Cert.png"></p>
-
-<p>It means that the connection is encrypted, and that some degree of validation has occurred to verify that the server is who it claims to be. Through the years, users have been taught to trust sites when they see that, or the all too familiar &#8216;lock&#8217; icon - when users see it, they assume their data is safe.</p>
-
-<p>But what about this?</p>
-
-<p><img class="center" src="/files/reddit_no_ssl-2.png"></p>
-
-<p>There&#8217;s no lock to tell them they are safe, but there&#8217;s also no warning to indicate that the connection isn&#8217;t secure. There&#8217;s no encryption, no validation, - no protection at all. With HTTP, users are afforded nothing at all to protect them - but we all know that, right? Does the average user understand that though? Do they understand how easily they could be <a href="http://arstechnica.com/tech-policy/2014/02/new-snowden-docs-show-nsa-gchq-spied-on-wikileaks-pirate-bay-users/">monitored</a>, or how easily traffic can be <a href="https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html">altered</a>?</p>
-
-<p><strong>The Need For Negative Feedback</strong></p>
-
-<p>Strong negative feedback has long been used in browsers to warn against invalid or expired certificates - but there&#8217;s no feedback to warn users of just how dangerous HTTP can be. After a discussion on Twitter, a friend of mine, <a href="https://twitter.com/defusesec">Taylor Hornby</a>, created a <a href="https://defuse.ca/web-browser-negative-feedback.htm">mockup</a> of what could be done in Firefox to warn users:</p>
-
-<p><img class="center" src="/files/ff_no_ssl_xmockup-1.png"></p>
-
-<p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
-
-<p>We, the security community, owe it to users to provide them with useful feedback so that they can protect themselves - providing negative feedback in the browser showing the weakness of HTTP would be a large step in that direction - and to urge site owners to adopt HTTPS as soon as possible.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -508,6 +542,10 @@ Checklist security, based on the latest checklist &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -521,10 +559,6 @@ Checklist security, based on the latest checklist &hellip;">
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

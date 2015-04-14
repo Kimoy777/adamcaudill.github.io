@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="After being reminded of Alex King&#8217;s excellent Tasks task management system by a Download Squad article, I decided it was high time to give it a &hellip;">
+  <meta name="description" content="For those that may be running Windows 2000, there&#8217;s some things you need to know. With the change in DST taking effect March 2nd, your Windows &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/01/25/still-running-windows-2000/">Still Running Windows 2000?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-01-25T21:12:23-05:00" pubdate data-updated="true">Jan 25<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For those that may be running Windows 2000, there&#8217;s some things you need to know.</p>
+
+<p>With the <a href="http://en.wikipedia.org/wiki/Energy_Policy_Act_of_2005">change</a> in <a href="http://en.wikipedia.org/wiki/Daylight_saving_time">DST</a> taking effect March 2nd, your Windows 2000 boxes may see some odd behavior. There <a href="http://ushipoisv.spaces.live.com/Blog/cns!29862A22A3FBB38D!156.entry">won&#8217;t</a> be Windows Update patch or hot-fix released for this (unless you have an extended support agreement); so there&#8217;s some work ahead to keep things running smoothly.</p>
+
+<p>Microsoft has <a href="http://support.microsoft.com/kb/914387">released</a> (<a href="http://www.microsoft.com/windows/timezone/dst2007.mspx">read more</a>) a fair bit of information (complete with sample scripts) that can be used to update any 2000 boxes you may have lying around. Those of us that keep 2000 boxes around for testing or even production use will need to make sure they are updated. I can only imagine the odd errors this will cause if these changes aren&#8217;t put in place.</p>
+
+<p>This is a bit of an annoyance, I really wish Microsoft would have released this in the form of a Windows Update, though I guess this will probably help drive home the reality that it&#8217;s time to upgrade for many users.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -249,59 +291,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/01/17/burning-isos-in-vista/">Burning ISOs in Vista</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-01-17T22:20:17-05:00" pubdate data-updated="true">Jan 17<span>th</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I had to do something I&#8217;ve not done since I <a href="http://adamcaudill.com/2006/11/18/installing-vista/">switched</a> to Vista: burn a ISO image. Normally I would just fire up <a href="http://www.nero.com/enu/index.html">Nero</a> and be on my way; but my version of Nero is old, and I didn&#8217;t feel like fighting with it. So I decide to find something new.</p>
-
-<p>I found a fair bit of discussion on the topic, and a few highly recommended (and free) choices:</p>
-
-<ul>
-<li><p><a href="http://www.imgburn.com/">ImgBurn</a> - This is a well polished application, it exposes a fair bit of information about what&#8217;s going on, and some of the behind the scenes details. Novice tend to prefer knowing as little as possible, but for more advanced users, it looks like a winner.</p></li>
-<li><p><a href="http://www.cdburnerxp.se/">CDBurnerXP Pro</a> - This one received a several recommendations, though I&#8217;d have to advise against it. While it seems like a well built application, it&#8217;s obvious that it&#8217;s not been tested on Vista (the warning about running on Windows 95 or Windows NT doesn&#8217;t inspire confidence).</p></li>
-<li><p><a href="http://isorecorder.alexfeinman.com/isorecorder.htm">ISO Recorder</a> - This is one that I didn&#8217;t get a chance to test, though it sounds quite promising.</p></li>
-</ul>
-
-
-<p>Of those I tested, all had the same major flaw: <em>none worked</em>. ImgBurn came the closest, though failed to actually start writing. After a quick search I turned up the reason: my old Iomega CD-RW drive was so old, it doesn&#8217;t follow the standards newer drives implement.</p>
-
-<p>So now I&#8217;m facing buying a new copy of Nero (as it&#8217;s always worked for me), when I stumbled upon a writeup for <a href="http://www.hanselman.com/blog/FreeISODiskImageBurningUtilityThatWorksOnVista.aspx">BurnCDCC</a>.  Even though I thought it would be a waste of time, I went ahead and tried it. After downloading the whopping <a href="ftp://terabyteunlimited.com/burncdcc.zip">69KB file</a>, I fired it up, and sure enough; <em>it worked</em>!</p>
-
-<blockquote><p><a href="http://adamcaudill.com/files/2007/01/burncdcc.png"><img src="http://adamcaudill.com/files/2007/01/burncdcc.thumbnail.png" alt="BurnCDCC" /></a></p></blockquote>
-
-<p>So if you&#8217;ll looking for a free way to burn ISOs, and have and old, hopeless drive; BurnCDCC just might help. Seems to be a great little program, and I have to appreciate the simplicity. Something nice about software that does one thing, and does it very well.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/28/">&larr; Older</a>
@@ -334,6 +323,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -347,10 +340,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

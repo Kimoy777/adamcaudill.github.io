@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Today ZDNet published an article titled &#8221;The lunacy of trying to avoid NSA spying by moving e-mail and cloud out of the US&#8221; - I&#8217;m &hellip;">
+  <meta name="description" content="As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/06/making-android-nsa-proof/">Making Android NSA-Proof</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-06T23:34:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
+
+<p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
+
+<p>Too extreme?</p>
+
+<p>Let&#8217;s shoot for something a little more attainable - spy resistant. We can&#8217;t stop every attack, but we can reduce the attack surface a bit. Here are a few tools that I&#8217;ve been using recently to do just that.</p>
+
+<p><strong><a href="https://www.boxcryptor.com/en/boxcryptor-classic">Boxcryptor Classic</a></strong> - Like many people, I use DropBox for certain, low sensitivity files. But what about things that require a little more care? Boxcryptor Classic encrypts files and then stores the encrypted copy in DropBox. It&#8217;s simple, security seems sound, and the free edition is quite adequate. May not be perfect, but suits my needs nicely.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms">TextSecure</a></strong> - It&#8217;s <a href="https://github.com/WhisperSystems/TextSecure/">open-source</a>, it&#8217;s free, and it&#8217;s from <a href="https://twitter.com/moxie">Moxie</a> - what&#8217;s not to love? It stores all of your SMS &amp; MMS data encrypted, and can encrypt the data over the air when texting another TextSecure user.</p>
+
+<p>Currently it uses the SMS/MMS service for messaging, and is Android only; both of those things are changing soon. It&#8217;ll be using the <a href="https://whispersystems.org/blog/asynchronous-security/">data channel</a> and supporting <a href="https://whispersystems.org/blog/iphone-rsn/">iOS</a> in the near future.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.kaitenmail&amp;hl=en">Kaiten Mail</a> &amp; <a href="https://play.google.com/store/apps/details?id=org.thialfihar.android.apg&amp;hl=en">AGP</a></strong> - Kaiten is a low cost ($4.99) mail client; though if you want to go cheaper, it&#8217;s open-source cousin <a href="https://play.google.com/store/apps/details?id=com.fsck.k9&amp;hl=en">K-9 Mail</a> is free. They are developed by the same core team, though Kaiten seems to get the new features first, then they are ported into K-9. I like supporting OSS developers, so I happily went with the paid version. It works great with my Google Apps email account, though does take some getting used to.</p>
+
+<p>Where it really comes in handy though, is when you use it with AGP, the Android Privacy Guard. It&#8217;s a simple, minimalistic OpenPGP tool that integrates nicely with Kaiten and K-9. It makes it simple to support encrypted or signed mail on your phone.</p>
+
+<p>This does though require that your private key be on the device, so keep that risk in mind.</p>
+
+<p>AGP is a bit dated, and hasn&#8217;t been updated since 2010. So, it&#8217;s  clearly been abandoned. Thankfully though, <a href="http://sufficientlysecure.org/">Dominik Schürmann</a> has <a href="https://github.com/dschuermann/openpgp-keychain">forked the project</a> and is working on a major update (new GUI, new API, etc.) that should be ready early next year.</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=com.gmail.mjm4456.vpncilla&amp;hl=en">VpnCilla</a></strong> - Next up is a highly configurable VPN client ($4.99). WIFI is great - except that evil part of your traffic being so simple to monitor, and with recent work on <a href="http://www.theregister.co.uk/2013/07/15/femtocell_flaw_leaves_verizon_customers_wifi_and_mobile_wide_open/">femtocell systems</a>, even 3G/4G connections can&#8217;t be fully trusted. Having a VPN handy is a must.</p>
+
+<p>You&#8217;ll also need a good VPN service; my current pick is <a href="http://www.atenlabs.com/zipline/">zipline</a>; it&#8217;s fast, cheap, and from a trusted professional (<a href="https://twitter.com/viss">Dan Tentler</a>).</p>
+
+<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.redphone&amp;hl=en">RedPhone</a></strong> - Another tool from Moxie, RedPhone secures your voice communications via encrypted VoIP. Or at least so I&#8217;ve read - I never actually make voice calls on my personal phone anymore.</p>
+
+<p><strong>Others</strong> - There are various other useful things - Google Authenticator (2FA all the things, right?), ConnectBot to SSH into your server to do anything you don&#8217;t want to do from your phone, use wifitrack &amp; Wifi Analyzer to better understand what&#8217;s in your area.</p>
+
+<p><strong>Configuration</strong></p>
+
+<p>There is, of course, obvious configuration to make things a bit safer. Make sure you have a good password, or at least a long PIN set - don&#8217;t trust patterns, and don&#8217;t bother with a 4 digit PIN.</p>
+
+<p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
+
+<p><strong>Weak Spots</strong></p>
+
+<p>It&#8217;s not all great though, there are still weaknesses - plenty in fact. Thanks to USB MUXing there is probably a debug interface - and maybe even a full shell on your phone, and you have no way of turning it off. There may be flaws in the baseband or other software that could allow an attacker to gain control.</p>
+
+<p>The list goes on and on. And that&#8217;s without the fact that your phone company hands over all of your call records, or the various apps you need, but don&#8217;t have a secure replacement.</p>
+
+<p>There is no such thing as an NSA proof phone - unless you literally melt it. What we can do though is make it harder to be spied on; make the attackers work for every bit of data. Give nothing away for free.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -373,80 +457,6 @@ they already know how to use. Cryptocat is currently available for Chrome, Firef
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/06/19/opsec-the-nsa-and-you/">OPSEC, the NSA, and You</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-19T19:39:00-04:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It&#8217;s been two weeks since news broke about the NSA <a href="http://www.guardian.co.uk/world/2013/jun/06/nsa-phone-records-verizon-court-order">collecting massive amounts of data</a> from Verizon; and likely everybody else. There&#8217;s also <a href="http://www.guardian.co.uk/world/2013/jun/06/us-tech-giants-nsa-data">PRISM</a> - whatever the hell that is - it seems there&#8217;s no agreement on that, and I doubt there will be anytime soon. What really matters here though, is we have proof that people are watching - and if it&#8217;s happening in the US, it&#8217;s probably happening everywhere else.</p>
-
-<p>If you have any understanding of the intelligence community, all of this should come as absolutely no surprise whatsoever.</p>
-
-<p>For me, it has served as a reminder of the importance of OPSEC in anything you&#8217;re doing. The NSA is collecting metadata, and lots of it - they repeatedly assure people that it&#8217;s harmless. And it is - if you&#8217;re a technophobic OPSEC master living in a cave. Where metadata is so valuable, is in cases where you are looking at people that leak little bits of personal data everywhere they go, then you use the metadata to connect the dots. Very soon, you have a great picture of what they are doing and who is involved - without needing access to voice recordings or other, more protected information.</p>
-
-<p><strong>Knowing Where Your Weakness Is</strong></p>
-
-<p>Many people are talking about tools and technologies now to defeat this kind of data collection - from Tor to Cryptocat, yet, there are issues; it sounds so simple, but it&#8217;s not. Tor for example, how easy would it be for someone with a large budget to put the network at risk? The approximate answer, is <a href="http://grugq.github.io/blog/2013/06/10/good-luck-with-that/">easy</a>. How about Cryptocat or other encrypted communication tools? Last year was <a href="https://blog.crypto.cat/2012/11/security-update-our-first-full-audit/">painful</a> for Cryptocat - the last audit may have been clean, but who knows what else may be found.</p>
-
-<p>Encryption is hard, and it&#8217;s very easy to write something that looks secure but falls apart when placed in the right hands - accidentally or otherwise.</p>
-
-<p>The question is, is it effective against an actor with a massive budget? I would say it is, but not for the reason you might be thinking. Encryption is hard, both for those that implement and those that attack. But why spend the time and money on breaking encryption when you can take advantage of bad OPSEC to achieve the same goal?</p>
-
-<p>People leak data constantly - how, when, and where they use their phone, who they email, how they use social networks - all of these things provide useful information for an attacker. Individually, they may seem to have no value, but it&#8217;s the connections they add to the overall picture that makes them so damaging.</p>
-
-<p>Photo EXIF data, time of day trends in social media (or IRC), comments about the weather - all seem so innocent, but when combined can help to narrow down the list of candidates, and start building a picture of a person and their habits. Simple, innocuous, meaningless - until assembled.</p>
-
-<p>No tool can fix this; using Tor doesn&#8217;t eliminate habits, encrypting email doesn&#8217;t hide social connections. Everything you do leaks data.</p>
-
-<p><strong>Your Software Isn&#8217;t The Big Risk</strong></p>
-
-<p>You are. Your friends are.</p>
-
-<p>All the encryption software in the world won&#8217;t protect you from posting a picture with GPS data embedded in it; no 0day will put you at more risk than you are from your own mouth. No major actor needs to crack encryption, when they can collect massive amounts of metadata, and play connect the dots with the data you give them for free.</p>
-
-<p>It&#8217;s even worse when you start talking to friends, what they know, they&#8217;ll leak. When you speak to anyone, assume that a link between you and them has been documented by somebody, somewhere - now that person is a target to see what little bits of data they leak about you. Or you are now a target because of them.</p>
-
-<p>Trust no one, not even yourself.</p>
-
-<p><strong>Know Your Enemy</strong></p>
-
-<p>As Sun Tzu <a href="https://en.wikipedia.org/wiki/The_Art_of_War">pointed out</a>, if you know your enemy - war is easy. The problem is, you don&#8217;t. Nobody knows just how much data groups like the NSA have - if you believe them, not even the NSA knows. Nor does anyone know what they are capable of collecting should the need arise. Large groups of <em>very</em> intelligent people with a secret budget and access to a secret court that grants almost everything they ask for - my guess is that they&#8217;re capable of a lot.</p>
-
-<p>You know what tools are available - but how can you protect yourself, if you don&#8217;t know what works and what doesn&#8217;t? What networks are monitored? What agencies or companies are sharing data?</p>
-
-<p>Having good tools is a start, but that must be part of a larger plan to control what you expose publicly. You must be very cautious about every bit of data that could be collected - no matter how insignificant it seems. Who you associate with and how needs to be carefully controlled to avoid both unwanted leaks and attention. Every action feeds data in a picture, how useful that picture is, is completely up to you.</p>
-
-<p>Want to learn more, start with <a href="http://www.youtube.com/watch?v=9XaYdCdwiWU">grugq&#8217;s HITB OPSEC talk</a> if you&#8217;ve not seen it yet. If you&#8217;d like the short version, I&#8217;ll sum it up: STFU.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -479,6 +489,10 @@ they already know how to use. Cryptocat is currently available for Chrome, Firef
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -492,10 +506,6 @@ they already know how to use. Cryptocat is currently available for Chrome, Firef
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

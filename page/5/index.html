@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Opportunistic encryption has become quite a hot topic recently, and blew up in a big way thanks to an Internet Draft that was published on February &hellip;">
+  <meta name="description" content="We all know, and well understand what this means when we see it in a browser: It means that the connection is encrypted, and that some degree of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/15/http-considered-harmful-the-need-for-negative-feedback/">HTTP Considered Harmful - the Need for Negative Feedback</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-15T17:53:00-04:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We all know, and well understand what this means when we see it in a browser:</p>
+
+<p><img class="center" src="/files/GitHub_EV_Cert.png"></p>
+
+<p>It means that the connection is encrypted, and that some degree of validation has occurred to verify that the server is who it claims to be. Through the years, users have been taught to trust sites when they see that, or the all too familiar &#8216;lock&#8217; icon - when users see it, they assume their data is safe.</p>
+
+<p>But what about this?</p>
+
+<p><img class="center" src="/files/reddit_no_ssl-2.png"></p>
+
+<p>There&#8217;s no lock to tell them they are safe, but there&#8217;s also no warning to indicate that the connection isn&#8217;t secure. There&#8217;s no encryption, no validation, - no protection at all. With HTTP, users are afforded nothing at all to protect them - but we all know that, right? Does the average user understand that though? Do they understand how easily they could be <a href="http://arstechnica.com/tech-policy/2014/02/new-snowden-docs-show-nsa-gchq-spied-on-wikileaks-pirate-bay-users/">monitored</a>, or how easily traffic can be <a href="https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html">altered</a>?</p>
+
+<p><strong>The Need For Negative Feedback</strong></p>
+
+<p>Strong negative feedback has long been used in browsers to warn against invalid or expired certificates - but there&#8217;s no feedback to warn users of just how dangerous HTTP can be. After a discussion on Twitter, a friend of mine, <a href="https://twitter.com/defusesec">Taylor Hornby</a>, created a <a href="https://defuse.ca/web-browser-negative-feedback.htm">mockup</a> of what could be done in Firefox to warn users:</p>
+
+<p><img class="center" src="/files/ff_no_ssl_xmockup-1.png"></p>
+
+<p>This provides simple, clear feedback to the user that they shouldn&#8217;t trust the site - it doesn&#8217;t present an error or anything to interrupt the user, but does make them aware of the risks they are taking.</p>
+
+<p>We, the security community, owe it to users to provide them with useful feedback so that they can protect themselves - providing negative feedback in the browser showing the weakness of HTTP would be a large step in that direction - and to urge site owners to adopt HTTPS as soon as possible.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -592,90 +648,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/09/06/making-android-nsa-proof/">Making Android NSA-Proof</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-06T23:34:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As it turns out, it&#8217;s quite easy to make your Android phone NSA-proof. It&#8217;s a simple method, and anyone can do it - all you need is a few ounces of thermite!</p>
-
-<p><a href="https://secure.flickr.com/photos/pkh/578831120/"><img class="center" src="https://farm2.staticflickr.com/1341/578831120_8ee93c49af.jpg"></a></p>
-
-<p>Too extreme?</p>
-
-<p>Let&#8217;s shoot for something a little more attainable - spy resistant. We can&#8217;t stop every attack, but we can reduce the attack surface a bit. Here are a few tools that I&#8217;ve been using recently to do just that.</p>
-
-<p><strong><a href="https://www.boxcryptor.com/en/boxcryptor-classic">Boxcryptor Classic</a></strong> - Like many people, I use DropBox for certain, low sensitivity files. But what about things that require a little more care? Boxcryptor Classic encrypts files and then stores the encrypted copy in DropBox. It&#8217;s simple, security seems sound, and the free edition is quite adequate. May not be perfect, but suits my needs nicely.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms">TextSecure</a></strong> - It&#8217;s <a href="https://github.com/WhisperSystems/TextSecure/">open-source</a>, it&#8217;s free, and it&#8217;s from <a href="https://twitter.com/moxie">Moxie</a> - what&#8217;s not to love? It stores all of your SMS &amp; MMS data encrypted, and can encrypt the data over the air when texting another TextSecure user.</p>
-
-<p>Currently it uses the SMS/MMS service for messaging, and is Android only; both of those things are changing soon. It&#8217;ll be using the <a href="https://whispersystems.org/blog/asynchronous-security/">data channel</a> and supporting <a href="https://whispersystems.org/blog/iphone-rsn/">iOS</a> in the near future.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=com.kaitenmail&amp;hl=en">Kaiten Mail</a> &amp; <a href="https://play.google.com/store/apps/details?id=org.thialfihar.android.apg&amp;hl=en">AGP</a></strong> - Kaiten is a low cost ($4.99) mail client; though if you want to go cheaper, it&#8217;s open-source cousin <a href="https://play.google.com/store/apps/details?id=com.fsck.k9&amp;hl=en">K-9 Mail</a> is free. They are developed by the same core team, though Kaiten seems to get the new features first, then they are ported into K-9. I like supporting OSS developers, so I happily went with the paid version. It works great with my Google Apps email account, though does take some getting used to.</p>
-
-<p>Where it really comes in handy though, is when you use it with AGP, the Android Privacy Guard. It&#8217;s a simple, minimalistic OpenPGP tool that integrates nicely with Kaiten and K-9. It makes it simple to support encrypted or signed mail on your phone.</p>
-
-<p>This does though require that your private key be on the device, so keep that risk in mind.</p>
-
-<p>AGP is a bit dated, and hasn&#8217;t been updated since 2010. So, it&#8217;s  clearly been abandoned. Thankfully though, <a href="http://sufficientlysecure.org/">Dominik Schürmann</a> has <a href="https://github.com/dschuermann/openpgp-keychain">forked the project</a> and is working on a major update (new GUI, new API, etc.) that should be ready early next year.</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=com.gmail.mjm4456.vpncilla&amp;hl=en">VpnCilla</a></strong> - Next up is a highly configurable VPN client ($4.99). WIFI is great - except that evil part of your traffic being so simple to monitor, and with recent work on <a href="http://www.theregister.co.uk/2013/07/15/femtocell_flaw_leaves_verizon_customers_wifi_and_mobile_wide_open/">femtocell systems</a>, even 3G/4G connections can&#8217;t be fully trusted. Having a VPN handy is a must.</p>
-
-<p>You&#8217;ll also need a good VPN service; my current pick is <a href="http://www.atenlabs.com/zipline/">zipline</a>; it&#8217;s fast, cheap, and from a trusted professional (<a href="https://twitter.com/viss">Dan Tentler</a>).</p>
-
-<p><strong><a href="https://play.google.com/store/apps/details?id=org.thoughtcrime.redphone&amp;hl=en">RedPhone</a></strong> - Another tool from Moxie, RedPhone secures your voice communications via encrypted VoIP. Or at least so I&#8217;ve read - I never actually make voice calls on my personal phone anymore.</p>
-
-<p><strong>Others</strong> - There are various other useful things - Google Authenticator (2FA all the things, right?), ConnectBot to SSH into your server to do anything you don&#8217;t want to do from your phone, use wifitrack &amp; Wifi Analyzer to better understand what&#8217;s in your area.</p>
-
-<p><strong>Configuration</strong></p>
-
-<p>There is, of course, obvious configuration to make things a bit safer. Make sure you have a good password, or at least a long PIN set - don&#8217;t trust patterns, and don&#8217;t bother with a 4 digit PIN.</p>
-
-<p>USB debugging <em>must</em> be turned off - otherwise there&#8217;s no point in locking your phone. Some other settings help, but not enough - one big one is Android&#8217;s full disk encryption.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Hashkill now cracks Android FDE images master password. Speed is ~135k on 6870, ~270k/s on 7970. Android FDE is weak. <a href="http://t.co/mhcvEuEP48">pic.twitter.com/mhcvEuEP48</a></p>&mdash; gat3way (@gat3way) <a href="https://twitter.com/gat3way/statuses/328550698558029824">April 28, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>If you only have a short numeric PIN, the FDE is little better than a wet paper bag.</p>
-
-<p><strong>Weak Spots</strong></p>
-
-<p>It&#8217;s not all great though, there are still weaknesses - plenty in fact. Thanks to USB MUXing there is probably a debug interface - and maybe even a full shell on your phone, and you have no way of turning it off. There may be flaws in the baseband or other software that could allow an attacker to gain control.</p>
-
-<p>The list goes on and on. And that&#8217;s without the fact that your phone company hands over all of your call records, or the various apps you need, but don&#8217;t have a secure replacement.</p>
-
-<p>There is no such thing as an NSA proof phone - unless you literally melt it. What we can do though is make it harder to be spied on; make the attackers work for every bit of data. Give nothing away for free.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -708,6 +680,10 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -721,10 +697,6 @@ ERROR Exten  is not valid or queryCID LIN--130602192238 is not valid, Originate 
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

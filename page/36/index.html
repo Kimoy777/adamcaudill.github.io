@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="While going through my (long) list of RSS-feeds that I monitor, I found this gem of an article: Vista Transformation Pack: Vista-ize your XP. The &hellip;">
+  <meta name="description" content="If you look at the code I write, seeing a line similar to the following would be fairly common: RaiseEvent LoadComplete(Me, New EventArgs) Yesterday &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/09/24/eventargs-no-need-to-pass-a-new-instance/">EventArgs: No Need to Pass a New Instance</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-09-24T23:15:01-04:00" pubdate data-updated="true">Sep 24<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you look at the code I write, seeing a line similar to the following would be fairly common:</p>
+
+<p><code>RaiseEvent LoadComplete(Me, New EventArgs)</code></p>
+
+<p>Yesterday, I wouldn&#8217;t have given this a second thought, but today, the story is a bit different. A friend of mine pointed me to an <a href="http://msdnwiki.microsoft.com/en-us/mtpswiki/118wxtk3(vs.80">interesting comment</a>.aspx#CommunityContentAnchor)  by <a href="http://davidkean.net/">David Kean</a>  (from Microsoft) on the <a href="http://msdnwiki.microsoft.com/en-us/mtpswiki/default.aspx">MSDN Wiki</a>  indicating that the line above is actually <em>wrong</em>!</p>
+
+<p>So, based on his comment, I should be using <a href="http://msdn2.microsoft.com/en-us/library/system.eventargs.empty.aspx">EventArgs.Empty</a>  instead of creating a new instance, something like this:</p>
+
+<p><code>RaiseEvent LoadComplete(Me, EventArgs.Empty)</code></p>
+
+<p>So using <code>EventArgs.Empty</code> must be better somehow, so I decided to take a look and see if I could figure out just what the difference would be. The MSDN states that &#8221;<em>The value of Empty is a read-only instance of EventArgs equivalent to the result of calling the EventArgs constructor</em>&#8221; - so what&#8217;s the difference? Time for a trip into the <a href="http://www.aisto.com/roeder/DotNet/">Reflector</a>.</p>
+
+<p>The Reflector shows two constructors:</p>
+
+<p><code>Public Sub New()  
+End Sub</code></p>
+
+<p><code>Shared Sub New()  
+EventArgs.Empty = New EventArgs  
+End Sub  
+</code></p>
+
+<p>So, <code>EventArgs.Empty</code> just calls <code>New EventArgs</code> and returns that. <em>Right</em>.</p>
+
+<p>Anybody see something there that I&#8217;m missing? Seems to me that the somewhat more verbose, but more clear (as to what is actually happening) syntax would be better, and no less efficient. If anybody has an opinion about why you would do one instead of the other, I&#8217;d like to hear it.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -273,48 +333,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/09/16/kill-capslock/">Kill CapsLock!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-09-16T13:42:02-04:00" pubdate data-updated="true">Sep 16<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Most people I know have issues with the CapsLock key; with feelings ranging from annoyance to sheer hatred. More often than not, I fall into the sheer hatred side of things. I&#8217;ve played with various ideas to solve the problem. Everything from a system tray notification when CapsLock is on, to physically removing the evil key itself. After all these attempts, I have found I like none of them.</p>
-
-<p>Enter <a href="http://winadmin.forret.com/registry/wanocaps/">waNOCAPS</a> (from the <a href="http://winadmin.forret.com/">Winadmin tools</a> project), a registry modification to quickly and cleanly remap the CapsLock to a third Ctrl key. This is nice in that it&#8217;s a simple registry change, not something as ugly as a background program to alter the CapsLock state or value as many CapsLock killers use.</p>
-
-<p>This seems to be a clean, simple solution to an annoying &#8220;feature&#8221; - one I&#8217;ll certainly be using.</p>
-
-<p><strong><em>Update</em></strong>: It looks like the original page has been removed, but you can still access the files <a href="http://sourceforge.net/project/showfiles.php?group_id=88417">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/37/">&larr; Older</a>
@@ -347,6 +365,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -360,10 +382,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

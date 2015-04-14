@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="As you might be able to tell from looking, something is different around here. So what&#8217;s changed? Octopress I&#8217;ve switched from WordPress &hellip;">
+  <meta name="description" content="When Intel and various industry partners started talking about &#8220;ultra-books&#8221; as competition against Apple and tablets, I was more than a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/04/23/hp-folio-13/">HP Folio 13</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-23T00:01:00-04:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When Intel and various industry partners started talking about &#8220;ultra-books&#8221; as competition against Apple and tablets, I was more than a little skeptical. Ultra-books are small and light weight - but not cheap (average price being around $1,000) and rather underpowered compared to what you can get for the same money with a more traditional laptop (they are basically MacBook Air knock-offs). I had written them off almost as soon as they were announced.</p>
+
+<p>I really expected the ultra-book to be a fad, and a short-lived one at that.</p>
+
+<p>Then came the <a href="http://www.amazon.com/gp/product/B006OEL86Q/ref=as_li_ss_tl?ie=UTF8&amp;tag=adamcaucom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B006OEL86Q">HP Folio 13</a> - my desktop recently failed, and since then I&#8217;ve been using my 2+ year old ASUS G73 as my only machine. While the G73 is great - it&#8217;s also massive, hot, and heavy. After parting with my unused camera gear, I acquired a Folio 13 to act as my main laptop, leaving the G73 to play the role of desktop / development machine.</p>
+
+<p>Within a couple hours of getting the Folio 13 it was clear, I was in love.</p>
+
+<p>It&#8217;s not quite the love I felt when I <a href="http://adamcaudill.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/">first found the iPad</a>, but it&#8217;s an amazing machine. Fast, super-light, and the battery goes on forever - it&#8217;s the ideal laptop. With the power of my G73 available anytime via RDP, I think this combination is about as good as it gets.</p>
+
+<p>Here&#8217;s a rough overview of the Folio:</p>
+
+<ul>
+<li>Intel Core i3 / i5**</li>
+<li>128GB SSD</li>
+<li>4GB RAM</li>
+<li>13.3&#8221; 1366x768 display</li>
+<li>9 hour battery (so far 7-8 hours seems to be the realistic number)</li>
+<li>Brushed aluminum case</li>
+<li>3.3lbs</li>
+</ul>
+
+
+<p>Also included are the normal things you would expect, like a web cam, Bluetooth, etc..</p>
+
+<p>I&#8217;ve been extremely impressed with what this little thing can do, from large compiles to generating <a href="https://github.com/mojombo/jekyll">Jekyll</a> sites, it&#8217;s more capable than I expected. So far it&#8217;s handled everything I&#8217;ve thrown at it - and most taking around the same time as my G73 would (and some taking less, thanks to the Folio&#8217;s SSD).</p>
+
+<p>I&#8217;ll be doing most of my writing and non-development work on the Folio, and the G73 will still be my go-to system anytime I need Visual Studio or other heavy-weight development tools (though I&#8217;d be willing to bet, it&#8217;ll be via RDP from the Folio more often than not).</p>
+
+<p>Overall: I&#8217;m extremely pleased. It&#8217;s a great device - it has the battery life and portability of a tablet (i.e. an iPad), with the power and flexibility of a traditional laptop.</p>
+
+<p>** The Core i3 version is less expense, and thanks to the lower power consumption, it also stretches the battery life better than the i5 - making it a win-win.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -442,78 +509,6 @@ $ make all
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/01/26/iin-bin-database/">IIN (BIN) Database</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-26T12:58:28-05:00" pubdate data-updated="true">Jan 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>An <a href="http://en.wikipedia.org/wiki/ISO/IEC_7812">Issuer Identification Number</a> (IIN, more commonly called a BIN) is the first 6 digits of a credit or debit card, and it identifies the bank that issued it - and if you want to know if a number is a real credit card or just a bunch or random digits, it&#8217;s a huge help. While credit card numbers do use the <a href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> (mod 10 check) to see if the number is valid, it still produces a huge false-positive rate.</p>
-
-<p>For an application like <a href="https://github.com/adamcaudill/ccsrch">ccsrch</a>, having this data available would be very handy to reduce false positives when scanning a large file system (scanning a large server produces a huge number of possible hits), but for what I would call fairly misguided reasons, the official registrar of these numbers (the <a href="http://www.aba.com/default.htm">ABA</a>) doesn&#8217;t make this data publicly available. As a result many people have pulled together what data they could find and made it freely available.</p>
-
-<p>So I&#8217;ll add my name to that list.</p>
-
-<p>I&#8217;ve pulled data from many public sources (sorry, I didn&#8217;t keep very good notes as to the sources) and cleaned it up to a reasonable point. All told, I&#8217;ve probably spent 40 hours or more cleaning this data up and getting it to a usable state. It contains over 60,000 entries, including major credit cards (Visa, MasterCard, Amex, Discover) as well as a few merchant entries.</p>
-
-<p>Each record contains the following:</p>
-
-<ul>
-<li><p>IIN</p></li>
-<li><p>Type (Mastercard, Visa, Visa Credit, etc.)</p></li>
-<li><p>Name (Issuer name)</p></li>
-<li><p>Length</p></li>
-</ul>
-
-
-<p><strong>Data Quality</strong></p>
-
-<p>It&#8217;s not perfect. It&#8217;s from public sources so there may be errors, and there are some duplicates from cases where I wasn&#8217;t able to determine who the IIN actually belongs to. I&#8217;ve also updated for name changes and mergers where possible, but I&#8217;m sure I&#8217;ve missed a few and there are some where the assets where split, so I don&#8217;t know who the correct owner actually is (Washing Mutual being the leading example of this).</p>
-
-<p>In general, I leaned to the side of caution - so if I didn&#8217;t know for sure, I left the duplicate in.</p>
-
-<p>If you need absolutely correct data - contact the ABA, they are the only source that can give you the completely accurate listing. If you need to have a decent idea if a number is valid for most cases - I would say that this data is good enough.</p>
-
-<p><strong>Warranty</strong></p>
-
-<p>Just to make it really, really, really clear: There is no guarantee that this data is accurate, that it won&#8217;t cause to lose your job, cause your house to burn down, or cause Rebecca Black&#8217;s <a href="http://www.youtube.com/watch?v=kfVsfOSbJY0">Friday</a> to get stuck in your head (yup, you&#8217;re welcome ;)).</p>
-
-<p><strong>Copyright</strong></p>
-
-<p>Based on my understanding of US copyright law, it is my understanding that this data is not subject to copyright as it is a compilation of facts and doesn&#8217;t constitute an original expression. Thus, to the best of my knowledge, this data is in the public domain.</p>
-
-<p><strong>Download</strong></p>
-
-<p><a href="http://adamcaudill.com/files/2012/01/IIN.zip">Here</a> (zipped CSV)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -546,6 +541,10 @@ $ make all
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -559,10 +558,6 @@ $ make all
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

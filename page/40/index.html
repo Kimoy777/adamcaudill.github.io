@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Somehow, this story sounds familiar. A total of 243,000 credit card numbers stolen, that many more potential victims. Yet, they are far from alone, &hellip;">
+  <meta name="description" content="  Taking a rather extended lunch break today, I went to the Blue Hole waterfall near Elizabethton in east Tennessee. What a sight! I know my policy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/06/04/blue-hole-waterfall/">Blue Hole Waterfall</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-06-04T00:28:47-04:00" pubdate data-updated="true">Jun 4<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p> <a href="http://flickr.com/photos/89756004@N00/159759269/"><img src="http://static.flickr.com/76/159759269_81b1db659b_m.jpg" alt=" " /></a></p></blockquote>
+
+<p>Taking a rather extended lunch break today, I went to the <a href="http://www.cs.utk.edu/~dunigan/landforms/m.php?wpt=CTF001">Blue Hole waterfall</a> near Elizabethton in east Tennessee. What a sight!</p>
+
+<p>I know my policy is to avoid blogging about things not related to the IT/Software Development industry, but this sight is certainly worth breaking the policy. If you like waterfalls, or just &#8216;getting away&#8221; this is a great place to go. If you&#8217;d like to see more, I&#8217;ve uploaded a <a href="http://flickr.com/photos/89756004@N00/sets/72157594154722533/">few pictures</a> to my <a href="http://flickr.com/photos/adamcaudill/">Flickr page</a>.</p>
+
+<p>Speaking of Flickr, in a previous life I worked as a photographer and as such I&#8217;ve built up quite a collection, over the next few weeks I&#8217;ll be scanning parts of my collection and uploading them. They cover a wide range of topics, so odds are you&#8217;ll find something you like. Just as a note, I&#8217;ve added a link to my Flickr page in the &#8220;Sites&#8221; list as &#8220;My Photos&#8221; on the left panel.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -255,60 +297,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/05/27/maskedtextbox-madness/">MaskedTextBox Madness</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-05-27T10:43:21-04:00" pubdate data-updated="true">May 27<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Over the last couple days, most of my time has been devoted to the <code>MaskedTextBox</code> control, and one very annoying bug. The issues revolves around the way the control deals with currency. When provided with a mask such as &#8217;<code>$999,999,999</code>&#8217; - you&#8217;d expect it to exercise some degree of intelligence. That expectation turned out to be <em>quite</em> wrong.</p>
-
-<p>If you type the number &#8216;50&#8217; in a box with that mask, you&#8217;ll end up with &#8216;$500,000,000&#8217; - for a financial application such as the one I&#8217;m working on, that could lead to a major issue. The only way to get the proper value is to set the cursor two places from the right. So if the user doesn&#8217;t pay attention, it&#8217;ll be simple to enter a value that is completely wrong.</p>
-
-<p>To add insult to injury, when the control receives focus, it has a habit of setting focus to the end of the mask, where the user can not type due to the length restriction. So the user has to move the cursor to the desired location before they can start to type, and if thy just start typing, the control happily ignores them.</p>
-
-<p>After testing a couple possible solutions (<a href="http://blogs.msdn.com/irenak/archive/2006/03/21/556434.aspx">this</a> and <a href="http://www.c-sharpcorner.com/UploadFile/mgold/MaskedCurrencyTextBox08142005135643PM/MaskedCurrencyTextBox.aspx?ArticleID=3dc8ca4b-7166-4851-ab40-a2150c5ca787">this</a>) it soon became clear that the <code>MaskedTextBox</code> is too limited in features to be useful for currency. That simple.</p>
-
-<p>My solution to this was to drop the Masked control and create a new control inherited from <code>TextBox</code> that supports a few extra features such as:</p>
-
-<ul>
-<li><p>Numeric only input</p></li>
-<li><p>Minimum Value</p></li>
-<li><p>Maximum Value</p></li>
-<li><p>Format String support</p></li>
-</ul>
-
-
-<p>With less than 30 lines of code, the basic control was in place. I wish I could include a proper answer for this issue to make the <code>MaskedTextBox</code> useful, but after loosing two days, I can safely say it&#8217;s too limited to be of real value for even slightly complex uses.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/41/">&larr; Older</a>
@@ -341,6 +329,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -354,10 +346,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

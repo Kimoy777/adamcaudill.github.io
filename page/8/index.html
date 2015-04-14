@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Primum non nocere (first, do no harm) - an iconic phrase in modern medicine, yet also applicable to many other fields. This is something I wish more &hellip;">
+  <meta name="description" content="Update: I&#8217;ve just spoken to AMI, and received some very important information; so here are the key points and clarifications: To clarify, the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/04/security-done-wrong-leaky-ftp-server/">Security Done Wrong: Leaky FTP Server</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-04T22:10:00-04:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update:</strong> I&#8217;ve just spoken to AMI, and received some very important information; so here are the key points and clarifications:</p>
+
+<ul>
+<li>To clarify, the &#8216;vendor&#8217; I refer to is a customer of AMI; it is this customer&#8217;s public FTP server that exposed this information.</li>
+<li>Per AMI, the signing key included in the &#8216;Ivy Bridge&#8217; archive is a <em>default</em> test key; AMI instructs customers to change the key before building for a production environment. It&#8217;s not currently known if the customer was following recommended practices.</li>
+<li>The &#8216;Ivy Bridge&#8217; code was unmodified, meaning that the customer had not made any alterations to this specific copy.</li>
+</ul>
+
+
+<p>AMI is preparing a press release. The &#8216;vendor&#8217; still hasn&#8217;t responded (to me or AMI).</p>
+
+<p>Assuming the vendor was following AMI&#8217;s instructions, the private key found on the vendor&#8217;s public FTP server <em>should</em> have little practical value; though how this vendor was handling keys isn&#8217;t known, so the usefulness of the key is also unknown. There is also the possibility of other AMI customers violating AMI&#8217;s instructions. <em>We know we have a key; we don&#8217;t know how it&#8217;s been used.</em></p>
+
+<p>Publicly revealing the source code still has some potentially interesting implications, even with the assumption that the vendor was following AMI&#8217;s instructions on key handling. As this code may be under additional scrutiny from researchers, it&#8217;s likely that new flaws will be found that would have been missed otherwise.</p>
+
+<p>&#8211;</p>
+
+<p>A few hours ago I received a call from my frequent research partner, <a href="http://brandonw.net/">Brandon Wilson</a>, about an open FTP server hosted in Taiwan serving up some rather interesting data. Internal emails, various system images (and even the Ghost software!), numerous photos - some personal, some high resolution PCB images, private specification sheets, Excel documents loaded with private information - but that wasn&#8217;t the worst.</p>
+
+<p>In a folder called <code>code</code> was quite a treasure. The source code for different versions of <a href="http://en.wikipedia.org/wiki/American_Megatrends">American Megatrends</a> (AMI) firmware - but there was even a bonus on top of that! They included their private signing key with the code in the &#8216;Ivy Bridge&#8217; archive.</p>
+
+<p><code>308204A30201000282010100ED71D63F21FF0B4563A43D871D22448FC9...</code></p>
+
+<p>If you aren&#8217;t familiar with how AMI does UEFI firmware upgrades, they were nice enough to produce <a href="http://www.uefi.org/learning_center/UEFI_Plugfest_2012Q1_v3_AMI.pdf">some documentation</a> (PDF).</p>
+
+<p>By leaking this key and the firmware source, it is possible (and simple) for others to create malicious UEFI updates that will be validated &amp; installed for the vendor&#8217;s products that use this &#8216;Ivy Bridge&#8217; firmware. If the vendor used this same key for other products - the impact could be even worse. Even with a quick reaction, odds are users will be unprotected for some time. As users often don&#8217;t install firmware updates unless they are having issues - I expect this one to be around for a while.</p>
+
+<p>This kind of leak is a dream come true for advanced corporate espionage or intelligence operations. The ability to create a nearly undetectable, permanent hole in a system&#8217;s security is an ideal scenario for covert information collection.</p>
+
+<p>This vendor&#8217;s lax (non-existent?) security could have much broader repercussions though. For AMI, they now have a major piece of intellectual property freely available for download by competitors. For users, this code could now be subject to new scrutiny - if a security issue is found in the firmware, it could potentially impact all users whose firmware is based on the leaked code.</p>
+
+<p>If the code was old, as it&#8217;s been when products like <a href="http://www.zdnet.com/symantec-source-code-leaked-on-pirate-bay-7000004765/">Symantec&#8217;s were leaked</a>, this might not be so bad - but it&#8217;s not.</p>
+
+<p><img class="center" src="/files/Screenshot_4_4_13_10_04_PM.png"></p>
+
+<p>References in the files indicate that the code is from sometime in February 2012 - so this is fairly current code. For AMI, I hope they perform a security audit of their code to make sure that this leak doesn&#8217;t put users at excessive risk.</p>
+
+<p>A foolish oversight now has the potential to impact many.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -400,70 +473,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/06/wordpress-dont-trust-that-update/">WordPress: Don&#8217;t Trust That Update</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-06T01:42:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Want to know the easiest way to hack most of the WordPress installs on a host? It&#8217;s as easy as attacking the host&#8217;s internal DNS server, then just sitting back and waiting on users to install your backdoor. If you can manage to change the IP address that &#8220;api.wordpress.org&#8221; resolves to, you&#8217;ve won the battle.</p>
-
-<p>I can&#8217;t take credit for finding this, it was pointed out on Twitter:</p>
-
-<div class='embed tweet'>Tweet could not be processed</div>
-
-
-<p>So this is nothing new - though I don&#8217;t think most users realize that this hole exists, or how hard it would be to find out that they&#8217;ve been attacked.</p>
-
-<p>Internal networks rarely receive the same degree of scrutiny as public facing systems when it comes to updates and hardening, making an attack against an internal DNS server not just possible - but quite likely. Since HTTPS isn&#8217;t used to protect against MITM attacks, and the packages aren&#8217;t signed, so there&#8217;s no verification that what you downloaded matches what was released. So going after the DNS server is just one attack option.</p>
-
-<p>Here&#8217;s a quick overview of just how it could happen:</p>
-
-<ul>
-<li>Hacker signs up for an account with a large host</li>
-<li>The attacker targets the internal DNS server and manages to redirect the API domain</li>
-<li>The API domain now points to an altered update check that serves an infected update package</li>
-<li>Users install updates with no idea that they aren&#8217;t original</li>
-</ul>
-
-
-<p>It would be trivial to modify the WordPress update package to add a backdoor and modify the update check (<code>wp-includes/update.php</code>) to point to the attacker&#8217;s site - that way if the attack against the DNS server is fixed, compromised sites will remain compromised. This does assume that the host&#8217;s internal DNS server has some vulnerability - but in my experience that wouldn&#8217;t be surprising.</p>
-
-<p>If the WordPress team started signing their updates, these issues would be gone; though it doesn&#8217;t look like that will happen:</p>
-
-<div class='embed tweet'>Tweet could not be processed</div>
-
-
-<p>What makes this worse? Both the API and download domains already support HTTPS, but this doesn&#8217;t do any good if the application is hardcoded to use HTTP.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -496,6 +505,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -509,10 +522,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

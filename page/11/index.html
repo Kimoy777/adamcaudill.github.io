@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Huge PGP files, an ancient version of PGP, and errors every time they tried to decrypt a file - that was my completely unexpected challenge on Friday &hellip;">
+  <meta name="description" content="I recently finished building my first MiniPwner - a tiny OpenWrt-based system for pen-testing. At only 2.25 x 2.25 inches, the device plus battery is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/13/minipwner/">MiniPwner</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T16:24:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently finished building my first <a href="http://minipwner.com/">MiniPwner</a> - a tiny <a href="https://openwrt.org/">OpenWrt</a>-based system for pen-testing. At only 2.25 x 2.25 inches, the device plus battery is still extremely small - it easily fits in a pocket, and could be hidden anywhere.</p>
+
+<p>The device is based on the <a href="http://wiki.openwrt.org/toh/tp-link/tl-wr703n">TP-LINK TL-WR703N</a>, which uses a 400Mhz Atheros AR7240 CPU - not exactly a power-house, but enough power for standard pen-testing (or even just as a super-portable linux box). In cases where the 400Mhz CPU and 32MB RAM aren&#8217;t enough, you can easily use OpenVPN as a tunnel to run your tests remotely.</p>
+
+<p>The total investment for the build was only $38 - though next time I&#8217;ll pay a little extra and get the <a href="http://www.amazon.com/gp/product/B005FYNSZA/ref=as_li_ss_tl?ie=UTF8&amp;tag=adamcaucom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005FYNSZA">16GB drive</a> - mostly for extra room when working with logs. The 4GB drive used in the standard build has plenty of room for the software - but I&#8217;d rather have the extra room to work with.</p>
+
+<p>The build process was process was simple - thankfully the <a href="http://minipwner.com/index.php/minipwner-build">instructions</a> are quite good, though I did have to change a few things to make it all work.</p>
+
+<p>Step 1): To save looking, <a href="http://downloads.openwrt.org/snapshots/trunk/ar71xx/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin">here&#8217;s</a> a direct link to the OpenWrt image.</p>
+
+<p>Step 4): I formated the thumb drive by mounting it in a Ubuntu VM, and used <a href="http://gparted.sourceforge.net/">GParted</a> to delete the existing partition, and created a 512MB swap partition, then the rest is ext4.</p>
+
+<p>Step 16): Read step 17 first so you don&#8217;t feel so stupid for wasting time trying to figure out why step 16 doesn&#8217;t seem to do anything.</p>
+
+<p>Step 21): I use WPA2 on my network, so I had to edit the <code>/etc/config/wireless</code> a little differently:</p>
+
+<pre><code>config wifi-iface
+        option device   wlan0
+        option network  wan
+        option mode     sta
+        option ssid     &lt;ssid&gt;
+        option encryption psk2+tkip
+        option key &lt;password&gt;
+</code></pre>
+
+<p>More information about the wireless setup can be found <a href="http://wiki.openwrt.org/doc/uci/wireless">here</a>.</p>
+
+<p>Step 24): My local wireless network is in the 192.168.1.x range, so this wasn&#8217;t working for me. Seeing as changing the wireless doesn&#8217;t make sense for me (way too many static devices), I had to change the IP address of <code>eth0</code> to deal with the issue. I updated my <code>/etc/config/network</code> to look something like this:</p>
+
+<pre><code>config 'interface' 'lan'
+        option 'ifname' 'eth0'
+        option 'type' 'bridge'
+        option 'proto' 'static'
+        option 'ipaddr' '192.168.2.1'
+        option 'netmask' '255.255.255.0'
+</code></pre>
+
+<p>Once the change is made, you&#8217;ll need to execute <code>/etc/init.d/network restart</code> - then update your PC&#8217;s static IP address to &#8220;192.168.2.111&#8221; and reconnect your telnet session.</p>
+
+<p>Step 27): When executing the installs I was receiving this error:</p>
+
+<pre><code>opkg_install_cmd: Cannot install package &lt;package-name&gt;
+</code></pre>
+
+<p>To correct this error, I had to run <code>opkg update</code> - after this the installs started working fine.</p>
+
+<p>Step 27b): The install for <code>samba2-client</code> was failing, as there isn&#8217;t a package by that name - though <code>samba36-client</code> installed fine.</p>
+
+<p>Overall, it&#8217;s a great little setup - I&#8217;m quite pleased.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -410,73 +494,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/23/hp-folio-13/">HP Folio 13</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-23T00:01:00-04:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When Intel and various industry partners started talking about &#8220;ultra-books&#8221; as competition against Apple and tablets, I was more than a little skeptical. Ultra-books are small and light weight - but not cheap (average price being around $1,000) and rather underpowered compared to what you can get for the same money with a more traditional laptop (they are basically MacBook Air knock-offs). I had written them off almost as soon as they were announced.</p>
-
-<p>I really expected the ultra-book to be a fad, and a short-lived one at that.</p>
-
-<p>Then came the <a href="http://www.amazon.com/gp/product/B006OEL86Q/ref=as_li_ss_tl?ie=UTF8&amp;tag=adamcaucom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B006OEL86Q">HP Folio 13</a> - my desktop recently failed, and since then I&#8217;ve been using my 2+ year old ASUS G73 as my only machine. While the G73 is great - it&#8217;s also massive, hot, and heavy. After parting with my unused camera gear, I acquired a Folio 13 to act as my main laptop, leaving the G73 to play the role of desktop / development machine.</p>
-
-<p>Within a couple hours of getting the Folio 13 it was clear, I was in love.</p>
-
-<p>It&#8217;s not quite the love I felt when I <a href="http://adamcaudill.com/2011/01/02/thoughts-on-the-ipad-from-an-apple-hater/">first found the iPad</a>, but it&#8217;s an amazing machine. Fast, super-light, and the battery goes on forever - it&#8217;s the ideal laptop. With the power of my G73 available anytime via RDP, I think this combination is about as good as it gets.</p>
-
-<p>Here&#8217;s a rough overview of the Folio:</p>
-
-<ul>
-<li>Intel Core i3 / i5**</li>
-<li>128GB SSD</li>
-<li>4GB RAM</li>
-<li>13.3&#8221; 1366x768 display</li>
-<li>9 hour battery (so far 7-8 hours seems to be the realistic number)</li>
-<li>Brushed aluminum case</li>
-<li>3.3lbs</li>
-</ul>
-
-
-<p>Also included are the normal things you would expect, like a web cam, Bluetooth, etc..</p>
-
-<p>I&#8217;ve been extremely impressed with what this little thing can do, from large compiles to generating <a href="https://github.com/mojombo/jekyll">Jekyll</a> sites, it&#8217;s more capable than I expected. So far it&#8217;s handled everything I&#8217;ve thrown at it - and most taking around the same time as my G73 would (and some taking less, thanks to the Folio&#8217;s SSD).</p>
-
-<p>I&#8217;ll be doing most of my writing and non-development work on the Folio, and the G73 will still be my go-to system anytime I need Visual Studio or other heavy-weight development tools (though I&#8217;d be willing to bet, it&#8217;ll be via RDP from the Folio more often than not).</p>
-
-<p>Overall: I&#8217;m extremely pleased. It&#8217;s a great device - it has the battery life and portability of a tablet (i.e. an iPad), with the power and flexibility of a traditional laptop.</p>
-
-<p>** The Core i3 version is less expense, and thanks to the lower power consumption, it also stretches the battery life better than the i5 - making it a win-win.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -509,6 +526,10 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -522,10 +543,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>

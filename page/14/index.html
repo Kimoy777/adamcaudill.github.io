@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="A couple of days ago I was sent a link to Robert Cringely&#8217;s latest treatise:  The second coming of Java - and to say I disagreed was a bit of &hellip;">
+  <meta name="description" content="PCI DSS, the security standard for companies that handle credit cards, defines a number of rules as to how credit cards are handled. One of those &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,83 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/10/20/masking-credit-cards-for-pci/">Masking Credit Cards for PCI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-20T16:14:40-04:00" pubdate data-updated="true">Oct 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PCI DSS, the security standard for companies that handle credit cards, defines a number of <a href="https://www.pcisecuritystandards.org/pdfs/pci_audit_procedures_v1-1.pdf">rules</a> as to how credit cards are handled. One of those rules, 3.3, is defined as follows:</p>
+
+<p><em>Mask PAN when displayed (the first six and last four digits are the maximum number of digits to be displayed)</em></p>
+
+<p>So based on this requirement I assumed that the code to do this would be common and widely available; much to my surprise there are rather few samples that do this, and of those I found they only showed the last four (which when you are handling a lot of credit cards, searching for an account by the last four isn&#8217;t all that helpful) and were often rather fragile.</p>
+
+<p>So I whipped this up, hopefully it&#8217;ll be useful to others.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">MaskCreditCard</span><span class="p">(</span><span class="kt">string</span> <span class="k">value</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="kt">string</span> <span class="n">PATTERN</span> <span class="p">=</span> <span class="s">@&quot;\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|&quot;</span> <span class="p">+</span>
+</span><span class='line'>    <span class="s">@&quot;6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|&quot;</span> <span class="p">+</span>
+</span><span class='line'>    <span class="s">@&quot;[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})\b&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">replace</span> <span class="p">=</span> <span class="n">Regex</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="k">value</span><span class="p">,</span> <span class="n">PATTERN</span><span class="p">,</span> <span class="k">new</span> <span class="n">MatchEvaluator</span><span class="p">(</span><span class="n">match</span> <span class="p">=&gt;</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">num</span> <span class="p">=</span> <span class="n">match</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">num</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span> <span class="p">+</span> <span class="k">new</span> <span class="kt">string</span><span class="p">(</span><span class="sc">&#39;*&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span>
+</span><span class='line'>      <span class="n">num</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">4</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">replace</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The regex pattern is from <a href="http://www.regular-expressions.info/creditcard.html">Regular-Expressions.info</a> and should detect most major cards.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -317,52 +394,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/05/21/happy-20th-birthday-visual-basic/">Happy 20th Birthday Visual Basic!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-21T01:50:19-04:00" pubdate data-updated="true">May 21<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I saw a post on Facebook by a friend of mine, <a href="http://inotifythoughtschanging.net/blog/">Anthony Green</a>, about writing his first blog post as a Microsoft employee (he has a personal blog as well, unfortunately he&#8217;s not written anything since 2008) - when I saw the title, I couldn&#8217;t believe it was 20 years already - seems just yesterday that I wrote about its <a href="http://adamcaudill.com/2006/05/27/happy-belated-birthday-vb/">15th birthday</a>:</p>
-
-<p><a href="http://blogs.msdn.com/b/vbteam/archive/2011/05/20/happy-20th-birthday-visual-basic.aspx">Happy 20th Birthday Visual Basic!</a></p>
-
-<p>My, what a journey it&#8217;s been. Almost fifteen years ago I randomly bought a copy of &#8220;Visual Basic 5: Deluxe Learning Edition&#8221; - I was just 15 at the time and wanted a new hobby, and writing software seemed like it would be fun. In those early days, I had no idea what career I would choose, and really didn&#8217;t intend for software development to become the dominant force in my life - I just wanted a better, more productive way to spend my time during the summer.</p>
-
-<p>In the years that have went by, I became passionate about the field, and all it encompasses (possible obsessed, if you believe my wife) - it&#8217;s been the driving force in my life. Today, I manage a team of 6 developers, and have a fun start-up with some friends (that someday won&#8217;t cost me money every month) - and all because I bought that book. Overall, I have a lot to thank VB for, it really did get me started in this field.</p>
-
-<p>Today though, my language of choice has moved on to newer options - I prefer bleeding technologies when I can use them - but VB will always have a place in my heart, and I&#8217;ll always follow its progress as it continues to transform and adapt to an ever-changing world. As the most popular .NET language (contrary to what many of the C# developers think), it plays a vital role in the development of the framework and the ecosystem.</p>
-
-<p>In the conversations I&#8217;ve had with Anthony about the future of the language, I greatly look forward to writing about its 25th birthday; I expect those will be exciting times for the language and the entire .NET ecosystem.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/15/">&larr; Older</a>
@@ -395,6 +426,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
       </li>
     
@@ -408,10 +443,6 @@
     
       <li class="post">
         <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/01/2014-a-year-in-review/">2014: Year In Review</a>
       </li>
     
   </ul>
