@@ -12,7 +12,8 @@ I speak at various events on security, development, and related topics. If you w
 
 ## Recent & Upcoming Talks
 
-* [Crypto Village @ DEFCON](https://cryptovillage.org/) (August 6th - 9th) - *Representing the Underhanded Crypto Contest; details TBD*
+* [Western North Carolina .NET Developers Guild](http://wncdotnet.com/) - (October 15th, 2015) - TBD
+* [Crypto Village @ DEFCON](https://cryptovillage.org/) (August 6th - 9th, 2015) - *Representing the Underhanded Crypto Contest; details TBD*
 * [BSides Knoxville](https://bsidesknoxville.com/) (May 15th, 2015) - *Event Organizer*
 * [Stir Trek](http://stirtrek.com/) (May 1st, 2015) - What you don’t know about crypto can hurt you!
 * [Code PaLOUsa](http://www.codepalousa.com/) (April 27th - April 30th, 2015) - What you don’t know about crypto can hurt you!
