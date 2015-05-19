@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I recently finished building my first MiniPwner - a tiny OpenWrt-based system for pen-testing. At only 2.25 x 2.25 inches, the device plus battery is &hellip;">
+  <meta name="description" content="Update: LastPass has confirmed that they&#8217;ll address this issue in the next release. Update 2: LastPass has addressed this issue in their new v2 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/19/slipping-past-lastpass/">Slipping Past LastPass</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-19T13:54:00-04:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Update:</strong> LastPass has confirmed that they&#8217;ll address this issue in the next release.</p>
+
+<p><strong>Update 2:</strong> LastPass has addressed this issue in their new v2.0 release. There is still a way to bypass the password prompt in Chrome, but they will address that in the next release. Overall, it looks like we can close the books on this one.</p>
+
+<p>I&#8217;m a big fan of <a href="https://lastpass.com/">LastPass</a> - it&#8217;s a great service that has impressed me every step of the way. Though it&#8217;s not perfect, and I&#8217;ve found a small hole that makes it easier for an attacker to get your passwords - if the following are true:</p>
+
+<ol>
+<li>The attacker has physical access to your PC.</li>
+<li>You&#8217;ve made the mistake of not locking your PC when you walk away.</li>
+<li>You&#8217;ve select the option to stay logged on - which happens to be a default, or, you&#8217;ve left your browser open (as I expect most people do).</li>
+</ol>
+
+
+<p><img class="center" src="http://adamcaudill.com/files/lastpass_default_opt.png"></p>
+
+<p>If all three of these are true (or your PC is otherwise compromised) - you probably shouldn&#8217;t expect much in the way of security, but LastPass does protect you - most of the time. If you try to copy or view a password, you&#8217;ll be prompted to enter your Master Password - but there&#8217;s one case that can easily expose your passwords without needing to know the Master Password.</p>
+
+<p>The issue is that LastPass allows you to change the address associated with a login without confirming your master password. This would allow an attacker to update an entry in your vault to a specially crafted page to echo the password - allowing the attacker to see the password and leave minimal tracks behind. I setup a <a href="http://adamcaudill.com/files/EchoLoginForm.html">special page</a> to test this, it echoes the password as soon as LastPass enters it, allowing me to see the password in a few seconds without providing the master password (it&#8217;s also possible to update the password without providing the Master Password, providing another opportunity for mischief).</p>
+
+<p><img class="center" src="http://adamcaudill.com/files/lastpass_edit.png"></p>
+
+<p><strong>Automation</strong></p>
+
+<p>While I&#8217;ve not taken the time to build a tool to automate this - it would be a fairly simple process to do, just a matter of investing the time (which unfortunately I don&#8217;t have). The obvious solution would be to automate the GUI interaction to perform the following steps:</p>
+
+<ul>
+<li>Change the URL to a malicious page.</li>
+<li>Navigate to the page, and log the login data.</li>
+<li>Revert the URL to the original value.</li>
+</ul>
+
+
+<p>Using this method it would be possible to collect all of a users credentials within just a few minutes. It&#8217;s possible there may be a simpler &amp; faster route available by interacting directly with the plug-ins, though in looking at the exports and COM interfaces I didn&#8217;t see an obvious way to achieve this (which as a LastPass user, this makes me happy).</p>
+
+<p>For an attacker, one substantial upside is that there would be little evidence of the event - while the LastPass Vault will show that all entries have been &#8220;touched&#8221; recently, I would venture to say that very few users would actually notice.</p>
+
+<p>While this attack requires full access as the logged-in user, if a PC is otherwise compromised (perhaps as part of an APT type attack), it could allow an attacker to greatly expand their activities with a minimal time investment. This is the type of situation that could take a fairly small local information disclosure and turn it into a real nightmare scenario for a targeted user.</p>
+
+<p><strong>Solution</strong></p>
+
+<p>The simplest solution for this issue is to require Master Password verification if the URL changes, or at least require it if the domain changes. This should be a minor change for them and will eliminate this attack vector. Thankfully this is a minor issue, due to the three requirements required to pull this off - so I don&#8217;t believe there is too much risk due to this oversight.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -448,52 +524,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/29/absolute-deniability/">Absolute Deniability</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-29T17:38:00-04:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://sebsauvage.net/wiki/doku.php?id=php:zerobin">ZeroBin</a> (<a href="https://github.com/sebsauvage/ZeroBin">code</a>) is a new and interesting piece of software to compete with services such PasteBin - largely in response to PasteBin&#8217;s new aggressiveness in <a href="http://www.bbc.co.uk/news/technology-17544311">removing objectionable posts</a>. For PasteBin, it&#8217;s easy to see why their policy changed - currently they can&#8217;t deny knowledge of what they are hosting, it&#8217;s plain-text and easily scanned (look <a href="http://www.leakedin.com/">at this</a> if you don&#8217;t believe me). ZeroBin on the other hand has taken a very different approach - to not just have <a href="https://en.wikipedia.org/wiki/Plausible_deniability">plausible deniability</a>, but absolute deniability.</p>
-
-<p>The key to this is that ZeroBin stores pastes and discussions encrypted - and the encryption is performed in the browser, with a browser generated key. This means that the people running the ZeroBin software have no knowledge of what they are storing.</p>
-
-<p>So, if they are asked to remove content, all they can do is remove specific named items - it would be impossible to remove all items that contain specific material (where if PasteBin was to be ordered to remove all items containing credit card numbers, it&#8217;s a realistic possibility). As long as knowledge of the key remains limited - the paste will likely live on, no matter the content.</p>
-
-<p>To make it even better, there are no accounts - so there&#8217;s no way to see what a specific user is posting. With a properly configured server, this could be completely anonymous. With no knowledge of the content, no knowledge of users - it&#8217;s the ultimate in deniability.</p>
-
-<p>I really expect that this technique will become far more common in the future. It allows a much higher level of deniability for hosts and service provider, and greatly restricts the ability of investigators to research the activities of a user or group.</p>
-
-<p>Take a closer look at this, I expect you&#8217;ll see more of this.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -526,6 +556,10 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
       </li>
     
@@ -539,10 +573,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
     
       <li class="post">
         <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2015-05-08T23:50:05-04:00</updated>
+  <updated>2015-05-19T00:43:32-04:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Making BSides Knoxville]]></title>
+    <link href="https://adamcaudill.com//2015/05/18/making-bsides-knoxville/"/>
+    <updated>2015-05-18T00:17:00-04:00</updated>
+    <id>https://adamcaudill.com//2015/05/18/making-bsides-knoxville</id>
+    <content type="html"><![CDATA[<p><a href="https://www.flickr.com/photos/126993760@N05/17709785102/in/album-72157652967513465/"><img class="center" src="https://farm9.staticflickr.com/8853/17709785102_8d6abf178b_z.jpg"></a></p>
+
+<p>Two years of discussions, months of planning, weekly meetings, and thousands of dollars - BSides Knoxville 2015, the first BSides Knoxville that is, is in the books. By any metric I can think of, it was a resounding success - the feedback was great, awesome talks, good food, and a great atmosphere.</p>
+
+<p>I would like to give a little insight into the event, some of what I learned from it, what went right, went wrong, and how to make something like this without going insane. Hopefully this will be useful for others thinking about running a small conference, or if you just want a behind the scenes view of what goes on.</p>
+
+<h2>Time</h2>
+
+<p>A conference of any size takes time to put together, and even a fairly small regional event is no different. The planning actually started in the summer of 2013, with an event planned for the spring of 2014 — that clearly didn’t happen. Venue quotes, preliminary budgets, talks with potential sponsors — altogether, several hundred hours of work went into the 2014 event before a painful decision had to be made.</p>
+
+<p>Putting something like this together is hard — you truly have to juggle a thousand things at once, if you can’t dedicate the time needed to keep track of them all, things fall and the event fails. In May of 2014, we let the main BSides organization know that we put the event on hold, with no set date to resume. After so much work, this was a hard thing to do — but we wanted to do it right, and the team we had simply couldn’t put in enough time to make it happen. If we couldn’t make it the event Knoxville deserved, we weren’t going to do it.</p>
+
+<p>At DerbyCon 2014, a few of us met and discussed the path forward to make the event happen — we still had a strong desire to make it happen, but it had to be right. After a number of conversations, it was clear that we needed to rebuild the core team.</p>
+
+<p>The timing couldn’t have been better.</p>
+
+<p>A couple weeks after DerbyCon, a message was relayed through the main BSides organization that someone else was interested in getting a BSides event in Knoxville. Perfect.</p>
+
+<p>In November 2014 the regular meetings started, and ran through till a few days ago. Between the four person team, the time investment ranged from 10 hours to 40+ hours a week. Running the CFP, finding sponsors, negotiating with venues, badge design and manufacturing, and of course promoting the event.</p>
+
+<p>The best lesson here was to find good tools and use them religiously — we coordinated everything through <a href="https://trello.com/">Trello</a>, and it worked out beautifully. Making the move to run everything through it might have been the best decision we made.</p>
+
+<h2>Money</h2>
+
+<p>Running a conference isn’t cheap, and without the generosity of the sponsors, it simply wouldn’t be possible. To give a rough idea, the cost per attendee was roughly $77 — we charged $10; the $67 difference was covered by the sponsors. So when I say it wouldn’t be possible without them, I’m really not kidding.</p>
+
+<p>The cost of food &amp; drinks was, by far, our largest expense — making up over half of the budget. The badges made up the next largest cost — we really wanted to do something special, useful, memorable, and we hope we did it.</p>
+
+<p>Getting the money necessary and determining the best way to use it to get the most bang for everyone involved is anything but simple. Of all the time we spent in the planning meetings, approximately half was spent discussing money.</p>
+
+<h2>Team</h2>
+
+<p>Without the team, both organizers and volunteers, there’s no way it would have happened. In total, there were four organizers and twelve volunteers. Having a good team is critical for the event’s success — without a good team of people that are willing to work hard, the event will have issues every step of the way.</p>
+
+<p>Volunteering at a conference is a great way to learn about how to manage an event, and get an insight to the issues that you may have, and how to deal with them. For me, volunteering at BSides Las Vegas was a great experience — extremely educational, and something that everyone interested in running a conference should do.</p>
+
+<p>For me, I was in charge of coordinating the staff, and I feel that I could have done a better job coordinating the team and promoting communication. This is my top personal item to improve for next year.</p>
+
+<h2>Speakers</h2>
+
+<p>We had 20 speakers and 14 talks, plus the keynote — the content, I think, was excellent. The feedback from the speakers was excellent, and the feedback on the quality of the talks couldn’t have been better.</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p lang="en" dir="ltr">Speaker gifts have arrived&#8230; <a href="http://t.co/gap4P5pKXL">pic.twitter.com/gap4P5pKXL</a></p>&mdash; BSidesKnoxville (@BSidesKnoxville) <a href="https://twitter.com/BSidesKnoxville/status/598814863184494592">May 14, 2015</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>One of the goals was to make sure that the speakers walked away with a positive feeling about the event, and would remember it for years to come. We had custom flasks made, speaker areas for each track stocked with snacks and drinks, walk-out music, and so forth — all with the goal of making sure that all of the speakers would walk away looking forward to next year.</p>
+
+<p>The one area where I think we failed the speakers, is that we didn’t accurately judge which talks would need the most space — leading to a couple cases where the smaller area was completely packed, and the larger area had half the seats empty. This is something we will do better next year.</p>
+
+<h2>Overall</h2>
+
+<p>We had a target of 200 people, including staff and speakers — and we sold out around a month before the event. Had we been able to open up more spots, we likely could have increased this number by quite a bit. There’s a huge interest in the Knoxville area for this kind of event. For our first year, the response was incredible.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Crypto Front Door: Everyone Welcome!]]></title>
@@ -1403,67 +1464,6 @@ In general, if there’s nothing other than a piece of paper protecting your dat
 <p>One of the things I&#8217;d love to see fixed is the way the user&#8217;s password is stored - it&#8217;s currently stored in the <code>MyID.config.php</code> file as a MD5 hash - making brute-forcing entirely too easy. Hopefully <a href="http://tools.ietf.org/html/draft-ietf-httpauth-digest-06">this</a> Internet Draft will be adopted soon, obsoleting <a href="http://tools.ietf.org/html/rfc2617">RFC 2617</a>, which will be an easy win to improve the security of the password when in transit. There are many places where the code can be improved by somebody with a little time.</p>
 
 <p>If you are using phpMyID today, replace the <code>MyID.php</code> file with the one <a href="https://raw.githubusercontent.com/adamcaudill/phpMyID/master/MyID.php">here</a> (it also fixes compatibility with PHP 5.4).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Security By Buzzword - Why I don't support Ensafer]]></title>
-    <link href="https://adamcaudill.com//2014/03/23/security-by-buzzword-why-i-dont-support-ensafer/"/>
-    <updated>2014-03-23T12:28:00-04:00</updated>
-    <id>https://adamcaudill.com//2014/03/23/security-by-buzzword-why-i-dont-support-ensafer</id>
-    <content type="html"><![CDATA[<p><strong>Update</strong>: I had a call with Ensafer&#8217;s CTO, Trygve Hardersen to discuss the issues I brought up, and what they can do about it. First, they updated the site so that downloads are now over HTTPS. He stated that the infrastructure that powers their service is separate from the website, and everything is over HTTPS. They are working on making documentation available, and hope to have the first documents available soon. Once I get a chance to look over their documentation, I&#8217;ll post further updates.</p>
-
-<p><a href="http://www.ensafer.com/">Ensafer</a> is an overlay to Dropbox that offers end-to-end encryption, the goal being to address privacy concerns that Dropbox can access user&#8217;s files - and thus possibly the US Government (via NSLs, etc.). This sounds like a great idea - end to end encryption is the best way to prevent unjustified surveillance, and I do use a competing product (<a href="https://www.boxcryptor.com/">Boxcryptor</a>), so I support the concept, but what about Ensafer&#8217;s implementation - does it provide the level of security desired?</p>
-
-<p><strong>Where are the details?</strong></p>
-
-<p>If you look at Ensafer&#8217;s site, you&#8217;ll find precious few details on what they are doing - plenty of security buzzwords, but no specifics. Let&#8217;s take a look at the <a href="https://ensafer.zendesk.com/hc/en-us/articles/200797297-Industry-standard-RSA-and-AES-cryptography">one page with details</a>:</p>
-
-<blockquote><p>Ensafer believes in standards and we don&#8217;t use any custom encryption algorithms. Our encryption platform is built on:</p><p>2048-bit RSA keys<br/>256-bit AES encryption<br/>2048-bit SSL<br/>PKCS#12 key containers<br/>X.509 certificates</p></blockquote>
-
-
-<p>We see some algorithm names - but what about key derivation, or symmetric encryption modes? How about hashing algorithms? How and where is your password stored? There are so many implementation details that are critical for security, yet aren&#8217;t talked about at all.</p>
-
-<p>In December of 2012 I started asking about details, they pointed me back to the web site - when I pushed for more, I was told that they were working on a whitepaper to explain their implementation:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> We have not published all technical details, but we&#39;re working on a whitepaper which will be published later. ^LS</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/275616564085149698">December 3, 2012</a></blockquote>
-<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>More than a year later, I&#8217;m still waiting to see those details.</p>
-
-<p><strong>So have they conducted an audit?</strong></p>
-
-<p>Since they haven&#8217;t released details publicly, if they conducted an external audit, that would bring some trust. So, recently I asked, and this is what they had to say:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p><a href="https://twitter.com/adamcaudill">@adamcaudill</a> Thanks for your important question. There hasn’t been an audit yet due to work in progress, but will be done this year.</p>&mdash; Ensafer (@Ensafer) <a href="https://twitter.com/Ensafer/statuses/447156694041509889">March 21, 2014</a></blockquote>
-<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>After the delay in getting useful details published, I&#8217;m not hopeful that we&#8217;ll see the results of an audit in the near future.</p>
-
-<p><strong>TLS &amp; Safe Downloads</strong></p>
-
-<p>I really wish that the lack of details was the only concern - but it&#8217;s not. The first thing I noticed is that their web site doesn&#8217;t force TLS, so I manually switched to HTTPS, unfortunately the result wasn&#8217;t what I was hoping for:</p>
-
-<p><img class="center" src="https://adamcaudill.com//files/Ensafer_SSL_Error.png"></p>
-
-<p>Well, that&#8217;s not encouraging. Let&#8217;s take a look at the download link:</p>
-
-<pre><code>http://get.ensafer.com/mac/prod/Ensafer-1.0.8.dmg
-</code></pre>
-
-<p>When you try the same link over HTTPS, it&#8217;s even worse:</p>
-
-<p><img class="center" src="https://adamcaudill.com//files/ensafer_dl_no_tls.png"></p>
-
-<p>For a security product, I&#8217;d expect the download to be over HTTPS to prevent an attacker from redirecting a victim to a malicious version. This isn&#8217;t the kind of mistake I&#8217;d expect from people building advanced security tools. When you see issues like this, it&#8217;s common to see more problems, so this may just be the tip of the iceberg.</p>
-
-<p><strong>Is it trustworthy?</strong></p>
-
-<p>I would like to say that it&#8217;s safe to use, and that it lives up to the promises made - but they haven&#8217;t made enough information available for people to make an informed decision. If you add the lack of information with such basic mistakes as not making the download available over HTTPS, it doesn&#8217;t instill much confidence. Companies focused on security should know better.</p>
-
-<p>When you make decisions about what tools you use, you have to look at the full picture - and Ensafer is a great example of that. They&#8217;ve focused first on a pretty website, adding features - but not assuring trust. At this point, the only evidence of their security is the use of buzzwords.</p>
 ]]></content>
   </entry>
   

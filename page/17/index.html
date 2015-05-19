@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I recently discovered that I had left the changer for my BlackBerry Tour behind (I&#8217;m in the process of moving, and left my changer at the old &hellip;">
+  <meta name="description" content="While building a new website for a small ISV, I was asked to integrate a forum - should be simple I thought, I&#8217;ll just use WordPress as a CMS &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/06/bbpress-wordpress-3-1-registration-issues/">bbPress & WordPress 3.1 (Registration Issues)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-06T03:39:49-05:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While building a new website for a small ISV, I was asked to integrate a forum - should be simple I thought, I&#8217;ll just use WordPress as a CMS and <a href="http://bbpress.org/">bbPress</a>. Simple? Not quite.</p>
+
+<p>To make things easier, I used <a href="http://www.pagelines.com/themes/platformpro/">Platform Pro</a> by Pagelines (a great platform IMHO) and so used their &#8220;deep integration&#8221; <a href="http://www.pagelines.com/docs/bbpress-forums">instructions</a> (while they are intended for Platform Pro users, the steps are virtually identical for all other setups). While the setup went quite smoothly, it wasn&#8217;t until it came time to test user registrations that the issue came up: when a new user tried to register they would receive an error stating that &#8220;email is required,&#8221; even if they had entered a valid email address. This effectively made it impossible for users to register, and thus made the forum useless.</p>
+
+<p>After a bit of research, it looks like there is a conflict between newer versions of WordPress (3.0+) and bbPress 1.0.2 (I&#8217;m not sure if older versions have the same issue, but I would assume so). The fix for this is actually quite simple: install a <a href="http://bbpress.org/plugins/topic/zaerl-wordpress-3-integration/">plugin</a>. The plugin itself is quite simple - containing only around a half-dozen executable lines of code, and works around the issue with a simple hack.</p>
+
+<p>Unfortunately, the plugin description is rather vague and required a fair bit of research to identify as the fix, and the official documentation makes no reference to the issue or that this plugin can be used as a workaround.</p>
+
+<p>Overall, a simple workaround but a major issue if you don&#8217;t notice that it&#8217;s broke (as is quite easy to do).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -375,62 +419,6 @@ install sqlite3-devel'
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/19/rosen-shingle-creek/">Rosen Shingle Creek</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-19T13:22:30-05:00" pubdate data-updated="true">Dec 19<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently had a great idea; a trip down to Florida to visit family and celebrate our second anniversary - the idea turned out to be a bit less great than I had hoped. Of the seven days we were there, on three the wind-chill was less than 40F. On the upside, I had booked a room at a newer (opened in 2006) 4-star hotel; if we&#8217;re going to be stuck inside, no reason not to be in a great room.</p>
-
-<p>The hotel was <a href="http://www.rosenshinglecreek.com/">Rosen Shingle Creek</a>, a rather large (1,500 rooms plus a 450,000 sq. ft. conference area) and quite impressive facility. The view as you drive up to the main entrance is most impressive; 14-stories tall and inspired by <a href="http://en.wikipedia.org/wiki/Spanish_Colonial_Revival_architecture">Spanish Colonial Revival</a> architecture that was so popular in Florida during the early 1900s. As you approach the hotel, you&#8217;ll notice that the driveway is offset to the left to enhance the initial impression.</p>
-
-<p><a href="http://www.flickr.com/photos/26686573@N00/4693535920/"><img src="http://farm5.static.flickr.com/4016/4693535920_4e031719ea.jpg" alt="" /></a></p>
-
-<p>The rooms are well-appointed, and well designed. The use of art by a local photographer (which is featured throughout the hotel) seems, to me at least, far better than the random paintings and abstract art I&#8217;ve seen at most other hotels I&#8217;ve been to recently. As would be expected from a 4-star hotel, the beds are comfortable; though personally I believe that the beds at the nearby <a href="http://www.renaissanceseaworldorlando.com/">Renaissance Orlando at SeaWorld</a> are far superior.</p>
-
-<p>The hotel&#8217;s public spaces are nearly as impressive as its exterior appearance, with abundant marble and stonework, and large open spaces. It is certainly an upscale hotel, and you are reminded of that fact each and every step of the way.</p>
-
-<p>Though with this praise, there are a few things I really didn&#8217;t care for:</p>
-
-<ul>
-<li><p>Parking: Valet parking is a steep $20/day; there is the option to self-park for $12/day, but in the evening the parking lot fills quickly. If the thought of walking close to a half-mile at the end of a long day walking around theme parks seems like a bad idea, then I would avoid the self-parking.</p></li>
-<li><p>Internet: The lack of in-room Wi-Fi is (in my opinion) inexcusable for such a new hotel. Between my wife and me, there were three laptops and two iPads; so a single wired internet connection just doesn&#8217;t cut it. I don&#8217;t mind paying the $13/day they change for internet access (well, I do mind, but there&#8217;s little choice but to live with it), but I need to be able to use it the way I want to use it. In a world where more and more devices come with Wi-Fi built-in, there&#8217;s no reason for any hotel to not provide in-room Wi-Fi access.</p></li>
-<li><p>Cleaning: The room was nearly spotless when we arrived (and what little was missed was quite excusable), and the daily cleaning was always courteous and thorough. Some other areas though, didn&#8217;t receive the same level of attention. For example, the in the hallway leading to our room there were scraps of paper and other debris on the floor for almost the entire time we were there. Not a huge deal, but if they only vacuum the hallway once a week – what else are they not doing right?</p></li>
-<li><p>Tips: I don&#8217;t mind tipping for good service (and I tend to be more generous than most), but I can&#8217;t stand people who demand tips. I&#8217;ve not seen people push for tips like that in a long time.</p></li>
-</ul>
-
-
-<p>Overall, it&#8217;s a nice hotel and I wouldn&#8217;t suggest avoiding it; though there are better hotels in the area.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/18/">&larr; Older</a>
@@ -463,6 +451,10 @@ install sqlite3-devel'
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
       </li>
     
@@ -476,10 +468,6 @@ install sqlite3-devel'
     
       <li class="post">
         <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
   </ul>

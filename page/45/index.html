@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Microsoft recently moved to release their Virtual Server 2005 software for free. This is a somewhat unexpected, yet not surprising move by the &hellip;">
+  <meta name="description" content="Over the next three months or so I plan on more-or-less rebuilding all of my computers, and the network they sit on. This is going to be a fairly &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,104 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/04/09/rebuilding-my-network/">Rebuilding My Network</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-04-09T15:06:17-04:00" pubdate data-updated="true">Apr 9<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the next three months or so I plan on more-or-less rebuilding all of my computers, and the network they sit on. This is going to be a fairly time consuming process, though I expect should be well worth it. This includes the addition on a couple new computers, as well as new hardware for the existing ones. Among the various changes is the move to a rack-mount environment, away from normal tower cases. I think this is going to be quite a project.</p>
+
+<p>Here&#8217;s how things look now:</p>
+
+<ul>
+<li><p>Primary Desktop (WinXP, tower case)</p></li>
+<li><p>Subversion Server (Win2000, tower case)</p></li>
+<li><p>(Misc hardware strewn about)</p></li>
+</ul>
+
+
+<p>On to the changes&#8230;</p>
+
+<p><strong>Dell PowerEdge 2500</strong></p>
+
+<p>The first (and largest) change is the addition of a used Dell PowerEdge 2500 server, that will server as a development SQL &amp; Web server. This will eliminate the need to be running SQL Server on my primary PC.</p>
+
+<p><a href="http://adamcaudill.com/files/2006/04/powerfront.jpg"><img src="http://adamcaudill.com/files/2006/04/powerfront.thumbnail.jpg" alt="powerfront.jpg" /> </a></p>
+
+<p>This was a beefy server in its day, though it&#8217;s somewhat underpowered for many of the more demanding projects servers have to deal with. This makes it a perfect development server. This allows a better view of the impact software can have on it, as well as being light on the budget, leaving money for more important things.</p>
+
+<p>This box is currently setup with 1 PIII 933Mhz CPU (I plan on upgrading this), 512MB of RAM (it&#8217;ll be seeing at least a couple of <a href="http://www.newegg.com/Product/Product.asp?Item=N82E16820999201">these</a> in the rebuilding process), and <strong>6</strong> 18.2GB SCSI HDs. So it&#8217;s far from top of the line, but it&#8217;ll be a great development box.</p>
+
+<p><strong>Primary PC</strong></p>
+
+<p><img src="http://adamcaudill.com/files/2006/04/23513141.jpg" alt="23513141.jpg" /></p>
+
+<p>My primary desktop is also my primary development box, this is the most important box on the network. Right now it&#8217;s a Windows XP box, and will see the fewest changes of all the systems I have. The only major change will be moving it from it&#8217;s existing tower case to a CODEGEN 4U-500-CA rack mount case. This is part of the move to consolidate all of my hardware and get rid of the &#8216;towers on top of towers&#8217; issue I have now.</p>
+
+<p>This is the first time I&#8217;ve tried to migrate from a tower to a rack-mount, so there may a couple &#8220;gotcha&#8217;s&#8221; that I&#8217;ve not anticipated, I&#8217;m hoping this is a smooth move.</p>
+
+<p><strong>Subversion Server</strong></p>
+
+<p>For an existing system, the subversion server will see the most changes. This server started out as my desktop, and has by now been relegated to the role of hosting subversion, and thats about it. To make this box more useful, I plan on adding a <a href="http://www.newegg.com/Product/Product.asp?Item=N82E16816220001">SABRENT RAID controller</a>, as well as a couple Western Digital <a href="http://www.westerndigital.com/en/products/Products.asp?DriveID=137">160GB SATA</a> drives (I&#8217;ll add a couple more latter). This will allow it to server as not only the subversion server, but also as a file archive server.</p>
+
+<p>The other change for this server is the move to the CODEGEN 4U-500-CA rack mount case, the same one I&#8217;m using for my PC. getting these boxes all in a rack will be quite nice I think.</p>
+
+<p><strong>KVM</strong></p>
+
+<p><img src="http://adamcaudill.com/files/2006/04/p11381a.thumbnail.jpg" alt="p11381a.jpg" />As a use a single keyboard/monitor for my separate computers, a KVM is a must. I&#8217;ll be replacing my <a href="http://adamcaudill.com/files/2006/04/FUL1_F1DL102P.jpg">existing</a> KVM, with a new one from JustCom. Based on the reviews I&#8217;ve seen, the <a href="http://www.newegg.com/Product/Product.asp?Item=N82E16817107056">JC-104PE</a> looks like a nice choice for my needs, while trying to keep to a tight budget.</p>
+
+<p><strong>Firewall / Router
+</strong></p>
+
+<p>After doing some research, and speaking to Andrew about his ideas (see comments), I&#8217;ve opted to pick up an older rack mount server from eBay, and using that as a firewall / router / VPN. It will most likely be running <a href="http://www.centos.org/">CentOS</a>, and using IPTables as the basis for the firewall functionality. This will eliminate the need for my current Linksys router.</p>
+
+<p>Using a single box as the firewall &amp; router should provide excellent performance, and be very secure.</p>
+
+<p><strong>Switch</strong></p>
+
+<p>The Linksys router is being replaced, adding the need for a new switch. I&#8217;ve opted for the <a href="http://www.newegg.com/Product/Product.asp?Item=N82E16817111021">D-Link DGS-1008D</a>, this is a Gigabit switch, and should bring a real speed boost over the current 100Mbit network.</p>
+
+<p><strong>Linux PC</strong></p>
+
+<p><img src="http://adamcaudill.com/files/2006/04/linux-penguin%5B1%5D.thumbnail.jpg" alt="linux-penguin[1].jpg" />This will probably be one of the last steps in the rebuild process. I&#8217;m going to be using the same CODEGEN 4U-500-CA case, along with an ASUS motherboard to form the basis of this system. This will most likely be running <a href="http://www.novell.com/products/desktop/preview.html">SUSE 10</a>, this will give me two fairly modern PCs, one for Windows development, one for Linux development. I image once that&#8217;s setup, most of my PHP work will be done from there, should prove much easier than working on Windows.</p>
+
+<p><strong>The Rack</strong></p>
+
+<p>I&#8217;ve yet to figure out what I&#8217;m going to do for a rack to hold all of this. This is stall an open item in my plan.</p>
+
+<p><strong>Thoughts? </strong></p>
+
+<p>If anybody has any ideas or comments about the direction I&#8217;m heading, or the products I&#8217;m using, feel free to let me know.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -309,51 +407,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/03/29/advanced-net-programming/">Advanced .NET Programming</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-03-29T23:46:23-05:00" pubdate data-updated="true">Mar 29<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://adamcaudill.com/files/1861006292.01._SCLZZZZZZZ_.jpg"><img src="http://adamcaudill.com/files/2006/03/1861006292.01._SCTZZZZZZZ_.jpg" alt="Advanced .NET Programming" /></a> <a href="http://www.amazon.com/exec/obidos/tg/detail/-/1861006292/">Advanced .NET Programming</a>,<br/>
-by Simon Robinson</p>
-
-<p>This is a book I picked on clearance at the local Books-A-Million, being targeted at the 1.0 release of the Framework I was aware it was rather dated, though it was still a decent looking book (and it was cheap). The author doesn&#8217;t jest when he uses the word <em>advanced</em>, this is an in-depth book.</p>
-
-<p>While I tend to be forgiving of small typos in books, this book has an unforgivable number of errors. While much of the content is useful (and seems correct), there are enough editing issues to make me second-guess <em>everything</em>. With as many errors as I saw, I was almost wondering if was a test printing of the manuscript, though after some checking, that doesn&#8217;t seem to be the case. This book had the potential to be one of my favorites due to the way the author explains topics, and the vast amount of hard to find information included.</p>
-
-<p>Yet, it leaves me disappointed.</p>
-
-<p>I&#8217;d like to say that this is a book everyone should read, but due to countless editing errors, all this one is - is a &#8216;could have&#8217;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/46/">&larr; Older</a>
@@ -386,6 +439,10 @@ by Simon Robinson</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
       </li>
     
@@ -399,10 +456,6 @@ by Simon Robinson</p>
     
       <li class="post">
         <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/03/utopia-found-utopia-lost/">Utopia Found; Utopia Lost</a>
       </li>
     
   </ul>
