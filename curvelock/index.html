@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CurveLock - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="CurveLock May 31st, 2015 CurveLock is an experimental high-security message and file encryption application for Windows. To enhance security, the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://adamcaudill.com//curvelock">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">CurveLock</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-31T19:43:00-04:00" pubdate data-updated="true">May 31<span>st</span>, 2015</time></p>
+  </header>
+  
+  <p>CurveLock is an experimental high-security message and file encryption application for Windows. To enhance security, the application was designed around the following key design points:</p>
+
+<ul>
+<li>Desktop based, to reduce attack surface (unlike other options that are web/browser based)</li>
+<li>Minimal exposed metadata</li>
+<li>Non-NIST asymmetric encryption (<a href="https://en.wikipedia.org/wiki/Curve25519">curve25519</a>)</li>
+<li>Crypto operations performed via <a href="https://github.com/jedisct1/libsodium">libsodium</a></li>
+<li>Aggressive scrypt settings to resist bruteforcing passwords</li>
+</ul>
+
+
+<p><img src="https://github.com/adamcaudill/CurveLock/raw/master/resources/screenshot.png" alt="" /></p>
+
+<h2>Text Message Format</h2>
+
+<p>The message is formatted as follows:</p>
+
+<pre><code>&lt;version_byte&gt; || &lt;nonce, 24 bytes&gt; || &lt;sender’s public key, 32 bytes&gt; || 
+  BLAKE2B(nonce || recipient’s public key) || &lt;encrypted message&gt;
+</code></pre>
+
+<ul>
+<li>Version: 1 byte, used to indicate the message format. Current version is <code>0x00</code></li>
+<li>Nonce: 24 bytes, randomly generated nonce used to encrypt message</li>
+<li>Sender’s Public Key: 32 bytes, required to decrypt message (ephemeral, see below)</li>
+<li>Recipient Verifier: 16 bytes, recipient’s public key hashed with the nonce using Blake2b</li>
+<li>Encrypted Message: message length + 16 bytes; the curve25519/XSalsa20/Poly1305 (<a href="http://nacl.cr.yp.to/box.html">crypto_box</a>) encrypted message</li>
+</ul>
+
+
+<p><strong>Anonymity:</strong> To protect information about who sent a message, the sender uses an ephemeral key that is discarded after the message is sent. This prevents tracking who is sending messages, and prevents the sender from being able to later decrypt the message. To protect the recipient, especially in the case that the recipient has multiple public keys (“identities”), the recipient’s public key is hashed with the nonce, producing a 16 byte hash. This allows the recipient to confirm that they are using the proper private key, without exposing information that could be used for tracking.</p>
+
+<p>The downside of this is that it isn’t possible to authenticate who sent a message, if this type of authentication is required, another method of authentication should be used.</p>
+
+<h2>File Format</h2>
+
+<p>Files are encrypted via <a href="https://github.com/bitbeans/StreamCryptor">StreamCryptor</a>, into <code>SCCEF</code> format. The same anonymity measures that exist for Text Message are employed here as well; so files are encrypted with an ephemeral key pair. As with Text Messages, StreamCryptor uses <code>libsodium</code> for all cryptographic operations.</p>
+
+<p>StreamCryptor is a small library that sits on top of <code>libsodium-net</code> (and thus <code>libsodium</code>) to perform chunked file encryption.</p>
+
+<h2>Identity</h2>
+
+<p>A CurveLock Identity is derived from the user’s password and email address using <a href="https://www.tarsnap.com/scrypt.html">scrypt</a>, the public ID is the user’s public key encoded with <a href="https://en.bitcoin.it/wiki/Base58Check_encoding">Base58Check</a>. To generate the seed for the private key, the <code>scrypt</code> is used with the user’s password, and the user’s email as the salt (hashed with Blake2b); the <code>scrypt</code> parameters are:</p>
+
+<pre><code>OPS_LIMIT = 8388608
+MEM_LIMIT = 100000000
+</code></pre>
+
+<p>These setting use 100MB of RAM, and takes roughly 5 seconds to complete. While this is likely excessive for most users, this greatly complicates attempts to brute force the password.</p>
+
+<p>The first byte if the ID is a version indicator; the current version is <code>0x0A</code>.</p>
+
+<p>Overall, the identity design was inspired by <a href="https://github.com/kaepora/miniLock/blob/master/README.md#2-key-derivation">miniLock</a>, though is more aggressive to improve security.</p>
+
+<p><a href="https://github.com/adamcaudill/CurveLock">See GitHub For More</a> | <a href="https://github.com/adamcaudill/CurveLock/releases">Downloads</a></p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-31T19:43:00-04:00" pubdate data-updated="true">May 31<span>st</span>, 2015</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2015 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
