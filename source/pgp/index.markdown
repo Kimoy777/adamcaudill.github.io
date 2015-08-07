@@ -9,7 +9,7 @@ footer: true
 
 ### Messaging / Others
 
-One of teh best ways to get me is via Twitter, [@adamcaudill](http://twitter.com/adamcaudill) - this or email gets the fasted response.
+One of the best ways to get me is via Twitter, [@adamcaudill](https://twitter.com/adamcaudill) - this or email gets the fastest response.
 
 I'm also available on Wickr, as `adamcaudill`.
 
