@@ -12,13 +12,14 @@ I speak at various events on security, development, and related topics. If you w
 
 ## Recent & Upcoming Talks
 
+* [BSides Knoxville](https://bsidesknoxville.com/) (May 20th, 2016) - *Event Organizer*
 * [CodeMash](http://www.codemash.org/) (January 5th - 8th, 2016) — A Deep Dive Into Modern Crypto
-* [Tri-Cities.Net Users Group](http://www.tricitiesug.net/) — What you don’t know about crypto can hurt you!
-* [Western North Carolina .NET Developers Guild](http://wncdotnet.com/) — (October 15th, 2015) — What you don’t know about crypto can hurt you!
-* [DerbyCon](https://www.derbycon.com/) (September 23rd-27th, 2015) - Crypto 101: An Intro To Real-World Crypto
+* [Tri-Cities.Net Users Group](http://www.tricitiesug.net/) (October 20th, 2015) — What you don’t know about crypto can hurt you!
+* [Western North Carolina .NET Developers Guild](http://wncdotnet.com/) (October 15th, 2015) — What you don’t know about crypto can hurt you!
+* [DerbyCon](https://www.derbycon.com/) (September 23rd-27th, 2015) — Crypto 101: An Intro To Real-World Crypto
 * [Crypto Village @ DEFCON](https://cryptovillage.org/) (August 6th - 9th, 2015) — The Importance of Backdoor Research
 * [Crypto Village @ DEFCON](https://cryptovillage.org/) (August 6th - 9th, 2015) — *Representing the Underhanded Crypto Contest*
-* [BSides Knoxville](https://bsidesknoxville.com/) (May 15th, 2015) - *Event Organizer*
+* [BSides Knoxville](https://bsidesknoxville.com/) (May 15th, 2015) — *Event Organizer*
 * [Stir Trek](http://stirtrek.com/) (May 1st, 2015) — What you don’t know about crypto can hurt you!
 * [Code PaLOUsa](http://www.codepalousa.com/) (April 27th - April 30th, 2015) — What you don’t know about crypto can hurt you!
 * [CodeMash](http://www.codemash.org/) (January 6th - 9th, 2015) — What you don’t know about crypto can hurt you!
