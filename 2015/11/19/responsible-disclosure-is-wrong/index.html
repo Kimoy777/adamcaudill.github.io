@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Responsible Disclosure Is Wrong - Adam Caudill</title>
+  <meta name="author" content="Adam Caudill">
+
+  
+  <meta name="description" content="The debate around how, where, and when to disclose a vulnerability - and of course to whom - is nearly as old as the industry that spawned the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://adamcaudill.com//2015/11/19/responsible-disclosure-is-wrong">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Caudill" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-106942-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Caudill</a></h1>
+  
+    <h2>Independent Security Researcher &amp; Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adamcaudill.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/archives/">Archives</a></li>
+  <li><a href="/speaking/">Speaking</a></li>
+  <li><a href="/about/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Responsible Disclosure Is Wrong</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-19T18:47:00-05:00" pubdate data-updated="true">Nov 19<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The debate around how, where, and when to disclose a vulnerability - and of course to whom - is nearly as old as the industry that spawned the vulnerabilities. This debate will likely continue as long as humans are writing software. Unfortunately, the debate is hampered by poor terminology.</p>
+
+<blockquote><p>Responsible disclosure is a computer security term describing a vulnerability disclosure model. It is like full disclosure, with the addition that all stakeholders agree to allow a period of time for the vulnerability to be patched before publishing the details.</p></blockquote>
+
+
+<p>This is how Wikipedia defines responsible disclosure — but the person that coined the term has stepped away from it, advocating “coordinated disclosure” instead. To me, this makes perfect sense - if you go by the Wikipedia definition, coordinated disclosure is a better fit, it closely matches how the term is being use by vendors. <em>The problem is that coordinated disclosure isn’t necessarily responsible — and full disclosure isn’t necessarily irresponsible</em>.</p>
+
+<p>The term is a bit of a misnomer really — as researchers our responsibility is to users, though often the term is seen as meaning a responsibility to vendors. This is the biggest issue I have with the term, it’s used as focusing on the wrong group in a disclosure. As a security researcher my responsibility is to make the world a safer place, to protect the users, not to protect the name of a vendor.</p>
+
+<p>Based on this, I would say that responsible disclosure is wrong - or more accurately, how it’s been defined is wrong. As defined, what we get from the term is a one-sided view on the disclosure process and its goals. I like the term, but the definition doesn’t suit the reality of vulnerability disclosure.</p>
+
+<h2>Sensible Disclosure</h2>
+
+<p>Perhaps we need a better term to describe real world disclosures - full disclosure and coordinated disclosure are both potential outcomes of the sensible disclosure process. Every step in the decision process needs to factor in what’s best for users.</p>
+
+<p>Let’s look at what a truly responsible disclosure decision process needs to include - decisions that are ignored by the simplistic definition used by responsible disclosure today. This is far from complete of course, these are just high level question that need consideration; there are considerations that are more specific to situations that can have a dramatic impact on what the right decision is.</p>
+
+<p><strong>Can users take action to protect themselves?</strong> If you release details publicly, are there concrete steps that individual users and companies can take to protect themselves?</p>
+
+<p><strong>Is it being actively exploited?</strong> If a vulnerability is being actively exploited, the focus has to shift to minimizing damage - this can change value of other factors drastically.</p>
+
+<p><strong>Is the issue found with minimal effort?</strong> Is the vulnerability something difficult, or something that anyone would notice of they looked in the right place? If it’s something that anyone would notice, how likely is it that others have already found it, and are using it maliciously? Even if you don’t have evidence that something is being exploited in the wild, it’s still quite possible, and this needs to be considered.</p>
+
+<p><strong>Is the issue something that can be corrected without major effort?</strong> Some issues are simple — a few lines of code and it’s gone, others are difficult to impossible to fix.</p>
+
+<p><strong>If patched today, how are users impacted?</strong> With some flaws, apply a patch to code and you are done — with others, there is still clean up to do. For example, errors in cryptography can mean that messages aren’t protected as they should be; this means that every message that is encrypted expands the issue and increases risk, that isn’t addressed once patched. There is also the related issue of backwards compatibility — breaking systems by fixing the flaw, or requiring substantial cleanup (think re-encrypting large amounts of data).</p>
+
+<p><strong>Is the vendor responsive?</strong> Vendors have a responsibility to respond quickly, and to take action quickly to address reported vulnerabilities. Are they responding at all? Are they trying to address the issue, or just keep the issue away from the press for as long as possible? If the vendor isn’t acting, is more pressure needed to get the issue resolved? Another important question when evaluating vendor response — remember, they are likely addressing other issues as well, which may be more severe; as such, something that you think is critical, may deserve less attention than other bugs that you aren’t aware of.</p>
+
+<p><strong>How severe is the issue?</strong> Is this an earth-shattering vulnerability that those affected would take drastic actions if they were aware, or is this something minor that is an issue, but not quite deserving of panic?</p>
+
+<p>Sensible Disclosure should include evaluation of all of these, and then proceeding to coordinated disclosure or full disclosure, or some hybrid — based on what’s best for those impacted. This is full of nuance, full of subtleties — it’s not the black and white “<em>tell us, only us, and we’ll tell you when you can say something</em>” policy that vendors like, but it provides a path to acting in the interest of users first.</p>
+
+<h2>Users First, Always</h2>
+
+<p>There is nothing wrong with coordinated disclosure — this should be the goal: quick vendor response, protecting users as quickly as possible with minimal or no malicious use of a flaw. Generally speaking, contacting the vendor should be the first step, and hopefully they act quickly and the rest of the process is then easy; sometimes though they don’t, sometime full disclosure is the only option to get them to act. Sometimes the delay of working with the vendor would put people at risk.</p>
+
+<p>For a security researcher, in general, full disclosure should be the last resort, pulled out when working with the vendor has failed. There are some cases where getting the word out quickly is more important though — it depends on the vulnerability, and the impact to those affected.</p>
+
+<p>Each and every decision made in a disclosure process should be focused on the users, and what protects them best — some vulnerabilities require so much research, and are so difficult to exploit that taking a year to secretly fix it is fine. Others, every day that goes by moves users closer to disaster; most others are somewhere in between.</p>
+
+<p><em>There is no one size fits all solution for vulnerability disclosure.</em> That simple, “responsible disclosure” doesn’t address the subtitles that are actually involved. The term Sensible Disclosure may be closer to reality, though I don’t like it as much.</p>
+
+<p>Be responsible, protect users — practice sensible disclosure.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Caudill</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-19T18:47:00-05:00" pubdate data-updated="true">Nov 19<span>th</span>, 2015</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/05/18/making-bsides-knoxville/" title="Previous Post: Making BSides Knoxville">&laquo; Making BSides Knoxville</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><img src="https://1.gravatar.com/avatar/49e14cf9f67c48aad082dec4f106f19a?size=250" class="aligncenter"></p>
+  <p>I am an independant security researcher and software developer with more than 15 years of experience. I primarily focus on application security, secure communications, and cryptography, though often research new areas if I get too bored. I write about my research and security in general, development and software design, and whatever hobby has my attention at the moment.</p>
+  <p>Email: <a href="mailto:adam@adamcaudill.com">adam@adamcaudill.com</a> (<a href="https://adamcaudill.com/pgp/">PGP</a>)</p>
+</section>
+<section>
+  <h1>Links</h1>
+	<ul>
+		<li><a href="https://twitter.com/adamcaudill">Twitter</a></li>
+		<li><a href="http://www.linkedin.com/in/adamcaudill">LinkedIn</a></li>
+		<li><a href="https://github.com/adamcaudill">GitHub</a></li>
+		<li><a href="http://www.flickr.com/people/adamcaudill/">Flickr</a></li>
+	</ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/04/13/crypto-front-door-everyone-welcome/">Crypto Front Door: Everyone Welcome!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/adamcaudill">@adamcaudill</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'adamcaudill',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Enjoy this site? Consider donating via Bitcoin to <strong>14jumFDmuVkLiAt4TgyKt17SWHtPRbkcLr</strong>.<br>
+  Copyright &copy; 2015 - Adam Caudill -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Setting up the Android SDK on Windows 7 64bit, with a 64bit JDK / JRE is a bit less straightforward than one would expect, thankfully though the &hellip;">
+  <meta name="description" content="While performing some testing on a Windows 7 Professional workstation running a VL build from MSDN I found that a feature I needed was missing - the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/06/18/upgrading-windows-7-pro-vl/">Upgrading Windows 7 Pro VL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-18T23:42:05-04:00" pubdate data-updated="true">Jun 18<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While performing some testing on a Windows 7 Professional workstation running a VL build from MSDN I found that a feature I needed was missing - the new <a href="http://blogs.msdn.com/b/rds/archive/2009/07/01/using-multiple-monitors-in-remote-desktop-session.aspx">Multi-Monitor RDP</a> support. After a little <a href="http://windows.microsoft.com/en-us/windows7/Remote-Desktop-Connection-frequently-asked-questions#">research</a> I found that only the Ultimate and Enterprise editions support this feature; which thanks to Windows 7&#8217;s <a href="http://en.wikipedia.org/wiki/Windows_Anytime_Upgrade">Anytime Upgrade</a> feature I assumed this would be no issue.</p>
+
+<p>But, it was an issue.</p>
+
+<p>It turns out that the build of Windows 7 I was using was missing <code>WindowsAnytimeUpgradeUI.exe</code> and the other related files needed to make the Anytime Upgrade work - and copying the files from another box doesn&#8217;t work. It seems this build simply can&#8217;t be upgraded in this fashion. So I tried a few other tricks, hoping to find something that would work:</p>
+
+<ul>
+<li><p>Reactivate Windows with an Ultimate key; fails with an error indicating that a Professional key is required.</p></li>
+<li><p>Run Ultimate edition installer from Windows; fails with <a href="http://adamcaudill.com/files/2010-06-18_0332.png">this error</a> indicating that you can&#8217;t perform edition upgrades.</p></li>
+</ul>
+
+
+<p>So being stubborn and determined not to re-install Windows to make this feature work, I started looking for other options. Thanks to a hack for <a href="http://www.gmtaz.com/how-to-upgrade-windows-7-rc-ultimate-to-rtm-enterprise/comment-page-1/">upgrading the RC builds to Final</a>, I found what I needed.</p>
+
+<p>I edited the <code>EditionID</code> and <code>ProductName</code> to reflect Ultimate instead of Professional, rebooted, and then ran the Ultimate installer from within Windows. This time the installer ran without issue and after an hour and a couple reboots it was done. This in-place upgrade/repair procedure allows you to jump to a different edition with fairly little pain. A couple of Windows settings needed to be corrected (primarily display related) and Visual Studio 2010 had to be re-installed, though otherwise everything worked just as it did before.</p>
+
+<p>This is the only method for upgrading these Windows 7 builds that I&#8217;ve found, the only other option is to re-install Windows from scratch.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -271,50 +323,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/14/leaving-godaddy/">Leaving GoDaddy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-14T19:31:31-05:00" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In December 2002 I made my first purchase from GoDaddy, since then I&#8217;ve spent $1,200 with them. Over the years I&#8217;ve seen them grow up to be a major force both in the registration and web hosting markets; I&#8217;ve also seen them go from lean and efficient to annoying and unfriendly.</p>
-
-<p>Once upon a time GoDaddy had the best prices and the best search of any registrar; unfortunately things often change, and not always for the best. As time went on they added more products and adopted a very &#8220;in your face&#8221; style of marketing. For years I&#8217;ve dismissed the aggressive marketing as the cost of the low prices, but times have changed.</p>
-
-<p>The aggressive marketing style, incredibly difficult to cancel subscriptions, feature <a href="http://adamcaudill.com/2009/10/03/cancel-godaddys-domain-privacy/">lock in</a>, and many other annoyances and issues. And why do I put up with this? It&#8217;s not the low prices, as for many things my current <a href="http://dreamhost.com/">hosting company</a> is far cheaper. I&#8217;m no longer locked, it&#8217;s not that. Loyalty? That it, well, that was it.</p>
-
-<p>After 7 years, and $1,200 - I&#8217;ve started moving my domains over to my hosting company; and so far I couldn&#8217;t be happier. No aggressive marketing, good service, and they don&#8217;t nickel and dime me to death.</p>
-
-<p>Loyalty can be a good thing, but how much is loyalty costing you? Is it worth it?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/21/">&larr; Older</a>
@@ -347,6 +355,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
       </li>
     
@@ -360,10 +372,6 @@
     
       <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
   </ul>

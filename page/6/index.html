@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Even as a child I was fascinated by cryptography - and often left the local librarians with puzzled looks thanks to the books I would check out. It&# &hellip;">
+  <meta name="description" content="[…or, The Cost of Wild Speculation] &#8220;We need to boost our security - I think the NSA has broken everything we use. AES-256 is too weak, I don&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,140 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/09/08/worried-about-the-nsa-try-aes-512/">Worried About the NSA? Try AES-512!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:07:00-04:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>[…or, The Cost of Wild Speculation]</em></p>
+
+<p>&#8220;We need to boost our security - I think the NSA has broken everything we use. AES-256 is too weak, I don&#8217;t trust it. Find a way to implement AES-512.&#8221;</p>
+
+<p>Double-AES-256! It&#8217;d be easy, and double encrypting has <a href="https://en.wikipedia.org/wiki/Meet-in-the-middle_attack">never bitten us</a> before. So, let&#8217;s write some code!</p>
+
+<figure class='code'><figcaption><span>AES-512 / Double-AES-256 - aes512.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">e</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">))</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">32</span><span class="o">.</span><span class="n">.</span><span class="mi">63</span><span class="p">)),</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">31</span><span class="p">))</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">e</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;AES-256-CBC&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">encrypt</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aes</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">Cipher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;AES-256-CBC&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">decrypt</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span><span class='line'>  <span class="n">aes</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">data</span> <span class="o">=</span> <span class="n">aes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cipher</span><span class="p">)</span> <span class="o">+</span> <span class="n">aes</span><span class="o">.</span><span class="n">final</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">data</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This (somewhat) hypothetical conversation is becoming more common in the face of uncertainty and wild speculation. We have seen a glimpse into the greatest adversary that cryptography has. And we&#8217;ve learned almost nothing.</p>
+
+<p>We know they have attacks, but we don&#8217;t know against what. Is Diffie-Hellman broken? Is ECC backdoored? Has the <a href="https://en.wikipedia.org/wiki/RSA_problem">RSA problem</a> been solved? Or maybe they&#8217;ve only found a somewhat more efficient way to factor  RSA keys? I&#8217;ve also heard speculation that they&#8217;ve broken RC4. They might have backdoors in OpenSSL or Microsoft&#8217;s CAPI.</p>
+
+<p>We have no idea.</p>
+
+<p>Here&#8217;s what we do know, in the past, uncertainty and speculation drove adoption of snake-oil solutions. Flawed, nonsensical technologies that just did more harm than good. Speculation today risks driving people from something that&#8217;s safe, to tools that leave them fully exposed.</p>
+
+<p>It&#8217;s hard to give pragmatic advice in the face such uncertainty; but we must be cautious, we must not panic. I won&#8217;t accuse anyone of over-reacting, as what we have seen is startling to say the least - but there are bigger risks to consider.</p>
+
+<p>For example, let&#8217;s assume for just a moment that the NSA has, in fact, influenced the ECC specification to include curves with weaknesses known to itself. What are the risks?</p>
+
+<ol>
+<li>The NSA is able to decrypt messages at will.</li>
+<li>A well equipped adversary (say, another state funded group) could discover the flaw, and exploit it.</li>
+</ol>
+
+
+<p>Neither of those give me warm-fuzzies, but there are worse things: in the panic over &#8220;OMG - ECC is broken&#8221; people hastily switch to magic solutions that rely on obscurity and have no proven security, or to hastily implemented, poorly configured solutions that make them vulnerable to not only nation-state level adversaries, but much smaller ones as well.</p>
+
+<p>If in the panic over ECC one was to move to an RSA based system with weak keys - they are likely to be far more vulnerable than they would have been, had they done nothing at all.</p>
+
+<p>This of course applies to many scenarios, not just ECC - and personally, I trust ECC over RSA, at lease when using <a href="http://cr.yp.to/ecdh.html">curve25519</a> or other non-NSA supplied curves.</p>
+
+<p>There are no good answers to be found right now; all we can do is exercise caution and try to keep people from over-reacting and making their problems worse.</p>
+
+<p><em>[N.B. I realize that meet-in-the-middle isn&#8217;t practical against AES-256 with technology as we know it, but it had to be pointed out. Also, please, <strong>please</strong> don&#8217;t use the double AES-256 / AES-512 code. Really. Just don&#8217;t.]</em></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -374,101 +508,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/16/cryptocat-what-is-the-measure/">Cryptocat: What Is the Measure&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-16T19:05:00-04:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>What is the measure of a man; what makes one great, and another lesser? What separates success from failure? We all recognize light from dark, but at which point does it go from one to another? If we ask if a person (or company, or product) is successful - do we measure them against their closest competitor, their nearest neighbor, or perhaps the most successful person we know? Where, and how, do you set that bar to measure against?</p>
-
-<p>Yesterday I talked to <a href="http://nadim.cc/">Nadim Kobeissi</a> for about an hour about Cryptocat, its policies, practices, successes, failures, and goals. The topic of goals led to an interesting discussion - to what standard is Cryptocat being held? Perhaps, just perhaps - the unforgivable security failures of Cryptocat are only so unforgivable because of the bar it&#8217;s being measured against.</p>
-
-<blockquote><p>[this] is a crucible; in it we burn away irrelevancies until we are left with a pure product: the truth, for all time.</p></blockquote>
-
-
-<p>So, what it the true goal? Here is a snippet of their <a href="https://github.com/cryptocat/cryptocat/blob/master/README.md">readme</a>, which (kinda) lays out the goal:</p>
-
-<pre><code>Cryptocat is an experimental browser-based chat client for easy to use, encrypted conversations. 
-It aims to make encrypted, private chat easy to use and accessible. We want to break down the 
-barrier that prevents the general public from having an accessible privacy alternative that 
-they already know how to use. Cryptocat is currently available for Chrome, Firefox and Safari.
-</code></pre>
-
-<p>The second sentence is the one that I find interesting, in light of the conversation I had yesterday; primarily this part: <em>an accessible privacy alternative that they already know how to use</em>. I asked Nadim at one point what his goal was, he responded without hesitation: to provide a safer alternative to Facebook Chat, Google Talk, etc..</p>
-
-<p>When I asked about Cryptocat&#8217;s reputation as a tool for activists, he was clearly agitated and made his position on the matter very clear. That isn&#8217;t the intention, and he acknowledged that it&#8217;s not safe for that use. He then pointed me to a <a href="https://blog.crypto.cat/2012/11/security-update-a-follow-up/">quote on their blog</a>:</p>
-
-<blockquote><p>We have realized that due to some (perhaps well-meaning) media coverage of the Cryptocat Project, our work has been labeled by the media as something that can aid activists in overthrowing governments or help save someone’s life. This is not what Cryptocat is, it is wrong for the media to say that, and we have never said anything to that effect ourselves.</p></blockquote>
-
-
-<p>Though I will note, the initial feeling seemed to be a bit different:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Cryptocat featured in Wired! <a href="http://t.co/Aj45zedr">http://t.co/Aj45zedr</a></p>&mdash; Cryptocat (@cryptocatapp) <a href="https://twitter.com/cryptocatapp/statuses/228921660324061184">July 27, 2012</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p><strong>So, where does this leave us?</strong></p>
-
-<p>The <a href="http://tobtu.com/decryptocat.php">most recent flaw</a> was bad, very, very bad. <em>If</em> you understand encryption, the protection afforded was far less than expected. Let&#8217;s look at it from another perspective though: Compared to Facebook Chat. While the bug was bad, how does it compare to other consumer chat systems, even with that flaw in mind? From what I&#8217;ve seen, it&#8217;s still a better option than Facebook.</p>
-
-<p>First, let&#8217;s ignore encryption and just look at what we get from SSL/TLS:</p>
-
-<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=facebook.com&amp;s=173.252.110.27">Facebook</a>:</p>
-
-<p><img class="center" src="/files/Qualys_SSL_Labs_-_Projects___SSL_Server_Test___facebook.com.png"></p>
-
-<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=crypto.cat">Cryptocat</a>:</p>
-
-<p><img class="center" src="/files/Qualys_SSL_Labs_-_Projects___SSL_Server_Test___crypto.cat.png"></p>
-
-<p>First thing that I can point out is the use of <a href="https://community.qualys.com/blogs/securitylabs/2013/06/25/ssl-labs-deploying-forward-secrecy">forward secrecy</a> - something Facebook isn&#8217;t using (<a href="http://news.cnet.com/8301-13578_3-57591179-38/data-meet-spies-the-unfinished-state-of-web-crypto/">yet</a>). So, if you just look at SSL/TLS, Cryptocat is better - assuming nobody else has access to the ciphertext, which <a href="https://blog.crypto.cat/2012/11/security-update-our-first-full-audit/">happened</a> (at least) when they used Cloudflare.</p>
-
-<p>How about data retention? While in the past Facebook has said messages are <a href="http://news.cnet.com/8301-13577_3-9896860-36.html">cleared after 90 days</a>, it&#8217;s not clear how long they retain the information today, or how much could be produced under subpoena - it&#8217;s clearly more than what <a href="https://blog.crypto.cat/2013/05/responding-to-law-enforcement-requests/">Cryptocat can</a> produce (as Facebook <a href="http://info.publicintelligence.net/Facebook2010.pdf">produces a lot</a>). Just looking at what Facebook can provide, versus what Cryptocat can says a lot from a privacy perspective.</p>
-
-<p>I could go through more details, or compare it in more detail to other services, but the basic point should remain.</p>
-
-<p>From that perspective, I think Cryptocat has accomplished something - it may not be ideal, and has clearly been far from it; it&#8217;s still a better choice for casual communication than most (all?) of the major IM/chat players.</p>
-
-<p><strong>&#8216;I thought you said don&#8217;t use it?&#8217;</strong></p>
-
-<p>In an <a href="http://arstechnica.com/security/2013/07/bad-kitty-rooky-mistake-in-cryptocat-chat-app-makes-cracking-a-snap/">article</a> I was quoted as saying something like this:</p>
-
-<blockquote><p>He went on to recommend people not rely on Cryptocat to keep their conversations private until the code and the cryptography in it are thoroughly audited by professional penetration testers and cryptographers.</p></blockquote>
-
-
-<p>I stand by that statement. If you <em>need</em> security, Cryptocat isn&#8217;t what you should be using, period. If you <em>want</em> privacy, it&#8217;s not a bad option. In a discussion on Twitter, the agreement was that there are no real competitors that provide secure multi-party chat - for those that want that feature, Cryptocat seems to be the only option.</p>
-
-<p>It&#8217;s worth pointing out though, if you&#8217;re reading this, you probably know how to use PGP - and can use that to get around Cryptocat&#8217;s use-case. I&#8217;m not an apologist, and I&#8217;m not trying to excuse serious mistakes - I&#8217;m trying to present the issue, and the system itself in a fair light for the intended use-case, as Nadim explained it. In that light, the system still achieves its basic goal.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -501,6 +540,10 @@ they already know how to use. Cryptocat is currently available for Chrome, Firef
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
       </li>
     
@@ -514,10 +557,6 @@ they already know how to use. Cryptocat is currently available for Chrome, Firef
     
       <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
   </ul>

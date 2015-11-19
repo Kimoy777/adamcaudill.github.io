@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="On Monday, August 2nd 2010 at 11:16 PM, Christopher Adam Caudill was born. Weighing in at 6 pounds and 7 ounces and 19.25 inches, born just 24 &hellip;">
+  <meta name="description" content="The recent release of diplomatic cables by WikiLeaks has caused many to stop and think - which is always a good thing in my opinion. Of the many &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/12/01/thinking-before-you-speak/">Thinking Before You Speak</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-01T03:35:23-05:00" pubdate data-updated="true">Dec 1<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The recent release of <a href="http://cablegate.wikileaks.org/">diplomatic cables</a> by WikiLeaks has caused many to stop and think - which is always a good thing in my opinion. Of the many comments I&#8217;ve seen on this subject, one by Jeff Atwood seems to be the most relevant:</p>
+
+<p><em>&#8220;WikiLeaks is preaching a message I&#8217;ve always practiced: there should be no difference between internal and external communication&#8221; (<a href="http://twitter.com/codinghorror/statuses/9505496079798272#">twitter</a>)</em></p>
+
+<p>Be it for a personal vendetta, political reasons, or perhaps just the love of chaos; there is always somebody that would love to take your secrets &amp; thoughtless words and expose them to the world. Even with the best security systems that the US Government could build, one person that wanted it all exposed was able to leak hundreds of thousands of documents before <a href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/8166395/Bradley-Manning-The-prime-suspect-of-giving-files-to-WikiLeaks.html">exposing himself</a> and ending his crusade.</p>
+
+<p>We should all be taking at least some precautions to protect our private communications, ensuring we use SSL wherever possible, avoiding unencrypted wireless networks, encrypting sensitive data and the like. By making a few smart decisions our secrets are a little safer, but there’s always the risk that there will be an insider ready and waiting. Anytime there is <em>interesting </em>communication, there will be people who want to see it exposed.</p>
+
+<p>In my current position, I tend to see a lot of dirty laundry go through my inbox – nothing illegal, but some things that could certainly be embarrassing. At times I’m amazed that people would type some of the things that they do, both our clients and internally. If they had been a little more careful about what they said, nobody would ever care; but as it stands, if publicly released they could lead to a real black-eye on somebody’s reputation.</p>
+
+<p>To minimize exposure to these risks, words should be carefully chosen and the impact of public disclosure always considered.</p>
+
+<p>Obviously though, there are times that the subject is sensitive and that is simply unavoidable. All one can do is take all the reasonable precautions and carefully consider the impact of their words, should they be exposed to the rest of the world.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -326,58 +374,6 @@ No, the items listed aren&#8217;t the issue, it&#8217;s <a href="http://en.wikip
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/06/18/upgrading-windows-7-pro-vl/">Upgrading Windows 7 Pro VL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-06-18T23:42:05-04:00" pubdate data-updated="true">Jun 18<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While performing some testing on a Windows 7 Professional workstation running a VL build from MSDN I found that a feature I needed was missing - the new <a href="http://blogs.msdn.com/b/rds/archive/2009/07/01/using-multiple-monitors-in-remote-desktop-session.aspx">Multi-Monitor RDP</a> support. After a little <a href="http://windows.microsoft.com/en-us/windows7/Remote-Desktop-Connection-frequently-asked-questions#">research</a> I found that only the Ultimate and Enterprise editions support this feature; which thanks to Windows 7&#8217;s <a href="http://en.wikipedia.org/wiki/Windows_Anytime_Upgrade">Anytime Upgrade</a> feature I assumed this would be no issue.</p>
-
-<p>But, it was an issue.</p>
-
-<p>It turns out that the build of Windows 7 I was using was missing <code>WindowsAnytimeUpgradeUI.exe</code> and the other related files needed to make the Anytime Upgrade work - and copying the files from another box doesn&#8217;t work. It seems this build simply can&#8217;t be upgraded in this fashion. So I tried a few other tricks, hoping to find something that would work:</p>
-
-<ul>
-<li><p>Reactivate Windows with an Ultimate key; fails with an error indicating that a Professional key is required.</p></li>
-<li><p>Run Ultimate edition installer from Windows; fails with <a href="http://adamcaudill.com/files/2010-06-18_0332.png">this error</a> indicating that you can&#8217;t perform edition upgrades.</p></li>
-</ul>
-
-
-<p>So being stubborn and determined not to re-install Windows to make this feature work, I started looking for other options. Thanks to a hack for <a href="http://www.gmtaz.com/how-to-upgrade-windows-7-rc-ultimate-to-rtm-enterprise/comment-page-1/">upgrading the RC builds to Final</a>, I found what I needed.</p>
-
-<p>I edited the <code>EditionID</code> and <code>ProductName</code> to reflect Ultimate instead of Professional, rebooted, and then ran the Ultimate installer from within Windows. This time the installer ran without issue and after an hour and a couple reboots it was done. This in-place upgrade/repair procedure allows you to jump to a different edition with fairly little pain. A couple of Windows settings needed to be corrected (primarily display related) and Visual Studio 2010 had to be re-installed, though otherwise everything worked just as it did before.</p>
-
-<p>This is the only method for upgrading these Windows 7 builds that I&#8217;ve found, the only other option is to re-install Windows from scratch.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/20/">&larr; Older</a>
@@ -410,6 +406,10 @@ No, the items listed aren&#8217;t the issue, it&#8217;s <a href="http://en.wikip
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
       </li>
     
@@ -423,10 +423,6 @@ No, the items listed aren&#8217;t the issue, it&#8217;s <a href="http://en.wikip
     
       <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="@KimZetter We need to distinguish between &quot;proof against NSA dragnet&quot;, &quot;proof against NSA PRISM&quot;, and &quot;proof against NSA TAO &hellip;">
+  <meta name="description" content="Last week Brandon Wilson and I gave the lunch keynote at the SC Magazine Congress event in Chicago. It was a fun, more executive level event - a big &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,197 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/11/23/speaking-at-sc-magazine-congress/">Speaking at SC Magazine Congress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-23T17:12:00-05:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week <a href="http://brandonw.net/">Brandon Wilson</a> and I gave the lunch keynote at the <a href="http://congress.scmagazine.com/page.cfm/link=16">SC Magazine Congress</a> event in Chicago. It was a fun, more executive level event - a big thanks to Eric Green and team. The talk was mostly an executive overview of what was discussed at <a href="https://adamcaudill.com/2014/10/02/making-badusb-work-for-you-derbycon/">our DerbyCon talk</a>, with some updates, and some insights.</p>
+
+<p>Here are the slides, and a rough transcript from the event:</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/41900274" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p><em>(This is based on the speaker notes - so it doesn’t include the discussion and other bits that were said)</em></p>
+
+<p><strong>Slide 2:</strong> (Adam) Hi, I&#8217;m Adam Caudill, I&#8217;m here today with Brandon Wilson, and we are here to talk about some research that we&#8217;ve been working on. We will be giving you some background information on BadUSB, showing it to you in action, and talking through the real risks.</p>
+
+<p><strong>Slide 3:</strong> (Adam) USB devices are truly ubiquitous - they are all around us. We all use them on a daily basis, but as is true for most technologies, the things that make our lives easier can be turned to attack us. This is a clear case of a technology that was designed to make life easier, but thanks to designers and implementers not fully understanding the potential for abuse, they have opened a door to attack vectors that most people don’t realize exists.</p>
+
+<p>That USB is so common is both a blessing and a curse – from a convenience perspective, it’s great that USB devices and things that support USB are everywhere, but from a security perspective, there are costs, there are risks. Risks that few people realize that they need to be worried about.</p>
+
+<p><strong>Slide 4:</strong> (Adam) BadUSB - the ability to take a seemingly harmless device and turn it into something evil, has been getting a lot of attention lately. We are here to talk about our findings, other research that&#8217;s going on, how this research can be extended, and what it means for those trying to defend against attacks.</p>
+
+<p><strong>Slide 5:</strong> (Adam) First, lets talk about what BadUSB isn&#8217;t - it&#8217;s not an exploit, it&#8217;s arguably not even a vulnerability. It&#8217;s not a flaw in a device, or an oversight in a protocol. BadUSB, really, part behavior by design, and part carelessness on the part of device manufacturers.</p>
+
+<p>BadUSB was first publicized by the Security Research Labs team from Germany, their work started with looking into a way to reprogram thumb drives to perform data processing - this led them to realize that the technique they intended to use to add features, could also be used by attackers.</p>
+
+<p>Their talk at Black Hat USA was the first time many people heard about the possibility for such issues. It&#8217;s their talk, and their decision to limit the details they released, that led us to change directions in some research we were doing, and get more details and code out to defenders.</p>
+
+<p>Before we go too much further, lets talk just a little about USB, things most people don’t know about it.</p>
+
+<p><strong>Slide 6:</strong> (Brandon) When BadUSB was first introduced, the focus was on a design aspect of USB - something that has been used by legitimate designs for years, composite devices. In short, a composite device is a USB device that has multiple interfaces, or profiles, each exposing a different type of device. The classic case for BadUSB is a thumbdrive that is also a keyboard.</p>
+
+<p>This isn&#8217;t a vulnerability though - this is perfectly compliant with the USB specification. Devices are allowed to do this, it&#8217;s intended behavior and by itself is not a bad thing. Of course, this doesn&#8217;t just apply to being a mass storage device and a keyboard - NICs, printers, USB display adapters, webcams, and so on - any combination is possible.</p>
+
+<p>So, for this part at least - it&#8217;s a feature, a feature that can be abused.</p>
+
+<p><strong>Slide 7:</strong> (Brandon) To turn a thumbdrive into something more, it requires updating the device’s firmware - the code that resides on the device and makes it function. Many people see thumbdrives as just a data storage device, without realizing that there&#8217;s a programmable controller inside.</p>
+
+<p>These controllers are often user updatable, meaning that with only some software, anyone can perform the update. Why would the manufacturer want to let people update the firmware on a flash drive, you might ask? Well, there can be bug fixes, improvements to how it communicates with the NAND memory inside, better bad block management, etc. Where this becomes a problem though, is that some of the largest controller vendors don&#8217;t enforce signed updates. So not only can any user update them, they can update them with any code they choose.</p>
+
+<p>So this, the fact that they are selling chips that don&#8217;t have any security considerations at all, is what turns USB&#8217;s feature of allowing composite devices into a real attack vector.</p>
+
+<p><strong>Slide 8:</strong> (Brandon) Using firmware as an attack vector is far from new though, it&#8217;s been done for years - though I don&#8217;t believe that most people realize that so much research has been done that shows how weak many devices are.</p>
+
+<p>We’ll get into some examples a little bit later, but people were reprogramming Apple keyboards to appear as other devices years ago, and a decade ago I was making graphing calculators show up as flash drives, so this is by no means new.</p>
+
+<p><strong>Slide 9:</strong> Here is a picture of a typical thumb drive &#8211; there is the USB port of course, then that square controller chip which is the “brain” of the device (and what runs the firmware that makes the drive work), and then the NAND flash memory on the far left.</p>
+
+<p>There are different vendors involved here &#8211; NAND comes from one company, controller from another, sold under another name, etc. They’re essentially just putting the parts together, so there are a lot of different combinations out there.</p>
+
+<p><strong>Slide 10:</strong> (Brandon) Let&#8217;s take a few minutes to talk about firmware&#8230;</p>
+
+<p>For this talk, so we can have specific examples, we are going to talk about the Phison family of controllers - Phison is the largest maker of controllers used in thumbdrives, so that&#8217;s why we are picking on them.</p>
+
+<p>In this case, the device has a small boot image built into the controller itself, which is responsible for loading the firmware from the NAND chip and executing it - through the use of special applications on a PC, users can update the firmware with different, or modified versions. This is something most users know nothing about - but it&#8217;s there.</p>
+
+<p><strong>Slide 11:</strong> (Brandon) Devices with updateable firmware aren&#8217;t inherently evil of course, but the question is, does it use signed updates. Which is to say, do the updates include a cryptographic signature, based on a protected private key that only the device manufacturer has access to. If the answer to that is no - the devices doesn&#8217;t validate the origin of updates, and it could be a target for a BadUSB style attack.</p>
+
+<p>To be secure, devices need to validate all updates, using a non-updatable public key. This is the only way to ensure that the firmware is from a legitimate source, and not from some attacker. If the public key were updateable, then there&#8217;s the risk that with physical access, or by taking advantage of a flaw, the key could be changed to an attacker-controlled public key - making it impossible to restore the device to stock firmware.</p>
+
+<p><strong>Slide 12:</strong> (Brandon) Even <em>if</em> a device uses only signed updates, that&#8217;s not a guarantee that it&#8217;s safe. There are many ways that an update system can fail - and it&#8217;s important to remember that once these systems are developed, they tend to not be updated, so they are often using old or even obsolete technologies.</p>
+
+<ul>
+<li><p>Weak signing keys. Texas Instruments found this out the hard way, when their 512-bit RSA signing keys for their graphing calculator line were factored and publicly released, allowing anyone to release signed updates.</p></li>
+<li><p>Verification failures. There have been some systems that use signing - but never bother to actually validate it.</p></li>
+<li><p>Implementation failures. In one case, a system used string comparison to check if the hashes match - which worked great until there was a null byte in the hash (which is also used to indicate the end of a string in memory). This allowed attackers to steal a valid signature, with only a partial hash collision.</p></li>
+<li><p>Exploitable code. If the signature check cannot be defeated, and I’ve had to do this, there are often ways to bypass it completely by taking advantage of vulnerabilities in poorly-written code.</p></li>
+</ul>
+
+
+<p><strong>Slide 13:</strong> (Brandon) To take advantage of all of these possibilities, an attacker has to perform some significant reverse engineering. Most of the products that are likely to be targeted, have little or no documentation - there are no spec sheets, no SDKs. It requires reverse engineering the firmware, and using that to document and understand how the hardware works, and then use that to identify how to add or change functionality.</p>
+
+<p><strong>Slide 14:</strong> (Brandon) On thumbdrives, being able to update firmware opens the doors to many things, not just the composite device attacks, but also changes in device behavior that makes it all but impossible to know if the device is behaving in a trustworthy way.</p>
+
+<p><strong>Slide 15:</strong> (Brandon) Thumbdrives are often used to transport sensitive information - but with modified firmware, it might not be doing what you think it is.</p>
+
+<ul>
+<li>Duplicating data to a hidden area for later retrieval</li>
+<li>Instead of deleting files, copying it to a hidden area</li>
+<li>Altering file contents when written - imagine writing a document to a drive, and later opening it to find that it says something else?</li>
+<li>Inserting malware into executables. The first time an executable is read (by antivirus software), it appears legitimate, but the second time it’s read (for execution), it’s completely different.</li>
+</ul>
+
+
+<p>You can see where we are going here - once you can no longer trust the firmware of a device, you can&#8217;t trust that anything it does or tells you.</p>
+
+<p><strong>Slide 16:</strong> (Brandon) A drive could also be modified to defeat forensic analysis. It&#8217;s common to connect a thumbdrive to a write-blocker to protect it - but a write-blocker can&#8217;t protect against the firmware.</p>
+
+<p>Something we designed, but aren&#8217;t releasing, is modified firmware that expects to receive a special command from the PC it&#8217;s connected to - if that command isn&#8217;t received within the first few seconds, it then proceeds to erase the NAND, and destroy the firmware. Rendering the device unusable.</p>
+
+<p>Within seconds of connecting it to a machine that doesn&#8217;t pass the secret command, the drive is toast. With this type of firmware, the only way to dump the data safely becomes dumping the NAND directly, without allowing the controller to have power. And by protecting the NAND by coating it in a hard substance like epoxy, even dumping the NAND becomes problematic.</p>
+
+<p><strong>Slide 17:</strong> (Brandon) So, with all of that said - let&#8217;s take a look at BadUSB in action, with some of the code that we&#8217;ve made publicly available. After we see it in action, we&#8217;ll talk about where this research can go, and try to help you understand what the real risks are.</p>
+
+<p><strong>Slide 18:</strong> (Brandon) This first demo is just the classic “show up as a keyboard and type out a bunch of commands automatically” scenario, which has been in the wild for many years through other devices such as the USB Rubber Ducky device, development boards, etc.</p>
+
+<p>What this drive will do is type out a one-line PowerShell command that downloads an executable from a server and executes it. This executable will open a shell so others can connect and do various bad things.</p>
+
+<p><strong>Slide 19:</strong> (Brandon) Next up, we&#8217;ll show you a patch to the existing firmware to add a new feature for data exfiltration - a hidden partition that&#8217;s only accessible via the right events.</p>
+
+<p>The drive is divided in half, the first half of the drive shows up when you insert the device - if you look at it in &#8220;Disk Management&#8221; in Windows, you&#8217;ll only see half the size, format it - half the size, query the device - same thing, half the size. Everything looks and acts normal. Format it, do whatever you want. This is hidden entirely in firmware, so the host device doesn&#8217;t have a way to see what&#8217;s going on unless the right bit is flipped.</p>
+
+<p>Until you eject the drive - not using the &#8220;safely remove hardware&#8217; option, but eject - after a few seconds it&#8217;ll re-enumerate and mount a hidden partition. You can dump whatever data you like here, and either unplug the drive, or hit eject again to get back to the first, original partition a few seconds later.</p>
+
+<p>This is a really simple way to hide data on a drive that appears to be empty. I wouldn&#8217;t try to use it to get past the NSA, but it&#8217;ll pass most checks.</p>
+
+<p><strong>Slide 20:</strong> (Brandon) Many drives support a mode that allows the contents to be protected by a user supplied password - until you enter the password, you can&#8217;t see the content of the drive.</p>
+
+<p>We&#8217;ve made a very simple patch to the firmware that changes the way that the password change function works.</p>
+
+<p>Normally you wouldn&#8217;t be able to access the contents of the drive without knowing the user&#8217;s password. With a simple change, we can change the password change function, so that it doesn&#8217;t verify that the old password is right - so you can take a drive that has password protected content, apply our patch, and change the password to something you know, without ever knowing the original password.</p>
+
+<p>This shows how a simple change in unsigned firmware can drastically change the security profile of the device.</p>
+
+<p>So we&#8217;ll take a drive, where I don&#8217;t know the password, and set the password to something new.</p>
+
+<p><strong>Slide 21:</strong> (Brandon) – Here’s Adam to talk about where this research can go, and the implications and impacts of BadUSB.</p>
+
+<p><strong>Slide 22:</strong> (Adam) So far, all we&#8217;ve been talking about is thumbdrives - but that&#8217;s just the beginning. How many people here knew that some keyboards and mice have user updateable firmware?</p>
+
+<p>In 2009, K. Chen demonstrated an attack against Apple keyboards, it used the same technique behind BadUSB. Update the device with malicious firmware, have it open a reverse shell, win.</p>
+
+<p>This was from 2009, and what we are seeing with BadUSB is just another take on the same issue.</p>
+
+<p><strong>Slide 23:</strong> (Adam) This issue isn&#8217;t unique to thumb drives - many different devices are subject to the same issues. So many devices that are routinely and thoughtlessly connected to computers can be updated with malicious firmware.</p>
+
+<p>Even better - many of these devices are installed in laptops, and connect over USB internally. So it&#8217;s possible that even internal peripherals could be attacked. The USB hubs integrated into motherboards are even a risk.</p>
+
+<p>Now, I don&#8217;t say this to make you paranoid, but so you&#8217;ll have a better understanding of your attack surface. These devices are all around us, and any time one of them isn&#8217;t in our control, it could be reprogrammed by an attacker.</p>
+
+<p>Keyboards, mice, printers, webcams, touchpads, Bluetooth adapters, SD card readers, USB hubs - almost anything that connects over USB could be attacked this way. The problem is, nobody knows what is vulnerable.</p>
+
+<p>Devices aren&#8217;t labeled with what controller they use, and even for the same brand and model of a device, the controller used can vary. This makes it nearly impossible to determine what is and isn&#8217;t at risk to this type of attack.</p>
+
+<p><strong>Slide 24:</strong> (Adam) Shortly after we released our code, I got a call from a reporter at Wired asking for more information. One of the topics that came up is, could this be used to build a firmware based worm.</p>
+
+<p>After the question was asked, I sat in silence for a moment before responding - this is not only something we had thought of, but Brandon and I had spent hours discussing the possibility. At first, it was because we thought it could be the basis of a great talk - but then, it turned into a discussion of risks, was such research too risky.</p>
+
+<p>I finally answered - yes, it&#8217;s possible, and we know how to do it.</p>
+
+<p>This is the worst case scenario for BadUSB, a worm that infects the firmware of thumbdrives, and possibly other devices. Plugging an infected device into a machine could be enough to infect it, then it will spread from machine, to devices, to other machines. The devices could be made to be nearly impossible to clean - format the thumbdrives all you want, that won&#8217;t get rid of malware in the firmware. This is a scenario we hope to never be seen in the wild, but with an attacker with enough resources, it&#8217;s very possible.</p>
+
+<p><strong>Slide 25:</strong> (Adam) This is clearly a problem, and very much a risk, on multiple fronts for secure environments - so how is this being addressed? For the most part, it isn&#8217;t. For me, there&#8217;s a striking similarity between the way these manufacturers are reacting to this, and the way ICS manufacturers responded to security issues prior to Stuxnet. They ignored the problem until something so dramatic, so important happened, that they couldn&#8217;t ignore it any longer.</p>
+
+<p>I expect it&#8217;ll be the same with BadUSB - at some point there will be an event that drives the point home that this issue has to be addressed at the root of the problem - the massive number of devices with insecure firmware updates.</p>
+
+<p><strong>Slide 26:</strong> (Adam) As Brandon said earlier, to pull of any of these attacks requires some significant reverse engineering work - if you have the right experience, it&#8217;s really not that hard. It does take quite a bit of time though. So, these are practical attacks, but there aren&#8217;t that many people that can do the work.</p>
+
+<p><strong>Slide 27:</strong> (Adam) This is one of the most common questions, and the hardest to answer. Some of these attacks can be more easily performed with other hardware - the pre-programmed keyboard that opens a shell for example, can be done with a USB Rubber Ducky, an easy to acquire pen-testing tool that looks just like a thumbdrive, but is actually much more.</p>
+
+<p>With USB development boards readily available, many things that are possible with BadUSB, are easier with better understood, well documented hardware. So, if an employee plugging in an unknown thumbdrive and it turning into a keyboard is a real risk in your environment - then BadUSB isn&#8217;t the problem you should be worried about.</p>
+
+<p>Now, things like the integrity of data on the device, the modifications to how a thumbdrive operates, that&#8217;s a different issue, and one that&#8217;s harder to protect against. If the drive is ever out of your control, you can&#8217;t know if it&#8217;s trustable. I hate FUD as much as anyone, but if you have a device that anyone can update to operate in ways that you don&#8217;t want - if you ever lose control of it, you can&#8217;t know if it&#8217;s working for you or an attacker.</p>
+
+<p>So, what&#8217;s the risk? It depends on how much people want what you have.</p>
+
+<p><strong>Slide 28:</strong> (Adam) How many people here have policies that allow employees to use their own keyboard or mouse? OK, how many people think this happens even if it&#8217;s against policy?</p>
+
+<p>When most people talk about BYOD policies, they aren&#8217;t thinking about the devices that connect to computers. But thanks to BadUSB, this is something that all companies should be thinking about - a user bringing in that Razer mouse they love so much, could actually be introducing a new attack vector, thanks to the updateable firmware.</p>
+
+<p>I&#8217;m not going to recommend that companies ban all outside devices - but companies should be very aware of not just what&#8217;s on their network, but what&#8217;s connected to the things on their network. You can&#8217;t protect against what you don&#8217;t know about.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -532,53 +723,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/08/25/ietf-action-on-secure-email/">IETF Action on Secure Email</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-25T11:02:00-04:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Early last week I emailed a group of IETF Area Directors, for the Security and Applications areas, asking them to start the process of creating a new Working Group to address the issues around email security. (Thanks Adrian Farrel for the prodding!)</p>
-
-<p>Today, the first result of the effort has been completed - the new <a href="https://www.ietf.org/mailman/listinfo/endymail">endymail</a> mailing list. An IETF venue to discuss how these issues can be addressed, hopefully laying the ground work updated standards to improve email as we know it today, and eventually standardizing a replacement to SMTP and related protocols. Here&#8217;s the description that the group came up with for the new list:</p>
-
-<blockquote><p>There is significant interest in improving the<br/>privacy-related properties of Internet mail. One focus of<br/>current efforts is on the per-hop (connection-based)<br/>protections provided by TLS. However a wide range of other<br/>work has a focus on end-to-end protection, at the Internet<br/>scale of billions of end users and perhaps millions of<br/>operators.  Such work typically involves new forms of mail<br/>header or body protection, new public key management<br/>(compared to S/MIME or PGP), and security mechanisms more<br/>appropriate for mobile/web user-agents.  Other<br/>security-relevant approaches may be discussed if needed.<br/>Various proposals and development efforts on this topic are<br/>underway outside the IETF. This mailing list provides an<br/>IETF venue for discussion of elements that might be commonly<br/>needed by such efforts and to identify work that the IETF<br/>could do to aid in achieving better end-to-end security<br/>deployed for Internet email.</p></blockquote>
-
-
-<p>While the creation of another mailing list is far from ground breaking, it&#8217;s the necessary first step in standardizing a solution to a decades old problem.</p>
-
-<p>I encourage everyone interested in email security and privacy to join the list, and participate in the discussions that will lead to new standards. (Though please wait a bit for people to subscribe before starting discussions.)</p>
-
-<p>A big thanks to Stephen Farrell, Joe Hildebrand, and Pete Resnick for their enthusiastic support for this effort.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -611,6 +755,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
       </li>
     
@@ -624,10 +772,6 @@
     
       <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
   </ul>

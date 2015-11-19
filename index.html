@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Two years of discussions, months of planning, weekly meetings, and thousands of dollars - BSides Knoxville 2015, the first BSides Knoxville that is &hellip;">
+  <meta name="description" content="The debate around how, where, and when to disclose a vulnerability - and of course to whom - is nearly as old as the industry that spawned the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-19T18:47:00-05:00" pubdate data-updated="true">Nov 19<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The debate around how, where, and when to disclose a vulnerability - and of course to whom - is nearly as old as the industry that spawned the vulnerabilities. This debate will likely continue as long as humans are writing software. Unfortunately, the debate is hampered by poor terminology.</p>
+
+<blockquote><p>Responsible disclosure is a computer security term describing a vulnerability disclosure model. It is like full disclosure, with the addition that all stakeholders agree to allow a period of time for the vulnerability to be patched before publishing the details.</p></blockquote>
+
+
+<p>This is how Wikipedia defines responsible disclosure — but the person that coined the term has stepped away from it, advocating “coordinated disclosure” instead. To me, this makes perfect sense - if you go by the Wikipedia definition, coordinated disclosure is a better fit, it closely matches how the term is being use by vendors. <em>The problem is that coordinated disclosure isn’t necessarily responsible — and full disclosure isn’t necessarily irresponsible</em>.</p>
+
+<p>The term is a bit of a misnomer really — as researchers our responsibility is to users, though often the term is seen as meaning a responsibility to vendors. This is the biggest issue I have with the term, it’s used as focusing on the wrong group in a disclosure. As a security researcher my responsibility is to make the world a safer place, to protect the users, not to protect the name of a vendor.</p>
+
+<p>Based on this, I would say that responsible disclosure is wrong - or more accurately, how it’s been defined is wrong. As defined, what we get from the term is a one-sided view on the disclosure process and its goals. I like the term, but the definition doesn’t suit the reality of vulnerability disclosure.</p>
+
+<h2>Sensible Disclosure</h2>
+
+<p>Perhaps we need a better term to describe real world disclosures - full disclosure and coordinated disclosure are both potential outcomes of the sensible disclosure process. Every step in the decision process needs to factor in what’s best for users.</p>
+
+<p>Let’s look at what a truly responsible disclosure decision process needs to include - decisions that are ignored by the simplistic definition used by responsible disclosure today. This is far from complete of course, these are just high level question that need consideration; there are considerations that are more specific to situations that can have a dramatic impact on what the right decision is.</p>
+
+<p><strong>Can users take action to protect themselves?</strong> If you release details publicly, are there concrete steps that individual users and companies can take to protect themselves?</p>
+
+<p><strong>Is it being actively exploited?</strong> If a vulnerability is being actively exploited, the focus has to shift to minimizing damage - this can change value of other factors drastically.</p>
+
+<p><strong>Is the issue found with minimal effort?</strong> Is the vulnerability something difficult, or something that anyone would notice of they looked in the right place? If it’s something that anyone would notice, how likely is it that others have already found it, and are using it maliciously? Even if you don’t have evidence that something is being exploited in the wild, it’s still quite possible, and this needs to be considered.</p>
+
+<p><strong>Is the issue something that can be corrected without major effort?</strong> Some issues are simple — a few lines of code and it’s gone, others are difficult to impossible to fix.</p>
+
+<p><strong>If patched today, how are users impacted?</strong> With some flaws, apply a patch to code and you are done — with others, there is still clean up to do. For example, errors in cryptography can mean that messages aren’t protected as they should be; this means that every message that is encrypted expands the issue and increases risk, that isn’t addressed once patched. There is also the related issue of backwards compatibility — breaking systems by fixing the flaw, or requiring substantial cleanup (think re-encrypting large amounts of data).</p>
+
+<p><strong>Is the vendor responsive?</strong> Vendors have a responsibility to respond quickly, and to take action quickly to address reported vulnerabilities. Are they responding at all? Are they trying to address the issue, or just keep the issue away from the press for as long as possible? If the vendor isn’t acting, is more pressure needed to get the issue resolved? Another important question when evaluating vendor response — remember, they are likely addressing other issues as well, which may be more severe; as such, something that you think is critical, may deserve less attention than other bugs that you aren’t aware of.</p>
+
+<p><strong>How severe is the issue?</strong> Is this an earth-shattering vulnerability that those affected would take drastic actions if they were aware, or is this something minor that is an issue, but not quite deserving of panic?</p>
+
+<p>Sensible Disclosure should include evaluation of all of these, and then proceeding to coordinated disclosure or full disclosure, or some hybrid — based on what’s best for those impacted. This is full of nuance, full of subtleties — it’s not the black and white “<em>tell us, only us, and we’ll tell you when you can say something</em>” policy that vendors like, but it provides a path to acting in the interest of users first.</p>
+
+<h2>Users First, Always</h2>
+
+<p>There is nothing wrong with coordinated disclosure — this should be the goal: quick vendor response, protecting users as quickly as possible with minimal or no malicious use of a flaw. Generally speaking, contacting the vendor should be the first step, and hopefully they act quickly and the rest of the process is then easy; sometimes though they don’t, sometime full disclosure is the only option to get them to act. Sometimes the delay of working with the vendor would put people at risk.</p>
+
+<p>For a security researcher, in general, full disclosure should be the last resort, pulled out when working with the vendor has failed. There are some cases where getting the word out quickly is more important though — it depends on the vulnerability, and the impact to those affected.</p>
+
+<p>Each and every decision made in a disclosure process should be focused on the users, and what protects them best — some vulnerabilities require so much research, and are so difficult to exploit that taking a year to secretly fix it is fine. Others, every day that goes by moves users closer to disaster; most others are somewhere in between.</p>
+
+<p><em>There is no one size fits all solution for vulnerability disclosure.</em> That simple, “responsible disclosure” doesn’t address the subtitles that are actually involved. The term Sensible Disclosure may be closer to reality, though I don’t like it as much.</p>
+
+<p>Be responsible, protect users — practice sensible disclosure.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -408,116 +487,6 @@ In general, if there’s nothing other than a piece of paper protecting your dat
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom From Offense</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-12T01:51:00-05:00" pubdate data-updated="true">Jan 12<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://zombietime.com/mohammed_image_archive/islamic_mo_full/"><img class="center" src="/files/muhammad.jpg"></a></p>
-
-<p>When I was a teenager I worked as a photojournalist and through that experience I learned just how important it is that the public, and the press in particular be able to speak openly, freely, and without restriction.</p>
-
-<p>I also learned how important discretion is — I routinely worked events where people died, those people had families and they would see the photographs that documented the end of a life. Photos chosen for publishing had to be carefully picked, making the wrong choice could offend some, and truly hurt others. I saw people break down and cry when seeing photos I took — I saw the results of brash carelessness on families that were already hurting, already devastated.</p>
-
-<p>I once was tasked with documenting a hate crime — a black effigy hung from a tree, followed shortly thereafter by a body found in a river — hands bound, and clearly related. People were scared, the mock hanging was a warning, and the body found proved that the threat was real. What gets shown and what doesn’t in cases like this is a very difficult choice. On one hand you risk offended and inciting fear — maybe even panic, on the other, you withhold useful information, stifle discussion, and risk leaving the truth sitting in a box, hidden from the world.</p>
-
-<p>For all of the bad, there was also good — lives changed, hard questions asked, reforms enacted, true change made. This wasn’t done without stepping on toes though, hard decisions had to be made to find the right balance.</p>
-
-<p>Making people comfortable is easy — give them what they want and no more. To make people think though, requires making them uncomfortable, requires pushing them outside of their comfort zone — and occasionally, offending them.</p>
-
-<h2>The attack on Charlie Hebdo</h2>
-
-<p>I firmly believe that journalism, legitimate journalism, is among the most critical tasks in a free society. Shining a light on the good and the bad — the eyes and ears of the people, too often the last chance for justice. When questions can’t be asked, when public figures are put beyond satire and debate, when some topics are unquestionably untouchable, then freedom dies. Slowly at first, then the line inches ever forward until the press is nothing but a mouthpiece for their puppet masters and feeding the public little more than entertainment - no challenges, no discomfort, no thought required entertainment.</p>
-
-<p>Charlie Hebdo made a habit of making people uncomfortable — they attacked everyone and everything in power, they left nothing untouched. In doing so they offended almost everyone — some got mad and stomped away; others took it as a chance to reflect, not  only on the statement, but their own reactions, feelings, and beliefs; a few though decided that they needed to die for it.</p>
-
-<p>Those at Charlie Hebdo worked despite threats and attacks, they continued in the face of danger. Every issue published was an act of bravery — sometimes tasteless, sometimes wantonly offensive, but still an act of bravery.</p>
-
-<p>In a effort to silence the criticism of their preferred historical figure, a small group following an extreme and radical interpretation of a religion, took it upon themselves to silence journalists and artists by force. The goal though, went far beyond Charlie Hebdo — the attack was meant to send a wave of fear and terror throughout the world and leave journalists too afraid to say anything or risk a similar fate.</p>
-
-<p>In the hours after the attack, there were clear indications that the extremists that sought to censor the world, may have actually <a href="http://www.huffingtonpost.com/2015/01/07/charlie-hebdo-censorship-cartoons_n_6431854.html">achieved that goal</a>. Publications around the world censored the cartoons of Charlie Hebdo, an act I consider to be cowardice, and willing, knowing capitulation. In the face of danger, some will choose to be brave and stand for what they believe — others will abandon what they believe readily when faced with the threat, or even the idea of danger.</p>
-
-<p>Nothing is beyond ridicule, no person above satire — not political leaders, not Muhammad, not Jesus, not Zoroaster, not Zeus, not Ra, not Utu.</p>
-
-<h2>#JeSuisCharlie</h2>
-
-<p><a href="http://blog.erratasec.com/">Robert Graham</a> posted an <a href="https://twitter.com/ErrataRob/status/552862494684094464">image on Twitter</a> that immediately gave me mixed feelings; I agreed and disagreed all at the same time. On one hand, the image is the very definition of satire — it’s a strong point on the perception that these religious extremists are leaving many with. On the other hand, it could further inflame the situation,  insulting some and adding more energy to those that have shown they will not be subject to rational thought. It was also an act of defiance, a statement that he would not be censored, and a recommendation that others should follow his example and show that the world will not allow a group of extremists to define what’s acceptable.</p>
-
-<p><img class="center" src="/files/jesuischarlie.png" width="299" height="338"></p>
-
-<p>For those that are offended by this image, I’m sorry that you feel as you do — though I will offer no apology for posting it. Offending for the sake of offense should be avoided — and is an act I disagree with, offending for the sake of making a point though, is sometimes necessary.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>I rarely agree with H. Nasrallah but yes: &quot;Islamic extremists who slaughter people have done more harm to Islam than anyone else in history&quot;</p>&mdash; Karin Kosina (@kyrah) <a href="https://twitter.com/kyrah/status/553991337750827008">January 10, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>The point here is clear — irrational extremists are acting in unimaginable violence against those that they disagree with, and in doing so, branding the religion as one of violence and hate. This is a fact that everyone needs to understand.</p>
-
-<h2>Religious Violence</h2>
-
-<p>Violence and religion have went hand in hand throughout recorded history. Christianity has <em>mostly</em> moved away from violence and many of its ancient prejudices (though certainly not all) — something Islam is still struggling with, based on the extreme views and actions of not only terrorist organizations, but governments.</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>Crowd shouted “Allahu akhbar” as Raif Badawi received 50 lashes for the crime of writing words. 950 more to come&#10;<a href="http://t.co/RRh97uaucT">http://t.co/RRh97uaucT</a></p>&mdash; Richard Dawkins (@RichardDawkins) <a href="https://twitter.com/RichardDawkins/status/553816128758501376">January 10, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>While extremists have done much to harm Islam, there seems to be a pervasive penchant for violence among the more ‘conservative’ Islamic countries — this acceptance of violence and frequent <a href="http://www.nytimes.com/2007/11/16/world/middleeast/16saudi.html?_r=0">perversions of justice</a> have also done much to make the world question the Islamic commitment to peace.</p>
-
-<p>For me, as an atheist, knowing that there are thirteen Islamic countries where I could be <a href="http://www.reuters.com/article/2013/12/10/us-religion-atheists-idUSBRE9B900G20131210">put to death</a> for my lack of faith certainly makes me question just how much peace factors into Islamic views.</p>
-
-<p>While most Muslims are peaceful, the large numbers that espouse peace through forced conformity and violence taint the view of the entire religion.</p>
-
-<h2>Freedom from Offense</h2>
-
-<p>One of the most bizarre and damaging perversions on the innate right to free speech, is that there is an implied inverse right to <em>not</em> be exposed to anything offensive. Yet this fictitious right to not be offended is antithetical to freedom of speech - you can have only one of the two.</p>
-
-<p>A right to not be offended is a personal right that would trump the rights of all others — freedom of speech does not imply that anyone must listen, only that you have the right to speak. A right to not be offended would require others to not speak if you didn’t like what they had to say. Such a right is a logical impossibility — if we accept that there is truly an innate right to free speech, then there is no overriding inverse.</p>
-
-<p>So the reality is simple — there are times to preserve the critical and innate right to free speech, that some will be offended.</p>
-
-<p>One challenge for a journalist is to effectivly get a message across that challenges without offending more than absolutely necessary. I can’t say if Charlie Hebdo crossed that line, but even if they did, they were within their rights.</p>
-
-<h2>All Speech Has Value</h2>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p>All speech, even the extremely stupid stuff, is valuable. I probably wouldn&#39;t understand evolution were it not for the insane creationists.</p>&mdash; Taylor Hornby (@DefuseSec) <a href="https://twitter.com/DefuseSec/status/554541092264108034">January 12, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>One final note, inspired by a friend, is that all speech — from the inane and ignorant to true hate speech can have some value. It provides insight, understanding, and perspective that would be missed otherwise.</p>
-
-<p>For those that don’t share perspective with the speaker, such speech that many consider worthless can be a learning experience. You may never agree with them, but at least you can better understand them, and that may lead to clarity.</p>
-
-<p>Embrace the speech that you disagree with and better understand the people behind a perspective that is new to you — it’s a chance to expand you mind, and maybe even bridge a gap and create new understanding.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -548,6 +517,10 @@ In general, if there’s nothing other than a piece of paper protecting your dat
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/05/18/making-bsides-knoxville/">Making BSides Knoxville</a>
       </li>
     
@@ -561,10 +534,6 @@ In general, if there’s nothing other than a piece of paper protecting your dat
     
       <li class="post">
         <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/01/12/religion-free-speech-freedom-from-offense/">Religion, Free Speech & Freedom from Offense</a>
       </li>
     
   </ul>

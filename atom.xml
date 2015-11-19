@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2015-08-22T15:22:42-04:00</updated>
+  <updated>2015-11-19T00:22:32-05:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Responsible Disclosure Is Wrong]]></title>
+    <link href="https://adamcaudill.com//2015/11/19/responsible-disclosure-is-wrong/"/>
+    <updated>2015-11-19T18:47:00-05:00</updated>
+    <id>https://adamcaudill.com//2015/11/19/responsible-disclosure-is-wrong</id>
+    <content type="html"><![CDATA[<p>The debate around how, where, and when to disclose a vulnerability - and of course to whom - is nearly as old as the industry that spawned the vulnerabilities. This debate will likely continue as long as humans are writing software. Unfortunately, the debate is hampered by poor terminology.</p>
+
+<blockquote><p>Responsible disclosure is a computer security term describing a vulnerability disclosure model. It is like full disclosure, with the addition that all stakeholders agree to allow a period of time for the vulnerability to be patched before publishing the details.</p></blockquote>
+
+
+<p>This is how Wikipedia defines responsible disclosure — but the person that coined the term has stepped away from it, advocating “coordinated disclosure” instead. To me, this makes perfect sense - if you go by the Wikipedia definition, coordinated disclosure is a better fit, it closely matches how the term is being use by vendors. <em>The problem is that coordinated disclosure isn’t necessarily responsible — and full disclosure isn’t necessarily irresponsible</em>.</p>
+
+<p>The term is a bit of a misnomer really — as researchers our responsibility is to users, though often the term is seen as meaning a responsibility to vendors. This is the biggest issue I have with the term, it’s used as focusing on the wrong group in a disclosure. As a security researcher my responsibility is to make the world a safer place, to protect the users, not to protect the name of a vendor.</p>
+
+<p>Based on this, I would say that responsible disclosure is wrong - or more accurately, how it’s been defined is wrong. As defined, what we get from the term is a one-sided view on the disclosure process and its goals. I like the term, but the definition doesn’t suit the reality of vulnerability disclosure.</p>
+
+<h2>Sensible Disclosure</h2>
+
+<p>Perhaps we need a better term to describe real world disclosures - full disclosure and coordinated disclosure are both potential outcomes of the sensible disclosure process. Every step in the decision process needs to factor in what’s best for users.</p>
+
+<p>Let’s look at what a truly responsible disclosure decision process needs to include - decisions that are ignored by the simplistic definition used by responsible disclosure today. This is far from complete of course, these are just high level question that need consideration; there are considerations that are more specific to situations that can have a dramatic impact on what the right decision is.</p>
+
+<p><strong>Can users take action to protect themselves?</strong> If you release details publicly, are there concrete steps that individual users and companies can take to protect themselves?</p>
+
+<p><strong>Is it being actively exploited?</strong> If a vulnerability is being actively exploited, the focus has to shift to minimizing damage - this can change value of other factors drastically.</p>
+
+<p><strong>Is the issue found with minimal effort?</strong> Is the vulnerability something difficult, or something that anyone would notice of they looked in the right place? If it’s something that anyone would notice, how likely is it that others have already found it, and are using it maliciously? Even if you don’t have evidence that something is being exploited in the wild, it’s still quite possible, and this needs to be considered.</p>
+
+<p><strong>Is the issue something that can be corrected without major effort?</strong> Some issues are simple — a few lines of code and it’s gone, others are difficult to impossible to fix.</p>
+
+<p><strong>If patched today, how are users impacted?</strong> With some flaws, apply a patch to code and you are done — with others, there is still clean up to do. For example, errors in cryptography can mean that messages aren’t protected as they should be; this means that every message that is encrypted expands the issue and increases risk, that isn’t addressed once patched. There is also the related issue of backwards compatibility — breaking systems by fixing the flaw, or requiring substantial cleanup (think re-encrypting large amounts of data).</p>
+
+<p><strong>Is the vendor responsive?</strong> Vendors have a responsibility to respond quickly, and to take action quickly to address reported vulnerabilities. Are they responding at all? Are they trying to address the issue, or just keep the issue away from the press for as long as possible? If the vendor isn’t acting, is more pressure needed to get the issue resolved? Another important question when evaluating vendor response — remember, they are likely addressing other issues as well, which may be more severe; as such, something that you think is critical, may deserve less attention than other bugs that you aren’t aware of.</p>
+
+<p><strong>How severe is the issue?</strong> Is this an earth-shattering vulnerability that those affected would take drastic actions if they were aware, or is this something minor that is an issue, but not quite deserving of panic?</p>
+
+<p>Sensible Disclosure should include evaluation of all of these, and then proceeding to coordinated disclosure or full disclosure, or some hybrid — based on what’s best for those impacted. This is full of nuance, full of subtleties — it’s not the black and white “<em>tell us, only us, and we’ll tell you when you can say something</em>” policy that vendors like, but it provides a path to acting in the interest of users first.</p>
+
+<h2>Users First, Always</h2>
+
+<p>There is nothing wrong with coordinated disclosure — this should be the goal: quick vendor response, protecting users as quickly as possible with minimal or no malicious use of a flaw. Generally speaking, contacting the vendor should be the first step, and hopefully they act quickly and the rest of the process is then easy; sometimes though they don’t, sometime full disclosure is the only option to get them to act. Sometimes the delay of working with the vendor would put people at risk.</p>
+
+<p>For a security researcher, in general, full disclosure should be the last resort, pulled out when working with the vendor has failed. There are some cases where getting the word out quickly is more important though — it depends on the vulnerability, and the impact to those affected.</p>
+
+<p>Each and every decision made in a disclosure process should be focused on the users, and what protects them best — some vulnerabilities require so much research, and are so difficult to exploit that taking a year to secretly fix it is fine. Others, every day that goes by moves users closer to disaster; most others are somewhere in between.</p>
+
+<p><em>There is no one size fits all solution for vulnerability disclosure.</em> That simple, “responsible disclosure” doesn’t address the subtitles that are actually involved. The term Sensible Disclosure may be closer to reality, though I don’t like it as much.</p>
+
+<p>Be responsible, protect users — practice sensible disclosure.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Making BSides Knoxville]]></title>
@@ -1413,57 +1465,6 @@ In general, if there’s nothing other than a piece of paper protecting your dat
 <p>My goal for the specification I&#8217;m writing is to encourage discussion - to get people talking about how to solve the problem. If it contributes in any way to a new system, a system that&#8217;s designed from the beginning to be secure, then it&#8217;s worth every minute that&#8217;s been invested in it. We need to find a viable option that can replace the monstrosity that we have today.</p>
 
 <p>I encourage everyone to think about solutions to this - how can we build a viable replacement to e-mail that meets the privacy and security goals, while being user friendly, and meeting the requirements of business and government environments. It&#8217;s a hard problem to solve, but it can be solved. It&#8217;s up to us to do it.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[phpMyID: Fixing Abandoned OSS Software]]></title>
-    <link href="https://adamcaudill.com//2014/04/19/phpmyid-fixing-abandoned-oss-software/"/>
-    <updated>2014-04-19T12:43:00-04:00</updated>
-    <id>https://adamcaudill.com//2014/04/19/phpmyid-fixing-abandoned-oss-software</id>
-    <content type="html"><![CDATA[<p><a href="http://siege.org/phpmyid">phpMyID</a> is a simple solution for those that want to run their own OpenID endpoint - the problem is that its author stopped maintaining the project in 2008. Despite this, there&#8217;s still quite a few people that use it, because it&#8217;s the easiest single-user OpenID option available.</p>
-
-<p>Unfortunately, the author didn&#8217;t follow best practices when building the software, and as a result multiple security flaws were introduced. In 2008, a XSS was identified and never fixed (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2008-4730">CVE-2008-4730</a>), in the years since then it seems the software has been below the radar. While conducting a pentest I discovered a previously undocumented XSS (CVE-2014-2890) - which left me with a dilemma - what to do about it?</p>
-
-<p>Looking at the code, I found a couple more potential XSS vulnerabilities - so the application clearly needed help, and if the author won&#8217;t do it, somebody should. Ethically, it seemed wrong to disclose the issue but leave users to fend for themselves; full disclosure is normally used to push a vendor into acting - but in this case it&#8217;s assured that there won&#8217;t be a vendor response.</p>
-
-<p><strong>Fixing The Code</strong></p>
-
-<p>One good thing is if a OSS project is abandoned, anyone can prepare patches to fix the issues. So, <a href="https://github.com/adamcaudill/phpMyID">that&#8217;s what I did</a>. I&#8217;ve committed fixes for both CVE-2008-4730 and CVE-2014-2890, as well as a couple potential issues. In both cases, the fix was easy:</p>
-
-<p>CVE-2008-4730:</p>
-
-<pre><code>@@ -439,7 +439,7 @@ function checkid ( $wait ) {
-    if ($trust_root != $return_to) {
-        // the urls are not the same, be sure return decends from trust
-        if (! url_descends($return_to, $trust_root))
- -          error_500('Invalid trust_root: "' . $trust_root . '"');
- +          error_500('Invalid trust_root: "' . htmlentities($trust_root, ENT_QUOTES) . '"');
-
-    }
-</code></pre>
-
-<p>CVE-2014-2890:</p>
-
-<pre><code>@@ -568,7 +568,7 @@ function checkid_setup_mode () {
-   */
-  function error_mode () {
-    isset($_REQUEST['openid_error']) 
- -      ? wrap_html($_REQUEST['openid_error'])
- +      ? wrap_html(htmlentities($_REQUEST['openid_error'], ENT_QUOTES))
-        : error_500();
-  }
-</code></pre>
-
-<p>I&#8217;ve only given the code a quick once-over, so there may be other issues - if I find time for a more thorough review I may commit additional fixes.</p>
-
-<p><strong>Status of phpMyID</strong></p>
-
-<p>I&#8217;m not taking over the maintenance of the project, I simply don&#8217;t have time to do the cleanup needed to bring it up to reasonable standards. I&#8217;d love to see somebody with a little time to invest cleanup the code and add more defensive measures. It needs some help, that&#8217;s clear.</p>
-
-<p>One of the things I&#8217;d love to see fixed is the way the user&#8217;s password is stored - it&#8217;s currently stored in the <code>MyID.config.php</code> file as a MD5 hash - making brute-forcing entirely too easy. Hopefully <a href="http://tools.ietf.org/html/draft-ietf-httpauth-digest-06">this</a> Internet Draft will be adopted soon, obsoleting <a href="http://tools.ietf.org/html/rfc2617">RFC 2617</a>, which will be an easy win to improve the security of the password when in transit. There are many places where the code can be improved by somebody with a little time.</p>
-
-<p>If you are using phpMyID today, replace the <code>MyID.php</code> file with the one <a href="https://raw.githubusercontent.com/adamcaudill/phpMyID/master/MyID.php">here</a> (it also fixes compatibility with PHP 5.4).</p>
 ]]></content>
   </entry>
   
