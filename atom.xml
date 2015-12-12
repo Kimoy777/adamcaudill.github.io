@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Caudill]]></title>
   <link href="https://adamcaudill.com//atom.xml" rel="self"/>
   <link href="https://adamcaudill.com//"/>
-  <updated>2015-11-19T00:41:18-05:00</updated>
+  <updated>2015-12-12T18:52:22-05:00</updated>
   <id>https://adamcaudill.com//</id>
   <author>
     <name><![CDATA[Adam Caudill]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Door to Nowhere]]></title>
+    <link href="https://adamcaudill.com//2015/12/12/the-door-to-nowhere/"/>
+    <updated>2015-12-12T17:13:00-05:00</updated>
+    <id>https://adamcaudill.com//2015/12/12/the-door-to-nowhere</id>
+    <content type="html"><![CDATA[<p><img class="left" src="https://adamcaudill.com//files/door_to_nowhere.jpg"></p>
+
+<p>Today I was walking around, exploring the local downtown area, and I noticed a door. Or more accurately, what used to be a door, and the symbolism was too perfect to ignore. It’s a door to nowhere.</p>
+
+<p>A door once stood here, carefully built, thoughtfully placed, well crafted. Long ago someone decided that they didn’t want the door to exist anymore — so they filled it in. They made an attempt at reversing the decisions of the past to suit their desire at the moment — but they couldn’t.</p>
+
+<p>What stands now is a scar, a flawed edifice, a clear sign that someone tried, and yet failed to change reality.</p>
+
+<p>The door, though forever closed, can not be erased.</p>
+
+<hr />
+
+<p><img class="center" src="https://adamcaudill.com//files/the_fool.jpg"></p>
+
+<p>The FBI Director is trying to do something very similar. James Comey is trying his best to close the door to cryptography for Americans, in a vain attempt to roll back the clock to a time when Americans didn’t have easy access to strong and easy to use encryption tools. A friend of mine summed up his efforts better than anyone else:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center" width="350"><p lang="en" dir="ltr">Crypto debate in a nutshell: At first there was no crypto. Great for law enforcement! Now there&#39;s crypto. Law enforcement wants to go back</p>&mdash; Tony Arcieri (@bascule) <a href="https://twitter.com/bascule/status/673647245426737153">December 6, 2015</a></blockquote>
+<script async src="https://adamcaudill.com///platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>That is, in a nutshell, what’s going on — between the creation of the internet, and the wide scale deployment of encryption, law enforcement had it easy. Getting information was simple; now it’s not and they want to go back to things being easy for them. Why actually investigate when you can just have companies deliver all the information to you? If one is to believe the narrative that Comey is pushing, you’d have to believe that the FBI was entirely useless prior to the creation of the internet.</p>
+
+<p>In the past Comey has called for <a href="https://theintercept.com/2015/07/08/fbi-director-comey-proposes-imaginary-solution-encryption/">magical solutions</a> to allow the US Government to have access to data, while somehow keeping it secure from everyone else. Everyone that understands cryptography immediately made it clear just how ridiculous that idea is. Now, Comey has a new tactic — declare that there is <a href="https://theintercept.com/2015/12/09/comey-calls-on-tech-companies-offering-end-to-end-encryption-to-reconsider-their-business-model/">no technical problem</a> with backdooring systems.</p>
+
+<p>Instead of trying to understand the problem, the FBI’s position is now to just pretend it doesn’t exist.</p>
+
+<p>The goal of the FBI now is to compel companies, by political pressure or legislation, to add backdoors to their systems, to allow them (and hackers, and malicious employees, etc.) to bypass encryption and provide the US Government with clear text. Or, put more simply, the goal is to <strong>eliminate end-to-end encryption</strong>.</p>
+
+<p>Yet, the door as been opened — strong cryptography is readily available. So, how does Comey see this little fact?</p>
+
+<blockquote><p>I think there’s no way we solve this entire problem. … The sophisticated user could still find a way.</p></blockquote>
+
+
+<p>They understand that those that are motivated to hide, such as the terrorists they are purportedly targeting with these calls to control encryption, will still use strong encryption. Yet they call for average Americans to lose access to end-to-end cryptography.</p>
+
+<p>Any legislative option would only apply to American companies — <a href="https://www.silentcircle.com/">Silent Circle</a> for example, left the country in 2014 to get away from the problems with the US legal system. Should such legislation be enacted, smaller players would likely follow very quickly. With issues, such as the collapse of the US-EU Safe Harbor due to the US failing to live up to its privacy requirements, life has already been getting harder for the larger US-based companies; they may just opt to leave as well.</p>
+
+<p>By trying to force US companies to backdoor their own systems for the convenance of the FBI, knowing that those that are motivated to encrypt will do so, the real loser is the American people &amp; companies. Foreign countries will be able to offer more secure products, terrorists and criminals will still be just as able to use strong encryption as they are now, life will be easier for hackers and malicious employees that want to steal data.</p>
+
+<p>As a final demonstration of the short-sighted foolishness of the FBI’s mission to keep end-to-end encryption away from Americans, they seem to completely fail to understand that other governments will demand access to these backdoors as well — this action would simplify state-sponsored corporate espionage, as well as monitoring US officials.</p>
+
+<p>Comey wants to change the past, yet at worst, all he will be able to do is leave a scar on America.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Responsible Disclosure Is Wrong]]></title>
@@ -1386,85 +1436,6 @@ In general, if there’s nothing other than a piece of paper protecting your dat
 <p>Such policies don&#8217;t help anyone - they don&#8217;t improve security, they certainly don&#8217;t prevent theft of data, and at the same time, they do have a negative business impact. Lost productivity, increased frustration, and in the end higher turn-over from employees that are fed up from the meaningless work. There&#8217;s no winner here - except the person that wants to show off all of the hoops they have.</p>
 
 <p>Security based on anything other than empirical evidence and legitimate analysis is just theater and nothing more.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Sinking Ship of E-Mail Security]]></title>
-    <link href="https://adamcaudill.com//2014/06/27/the-sinking-ship-of-email-security/"/>
-    <updated>2014-06-27T23:32:00-04:00</updated>
-    <id>https://adamcaudill.com//2014/06/27/the-sinking-ship-of-email-security</id>
-    <content type="html"><![CDATA[<p>E-Mail, the venerable old standard for internet text messages, dating back to the early 1980s - and back to the early 1970s in other forms, has long been the &#8220;killer app&#8221; of the internet. While so many companies try to make the next great thing that&#8217;ll capture users around the world - none of these compare to the success of e-mail. It is likely the single most entrenched application-layer protocol used today.</p>
-
-<p>Thanks to <a href="https://en.wikipedia.org/wiki/Stellar_Wind">STELLARWIND</a> and other NSA programs, we have also seen that it has failed in a very real, and very important way.</p>
-
-<p>But this isn&#8217;t exactly news is it?</p>
-
-<p>The security issues around e-mail - or rather the complete lack of security in the protocol has been well understood for decades. Yet, in all those years of existence, all we, as those that care about security have managed to do is glue ineffective solutions on it.</p>
-
-<p><strong>STARTTLS</strong></p>
-
-<p>In the last year, since the scope of NSA&#8217;s spying has been made clear to the world - and the reminder that the NSA isn&#8217;t the only player in this game, the use of STARTTLS has <a href="https://www.google.com/transparencyreport/saferemail/?hl=en">spread dramatically</a>. Many people have worked hard to make this happen - and it really has made things better. Kinda.</p>
-
-<p>While STARTTLS does enable TLS, thus encrypting the data over the wire, it&#8217;s far from perfect:</p>
-
-<ul>
-<li>Opportunistic - In the majority of occasions the encryption is opportunistic; meaning that certificates aren&#8217;t validated, and if something goes wrong in the TLS negotiation, the connection will fail-open - passing data in the clear.</li>
-<li>Server Trust - E-mail as it exists today places complete trust in not only the sending server, but also the recipients server - and every other relaying server. Any of these can log all correspondence, as the data is only encrypted during the transport. TLS can be added or dropped at any point in the chain, and this exposes multiple possible intercept points.</li>
-</ul>
-
-
-<p>Based on the famous &#8220;SSL added and removed here&#8221; NSA slide, we see that even if the messages are sent over an encrypted connection, that doesn&#8217;t mean they stay encrypted when moved around within a company. There are so many failure points that can lead to an attacker being able to collect data.</p>
-
-<p>So if groups like the NSA want e-mail, it takes some extra effort thanks to STARTTLS, but it doesn&#8217;t solve the problem.</p>
-
-<p><strong>PGP / GPG</strong></p>
-
-<p>PGP, and the compatible (and likely more commonly used) GPG are one of the best options people have to encrypt their email - but there&#8217;s still a great deal of data exposed.</p>
-
-<ul>
-<li>UX - The user experience for most applications goes beyond unfriendly, to the point of being actively hostile. I recently walked an experienced developer through setting up a key with Gpg4win - the process of getting everything setup and working was beyond painful. The only GPG wrapper that I&#8217;ve seen that isn&#8217;t unreasonably difficult is GPGTools for OSX.</li>
-<li>Web of Trust - The web of trust model that PGP uses is both genius and terrible. When a news organization started using PGP, I noticed that none of their keys were signed by anyone - so I tried explaining the concept to one of their journalists. After several tweets we moved the conversation to e-mail, which led to several multi-page emails. By the end, I think he was more confused than ever. Last I checked, their keys still aren&#8217;t signed.</li>
-<li>Metadata - <a href="http://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata/">Metadata kills</a>. It&#8217;s scary but true - people die based on who they talk to. How long till an investigative journalist reporting on an organization not friendly to the US gets droned for emailing the wrong people? PGP doesn&#8217;t hide who is emailed, the subject, or any of the headers. PGP encrypted email leaks useful information like a sieve.</li>
-<li>Client Integration - Not many email clients natively support PGP, so most users have to encrypt manually, or use a third-party add-on. This can lead to interesting information leaks, such as saving unencrypted drafts to the server.</li>
-<li>Mobile - Using PGP on a mobile device can be risky, as it requires storing the private key on devices that are likely to have known security issues. Many people recommend against it, as it puts the private key at too much risk.</li>
-</ul>
-
-
-<p>So while PGP / GPG protects the content of email, it still is subject to metadata collection.</p>
-
-<p><strong>S/MIME</strong></p>
-
-<p>For those that don&#8217;t like PGP, or want a better chance of having native support, there&#8217;s S/MIME. Like PGP, S/MIME has it&#8217;s share of issues which leave users with less protection than they realize.</p>
-
-<ul>
-<li>Certificates - To use S/MIME, you have to have a certificate issued from a CA. The question is, how trustworthy is it? CAs have been hacked to issue bad certificates in the past, and nobody knows what an NSL could be used for when issued to a CA.</li>
-<li>Key Escrow - Some CAs generate the private key on their side to allow them to provide a key escrow service. While this can be useful if you ever lose your key and want to read your email again, it also runs the risk of an unauthorized party getting access to the key.</li>
-<li>Metadata - The metadata issues noted for PGP applies here as well. The subject, the recipients, the headers are all in clear text.</li>
-</ul>
-
-
-<p>There are other various complaints around S/MIME that are well documented, and have been discussed countless times. The point is, it&#8217;s another partial solution just glued onto email in an attempt to make it do something it was never designed to do. Be secure.</p>
-
-<p><strong>The list goes on&#8230;</strong></p>
-
-<p>Much work has went into other various add-ons, such as SPF and DKIM and others that attempt to do things that could have been done by default if e-mail had been designed with authentication, privacy, and security in mind.</p>
-
-<p>When e-mail was designed, none of these issues were considered - people have been trying to find ways to fix that mistake for years. E-mail was open, plain text, security and privacy weren&#8217;t considered - or at least not to the extent required.</p>
-
-<p>For a system like e-mail to be secure, security has to be part of the core design, considered at every step. When security &amp; privacy are an afterthought, something to just glue on - it&#8217;s impossible to achieve either.</p>
-
-<p>There are many efforts underway now to improve the situation, some such as <a href="https://www.mailpile.is/">Mailpile</a>, I greatly respect. Their goals are noble, their purpose is true - but I also think they are fighting the wrong battle. E-mail as we know it is flawed beyond repair - we can make it leak less, but for all the work trying to overcome the design flaws, it&#8217;ll always be flawed. There&#8217;s only one way for e-mail to ever be secure.</p>
-
-<p><strong>Time for action!</strong></p>
-
-<p>Over the past few months I&#8217;ve been working on a specification for a system to replace e-mail. I don&#8217;t know if it&#8217;ll ever go anywhere - but that&#8217;s not the point. E-mail as we know it needs to be replaced - it can&#8217;t be fixed. We need to be discussing how to eliminate email, not new ways to glue partial solutions on to it. STARTTLS isn&#8217;t the answer, PGP isn&#8217;t the answer, S/MIME isn&#8217;t the answer - an entirely new protocol is.</p>
-
-<p>I&#8217;m hoping to make the first public draft available in the next few weeks. If it&#8217;s well received, I&#8217;ll try to do what I can to get the system built. If not, then hopefully others will write competing specifications, and I&#8217;ll aide them as I can.</p>
-
-<p>My goal for the specification I&#8217;m writing is to encourage discussion - to get people talking about how to solve the problem. If it contributes in any way to a new system, a system that&#8217;s designed from the beginning to be secure, then it&#8217;s worth every minute that&#8217;s been invested in it. We need to find a viable option that can replace the monstrosity that we have today.</p>
-
-<p>I encourage everyone to think about solutions to this - how can we build a viable replacement to e-mail that meets the privacy and security goals, while being user friendly, and meeting the requirements of business and government environments. It&#8217;s a hard problem to solve, but it can be solved. It&#8217;s up to us to do it.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="For many years now groups like the MPAA and RIAA have tried to convince the public that piracy (that is, copyright infringement) is theft - and many &hellip;">
+  <meta name="description" content="The fact that LinkedIn was breached has been well covered and confirmed, but in their confirmation they said something that I personally found &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/06/linkedin-a-little-common-sense/">LinkedIn: A Little Common Sense</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-06T18:28:00-04:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The fact that LinkedIn was breached has been well covered and <a href="http://blog.linkedin.com/2012/06/06/linkedin-member-passwords-compromised/">confirmed</a>, but in their confirmation they said something that I personally found insulting, more than anything else:</p>
+
+<blockquote><p>It is worth noting that the affected members who update their passwords and members whose passwords have not been compromised benefit from the enhanced security we just recently put in place, which includes hashing and salting of our current password databases.</p></blockquote>
+
+
+<p>So, they just recently started salting their hashes? Seriously?</p>
+
+<p>Storing passwords via unsalted SHA-1 is not only unsafe, it&#8217;s reckless. When you store user credentials, you have a responsibility to your users to keep their data safe - in this case LinkedIn failed, epicly. Had they bothered to think about security, or hired people that understood even the most basic principles of secure application development - this wouldn&#8217;t have happened.</p>
+
+<p>When properly implemented, hashed data shouldn&#8217;t be (practically) reversible to its original value - that is, after all, the purpose of hashing. Tweets like this though, make it painfully clear just how wrong LinkedIn got it:</p>
+
+<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>So far 3,427,202 passwords have cracked from LinkedIn List Almost 50%Its been about 24 hours - The longest? a 29 letter sentence from Bible</p>&mdash; KoreLogic(@CrackMeIfYouCan) <a href="https://twitter.com/CrackMeIfYouCan/status/210474428407103490">June 6, 2012</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+<p>They violated the most basic security principles, but more importantly, they violated their users&#8217; trust.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -377,142 +428,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/08/detecting-net-4-dot-0-remotely/">Detecting .NET 4.0 Remotely</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-08T03:47:00-04:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While preparing to deploy an internal application I started to wonder if all of the workstations were properly configured - after a quick search I found a number of methods for detecting the .NET framework locally, but I didn&#8217;t find any clean options that worked remotely.</p>
-
-<p>Thankfully I found a post with a few <a href="http://skatterbrainz.blogspot.com/2011/05/assorted-ways-to-detect-net-40.html">detection methods</a>, one of which was using <a href="https://en.wikipedia.org/wiki/Windows_Management_Instrumentation">WMI</a> from VBScript - which gave me the inspiration I needed:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='vbnet'><span class='line'><span class="n">strComputer</span> <span class="o">=</span> <span class="s">&quot;.&quot;</span>
-</span><span class='line'><span class="k">Set</span> <span class="n">objWMIService</span> <span class="o">=</span> <span class="n">GetObject</span><span class="p">(</span><span class="s">&quot;winmgmts:\\&quot;</span> <span class="o">&amp;</span> <span class="n">strComputer</span> <span class="o">&amp;</span> <span class="s">&quot;\root\CIMV2&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">Set</span> <span class="n">colItems</span> <span class="o">=</span> <span class="n">objWMIService</span><span class="p">.</span><span class="n">ExecQuery</span><span class="p">(</span> <span class="n">_</span>
-</span><span class='line'>    <span class="s">&quot;SELECT * FROM Win32_Product WHERE Caption LIKE &#39;%.NET Framework 4%&#39;&quot;</span><span class="p">,,</span><span class="mi">48</span><span class="p">)</span>
-</span><span class='line'><span class="k">For</span> <span class="k">Each</span> <span class="n">objItem</span> <span class="ow">in</span> <span class="n">colItems</span>
-</span><span class='line'>    <span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span> <span class="s">&quot;Caption: &quot;</span> <span class="o">&amp;</span> <span class="n">objItem</span><span class="p">.</span><span class="n">Caption</span>
-</span><span class='line'><span class="k">Next</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I pulled up <a href="http://www.linqpad.net/">LINQPad</a> and whipped up a quick script to check for both the Client Profile and full (extended) version on a list of computers. Hopefully it&#8217;ll be of some use others.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">//read the list of computrers to hit from computers.txt</span>
-</span><span class='line'>  <span class="kt">var</span> <span class="n">path</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">Environment</span><span class="p">.</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s">&quot;USERPROFILE&quot;</span><span class="p">),</span>
-</span><span class='line'>    <span class="s">@&quot;Desktop\computers.txt&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="kt">var</span> <span class="n">computers</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllLines</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//use a parallel searh as this process is quite slow</span>
-</span><span class='line'>  <span class="n">Parallel</span><span class="p">.</span><span class="n">ForEach</span> <span class="p">(</span><span class="n">computers</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="p">!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span> <span class="n">comp</span> <span class="p">=&gt;</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">try</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="kt">bool</span> <span class="n">extended</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">bool</span> <span class="n">client</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>    <span class="kt">var</span> <span class="n">search</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ManagementObjectSearcher</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">@&quot;\\{0}\root\cimv2&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="p">),</span>
-</span><span class='line'>      <span class="s">&quot;SELECT * FROM Win32_Product WHERE &quot;</span> <span class="p">+</span>
-</span><span class='line'>      <span class="s">&quot;Caption = &#39;Microsoft .NET Framework 4 Client Profile&#39; &quot;</span> <span class="p">+</span>
-</span><span class='line'>      <span class="s">&quot;OR Caption = &#39;Microsoft .NET Framework 4 Extended&#39;&quot;</span><span class="p">);</span>
-</span><span class='line'>  
-</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="n">ManagementObject</span> <span class="n">res</span> <span class="k">in</span> <span class="n">search</span><span class="p">.</span><span class="n">Get</span><span class="p">())</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">Properties</span><span class="p">[</span><span class="s">&quot;Name&quot;</span><span class="p">].</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">==</span> <span class="s">&quot;Microsoft .NET Framework 4 Client Profile&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">client</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>  
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">Properties</span><span class="p">[</span><span class="s">&quot;Name&quot;</span><span class="p">].</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">==</span> <span class="s">&quot;Microsoft .NET Framework 4 Extended&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">extended</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  
-</span><span class='line'>    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: Client: {1}; Extended: {2}&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">extended</span><span class="p">));</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: Failed ({1})&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">));</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One thing to note, is that you do need Administrator permissions on the remote workstations.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -545,6 +460,10 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -558,10 +477,6 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Before I get started, let me make a couple of things clear: Apple is evil; pure and simple. I&#8217;m fully convinced that Steve Jobs has weekly &hellip;">
+  <meta name="description" content="In a somewhat (but not entirely) surprising announcement, Google is removing support for H.264 video from Chrome. This change to their implementation &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/12/google-chrome-and-h-264/">Google Chrome and H.264</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-12T02:00:42-05:00" pubdate data-updated="true">Jan 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a somewhat (but not entirely) surprising <a href="http://blog.chromium.org/2011/01/html-video-codec-support-in-chrome.html">announcement</a>, Google is removing support for <a href="http://en.wikipedia.org/wiki/H.264/MPEG-4_AVC">H.264</a> video from Chrome. This change to their implementation of the often controversial HTML5 <code>&lt;video&gt;</code> tag is both a major step by Google and a furtherance of the already complicated world of video online.</p>
+
+<p><em>&#8230; To that end, we are changing Chrome’s HTML5  support to make it consistent with the codecs already supported by the open Chromium project. Specifically, we are supporting the WebM (VP8) and Theora video codecs, and will consider adding support for other high-quality open codecs in the future. Though H.264 plays an important role in video, as our goal is to enable open innovation, <strong>support for the codec will be removed</strong> and our resources directed towards completely open codec technologies.</em></p>
+
+<p>When Google <a href="http://techcrunch.com/2010/05/19/webm-google-h-264/">released</a> <a href="http://www.webmproject.org/">WebM</a> (a royalty-free codec which Google <a href="http://techcrunch.com/2009/08/05/google-acquires-video-compression-technology-company-on2-for-106-million/">acquired</a> as part of On2), it was clear that the intention was to take on H.264 and with this move there seems little doubt that the gauntlet has been thrown down. Although, now that H.264 has such a <a href="http://techcrunch.com/2010/05/01/h-264-66-percent-web-video/">strong base</a> (it&#8217;s included in <a href="http://www.adobe.com/aboutadobe/pressroom/pressreleases/200712/120407adobemoviestar.html">Flash</a>, <a href="http://blogs.msdn.com/b/ie/archive/2010/04/29/html5-video.aspx">IE9</a>, Safari, Mobile Safari, and Android), it really makes one wonder if Google has picked a fight that has long since been lost.</p>
+
+<p><strong>So why would Google do this?</strong></p>
+
+<p>Here&#8217;s my best guess: Money (specifically, patent licensing).</p>
+
+<p>H.264 is heavily encumbered by numerous patents owned by companies like Microsoft, Apple, and Cisco, and controlled by <a href="http://www.mpegla.com/main/default.aspx">MPEG LA</a>, the consortium charged with turning these patents into profit (<a href="http://www.mpegla.com/main/programs/avc/Documents/avc-att1.pdf">here&#8217;s</a> the 70 page list of patents for those interested). While I&#8217;m sure many people recall that MPEG LA made a very public pledge that H.264 would be <a href="http://gigaom.com/video/mpeg-la-h-264-streaming-will-be-free-forever/">free forever</a>, as is often the case, things aren&#8217;t quite that simple.</p>
+
+<p><a href="http://www.blogger.com/profile/06696465857424753507">Peter Csathy</a> wrote a fairly <a href="http://digitalmediaupdate.blogspot.com/2010/09/think-h264-is-now-royalty-free-think.html">detailed post</a> on the matter, pointing out some key details that many in the media skipped. Here&#8217;s the core of what wasn&#8217;t discussed after the MPEG LA announcement (but should have been):</p>
+
+<p><em>But, you say, MPEG LA recently announced that it will no longer charge royalties for the use of H.264. Yes, it’s true – MPEG LA recently bowed to mounting pressure from, and press surrounding, WebM and announced something that kind of sounds that way. But, I caution you to read the not-too-fine print. H.264 is royalty-free only in one limited case – for Internet video that is delivered free to end users. Read again: <strong><strong>for (1) Internet delivery that is (2) delivered free to end users</strong></strong>. In the words of MPEG LA’s own press release, “Products and services other than [those] continue to be royalty-bearing.”</em></p>
+
+<p><a href="http://shaver.off.net/diary/">Mike Shaver</a>, Mozilla&#8217;s VP of Engineering offer&#8217;s a somewhat similar take in &#8221;<a href="http://shaver.off.net/diary/2010/08/27/free-as-in-smokescreen/">Free as in Smokescreen</a>:&#8221;</p>
+
+<p><em>What MPEG-LA announced is that their current moratorium on charging fees for the <strong>transmission of H.264 content</strong>, previously extended through 2015 for uses that don’t charge users, is now permanent. You still have to pay for a license for H.264 if you want to make things that create it, consume it, or your business model for distributing it is direct rather than indirect.</em></p>
+
+<p><em>What they’ve made permanently free is distribution of content that people have already licensed to encode, and will need a license to decode. This is similar to Nikon announcing that they will not charge you if you put your pictures up on Flickr, or HP promising that they will never charge you additionally if you photocopy something that you printed on a LaserJet.</em></p>
+
+<p>I&#8217;m just waiting for one of the licensors to reinterpret the license and claim that ads constitute a form of payment or some similar excuse to exclude them from the exception they granted. I&#8217;ve yet to get my hands on the latest licensing agreement to see exactly what it says about this, but I wouldn&#8217;t be surprised at all to see this card played at some point to wring extra revenue from these patents.</p>
+
+<p>Given that Google owns the massive video sharing site YouTube, which <a href="http://youtube-global.blogspot.com/2010/01/introducing-youtube-html5-supported.html">uses H.264</a>, plus whatever unknown projects relating to <a href="http://www.google.com/tv/">Google TV</a> - it stands to reason that Google would certainly save some money by moving away from such an encumbered technology; not to mention avoid future risk should rules change. Though personally, I also have to wonder if it could be fears of a repeat of the <a href="http://burnallgifs.org/archives/">GIF patent</a> debacle.</p>
+
+<p><strong>Now where does this leave us?</strong></p>
+
+<p>Right now HTML5 <code>&lt;video&gt;</code> is a mess, at best. There is a war for which codec becomes the de facto standard, and there is a <em>lot</em> of money at stake depending on who wins. At this point there is no single codec that works across all major browsers; to get full coverage the best option now looks to be a combination of H.264, WebM, and Flash. Doesn&#8217;t really sound like the progress that was promised with HTML5 does it?</p>
+
+<p>It&#8217;s worth noting though that Google isn&#8217;t the first browser developer to reject H.264; both <a href="http://shaver.off.net/diary/2010/01/23/html5-video-and-codecs/">Firefox</a> and <a href="http://my.opera.com/core/blog/2009/12/31/re-introducing-video">Opera</a> have decided against including it in their browsers as well. As painful as the fragmentation is now in regard to who supports what, this move by Google actually does little to change the landscape. Support has been fragmented from the beginning, and all this really does it push H.264 a step away from being the de facto standard; a title that it has been very close to seizing.</p>
+
+<p>Had Firefox added support for H.264, I think the fight would be over and would have made today&#8217;s announcement almost suicidal for the project. Though with such a major player holding out against it, Google&#8217;s move becomes a minor tactical shift in the short-term (though the long-term impact could be significant).</p>
+
+<p>I could go on for pages about what works are where we are now, but <a href="http://diveintomark.org/">Mark Pilgrim</a> (an infinitely better writer than I) sums it all up here: &#8221;<a href="http://diveintohtml5.org/video.html#what-works">Dive into HTML5: Video on the Web</a>&#8221; - well worth reading if you want to really understand what&#8217;s going on.</p>
+
+<p>So in summary - video needs to be encoded to multiple formats, which today&#8217;s announcement does little to alter due to the fragmentation that was already in place. In the long run, WebM may be better for the community due to its license, though many of the internet&#8217;s biggest players have a vested interest in H.264. So when you factor in politics and propaganda between competing companies, distrust, and possible patent claims that haven&#8217;t been addressed yet; this all leads me to an even simpler summary:</p>
+
+<p>Yesterday, HTML5 <code>&lt;video&gt;</code> was a mess; tomorrow it will still be a mess.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -313,62 +387,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/01/being-fair/">Being Fair</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-01T04:47:14-05:00" pubdate data-updated="true">Dec 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A couple weeks ago, Hulu Plus shed its beta tag and opened to the general public. When this happened, the price was changed and a new one week free trial was added. As a subscriber I was happy to hear about the new lower price, though my main concern was wondering if I would have to contact them to get the price break. That concern, thankfully, was the furthest thing from the truth. Soon as the news hit, I found this email waiting for me:</p>
-
-<blockquote><p>Hi Adam,</p>
-
-<p>Thanks for being a subscriber to Hulu Plus during our preview. We&#8217;ve been hard at work refining our existing applications, expanding the device coverage, and extending our content lineup. We&#8217;re excited to announce that today, Hulu Plus is officially launching out of preview to anyone in the U.S. for just $7.99/month.</p>
-
-<p><strong>Since we&#8217;re now offering Hulu Plus at a lower price than during the preview, your subscription fee has been lowered to $7.99/month, and on your next billing cycle, we&#8217;ll also automatically credit your account with $2 for each month you&#8217;ve been a subscriber. In addition, we&#8217;re now offering a 1-week free trial for all new subscribers, so we&#8217;ll be issuing you an additional $2 credit since the free trial wasn&#8217;t in place during the preview.</strong></p>
-
-<p>We&#8217;d also like to offer you the chance to earn more free time on Hulu Plus by helping us spread the word about the service. For each friend who uses your referral to join Hulu Plus, we&#8217;ll give you two additional weeks for free, up to 20 weeks total. Each of your referrals will also receive two weeks free on their first month&#8217;s subscription. For more details on the program and to invite your friends, please visit <a href="http://www.hulu.com/profile/referrals?src=plus_launch">http://www.hulu.com/profile/referrals</a>.</p>
-
-<p>Since the Hulu Plus preview began, we&#8217;ve added more TV shows and extended our device coverage. To see which shows are now available on Hulu Plus, please visit <a href="http://www.hulu.com/plus?src=plus_launch#content">http://www.hulu.com/plus/content</a>, and to see the most up-to-date list of supported TVs, Blu-ray players, set-top boxes, mobile phones, and tablets visit <a href="http://www.hulu.com/plus?src=plus_launch#devices">http://www.hulu.com/plus/devices</a>.</p>
-
-<p>Thanks for supporting us during the Hulu Plus preview. We look forward to continuing to work on your behalf in the months and years to come.</p>
-
-<p>The Hulu Team</p></blockquote>
-
-<p>(emphasis added)</p>
-
-<p>This is about the last thing I expected, especially from a company <a href="http://en.wikipedia.org/wiki/Hulu#History">backed</a> by major media players. I would hate to imaging how much this move cost them, but I know it bought them plenty of loyalty; it&#8217;s rare to to see companies go out of their way to be fair to customers, and even moreso when it means giving back money they&#8217;ve already collected. If you want to win the hearts of your customers, this is the kind of move that does it.</p>
-
-<p>If you change the price on a service or application – how will you current customers feel? Will they feel cheated for being an early adopter? It&#8217;s your current customers that will bring in new customers; make sure you take good care of them, and they will take care of you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/19/">&larr; Older</a>
@@ -401,6 +419,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -414,10 +436,6 @@
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

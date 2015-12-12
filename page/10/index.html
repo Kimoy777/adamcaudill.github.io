@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Update: TrustedSec has a write up: Yahoo! Voice compromised. Over 400K clear-text accounts. Analysis and story here: bit.ly/Niz4Dw - Still &hellip;">
+  <meta name="description" content="A friend of mine has been evaluating an open source instant messaging client called Spark, which can be linked to Active Directory for authentication &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/27/decrypting-spark-saved-passwords/">Decrypting Spark Saved Passwords</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T00:44:00-04:00" pubdate data-updated="true">Jul 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A friend of mine has been evaluating an open source instant messaging client called <a href="http://www.igniterealtime.org/projects/spark/http://www.igniterealtime.org/projects/spark/">Spark</a>, which can be linked to Active Directory for authentication. Like most IM clients, Spark allows users to save their password - and me being me, I was curious as to how it&#8217;s doing this - as storing Windows domain logins is kinda a big deal.</p>
+
+<p>So, within a few minutes I found all of the details - and none of them make me feel any better. Here are the important bits:</p>
+
+<ul>
+<li>Encrypted with Triple DES in ECB mode.</li>
+<li>IV isn&#8217;t being set.</li>
+<li>Encryption key is <strong>hardcoded</strong>.</li>
+</ul>
+
+
+<p>This means that all users have the same, <a href="http://svn.igniterealtime.org/svn/repos/spark/trunk/src/java/org/jivesoftware/spark/util/Encryptor.java">publicly documented</a> encryption key protecting their password. What&#8217;s the key? It&#8217;s <code>ugfpV1dMC5jyJtqwVAfTpHkxqJ0+E0ae</code> in Base64 encoding - and thanks to this, it&#8217;s trivial to write code to reverse the &#8220;protection&#8221; and make the credentials (which may well be domain credentials) available to anyone with access to the users profile.</p>
+
+<p>So, that&#8217;s what <a href="https://github.com/adamcaudill/sparkim-passview">I did</a>. This is simple code that will scan a machine looking for Spark configuration files (named <code>spark.properties</code>) and checks each to see if a password can be extracted. You can also pass in a NetBIOS name, and it will attempt to use the administrative share (C$) to access the profiles on the system. Take a look at the <a href="https://github.com/adamcaudill/sparkim-passview#spark-im-password-decrypter">README</a> for more details.</p>
+
+<p>The saving grace here, is that you have to have access to the user profiles, so if a system is locked down throughly, you likely won&#8217;t make much progress. But if you can get a local administrator account to run this from - it may make a pentest go a little quicker.</p>
+
+<p>I&#8217;ve tried to find a way to disable the &#8216;Save Password&#8217; feature, but it seems that the only option was to <a href="http://community.igniterealtime.org/thread/37785">patch the source</a>. If you are using Spark within your environment, I strongly recommend that you carefully consider how it&#8217;s used and integrated with AD or other systems.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -740,57 +793,6 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/06/linkedin-a-little-common-sense/">LinkedIn: A Little Common Sense</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-06T18:28:00-04:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The fact that LinkedIn was breached has been well covered and <a href="http://blog.linkedin.com/2012/06/06/linkedin-member-passwords-compromised/">confirmed</a>, but in their confirmation they said something that I personally found insulting, more than anything else:</p>
-
-<blockquote><p>It is worth noting that the affected members who update their passwords and members whose passwords have not been compromised benefit from the enhanced security we just recently put in place, which includes hashing and salting of our current password databases.</p></blockquote>
-
-
-<p>So, they just recently started salting their hashes? Seriously?</p>
-
-<p>Storing passwords via unsalted SHA-1 is not only unsafe, it&#8217;s reckless. When you store user credentials, you have a responsibility to your users to keep their data safe - in this case LinkedIn failed, epicly. Had they bothered to think about security, or hired people that understood even the most basic principles of secure application development - this wouldn&#8217;t have happened.</p>
-
-<p>When properly implemented, hashed data shouldn&#8217;t be (practically) reversible to its original value - that is, after all, the purpose of hashing. Tweets like this though, make it painfully clear just how wrong LinkedIn got it:</p>
-
-<div class='embed tweet'><blockquote class="twitter-tweet" align="center"><p>So far 3,427,202 passwords have cracked from LinkedIn List Almost 50%Its been about 24 hours - The longest? a 29 letter sentence from Bible</p>&mdash; KoreLogic(@CrackMeIfYouCan) <a href="https://twitter.com/CrackMeIfYouCan/status/210474428407103490">June 6, 2012</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-
-<p>They violated the most basic security principles, but more importantly, they violated their users&#8217; trust.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/11/">&larr; Older</a>
@@ -823,6 +825,10 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -836,10 +842,6 @@ u=&lt;user&gt;&amp;t=&lt;session-token&gt;&amp;v_str=%7B%22&lt;image-id&gt;%22%3
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

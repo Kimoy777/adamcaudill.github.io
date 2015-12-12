@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="I just completed doing something I said I never would, I switched from The Bat! to Outlook. While I&#8217;ll remain a big fan of The Bat! for its &hellip;">
+  <meta name="description" content="This site now has a new home, on a Linux/Apache box where it should have been from the beginning. When I built this site, I put it on my Windows &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/03/25/server-move/">Server Move</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-03-25T13:45:11-05:00" pubdate data-updated="true">Mar 25<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This site now has a new home, on a Linux/Apache box where it should have been from the beginning. When I built this site, I put it on my Windows server with the idea I&#8217;m slowly move to an ASP.NET solution, away from WordPress. Well, after realizing what I was missing (i.e. .htaccess files) I decided to go ahead and move it to my Linux server.</p>
+
+<p>This will allow for some nice changes, here&#8217;s a couple:</p>
+
+<ul>
+<li><p>Better link structure. - The site now uses a cleaner, easier to understand link structure. Instead of seeing something like &#8220;p=25&#8221; - you&#8217;ll see &#8220;2006/03/19/iso-17799/&#8221;</p></li>
+<li><p>Now using the non-www version of the domain exclusively. Normally I only use the www version of the domain, but Google has so for only indexed the non-www variant, so that&#8217;s what I&#8217;ll use.</p></li>
+<li><p>Easier to maintain &amp; update. Due to some issues with FTP &amp; the Windows server, tweaking things has been a pain. Now that I&#8217;m back on my trusty Linux box, it&#8217;ll be a lot easier to tweak things to get them just how they should be.</p></li>
+</ul>
+
+
+<p>This change should also allow for more new features to be added as time goes on. I may start porting some of my old PHP tools to work with the WordPress structure and make those available again.</p>
+
+<p>If you see anything wrong, please let me know. I think I covered everything in the move, but it&#8217;s possible I missed something, if so, please let me know.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -252,68 +301,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/03/17/wheres-the-service/">Where&#8217;s the Service?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-03-17T21:25:12-05:00" pubdate data-updated="true">Mar 17<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When I buy something, I expect support. When I buy something expensive, I expect really good support. That may be asking too much, but that&#8217;s just how I think. Now, when I contact the vendor for support, I expect to talk to somebody that understands the product. When I bring up an issue that gets me on a conference call with a Vice President and a Project Manager, I expect them to give me accurate data.</p>
-
-<p>Seems not everybody thinks that way.</p>
-
-<p>We recently installed a new communications system at work, this is basically two servers (one was an old database server we already had), and a bunch of wires. This $40,000 gadget manages our phone systems, one of its components is a <em>$14,000</em> reporting system (that&#8217;s what the old DB server was used for). This reporting system is a rather complex bit of software, one that I&#8217;ve spent the last 5 weeks trying to figure out.</p>
-
-<p>When I first heard we were installing this system, I was rather excited as it uses MS SQL Server as a back-end, so writing custom reports should be easy. So I dug into the (limited) documentation and set to work. After a couple days I had everything in place for my most important reporting project (it&#8217;s used to report details for part of a major banks customer service department). After a few bumps, it was done and was a bit of a hero for getting it running so quickly.</p>
-
-<p>There were several more bumps on the road, most due to odd, conflicting, or confusing data, but it looked like we were slowly getting there. About a week ago, an issue was brought to my attention, one of the numbers looked wrong, so I dug into the data deeper than ever. I almost had a heart attack. Two of the most important items on the report were wrong, wrong by almost 50%. Not good.</p>
-
-<p>So several phone calls later, we hit a dead end, we just can&#8217;t get any answers. So one of our executives asked if we had cut the check for the system, turns out we hadn&#8217;t. So the word went out to not pay until we could get some answers. Not too surprisingly, when the vendor found out we hand no intention of paying until it was working properly, they finally agreed to give us what we were asking for: answers.</p>
-
-<p>Those answers came in the form of a conference call with a Vice President and Project Manager from the company that created the software, if anybody understood this software, it would be them. I guess luck wasn&#8217;t on our side. Of all the information we gathered from them (and confirmed more today), here&#8217;s the parts that matter:</p>
-
-<ul>
-<li><p>The documentation is completely wrong</p></li>
-<li><p>They don&#8217;t understand the settings for their own product</p></li>
-<li><p>They don&#8217;t truly understand how their own product works</p></li>
-<li><p>They can&#8217;t answer a question without first blaming it on something else</p></li>
-</ul>
-
-
-<p>Somehow, I was hoping for real answers, not  more clueless people.</p>
-
-<p>After spending $14,000 on the system, as of yesterday, they wanted another $27,000 to create reports and add-ons to do what was promised when we bought it. That&#8217;s doesn&#8217;t include any user training, or the thousands we lost due to under billing because of the bad data.</p>
-
-<p>I expect good support, seems not everybody thinks that way.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/48/">&larr; Older</a>
@@ -346,6 +333,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -359,10 +350,6 @@
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

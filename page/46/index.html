@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="A good friend of mine (as well as co-worker), Laura, has just went live with her new blog. If her other work is any indication, I&#8217;m sure we&# &hellip;">
+  <meta name="description" content="Visual Basic is at an interesting crossroads, it&#8217;s at a critical juncture between two paths. One path, it has followed since its earliest days &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2006/04/02/vb-the-dumbing-of-a-great-language/">VB: The Dumbing of a Great Language</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-04-02T17:23:26-04:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Visual Basic is at an interesting crossroads, it&#8217;s at a critical juncture between two paths. One path, it has followed since its earliest days, where simplicity and ease of use ruled over maintainability and solid design. The other, the longer, harder road, is that of design over ease. With the release of Visual Basic .NET, a major shift occurred in the direction the language is taking, though looking back now, nearly 5 years later, I&#8217;m finding myself concerned for the future of the language.</p>
+
+<p>Before I go much further, let me give you some background so that you can have a clearer understanding of my perspective. I&#8217;m a VB developer, I work exclusively in Visual Basic, and quite honestly I do love the language. It&#8217;s productivity at it&#8217;s best. I started using VB5 and at some point, I&#8217;ve used every version since then. So while I will be saying some negative things about VB, this isn&#8217;t bashing the language, this is me trying to open people&#8217;s eyes to the state of a great language.</p>
+
+<p><strong>The Problem</strong></p>
+
+<p>The issues VB as a language is facing is the desire from Microsoft to keep long-time users around, while trying to advance the language. Instead of making a clean break, they are falling into the trap they fell into with Internet Explorer, where they continued to build on broken code, to ensure that thing would work the same way (the IE team is trying to <a href="http://blogs.msdn.com/ie/archive/2005/10/12/480242.aspx">get out of the hole</a>). This has resulted in a language that makes heavy use of crutches to prevent pre-.NET users from having to re-learn their language.</p>
+
+<p>While backwards compatibility is a nice thing to offer, when you are making major changes to a language, sometimes it&#8217;s best to start over and break the mistakes of the past. I understood the forces at play when .NET was originally released, so it&#8217;s understandable that Microsoft would choose to add crutches to make the transition easier. All of 5 years and two versions latter, the picture doesn&#8217;t look any better.</p>
+
+<p>I had hoped that the crutches included in .NET 1.0 &amp; Visual Basic 2002 were temporary and would fade out as new versions are released. Nope. Instead of removing this legacy support, they continue to add more as the marketing forces inside Microsoft push to get the remaining pre-.NET VB developers to migrate. This is the same thing that was being done with Internet Explorer, which when the next version, 7, is released, it will cause many web sites to either display improperly, or not function at all. They are breaking it to fix it, I&#8217;m afraid we&#8217;ll need to get to the same point with VB before it continues down the proper path.</p>
+
+<p>As compatibility is continuously made a priority over good design, VB will continue to slip, and continue to carry the reputation the mistakes of the past gave it.</p>
+
+<p>C# was created with a true, very logical OOP model, VB was developed with a concoction of the C# &amp; VB6 models, which is enforced by both the compiler and the Visual Studio IDE. These are not simply issues with the use of legacy methods, but the very model that the language is based on.</p>
+
+<p><strong>Who&#8217;s To Blame</strong></p>
+
+<p>Microsoft, of course.. right? Wrong.</p>
+
+<p>The problem lies with the developers that use VB, not those that develop it. The primary issue I see is that legacy developers are not investing in the training or education to use VB properly. They continue to use antiquated methods and models they learned from VB6 and its predecessors.  The issue is that they create a hybrid type of code, that doesn&#8217;t follow a logical OOP model, instead following the pseudo-OOP model processed by VB6.</p>
+
+<p>VB.NET has the potential to be a truly great language, the main issue is its habit of thinking for the developer, C# was developed without the mistakes of prior languages, and has so far done very well as it can take full advantage of the .NET Framework. VB on the other hand is somewhat limited in that due to trying to partially emulate the object model and structure of its predecessor, it loses flexibility granted to the other .NET languages.</p>
+
+<p><strong>How to fix it</strong></p>
+
+<p>Great question.</p>
+
+<p>The only answer I see is to stop using legacy functionality, and calls for Microsoft to clean up the model used. When writing code in VB or C#, the IDE &amp; compilers should produce virtually identical code. As it stands now, there is a significant difference in the code the compiler generates, the assumptions it makes (many of which can <em>not</em> be over-ridden).</p>
+
+<p>Until developers stand up, and take responsibility for using the language in the way it should be, I doubt we&#8217;ll see any progress. We can hope things will change, but I&#8217;m not holding my breath. (Though, as a side note, C# is looking more appealing every day.)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -240,55 +306,6 @@ by Simon Robinson</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2006/03/25/server-move/">Server Move</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2006-03-25T13:45:11-05:00" pubdate data-updated="true">Mar 25<span>th</span>, 2006</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This site now has a new home, on a Linux/Apache box where it should have been from the beginning. When I built this site, I put it on my Windows server with the idea I&#8217;m slowly move to an ASP.NET solution, away from WordPress. Well, after realizing what I was missing (i.e. .htaccess files) I decided to go ahead and move it to my Linux server.</p>
-
-<p>This will allow for some nice changes, here&#8217;s a couple:</p>
-
-<ul>
-<li><p>Better link structure. - The site now uses a cleaner, easier to understand link structure. Instead of seeing something like &#8220;p=25&#8221; - you&#8217;ll see &#8220;2006/03/19/iso-17799/&#8221;</p></li>
-<li><p>Now using the non-www version of the domain exclusively. Normally I only use the www version of the domain, but Google has so for only indexed the non-www variant, so that&#8217;s what I&#8217;ll use.</p></li>
-<li><p>Easier to maintain &amp; update. Due to some issues with FTP &amp; the Windows server, tweaking things has been a pain. Now that I&#8217;m back on my trusty Linux box, it&#8217;ll be a lot easier to tweak things to get them just how they should be.</p></li>
-</ul>
-
-
-<p>This change should also allow for more new features to be added as time goes on. I may start porting some of my old PHP tools to work with the WordPress structure and make those available again.</p>
-
-<p>If you see anything wrong, please let me know. I think I covered everything in the move, but it&#8217;s possible I missed something, if so, please let me know.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/47/">&larr; Older</a>
@@ -321,6 +338,10 @@ by Simon Robinson</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -334,10 +355,6 @@ by Simon Robinson</p>
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

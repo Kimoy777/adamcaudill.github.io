@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="As a tip for all my Facebook friends, despite the promises you see spreading wildly across Facebook, you can&#8217;t see who&#8217;s looking at your &hellip;">
+  <meta name="description" content="On my fresh Ubuntu 11.04 box running Ruby 1.9.2 instead of the standard Ruby 1.8, I ran into some undocumented errors while installing the mysql2 gem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/05/16/errors-on-gem-install-mysql2/">Errors on &#8216;Gem Install Mysql2&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-16T01:29:19-04:00" pubdate data-updated="true">May 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On my fresh Ubuntu 11.04 box running Ruby 1.9.2 instead of the standard Ruby 1.8, I ran into some undocumented errors while installing the <code>mysql2</code> gem. Here&#8217;s what I was seeing:</p>
+
+<pre><code>$ gem install mysql2
+Building native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+    ERROR: Failed to build gem native extension.
+
+        /usr/bin/ruby1.9.1 extconf.rb
+          &lt;internal:lib/rubygems/custom_require&gt;:29:in `require': 
+          no such file to load -- mkmf (LoadError)
+    from &lt;internal:lib/rubygems/custom_require&gt;:29:in `require'
+    from extconf.rb:2:in `&lt;main&gt;'
+
+
+Gem files will remain installed in 
+  /usr/lib/ruby/gems/1.9.1/gems/mysql2-0.3.2 for inspection.
+Results logged to 
+  /usr/lib/ruby/gems/1.9.1/gems/mysql2-0.3.2/ext/mysql2/gem_make.out
+</code></pre>
+
+<p>This obviously isn&#8217;t all that helpful, nor did I find anything all that useful on Google - thankfully the issue is easy to solve. All that&#8217;s needed is to ensure that the following packages are installed:</p>
+
+<pre><code>sudo apt-get install libmysqlclient-dev libmysql-ruby1.9 ruby1.9.1-dev
+</code></pre>
+
+<p>Then you can try installing the gem, it should work, hopefully</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -284,54 +345,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/03/29/ted-stuxnet-a-preview-of-future-wars/">TED: Stuxnet: A Preview of Future Wars</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-29T19:28:29-04:00" pubdate data-updated="true">Mar 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.langner.com/en/">Ralph Langner</a> recently spoke at TED about his team&#8217;s findings on <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>; it&#8217;s a clear (and somewhat scary) insight into the wars of the future. Instead of sending fighters and bombers to take out <a href="http://articles.cnn.com/2010-09-29/world/iran.cyberattack_1_nuclear-program-bushehr-nuclear-plant-malware?_s=PM:WORLD">Iran&#8217;s nuclear program</a>, as was done in 1981 to eliminate <a href="http://en.wikipedia.org/wiki/Operation_Opera">Iraq&#8217;s program</a>, a carefully crafted virus slowly and methodologically damaged or destroyed vital equipment.</p>
-
-<p>How long until this is used as a standard part of &#8216;softening&#8217; a target by taking out key infrastructure (flight systems, power plants, telephone &amp; internet, etc.) before the bombs start to fly?</p>
-
-<p>For those of us that have a professional interest in security, understanding the threats both present and future is simply a necessity.</p>
-
-<p>This is a must watch.</p>
-
-<p><video width='720' height='480' preload='none' controls poster=' http://images.ted.com/images/ted/tedindex/embed-posters/RalphLangner-2011.embed_thumbnail.jpg'><source src='http://download.ted.com/talks/RalphLangner_2011-480p.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
-
-<p><a href="http://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon.html">Ralph Langner: Cracking Stuxnet, a 21st-century cyber weapon</a></p>
-
-<p>Update: If you want to dig into some technical detail, <a href="http://blogs.technet.com/b/markrussinovich/archive/2011/03/30/3416253.aspx">Mark Russinovich</a> has a good write-up on it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/17/">&larr; Older</a>
@@ -364,6 +377,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -377,10 +394,6 @@
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>

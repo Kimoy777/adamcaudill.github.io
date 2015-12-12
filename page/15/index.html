@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Caudill">
 
   
-  <meta name="description" content="Earlier today, the hacker collective Lulz Security released a batch of 62,156 email/password combinations from unknown sites; I decided to take a &hellip;">
+  <meta name="description" content="I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/07/06/pen-testing-silverlightria-with-soapui/">Pen-Testing Silverlight+RIA With SoapUI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-06T17:39:37-04:00" pubdate data-updated="true">Jul 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was recently given the task of ensuring that a Silverlight+RIA application that could contain private information was secure for deployment to a public web site. So I started searching for automated pen-testing tools that could work against Microsoft&#8217;s Binary SOAP protocol (<code>msbin1</code>, a.k.a <code>application/soap+msbin1</code>) and found only disappointment. For various reasons, it&#8217;s significantly more complex to pen-test a application using <code>msbin1</code> than traditional <code>SOAP</code> + <code>WSDL</code>.</p>
+
+<p>To properly test the services, I had to make a compromise: temporarily modify the application to expose a <code>SOAP</code> endpoint. While this changes the state of the application and thus reduces the validity of the tests, it does provide a reasonable way of testing the web services to ensure that they are behaving as intended.</p>
+
+<p>The recently released <a href="http://www.soapui.org/About-SoapUI/go-pro.html">SoapUI Pro 4</a> adds new <a href="http://www.soapui.org/Security/getting-started.html">security testing tools</a> that makes this a viable (and attractive option). To get this working, there are a few small changes that need to be made to the solution:</p>
+
+<p>First, you&#8217;ll need to add a reference to <code>Microsoft.ServiceModel.DomainServices.Hosting.EndPoints</code> which is part of the RIA Services Toolkit; this allows you to expose different End Points for the service such as <code>SOAP</code> and <code>OData</code>.</p>
+
+<p>Next, you&#8217;ll want to add the following <code>configSections</code> entry to your <code>Web.config</code>:</p>
+
+<pre><code>&lt;configuration&gt;
+ &lt;configSections&gt;
+   &lt;sectionGroup name="system.serviceModel"&gt;
+     &lt;section name="domainServices"
+      type="System.ServiceModel.DomainServices.Hosting.DomainServicesSection,
+      System.ServiceModel.DomainServices.Hosting,
+      Version=4.0.0.0,
+      Culture=neutral,
+      PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/sectionGroup&gt;
+ &lt;/configSections&gt;
+ ...
+</code></pre>
+
+<p>Finally, to expose the <code>SOAP</code> end point:</p>
+
+<pre><code>&lt;configuration&gt;
+ ...
+ &lt;system.serviceModel&gt;
+  ...
+  &lt;domainServices&gt;
+   &lt;endpoints&gt;
+    &lt;add name="Soap"
+     type="Microsoft.ServiceModel.DomainServices.Hosting.SoapXmlEndpointFactory,
+     Microsoft.ServiceModel.DomainServices.Hosting,
+     Version=4.0.0.0,
+     Culture=neutral, PublicKeyToken=31bf3856ad364e35" /&gt;
+   &lt;/endpoints&gt;
+  &lt;/domainServices&gt;
+  ...
+</code></pre>
+
+<p>Finally, just follow the <a href="http://www.soapui.org/Security/security-scans-overview.html">instructions</a> for SoapUI to setup your tests, and you can feel (just a little) more confident in your application. Passing with flying colors obviously doesn&#8217;t mean your application is bulletproof, but it helps to confirm that web service code is solid.</p>
+
+<p>Now, while this does provide some insight into your application and should help find common issues, it&#8217;s not a replacement for a professional assessment by a qualified auditor. If you are handling credit cards or other highly targeted information, <em>please</em> consult a security specialist before a public deployment.</p>
+
+<p><strong>Update:</strong> Another option is a <a href="http://portswigger.net/burp/">Burp</a> plug-in offered by Gotham Digital Science, and can be found <a href="http://blog.gdssecurity.com/labs/2009/11/19/wcf-binary-soap-plug-in-for-burp.html">here</a>. It&#8217;s a more complex workflow, but allows testing without an exposed SOAP end-point - which is great if you don&#8217;t have source code access.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -293,67 +375,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/05/16/errors-on-gem-install-mysql2/">Errors on &#8216;Gem Install Mysql2&#8217;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-16T01:29:19-04:00" pubdate data-updated="true">May 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On my fresh Ubuntu 11.04 box running Ruby 1.9.2 instead of the standard Ruby 1.8, I ran into some undocumented errors while installing the <code>mysql2</code> gem. Here&#8217;s what I was seeing:</p>
-
-<pre><code>$ gem install mysql2
-Building native extensions.  This could take a while...
-ERROR:  Error installing mysql2:
-    ERROR: Failed to build gem native extension.
-
-        /usr/bin/ruby1.9.1 extconf.rb
-          &lt;internal:lib/rubygems/custom_require&gt;:29:in `require': 
-          no such file to load -- mkmf (LoadError)
-    from &lt;internal:lib/rubygems/custom_require&gt;:29:in `require'
-    from extconf.rb:2:in `&lt;main&gt;'
-
-
-Gem files will remain installed in 
-  /usr/lib/ruby/gems/1.9.1/gems/mysql2-0.3.2 for inspection.
-Results logged to 
-  /usr/lib/ruby/gems/1.9.1/gems/mysql2-0.3.2/ext/mysql2/gem_make.out
-</code></pre>
-
-<p>This obviously isn&#8217;t all that helpful, nor did I find anything all that useful on Google - thankfully the issue is easy to solve. All that&#8217;s needed is to ensure that the following packages are installed:</p>
-
-<pre><code>sudo apt-get install libmysqlclient-dev libmysql-ruby1.9 ruby1.9.1-dev
-</code></pre>
-
-<p>Then you can try installing the gem, it should work, hopefully</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/16/">&larr; Older</a>
@@ -386,6 +407,10 @@ Results logged to
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/12/12/the-door-to-nowhere/">The Door to Nowhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/11/19/responsible-disclosure-is-wrong/">Responsible Disclosure Is Wrong</a>
       </li>
     
@@ -399,10 +424,6 @@ Results logged to
     
       <li class="post">
         <a href="/2015/03/08/on-the-underhanded-crypto-contest/">On the Underhanded Crypto Contest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2015/02/17/the-evolution-of-paranoia/">The Evolution of Paranoia</a>
       </li>
     
   </ul>
